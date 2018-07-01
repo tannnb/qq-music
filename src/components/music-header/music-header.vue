@@ -1,0 +1,295 @@
+<template>
+  <div class="music-header">
+    <h1 class="music-logo">
+      <a href="javascript:void(0)"><img src="./logo@2x.png" alt=""></a>
+    </h1>
+    <ul class="music-nav">
+      <li class="music-nav-item"
+          v-for="(items,index) in headerData"
+          :key="items.id">
+        <a :class='[currentIndex===index? "active":""]'
+           @click="handleSelect(items)"
+           href="javascript:void(0)"> {{items.label}} </a></li>
+    </ul>
+
+    <div class="music-search">
+      <div class="search-container">
+        <input type="text" @focus="handleFocus" @blur="handleBlur" v-model="hotKeyQuery">
+        <span @click.stop><Icon-svg class="svgIcon" iconClass="search"></Icon-svg></span>
+      </div>
+      <transition name="down">
+        <div class="search-history" v-show="search_Area">
+          <ul>
+            <li v-for="(items,index) in hotKey"
+                :key="index"
+                @click="handleSelectHotKey(items.k)"
+                class="hotkey-item">
+              <span class="rank">{{index}}</span> <span class="name">{{items.k}}</span> <span class="Playamount">{{_paddFied(items.n)}}</span>
+            </li>
+          </ul>
+          <div>
+            <div class="searchHistory-title">
+              <span>搜索历史</span>
+              <span @click.stop="handleDeleteAll"> <Icon-svg class="svgIcon" iconClass="del"></Icon-svg></span>
+            </div>
+            <div v-if="searchHistory.length" @click.stop>
+              <div class="searchItem" v-for="(items,index) in searchHistory" :key="index"
+                   @click="handleSelectHotKey(items)">
+                <span>{{items}}</span>
+                <span @click.stop="handleDetele(items)"><Icon-svg class="svgIcon" iconClass="delete"></Icon-svg></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
+</template>
+
+<script>
+  import {mapActions, mapGetters} from 'vuex'
+  import IconSvg from '../../components/svg-icon/svg-nav'
+  import {gethotkey} from '../../api/recommend'
+  import {ERR_OK} from "../../api/config";
+
+  export default {
+    name: "music-header",
+    props: {
+      currentIndex: {
+        type: Number,
+        default: 0
+      }
+    },
+    components: {
+      IconSvg
+    },
+    data() {
+      return {
+        headerData: [
+          {
+            label: '音乐馆',
+            id: '0'
+          },
+          {
+            label: '我的音乐',
+            id: '1'
+          },
+          {
+            label: '客户端',
+            id: '2'
+          },
+          {
+            label: '音乐号',
+            id: '3'
+          },
+          {
+            label: 'VIP',
+            id: '4'
+          }
+        ],
+        search_Area: false,
+        hotKey: '',
+        hotKeyQuery: ''
+      }
+    },
+    created() {
+      this._gethotkey()
+    },
+    computed: {
+      ...mapGetters(['searchHistory']),
+    },
+    methods: {
+      ...mapActions([
+        'saveSearcHistory',
+        'clearSearchHistory',
+        'deleteSearchHistory'
+      ]),
+      handleSelect(items) {
+        this.$emit('handleSelect', items)
+      },
+      handleFocus() {
+        this.search_Area = true
+      },
+      handleBlur() {
+        this.search_Area = false
+      },
+      handleSelectHotKey(items) {
+        this.saveSearcHistory(items)
+        this.hotKeyQuery = items
+      },
+      handleDeleteAll() {
+        this.clearSearchHistory()
+      },
+      handleDetele(items) {
+        this.deleteSearchHistory(items)
+      },
+      _gethotkey() {
+        gethotkey().then(res => {
+          if (res.code === ERR_OK) {
+            this.hotKey = this._normal(res.data.hotkey)
+          }
+        })
+      },
+      _paddFied(count) {
+        return (count / 10000).toFixed(1) + '万'
+      },
+      _normal(item) {
+        return item.slice(0, 5)
+      }
+    }
+  }
+</script>
+
+<style lang="stylus" scoped>
+
+  .down-enter-active, .down-leave-active {
+    transition: all 0.2s
+  }
+
+  .down-enter, .down-leave-to {
+    opacity 0.5
+  }
+
+  .music-header {
+    display flex
+    align-items center
+    max-width 1200px
+    min-height 90px
+    margin 0 auto
+    border-bottom 1px solid #f2f2f2
+    box-sizing border-box
+    .container {
+    }
+    .music-logo {
+      img {
+        width 170px
+        height 46px
+      }
+    }
+    .music-nav {
+      flex 1
+      display flex
+      margin-left 28px
+      .music-nav-item {
+        a {
+          display block
+          padding 0 20px
+          line-height 90px
+          height 90px
+          text-align center
+          font-size 18px
+          font-family "Microsoft JhengHei UI"
+          color #333
+          text-decoration none
+          &:hover {
+            color: #31c27c
+          }
+          &.active {
+            background #31c27c
+            color: #fff
+          }
+        }
+      }
+    }
+    .music-search {
+      position: relative
+      margin-left 40px
+      border 1px solid #ddd
+      .search-container {
+        position: relative
+        min-width 260px
+        input {
+          width 100%
+          height 40px
+          padding 10px 40px 10px 10px
+          outline none
+          font-size 14px
+          box-sizing border-box
+        }
+        .svgIcon {
+          position absolute
+          top 0px
+          right 0px
+          color #9a9a9a
+          padding 9px 10px
+          cursor pointer
+          &:hover {
+            color: #31c27c
+          }
+        }
+      }
+      .search-history {
+        position absolute
+        z-index 10
+        top 40px
+        left -1px
+        min-width 262px
+        border 1px solid #ddd
+        box-sizing border-box
+        background white
+        .hotkey-item {
+          display flex
+          line-height 38px
+          font-size 15px
+          cursor pointer
+          &:hover {
+            background #31c27c
+            & >>> span {
+              color: #fff
+            }
+          }
+          .rank {
+            display block
+            padding 0 10px
+            color: #ff6f2b
+          }
+          .name {
+            flex: 1;
+            display block
+          }
+          .Playamount {
+            display block
+            padding 0 10px
+            font-size 14px
+            color: #7f817f
+          }
+        }
+        .searchHistory-title {
+          display flex
+          justify-content space-between
+          padding 10px
+          span {
+            font-size 14px
+            color #828282
+          }
+          .svgIcon {
+            color #828282
+            width 22px
+            height 22px
+            cursor pointer
+          }
+        }
+        .searchItem {
+          display flex
+          justify-content space-between
+          align-items center
+          padding 2px 10px
+          line-height 38px
+          font-size 14px
+          color: #474747
+          cursor pointer
+          &:hover {
+            background #31c27c
+            color #fff
+          }
+          .svgIcon {
+            width 18px
+            height 18px
+            color: #fff
+          }
+        }
+      }
+    }
+  }
+
+</style>
