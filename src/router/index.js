@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '../views/index/index'
+import Music from '../views/Music/Music'
 
 Vue.use(Router)
 
@@ -8,12 +8,19 @@ export default new Router({
   routes: [
     {
       path:'/',
-      redirect:'/index'
+      redirect:'/music'
     },
     {
-      path: '/index',
-      name: 'Index',
-      component: Index
+      path: '/music',
+      name: 'music',
+      component: Music,
+      redirect:'/music/index',
+      children:[
+        {
+          path:'index',
+          component:() => import('@/views/index/index')
+        }
+      ]
     }
   ]
 })

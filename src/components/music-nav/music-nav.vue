@@ -19,7 +19,7 @@
         navData:[
           {
             label:'首页',
-            url:'/index'
+            url:'/Music'
           },
           {
             label:'歌手',

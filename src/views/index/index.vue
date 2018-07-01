@@ -1,35 +1,28 @@
 <template>
-  <div>
-    <Music-header @handleSelect="handleSelect" :currentIndex="currentIndex"></Music-header>
-    <Music-nav></Music-nav>
-    <div class="container">
-      <MusicSubheader :datas="recomPlaylistTitle"
-                      :currentIndex="recomCurrentIndex"
-                      @handleSelectItem="handleSelectItem"/>
-      <div class="swiperWrapper">
-        <div class="swiperWrapper-outer">
-          <swiper :options="swiperOption">
-            <swiper-slide v-for="(items,index) in recomPlaylist" :key="index">
-              <div class="playlist_item_box">
-                <div class="coverImg"><img :src="items.image" alt=""></div>
-                <p class="title">{{items.title}}</p>
-                <p class="listen_num">播放量:{{items.duration}}</p>
-              </div>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-          </swiper>
-        </div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
+  <div class="container">
+    <MusicSubheader :datas="recomPlaylistTitle"
+                    :currentIndex="recomCurrentIndex"
+                    @handleSelectItem="handleSelectItem"/>
+    <div class="swiperWrapper">
+      <div class="swiperWrapper-outer">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="(items,index) in recomPlaylist" :key="index">
+            <div class="playlist_item_box">
+              <div class="coverImg"><img :src="items.image" alt=""></div>
+              <p class="title">{{items.title}}</p>
+              <p class="listen_num">播放量:{{items.duration}}</p>
+            </div>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </div>
+      <div class="swiper-button-prev" slot="button-prev"></div>
+      <div class="swiper-button-next" slot="button-next"></div>
     </div>
-
   </div>
 </template>
 
 <script>
-  import MusicHeader from '../../components/music-header/music-header'
-  import MusicNav from '../../components/music-nav/music-nav'
   import MusicSubheader from '../../components/music-subHeader/music-subHeader'
   import {ERR_OK} from "../../api/config";
   import {config} from './config'
@@ -40,7 +33,6 @@
     name: "index",
     data() {
       return {
-        currentIndex: 0,
         recomPlaylist: [],
         recomPlaylistTitle: config.recommendPlaylistTitle,
         recomCurrentIndex: 0,
@@ -63,17 +55,12 @@
       }
     },
     components: {
-      MusicHeader,
-      MusicNav,
       MusicSubheader
     },
     created() {
       this._musicu()
     },
     methods: {
-      handleSelect(items) {
-        this.currentIndex = Number(items.id)
-      },
       _musicu() {
         musicu().then(res => {
           if (res.recomPlaylist.code === ERR_OK) {
@@ -135,10 +122,10 @@
     bottom 0px
   }
 
-    .container{
-      background-color: #f3f3f3
-      padding-bottom 20px
-    }
+  .container{
+    background-color: #f3f3f3
+    padding-bottom 20px
+  }
 
   .swiperWrapper {
     position: relative
