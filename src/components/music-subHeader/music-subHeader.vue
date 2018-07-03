@@ -1,8 +1,9 @@
 <template>
   <div class="subHeader">
-    <div class="title">{{datas.title}}</div>
+    <div class="title" v-if="datas.title">{{datas.title}}</div>
     <ul class="subTitle">
       <li
+        v-if="navList.length"
         v-for="(items,index) in navList"
         :key="index"
         @click="handleSelectItem(index,items)"
@@ -22,7 +23,8 @@
     props: {
       datas: {
         type: Object,
-        default: () => {}
+        default: () => {
+        }
       },
       currentIndex: {
         type: Number,
@@ -30,8 +32,13 @@
       }
     },
     created() {
-      let first = this.datas.firstRecommend
-      let list = shuffle(this.datas.navList).splice(0, 5)
+      let first = this.datas.firstRecommend ? this.datas.firstRecommend : null
+      let list;
+      if (first !== null) {
+        list = shuffle(this.datas.navList).splice(0, 5)
+      } else {
+        list = this.datas.navList
+      }
       this.navList = [first, ...list]
     },
     methods: {

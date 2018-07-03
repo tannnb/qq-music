@@ -5,6 +5,6 @@ const HomeController = require('../controller/home')
 module.exports = (app) => {
   router.get('/musicu', HomeController.musicu )
   router.get('/recommend',HomeController.recommend)
-  router.get('/recommendType',HomeController.recommendType)
+  router.get('/newSongType',HomeController.newSongType)
   app.use(router.routes())
 }

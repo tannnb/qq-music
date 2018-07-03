@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive>
       <router-view/>
-    </keep-alive>
   </div>
 </template>
 
@@ -11,4 +9,10 @@ export default {
   name: 'App'
 }
 </script>
+<style lang="stylus" >
 
+  body {
+    overflow-x hidden
+  }
+
+</style>

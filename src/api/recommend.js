@@ -141,11 +141,28 @@ export function recommend(id) {
 }
 
 
-// {"comm":{"ct":24},"playlist":{"method":"get_playlist_by_category","param":{"id":3056,"curPage":1,"size":40,"order":5,"titleid":3056},"module":"playlist.PlayListPlazaServer"}}
-// {"comm":{"ct":24},"playlist":{"method":"get_playlist_by_category","param":{"id":3230,"curPage":1,"size":40,"order":5,"titleid":3230},"module":"playlist.PlayListPlazaServer"}}
-// {"comm":{"ct":24},"playlist":{"method":"get_playlist_by_category","param":{"id":3263,"curPage":1,"size":40,"order":5,"titleid":3263},"module":"playlist.PlayListPlazaServer"}}
-// {"comm":{"ct":24},"playlist":{"method":"get_playlist_by_category","param":{"id":71,"curPage":1,"size":40,"order":5,"titleid":71},"module":"playlist.PlayListPlazaServer"}}
-// {"comm":{"ct":24},"playlist":{"method":"get_playlist_by_category","param":{"id":59,"curPage":1,"size":40,"order":5,"titleid":59},"module":"playlist.PlayListPlazaServer"}}
+export function newSongType(id) {
+  const url = 'http://localhost:3000/newSongType'
 
+  const data = Object.assign({}, commonParams, {
+    loginUin: 0,
+    hostUin: 0,
+    platform: 'yqq',
+    needNewCode: 0,
+    data: {
+      "comm": {"ct": 24},
+      "new_song": {
+        "module": "QQMusic.MusichallServer",
+        "method": "GetNewSong",
+        "param": {"type": id}
+      }
+    }
+  })
 
-/*data: {"comm":{"ct":24},"playlist":{"method":"get_playlist_by_category","param":{"id":59,"curPage":1,"size":40,"order":5,"titleid":59},"module":"playlist.PlayListPlazaServer"}}*/
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
+

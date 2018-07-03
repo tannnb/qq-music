@@ -33,10 +33,9 @@ module.exports = {
       })
   },
 
-  // 推荐类型
-  recommendType:async (ctx,next) => {
-    const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
-    await axios.get(url, {
+  newSongType:async (ctx,next) => {
+    const url ='https://u.y.qq.com/cgi-bin/musicu.fcg'
+    await axios.get(url,{
       headers: {
         referer: 'https://c.y.qq.com/'
       },

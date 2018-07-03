@@ -10,6 +10,9 @@ import IconSvg from './components/svg-icon/svg-nav'
 import 'swiper/dist/css/swiper.css'
 import  './styles/index.styl'
 import './fonts/iconfont'
+
+
+
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueLazyload)
 Vue.component('icon-svg', IconSvg)
