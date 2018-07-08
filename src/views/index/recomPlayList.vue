@@ -55,6 +55,7 @@
             nextEl: '.slider-next',
             prevEl: '.slider-prev'
           },
+          loop: true,
           simulateTouch: false,
           slidesPerView: 5,
           slidesPerGroup: 5,
@@ -100,10 +101,10 @@
         recommend(isFirstIndex).then(res => {
           if (res.code === ERR_OK) {
             if (!isFirstIndex) {
-              this.recomPlaylist = this._normalizeSongs(res.recomPlaylist.data.v_hot)
+              this.recomPlaylist = this._normalizeSongs(res.recomPlaylist.data.v_hot).slice(0,12)
               return
             }
-            this.recomPlaylist = this._normalizeSongs(res.playlist.data.v_playlist, true)
+            this.recomPlaylist = this._normalizeSongs(res.playlist.data.v_playlist, true).slice(0,12)
           }
         })
       },

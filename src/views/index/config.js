@@ -68,6 +68,18 @@ export const config = {
         index: 10,
         id: 59,
         text: '经典'
+      },
+      {
+        type: 'playlist',
+        index: 11,
+        id: 3230,
+        text: '经典国语'
+      },
+      {
+        type: 'playlist',
+        index: 12,
+        id: 3295,
+        text: '2018世界杯'
       }
     ]
   }

@@ -31,6 +31,19 @@ export class CreateBanner {
   }
 }
 
+export class CreateAblum {
+  constructor(musicData){
+    this.album_id = musicData.album_id
+    this.album_mid = musicData.album_mid
+    this.album_name = musicData.album_name
+    this.singer_id = musicData.singers[0].singer_id
+    this.singer_mid = musicData.singers[0].singer_mid
+    this.singer_name = musicData.singers[0].singer_name
+    this.image = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.album_mid}.jpg?max_age=2592000`
+  }
+}
+
+
 
 function filterSinger(singer) {
   let ret = []

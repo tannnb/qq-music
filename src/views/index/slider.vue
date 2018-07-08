@@ -76,6 +76,7 @@
 <style lang="stylus" scoped>
   .banner-container {
     background: linear-gradient(#f3f3f3, #fff);
+    padding-bottom 30px
     .title {
       width 1200px
       margin 0 auto

@@ -105,8 +105,8 @@ export function recommend(id) {
     "comm": {"ct": 24},
     "recomPlaylist": {
       "method": "get_hot_recommend",
-      "param": {"async": 1, "cmd": 2},
-      "module": "playlist.HotRecommendServer"
+      "module": "playlist.HotRecommendServer",
+      "param": {"async": 1, "cmd": 2}
     }
   }
 
@@ -114,14 +114,14 @@ export function recommend(id) {
     "comm": {"ct": 24},
     "playlist": {
       "method": "get_playlist_by_category",
+      "module": "playlist.PlayListPlazaServer",
       "param": {
         "id": id,
         "curPage": 1,
         "size": 40,
         "order": 5,
         "titleid": id
-      },
-      "module": "playlist.PlayListPlazaServer"
+      }
     }
   }
 
@@ -165,4 +165,34 @@ export function newSongType(id) {
     return Promise.resolve(res.data)
   })
 }
+
+
+export function newAlbumArea(id) {
+  const url = 'http://localhost:3000/newAlbumArea'
+
+  const data = Object.assign({}, commonParams, {
+    loginUin: 0,
+    hostUin: 0,
+    platform: 'yqq',
+    needNewCode: 0,
+    data: {
+      "comm": {"ct": 24},
+      "new_album": {
+        "module": "music.web_album_library",
+        "method": "get_album_by_tags",
+        "param": {
+          "area": id,
+          "num": 40
+        }
+      }
+    }
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
+
 

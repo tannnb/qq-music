@@ -1,17 +1,8 @@
 <template>
   <div class="newSong-container">
-    <div class="subHeader">
-      <div class="title">{{newSongPlaylistTitle.title}}</div>
-      <ul class="subTitle">
-        <li
-          v-for="(items,index) in newSongPlaylistTitle.navList"
-          @click="handleSelectNewSong(index,items)"
-          data-type="items.type"
-          :class=" index === currentNewSongIndex? 'active':'' "
-          :key="index">{{items.text}}
-        </li>
-      </ul>
-    </div>
+
+    <m-title :datas="newSongPlaylistTitle" :currentIndex="currentIndex" @handleSelectEvent="handleSelectNewSong"></m-title>
+
     <div class="swiperWrapper">
       <div class="swiperWrapper-outer">
         <swiper :options="swiperOptionNewSong">
@@ -36,10 +27,12 @@
       <div class="newSong-prev" slot="button-prev"><span class="prev"></span></div>
       <div class="newSong-next" slot="button-prev"><span class="next"></span></div>
     </div>
+
   </div>
 </template>
 
 <script>
+  import MTitle from './m-title'
   import {ERR_OK} from "../../api/config";
   import {newSongType} from '../../api/recommend'
   import {CreateSong} from "../../utils/util";
@@ -52,10 +45,13 @@
         default: {}
       }
     },
+    components:{
+      MTitle
+    },
     data() {
       return {
         newSongPlaylistTitle: {},
-        currentNewSongIndex: 0,
+        currentIndex: 0,
         newSongList: [],
         swiperOptionNewSong: {
           pagination: {
@@ -67,6 +63,7 @@
             nextEl: '.newSong-next',
             prevEl: '.newSong-prev'
           },
+          loop: true,
           simulateTouch: false,
           observer: true,
           observeParents: true
@@ -123,7 +120,7 @@
       },
 
       handleSelectNewSong(index, items) {
-        this.currentNewSongIndex = index
+        this.currentIndex = index
         newSongType(items.id).then(res => {
           if (res.new_song.code === ERR_OK) {
             this.newSongList = this._initNewSongList(res.new_song.data.song_list.slice(0, 36))
@@ -143,38 +140,7 @@
   .newSong-container {
     background: linear-gradient(#f3f3f3, #fff);
     padding-bottom 20px
-    .subHeader {
-      width 1200px
-      margin 0 auto
-      .title {
-        padding 50px 0 24px 0
-        line-height 40px
-        text-align center
-        font-size 30px
-        color: #545454
-        letter-spacing 6px
-        font-weight bold
-      }
-      .subTitle {
-        display: flex
-        justify-content center
-        align-items center
-        li {
-          line-height 22px
-          font-size 15px
-          margin 0 24px
-          padding-bottom 40px
-          color: #333
-          cursor pointer
-          &:hover {
-            color: #31c27c
-          }
-          &.active {
-            color: #31c27c
-          }
-        }
-      }
-    }
+
     .swiperWrapper {
       position: relative
       >>> .swiper-wrapper {
