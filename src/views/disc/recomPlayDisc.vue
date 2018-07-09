@@ -16,11 +16,15 @@
         </div>
       </div>
     </div>
+    <div class="list-wrapper">
+      <List-view v-if="playListUrl.length !== '' " :song="playListUrl"></List-view>
+    </div>
   </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
+  import ListView from '../../components/list-view/list-view'
   import {ERR_OK} from "../../api/config";
   import {getDiscList} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
@@ -34,6 +38,9 @@
     },
     created() {
       this._getDiscList()
+    },
+    components:{
+      ListView
     },
     computed: {
       ...mapGetters([
@@ -53,6 +60,7 @@
             console.log(this.playList)
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
               this.playListUrl = songs
+              console.log( this.playListUrl)
             })
           }
         })
