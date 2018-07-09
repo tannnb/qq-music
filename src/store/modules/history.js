@@ -1,15 +1,23 @@
 import * as types from '../mutation-types'
-import {saveSearch, clearSearch,deleteSearch, loadSearch} from '../../utils/ceche'
+import {
+  saveSearch,
+  clearSearch,
+  deleteSearch,
+  loadSearch,
+  saveSingId,
+  loadSingId
+} from '../../utils/ceche'
+import storage from "good-storage";
 
 
 const state = {
-  initHistory: {
-    searchHistory: loadSearch()
-  }
+  initSearchHistory: loadSearch(),
+  initMid: loadSingId()
 }
 
 const getters = {
-  searchHistory: state => state.initHistory.searchHistory
+  searchHistory: state => state.initSearchHistory,
+  mid: state => state.initMid
 }
 
 
@@ -23,15 +31,23 @@ const actions = {
     commit(types.SET_SEARCH_HISTORY, clearSearch())
   },
   // 删除单条信息
-  deleteSearchHistory({commit},song){
+  deleteSearchHistory({commit}, song) {
     commit(types.SET_SEARCH_HISTORY, deleteSearch(song))
+  },
+  // 保存id/mid
+  saveSingID({commit}, id) {
+    commit(types.SAVE_SINGID, saveSingId(id))
   }
+
 }
 
 
 const mutations = {
   [types.SET_SEARCH_HISTORY](state, payload) {
-    state.initHistory.searchHistory = payload
+    state.initSearchHistory = payload
+  },
+  [types.SAVE_SINGID](state, payload) {
+    state.initMid = payload
   }
 }
 

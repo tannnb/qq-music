@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import {ERR_OK} from "../../api/config";
   import {musicu} from '../../api/recommend'
   import recomPlayList from './recomPlayList'
@@ -50,6 +51,10 @@
       this._musicu()
     },
     methods: {
+      ...mapActions([
+        'saveDiscInfo',
+        'saveSingID'
+      ]),
       _musicu() {
         musicu().then(res => {
           if(res.code === ERR_OK){
@@ -65,11 +70,21 @@
       // 歌单推荐
       handleSelectRecomPlay(item){
         console.log(item)
+        this.$router.push({
+          path:`/music/${item.id}`
+        })
+        // 保存歌曲信息
+        this.saveDiscInfo(item)
+        this.saveSingID(item.id)
       },
 
       // 新歌首发
       handleNewSong(item) {
-        console.log(item)
+        this.$router.push({
+          path:`/music/${item.id}`
+        })
+        this.saveDiscInfo(item)
+        this.saveSingID(item.id)
       },
 
       handleTopList(){

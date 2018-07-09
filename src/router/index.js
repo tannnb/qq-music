@@ -19,6 +19,10 @@ export default new Router({
         {
           path:'index',
           component:() => import('@/views/index/index')
+        },
+        {
+          path:':id',
+          component:() => import('@/views/disc/recomPlayDisc')
         }
       ]
     }

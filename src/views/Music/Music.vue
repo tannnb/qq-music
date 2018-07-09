@@ -3,7 +3,6 @@
     <Music-header @handleSelect="handleSelect" :currentIndex="currentIndex"></Music-header>
     <Music-nav></Music-nav>
     <router-view></router-view>
-
   </div>
 </template>
 
@@ -29,5 +28,7 @@
 </script>
 
 <style lang="stylus" scoped>
+
+
 
 </style>

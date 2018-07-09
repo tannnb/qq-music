@@ -11,7 +11,10 @@
             <div class="toplistName"> {{_padd(items.name)}}</div>
             <div class="line"></div>
             <ul class="subItemWrapper">
-              <li class="subItme" v-for="(sub,index) in items.songlist" :key="index">
+              <li class="subItme"
+                  v-for="(sub,index) in items.songlist"
+                    @click="handleSelectItem(sub)"
+                  :key="index">
                 <p class="singername"> {{index+1}}  {{sub.singer_name}}</p>
                 <p class="trackname">{{sub.track_name}}</p>
               </li>
@@ -45,6 +48,9 @@
     methods:{
       _padd(item){
         return item.split('·')[1]
+      },
+      handleSelectItem(sub){
+        console.log(sub)
       }
     }
   }
@@ -91,6 +97,12 @@
         position relative
         overflow hidden
         width 224px
+        overflow hidden
+        &:hover{
+          .bg{
+            transform scale(1.2)
+          }
+        }
         .item{
           position absolute
           z-index 3
@@ -99,6 +111,12 @@
           bottom 0
           width 100%
           color: #fff
+          cursor pointer
+          &:hover{
+            .line{
+              width 70px
+            }
+          }
           .toplistTitle{
             padding-top  60px
             padding-bottom 10px
@@ -110,10 +128,11 @@
             text-align center
           }
           .line{
-            width 40px
+            width 30px
             height:2px
             background #fff
             margin 30px auto 20px auto
+            transition all .2s
           }
           .subItemWrapper{
             padding 30px
@@ -137,6 +156,7 @@
           z-index 0
           width 224px
           height: 100%
+          transition all .2s
           &.bg_0{
             background: url("./toplist.png") 100% 100%;
             background-position 0 0
