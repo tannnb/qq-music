@@ -10,10 +10,10 @@
         </li>
         <li class="item" v-for="(items,index) in song" :key="index">
           <div class="count">{{index+1}}</div>
-          <div class="sing">{{items.name}}</div>
+          <div class="sing">{{items.name}}  <i class="icon-play"></i> <i class="icon-add"></i>  </div>
           <div class="singer">{{items.singer}}</div>
           <div class="albumn">{{items.album}}</div>
-          <div class="time">{{items.duration}}</div>
+          <div class="time">{{format(items.duration)}}</div>
         </li>
       </ul>
     </div>
@@ -26,7 +26,23 @@
            type:Array,
            default:[]
          }
-       }
+       },
+      methods:{
+        _pad(num, n = 2) {
+          let len = num.toString().length
+          while (len < n) {
+            num = '0' + num
+            len++
+          }
+          return num
+        },
+        format(interval) {
+          interval = interval | 0
+          const minute = interval / 60 | 0
+          const second = this._pad(interval % 60)
+          return `${minute}:${second}`
+        }
+      }
     }
 </script>
 
@@ -69,6 +85,8 @@
       }
       .time{
         width 6%
+        font-size:14px
+        color: #999
       }
       &:nth-child(1){
         font-size 15px !important
