@@ -1,98 +1,193 @@
 <template>
-    <div>
-      <ul class="list-view">
-        <li class="item">
-          <div class="count"></div>
-          <div class="sing">歌曲</div>
-          <div class="singer">歌手</div>
-          <div class="albumn">专辑</div>
-          <div class="time">时长</div>
-        </li>
-        <li class="item" v-for="(items,index) in song" :key="index">
-          <div class="count">{{index+1}}</div>
-          <div class="sing">{{items.name}}  <i class="icon-play"></i> <i class="icon-add"></i>  </div>
-          <div class="singer">{{items.singer}}</div>
-          <div class="albumn">{{items.album}}</div>
-          <div class="time">{{format(items.duration)}}</div>
-        </li>
-      </ul>
-    </div>
+  <div>
+    <ul class="list-view">
+      <div class="itemFirst">
+        <div class="count"></div>
+        <div class="sing">歌曲</div>
+        <div class="singer">歌手</div>
+        <div class="albumn">专辑</div>
+        <div class="time">时长</div>
+      </div>
+      <li class="item" v-for="(items,index) in song" :key="index">
+        <div class="count">{{index+1}}</div>
+        <div class="sing">
+          <span>{{items.name}} </span>
+          <span class="desc" v-if="items.albumdesc">{{items.albumdesc}}</span>
+          <span class="isonly" v-if="items.isonly === 1"> 独家 </span>
+          <div class="funBtn">
+            <i class="icon-play" @click="handleSelectItem(items)"></i>
+            <i class="icon-add" @click="handleAppendItem(items)"></i>
+          </div>
+        </div>
+        <div class="singer">{{items.singer}}</div>
+        <div class="albumn">{{items.album}}</div>
+        <div class="time">{{format(items.duration)}}</div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-    export default {
-       props:{
-         song:{
-           type:Array,
-           default:[]
-         }
-       },
-      methods:{
-        _pad(num, n = 2) {
-          let len = num.toString().length
-          while (len < n) {
-            num = '0' + num
-            len++
-          }
-          return num
-        },
-        format(interval) {
-          interval = interval | 0
-          const minute = interval / 60 | 0
-          const second = this._pad(interval % 60)
-          return `${minute}:${second}`
+  export default {
+    props: {
+      song: {
+        type: Array,
+        default: []
+      }
+    },
+    methods: {
+      handleSelectItem(items){
+        this.$emit('handlePlayer',items)
+      },
+      handleAppendItem(items){
+        this.$emit('appendPlayer',items)
+      },
+      _pad(num, n = 2) {
+        let len = num.toString().length
+        while (len < n) {
+          num = '0' + num
+          len++
         }
+        return num
+      },
+      format(interval) {
+        interval = interval | 0
+        const minute = interval / 60 | 0
+        const second = this._pad(interval % 60)
+        return `${minute}:${second}`
       }
     }
+  }
 </script>
 
 <style lang="stylus" scoped>
 
-  .list-view{
+  .list-view {
     width 860px
-    .item{
+    .itemFirst {
       display flex
       line-height 50px
       height 50px
-      .count{
+      font-size 13px
+      color: #999
+      background #FBFBFD
+      .count {
         width 6%
-        font-size 13px
-        padding-left 10px
-        color: #999
       }
-      .sing{
+      .sing {
         width 48%
-        font-size:14px
-        color: #333
+        margin-right 20px
+        box-sizing border-box
       }
-      .singer{
+      .singer {
         width 20%
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-        padding 0 20px
-        font-size:14px
-        color: #333
+        margin-right 20px
+        box-sizing border-box
       }
-      .albumn{
+      .albumn {
         width 20%
-        overflow hidden
-        text-overflow ellipsis
-        white-space nowrap
-        padding 0 20px
-        font-size:14px
-        color: #333
+        margin-right 20px
+        box-sizing border-box
       }
-      .time{
+      .time {
         width 6%
-        font-size:14px
+      }
+    }
+
+    .item {
+      display flex
+      font-size 14px
+      line-height 50px
+      height 50px
+      color: #333
+      .count {
+        width 6%
         color: #999
       }
-      &:nth-child(1){
-        font-size 15px !important
-        color: #999 !important
+      .sing {
+        position: relative
+        width 48%
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+        margin-right 20px
+        box-sizing border-box
+        cursor pointer
+        .desc {
+          width 140px
+          font-size 13px
+          margin-left 6px
+          color: #999
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
+        }
+        .isonly {
+          font-size 10px
+          padding 1px 2px
+          color: #31c27c
+          border: 1px solid #31c27c
+          border-radius 3px
+        }
+        .funBtn {
+          display none
+          justify-content space-between
+          position: absolute
+          right: 0px
+          top: 0px
+          font-size 34px
+          padding 0 0 0 30px
+          i {
+            color: #c3c3c3
+            cursor pointer
+            &:hover {
+              color: #31c27c
+            }
+          }
+        }
+        &:hover {
+          color: #31c27c
+          .funBtn:nth-child(even) {
+            display block
+            background #fff
+          }
+        }
+        &:hover {
+          .funBtn:nth-child(odd) {
+            display block
+            background #FBFBFD
+          }
+        }
       }
-      &:nth-child(odd){
+      .singer {
+        width 20%
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+        margin-right 20px
+        box-sizing border-box
+        cursor pointer
+        &:hover{
+          color: #31c27c
+        }
+      }
+      .albumn {
+        width 20%
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+        margin-right 20px
+        box-sizing border-box
+        cursor pointer
+        &:hover{
+          color: #31c27c
+        }
+      }
+      .time {
+        width 6%
+        color: #999
+      }
+      &:nth-child(odd) {
         background #FBFBFD
       }
     }

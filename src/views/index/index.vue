@@ -69,7 +69,6 @@
 
       // 歌单推荐
       handleSelectRecomPlay(item){
-        console.log(item)
         this.$router.push({
           path:`/music/${item.id}`
         })
@@ -81,10 +80,10 @@
       // 新歌首发
       handleNewSong(item) {
         this.$router.push({
-          path:`/music/${item.id}`
+          path:`/music/${item.album_mid}`
         })
         this.saveDiscInfo(item)
-        this.saveSingID(item.id)
+        this.saveSingID(item.album_mid)
       },
 
       handleTopList(){

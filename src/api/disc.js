@@ -3,8 +3,6 @@ import {commonParams, options} from './config'
 import axios from 'axios'
 
 
-
-
 export function getDiscList(id) {
   const url = 'http://localhost:3000/getDiscList'
 
@@ -35,3 +33,39 @@ export function getDiscList(id) {
   })
 
 }
+
+export function review(mid,pagenum=0) {
+  const url = 'http://localhost:3000/review'
+
+  const data = Object.assign({}, commonParams, {
+    hostUin: 0,
+    inCharset: 'utf8',
+    outCharset: 'GB2312',
+    platform: 'yqq',
+    needNewCode: 0,
+    cid: 205360772,
+    reqtype: 2,
+    biztype: 3,
+    topid: mid,
+    cmd: 8,
+    needmusiccrit: 0,
+    pagenum: pagenum,
+    pagesize: 25,
+    lasthotcommentid: '',
+    domain: 'qq.com',
+    ct: 24,
+    cv: 101010,
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+
+
+
+
+

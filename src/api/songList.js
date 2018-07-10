@@ -4,8 +4,10 @@ import axios from 'axios'
 
 
 export default class Song {
-  constructor({id, mid, singer, name, album, duration, image, url}) {
+  constructor({id, mid,albumdesc,isonly, singer, name, album, duration, image, url}) {
     this.id = id
+    this.albumdesc = albumdesc
+    this.isonly = isonly
     this.mid = mid
     this.singer = singer
     this.name = name
@@ -38,6 +40,8 @@ export default class Song {
 export function createSong(musicData) {
   return new Song({
     id: musicData.songid,
+    albumdesc:musicData.albumdesc,
+    isonly:musicData.isonly,
     mid: musicData.songmid,
     singer: filterSinger(musicData.singer),
     name: musicData.songname,

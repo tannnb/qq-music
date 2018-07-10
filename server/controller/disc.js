@@ -19,21 +19,21 @@ module.exports = {
   },
 
   getPurlUrl: (req, res) => {
-     const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
-     axios.post(url, req.body, {
-       headers: {
-         referer: 'https://y.qq.com/',
-         origin: 'https://y.qq.com',
-         'Content-type': 'application/x-www-form-urlencoded'
-       }
-     }).then((response) => {
-       res.json(response.data)
-     }).catch((e) => {
-       console.log('请求失败')
-     })
+    const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
+    axios.post(url, req.body, {
+      headers: {
+        referer: 'https://y.qq.com/',
+        origin: 'https://y.qq.com',
+        'Content-type': 'application/x-www-form-urlencoded'
+      }
+    }).then((response) => {
+      res.json(response.data)
+    }).catch((e) => {
+      console.log('请求失败')
+    })
   },
 
-  getLyric:(req, res) => {
+  getLyric: (req, res) => {
     const url = 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg'
     axios.post(url, req.body, {
       headers: {
@@ -53,6 +53,22 @@ module.exports = {
     }).catch((e) => {
       console.log('请求失败')
     })
+  },
+
+  review: (req, res) => {
+    const url = 'https://c.y.qq.com/base/fcgi-bin/fcg_global_comment_h5.fcg'
+    axios.get(url, {
+      headers: {
+        referer: 'https://c.y.qq.com/'
+      },
+      params: req.query
+    })
+      .then((response) => {
+        res.json(response.data)
+      })
+      .catch((e) => {
+        console.log('请求失败')
+      })
   }
 
 }

@@ -4,20 +4,32 @@
       <div class="logo"><img :src="playList.logo" alt=""></div>
       <div class="singerItem">
         <div class="dissname">{{playList.dissname}}</div>
-        <div class="tags">{{playList.nickname}}</div>
+        <div class="tags"><i class="icon-user"></i> {{playList.nickname}}</div>
         <div class="tags" v-if="playList.tags">标签:{{playList.tags[0].name}}</div>
         <div class="tags">播放量：{{_paddListen(playList.visitnum)}}</div>
-         <div class="tags">收藏量：</div>
+        <div class="tags">收藏量：</div>
         <div class="funBtn">
-          <span class="active">播放全部</span>
-          <span>收藏</span>
-          <span>评论</span>
-          <span>更多</span>
+          <span class="active"> <i class="icon-play"></i> 播放全部</span>
+          <span><i class="icon-collect"></i>收藏</span>
+          <span><i class="icon-pinglun"></i>评论</span>
+          <span><i class="icon-more"></i>更多</span>
         </div>
       </div>
     </div>
     <div class="list-wrapper">
-      <List-view v-if="playListUrl.length !== '' " :song="playListUrl"></List-view>
+      <List-view
+        v-if="playListUrl.length !== '' "
+        :song="playListUrl"
+        @handlePlayer="handlePlayer"
+        @appendPlayer="appendPlayer"
+      ></List-view>
+      <div class="introduction">
+        <div class="name">简介</div>
+        <div class="desc">{{playList.desc}}</div>
+      </div>
+    </div>
+    <div class="list-wrapper" style="width: 860px">
+      <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>
     </div>
   </div>
 </template>
@@ -25,22 +37,26 @@
 <script>
   import {mapGetters} from 'vuex'
   import ListView from '../../components/list-view/list-view'
+  import reviewList from '../../components/review-list/review-list'
   import {ERR_OK} from "../../api/config";
-  import {getDiscList} from '../../api/disc'
+  import {getDiscList, review} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
 
   export default {
     data() {
       return {
         playList: {},
-        playListUrl: []
+        playListUrl: [],
+        commentlist: null,
+        commenttotal: ''
       }
     },
     created() {
       this._getDiscList()
     },
-    components:{
-      ListView
+    components: {
+      ListView,
+      reviewList
     },
     computed: {
       ...mapGetters([
@@ -60,8 +76,14 @@
             console.log(this.playList)
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
               this.playListUrl = songs
-              console.log( this.playListUrl)
+              console.log(this.playListUrl)
             })
+          }
+        })
+        review(this.mid).then(res => {
+          if (res.data.code === ERR_OK) {
+            this.commentlist = res.data.comment.commentlist
+            this.commenttotal = res.data.comment.commenttotal
           }
         })
       },
@@ -78,6 +100,13 @@
       _paddListen(number) {
         return (number / 10000).toFixed(1) + '万'
       },
+
+      handlePlayer(items){
+        console.log(items)
+      },
+      appendPlayer(items){
+        console.log(items)
+      }
 
     }
 
@@ -101,9 +130,9 @@
           vertical-align top
         }
       }
-      .singerItem{
+      .singerItem {
         padding-left 40px
-        .dissname{
+        .dissname {
           padding-top 13px
           padding-bottom 10px
           font-size 32px
@@ -115,22 +144,22 @@
         .funBtn {
           span {
             display inline-block
-            border:1px solid #c9c9c9
+            border: 1px solid #c9c9c9
             padding 10px 30px
             margin 20px 0
             font-size 15px
             color: #333
             border-radius 2px
             cursor pointer
-            &:hover{
+            &:hover {
               background #EDEDED
             }
           }
-          .active{
+          .active {
             background #31c27c
             color: #fff
             border-color #31c27c
-            &:hover{
+            &:hover {
               background #2CAF6F
             }
           }
@@ -139,5 +168,17 @@
 
       }
 
-
+    .list-wrapper
+      display flex
+      .introduction
+        padding-left 30px
+        .name
+          font-size: 15px
+          font-weight: 400
+          line-height: 46px
+        .desc
+          max-height: 88px
+          font-size: 14px
+          line-height: 22px
+          overflow: hidden
 </style>

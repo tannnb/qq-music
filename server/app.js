@@ -32,6 +32,7 @@ app.get('/newAlbumArea', IndexController.newAlbumArea)
 app.get('/getDiscList', DiscController.getDiscList)
 app.post('/getPurlUrl', bodyParser.json(),DiscController.getPurlUrl)
 app.get('/getLyric',DiscController.getLyric)
+app.get('/review',DiscController.review)
 
 
 

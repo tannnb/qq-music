@@ -18,7 +18,7 @@ export class CreateSong {
     this.name = musicData.singer[0].name
     this.id = musicData.id
     this.album_id = musicData.album.id
-    this.album_mid = musicData.album.mid
+    this.album_mid = musicData.mid
     this.duration = musicData.interval
     this.image = `http://y.gtimg.cn/music/photo_new/T002R90x90M000${musicData.album.mid}.jpg?max_age=2592000`
   }
