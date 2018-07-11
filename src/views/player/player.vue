@@ -1,9 +1,27 @@
 <template>
-  <div class="player-wrapper" v-show="playlist.length>0">
+  <div class="player-wrapper" v-if="playlist.length>0">
     <div class="normal-player" v-show="fullScreen">
+      <div class="background">
+        <img width="100%" height="100%"  :src="currentSong.image">
+      </div>
+      <div class="playerSet">
+        <i class="icon-minWin" @click="back"></i>
+      </div>
 
-      <i class="icon-minWin" @click="back"></i>
-      <i :class="playIcon" @click="togglePlaying"></i>
+      <div class="player_music">
+        <div class="playerStart">
+          <i class="icon-prev"></i>
+          <i :class="playIcon" @click="togglePlaying"></i>
+          <i class="icon-next"></i>
+        </div>
+        <div class="progress-wrapper">
+          <div class="header">
+            <div class="musicName">{{currentSong.name}}-{{currentSong.singer}}</div>
+            <div class="musictime">{{currentTime}}/{{currentSong.duration}}</div>
+          </div>
+          <div></div>
+        </div>
+      </div>
 
     </div>
     <div class="mini-player" v-show="!fullScreen" @click="open">mini</div>
@@ -16,6 +34,11 @@
 
   export default {
     name: "player",
+    data(){
+      return {
+        currentTime:0
+      }
+    },
     computed: {
       ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing']),
       playIcon() {
@@ -62,7 +85,54 @@
       bottom: 0
       width 100%
       z-index 99
-      background #ccc
+      background rgb(52, 52, 52)
+      .background{
+        position: absolute
+        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        z-index: -1
+        opacity: 0.2
+        filter: blur(20px)
+      }
+      .playerSet{
+        background #fff
+      }
+      .player_music{
+        position: absolute
+        bottom 50px
+        left: 50%
+        display flex
+        transform translateX(-50%)
+        width 1100px
+        margin 0 auto
+        .playerStart{
+          display flex
+          justify-content space-between
+          width 120px
+          color: #fff
+          i{
+            font-size 26px
+          }
+        }
+        .progress-wrapper{
+          padding 0 30px
+          width 460px
+          color: #fff
+          .header{
+            display flex
+            justify-content space-between
+            font-size 13px
+            .musicName{
+              color rgba(225,225,225,.8)
+            }
+            .musictime{
+              color rgba(225,225,225,.8)
+            }
+          }
+        }
+      }
     }
     .mini-player {
       position: fixed
