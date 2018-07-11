@@ -4,9 +4,21 @@
       <div class="background">
         <img width="100%" height="100%"  :src="currentSong.image">
       </div>
-      <div class="playerSet">
-        <i class="icon-minWin" @click="back"></i>
+      <div class="playerSet" @click="back">
+       <span class="mins"> <i class="icon-minWin" ></i> 最小化</span>
       </div>
+
+      <div class="playerContainer">
+        <div class="playerNav">
+            <span> <i class="icon-sound"></i> 收藏</span>
+            <span> <i class="icon-add"></i> 添加</span>
+            <span> <i class="icon-clearall"></i> 清空</span>
+        </div>
+        <div class="playerlyer">
+
+        </div>
+      </div>
+
 
       <div class="player_music">
         <div class="playerStart">
@@ -97,8 +109,44 @@
         filter: blur(20px)
       }
       .playerSet{
-        background #fff
+        display flex
+        justify-content flex-end
+        width 1100px
+        padding 10px 0
+        margin 0 auto
+        color: #898989
+        .mins{
+          padding-left 10px
+          font-size 14px
+          cursor pointer
+          i{
+            font-size 18px
+          }
+          &:hover{
+            color: #fff
+          }
+        }
       }
+      .playerNav{
+        display flex
+        width 1100px
+        padding 10px 0
+        margin 0 auto
+        span {
+          padding 10px 30px
+          color: #979797
+          margin-right 10px
+          font-size 14px
+          border:1px solid rgba(255, 255, 255, 0.23)
+          cursor pointer
+          &:hover{
+            color #fff
+            border:1px solid rgb(255, 255, 255)
+          }
+        }
+      }
+
+
       .player_music{
         position: absolute
         bottom 50px
