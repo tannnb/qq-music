@@ -1,15 +1,20 @@
 <template>
   <div id="app">
-      <router-view/>
+    <router-view/>
+    <Player></Player>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+import Player from './views/player/player'
+  export default {
+    name: 'App',
+    components:{
+      Player
+    }
+  }
 </script>
-<style lang="stylus" >
+<style lang="stylus">
 
   body {
     overflow-x hidden

@@ -15,8 +15,8 @@
           <span class="desc" v-if="items.albumdesc">{{items.albumdesc}}</span>
           <span class="isonly" v-if="items.isonly === 1"> 独家 </span>
           <div class="funBtn">
-            <i class="icon-play" @click="handleSelectItem(items)"></i>
-            <i class="icon-add" @click="handleAppendItem(items)"></i>
+            <i class="icon-play" @click="handleSelectItem(items,index)"></i>
+            <i class="icon-add" @click="handleAppendItem(items,index)"></i>
           </div>
         </div>
         <div class="singer">{{items.singer}}</div>
@@ -36,11 +36,11 @@
       }
     },
     methods: {
-      handleSelectItem(items){
-        this.$emit('handlePlayer',items)
+      handleSelectItem(items,index){
+        this.$emit('handlePlayer',items,index)
       },
-      handleAppendItem(items){
-        this.$emit('appendPlayer',items)
+      handleAppendItem(items,index){
+        this.$emit('appendPlayer',items,index)
       },
       _pad(num, n = 2) {
         let len = num.toString().length

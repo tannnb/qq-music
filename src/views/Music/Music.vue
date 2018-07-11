@@ -2,6 +2,17 @@
   <div>
     <Music-header @handleSelect="handleSelect" :currentIndex="currentIndex"></Music-header>
     <Music-nav></Music-nav>
+
+    <div class="test">
+      <div class="oidv"></div>
+      <div class="oidv"></div>
+      <div class="oidv"></div>
+      <div class="oidv"></div>
+      <div class="oidv"></div>
+      <div class="oidv"></div>
+    </div>
+
+
     <router-view></router-view>
   </div>
 </template>

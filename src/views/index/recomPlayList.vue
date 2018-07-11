@@ -127,12 +127,13 @@
         padding-bottom 20px
       }
       .swiperWrapper-outer {
+        display flex
+        justify-content space-between
         width 1200px
         margin 0 auto
       }
       .playlist_item_box {
         width 224px
-        margin-right 20px
         .coverImg {
           width 100%
           overflow hidden

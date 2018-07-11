@@ -5,7 +5,7 @@
       <div class="singerItem">
         <div class="dissname">{{playList.dissname}}</div>
         <div class="tags"><i class="icon-user"></i> {{playList.nickname}}</div>
-        <div class="tags" v-if="playList.tags">标签:{{playList.tags[0].name}}</div>
+        <div class="tags" v-if="playList.tags">标签：{{playList.tags[0].name}}</div>
         <div class="tags">播放量：{{_paddListen(playList.visitnum)}}</div>
         <div class="tags">收藏量：</div>
         <div class="funBtn">
@@ -18,8 +18,8 @@
     </div>
     <div class="list-wrapper">
       <List-view
-        v-if="playListUrl.length !== '' "
-        :song="playListUrl"
+        v-if="songs.length !== '' "
+        :song="songs"
         @handlePlayer="handlePlayer"
         @appendPlayer="appendPlayer"
       ></List-view>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
   import {ERR_OK} from "../../api/config";
@@ -46,7 +46,7 @@
     data() {
       return {
         playList: {},
-        playListUrl: [],
+        songs: [],
         commentlist: null,
         commenttotal: ''
       }
@@ -65,6 +65,21 @@
       ])
     },
     methods: {
+      ...mapActions([
+        'selectPlay'
+      ]),
+
+      handlePlayer(items, index) {
+        this.selectPlay({
+          list: this.songs,
+          index: index
+        })
+        console.log(items)
+      },
+      appendPlayer(items) {
+        console.log(items)
+      },
+
       _getDiscList() {
         if (!this.mid) {
           this.$router.push('/music/index')
@@ -73,10 +88,8 @@
         getDiscList(this.mid).then(res => {
           if (res.code === ERR_OK) {
             this.playList = res.cdlist[0]
-            console.log(this.playList)
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
-              this.playListUrl = songs
-              console.log(this.playListUrl)
+              this.songs = songs
             })
           }
         })
@@ -99,13 +112,6 @@
 
       _paddListen(number) {
         return (number / 10000).toFixed(1) + '万'
-      },
-
-      handlePlayer(items){
-        console.log(items)
-      },
-      appendPlayer(items){
-        console.log(items)
       }
 
     }

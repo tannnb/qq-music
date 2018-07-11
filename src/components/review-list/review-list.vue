@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="review-wrapper">
     <div class="review-header">{{commentheader}}({{commenttotal}})</div>
     <ul class="review-container">
       <li class="items" v-for="(items,index) in commentlist" :key="index">
@@ -48,6 +48,10 @@
 </script>
 
 <style lang="stylus" scoped>
+  .review-wrapper{
+    width 100%
+    padding-top 60px
+  }
   .review-header {
     height: 34px;
     line-height: 34px;
@@ -95,6 +99,4 @@
       }
     }
   }
-
-
 </style>
