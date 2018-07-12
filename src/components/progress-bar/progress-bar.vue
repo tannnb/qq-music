@@ -27,6 +27,9 @@
     mounted() {
       this.$nextTick(() => {
         this.bindEvents()
+        const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
+        const offsetWidth = newPercent * barWidth
+        this._offset(offsetWidth)
       })
     },
     watch: {
@@ -51,7 +54,7 @@
       },
       mousedown(e) {
         this.touch.initiated = true
-        this.touch.startX = e.clientX || e.touches[0].pageX;
+        this.touch.startX = e.clientX
         this.touch.left = this.$refs.progress.clientWidth
       },
       mousemove(e) {
@@ -73,7 +76,9 @@
         this.$emit('percentChange', percent)
       },
       progressClick(e){
-        this._offset(e.offsetX)
+        const deltaX = e.clientX - this.touch.startX
+        const offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth, Math.max(0, this.touch.left + deltaX))
+        this._offset(offsetWidth)
         this._triggerPercent()
       },
       _offset(offsetWidth) {

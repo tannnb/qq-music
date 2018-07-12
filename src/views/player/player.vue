@@ -176,8 +176,7 @@
       },
 
       // 音量
-      volume() {
-      },
+      volume() { },
 
       onPercentChange(percent){
         // 设置歌曲位置
