@@ -8,7 +8,8 @@ const state = {
   playlist: [],
   sequenceList: [],
   mode: playMode.sequence,
-  currentIndex: -1
+  currentIndex: -1,
+  audioVolume:false
 }
 
 const getters = {
@@ -21,7 +22,8 @@ const getters = {
   currentIndex: state => state.currentIndex,
   currentSong: state => {
     return state.playlist[state.currentIndex]
-  }
+  },
+  audioVolume: state => state.audioVolume,
 }
 
 
@@ -58,6 +60,9 @@ const mutations = {
   [types.SET_CURRENTINDEX](state,index){
     state.currentIndex = index
   },
+  [types.SET_AUDIOVOLUME](state,volume) {
+    state.audioVolume = volume
+  }
 }
 
 
