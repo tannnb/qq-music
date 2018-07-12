@@ -9,7 +9,7 @@
         </div>
 
         <div class="playerSet">
-          <span class="mins" @click="back"> <i class="icon-minWin"></i> 最小化</span>
+          <span class="mins" @click.stop="back"> <i class="icon-minWin"></i> 最小化</span>
         </div>
 
         <div class="playerContainer">
@@ -104,11 +104,11 @@
       playIcon() {
         return this.playing ? 'icon-pause' : 'icon-play'
       },
-      disableCls(){
-        return this.songReady? '':'disableCls'
+      disableCls() {
+        return this.songReady ? '' : 'disableCls'
       },
       // 获取播放比例
-      percent(){
+      percent() {
         return this.currentTime / this.currentSong.duration
       }
     },
@@ -171,17 +171,18 @@
         this.next()
       },
       // 获取播放的时间
-      updateTime(e){
+      updateTime(e) {
         this.currentTime = e.target.currentTime
       },
 
       // 音量
-      volume() { },
+      volume() {
+      },
 
-      onPercentChange(percent){
+      onPercentChange(percent) {
         // 设置歌曲位置
-        this.$refs.audio.currentTime = this.currentSong.duration * percent
-        if(!this.playing){
+         this.$refs.audio.currentTime = this.currentSong.duration * percent
+        if (!this.playing) {
           this.togglePlaying()
         }
       },
@@ -318,7 +319,7 @@
           justify-content space-between
           width 120px
           color: #9e9e9e
-          .disableCls{
+          .disableCls {
             color: #717171
           }
           i {

@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-bar" ref="progressBar" @click="progressClick">
+  <div class="progress-bar" ref="progressBar" @click.stop="progressClick">
     <div class="bar-inner">
       <div class="progress" ref="progress"></div>
       <div class="progress-btn-wrapper" ref="progressBtn"
@@ -20,22 +20,18 @@
         default: 0
       }
     },
-
     created() {
       this.touch = {}
     },
     mounted() {
       this.$nextTick(() => {
         this.bindEvents()
-        const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
-        const offsetWidth = newPercent * barWidth
-        this._offset(offsetWidth)
       })
     },
     watch: {
       percent(newPercent) {
         if (newPercent >= 0 && !this.touch.initiated) {
-          const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
+          const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth    // 进度条长度
           const offsetWidth = newPercent * barWidth
           this._offset(offsetWidth)
         }
@@ -53,6 +49,7 @@
         document.removeEventListener('mouseup',this.mouseup);
       },
       mousedown(e) {
+        // 记录点击的位置
         this.touch.initiated = true
         this.touch.startX = e.clientX
         this.touch.left = this.$refs.progress.clientWidth
@@ -105,7 +102,7 @@
       .progress {
         position: absolute;
         height: 100%;
-        background: #fff;
+        background: #31c27c;
       }
       .progress-btn-wrapper {
         position: absolute;
