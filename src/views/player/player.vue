@@ -60,7 +60,7 @@
               <div class="musictime">{{format(currentTime)}} / {{format(currentSong.duration)}}</div>
             </div>
             <div>
-              <Progress-bar :percent="percent" @percentChange="onPercentChange"></Progress-bar>
+            <Progress-bar :percent="percent" @percentChange="onPercentChange"></Progress-bar>
             </div>
           </div>
           <div class="playerFun">
@@ -72,7 +72,7 @@
               <i class="icon-down"></i>
               <div style="display: flex">
                 <i class="icon-sound"></i>
-                <Progress-bar style="width: 120px" :percent="volume" @percentChange="onPercentvolumeChange"></Progress-bar>
+                <Progress-bar style="width: 120px"  :percent="volume" @percentChange="onPercentvolumeChange"></Progress-bar>
               </div>
             </div>
             <div>
@@ -94,7 +94,7 @@
             <div class="musictime">{{format(currentTime)}}/{{format(currentSong.duration)}}</div>
           </div>
           <div>
-            <Progress-bar :percent="percent" @percentChange="onPercentChange"></Progress-bar>
+           <Progress-bar :percent="percent" @percentChange="onPercentChange"></Progress-bar>
           </div>
         </div>
         <div class="playerState">
@@ -275,7 +275,6 @@
           if (this.playing) {
             this.currentLyric.play()
           }
-          console.log(this.currentLyric)
         }).catch(() => {
           this.currentLyric = null
           this.currentLineNum = 0
@@ -311,6 +310,8 @@
       },
       // 音量
       onPercentvolumeChange(percent) {
+        console.log('onPercentvolumeChange :' + percent)
+        this.volume = percent;
         this.$refs.audio.volume = percent.toFixed(1)
       },
 
@@ -484,18 +485,18 @@
                 overflow: hidden
                 text-align: center
                 .text {
-                  line-height: 32px
+                  line-height: 28px
                   color: rgba(237, 237, 237, 0.59)
-                  font-size: 14px
+                  font-size: 13px
                   &.current {
                     color: #3be22e
                   }
                 }
                 .pure-music {
                   padding-top: 10px
-                  line-height: 32px
+                  line-height: 28px
                   color: rgba(255, 255, 255, 0.6)
-                  font-size: 15px
+                  font-size: 13px
                 }
               }
             }

@@ -75,8 +75,7 @@
           index: index
         })
       },
-      appendPlayer(items) {
-      },
+      appendPlayer(items) {  },
 
       _getDiscList() {
         if (!this.mid) {

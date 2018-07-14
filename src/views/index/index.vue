@@ -10,7 +10,7 @@
     <Slider v-if="focus" :focus="focus"></Slider>
 
     <!-- 新碟首发 -->
-    <new-album v-if="newAlbum" :newAlbum="newAlbum"></new-album>
+    <new-album v-if="newAlbum" :newAlbum="newAlbum" @handleNewAblum="handleNewAblum"></new-album>
 
     <!-- 排行榜 -->
     <top-list v-if="toplist"  :toplist="toplist"></top-list>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
+  import {mapActions,mapGetters} from 'vuex'
   import {ERR_OK} from "../../api/config";
   import {musicu} from '../../api/recommend'
   import recomPlayList from './recomPlayList'
@@ -28,6 +28,8 @@
   import Slider from './slider'
   import newAlbum from './newAlbum'
   import topList from './toplist'
+  import {getDiscList} from '../../api/disc'
+  import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
 
 
   export default {
@@ -50,10 +52,14 @@
     created() {
       this._musicu()
     },
+    computed:{
+      ...mapGetters(['songs'])
+    },
     methods: {
       ...mapActions([
         'saveDiscInfo',
-        'saveSingID'
+        'saveSingID',
+        'selectPlay'
       ]),
       _musicu() {
         musicu().then(res => {
@@ -84,6 +90,34 @@
         })
         this.saveDiscInfo(item)
         this.saveSingID(item.album_mid)
+      },
+
+      // 新碟首发
+      handleNewAblum(song){
+        /*getDiscList(song.album_mid).then(res => {
+          console.log(res)
+          if (res.code === ERR_OK) {
+            processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
+              //  排除没有url的歌曲
+              this.songs =  songs.filter((currentSong) => {
+                return currentSong.url.length !== 0
+              })
+              this.selectPlay({
+                list: this.songs,
+                index: 0
+              })
+            })
+          }
+        })*/
+      },
+      _normalizeSongs(list) {
+        let ret = []
+        list.forEach((musicData) => {
+          if (isValidMusic(musicData)) {
+            ret.push(createSong(musicData))
+          }
+        })
+        return ret
       },
 
       handleTopList(){

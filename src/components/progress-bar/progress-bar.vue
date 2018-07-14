@@ -13,7 +13,6 @@
 <script type="text/ecmascript-6">
   const progressBtnWidth = 16;
   export default {
-    name: '',
     props: {
       percent: {
         type: Number,

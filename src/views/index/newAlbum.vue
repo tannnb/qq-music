@@ -7,10 +7,8 @@
       <div class="swiperWrapper-outer">
         <swiper :options="swiperOptionNewSong">
           <swiper-slide class="newAlbumSlide" v-for="(items,index) in newAlbumData" :key="index">
-            <div class="item" v-for="(items,index) in items">
-              <div class="avatar">
-              <img :src="items.image" alt="">
-              </div>
+            <div class="item" v-for="(items,index) in items" :key="items.album_id"  @click="handleSelectItem(items)">
+              <div class="avatar"><img :src="items.image" alt=""></div>
               <div class="albumName"> {{items.album_name}}</div>
               <div class="singerName"> {{items.singer_name}}</div>
             </div>
@@ -104,6 +102,9 @@
            this.newAlbumData = this._initNewSongList(res.new_album.data.list).slice(0,4)
          }
         })
+      },
+      handleSelectItem(items){
+        this.$emit('handleNewAblum',items)
       }
     }
   }
