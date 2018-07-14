@@ -1,6 +1,7 @@
 import {commonParams} from "./config";
 import {ERR_OK} from "./config";
 import axios from 'axios'
+import { Base64 } from 'js-base64'
 
 
 export default class Song {
@@ -53,7 +54,7 @@ export function createSong(musicData) {
 }
 
 // 获取歌词
-export function getLyric(mid) {
+function getLyric(mid) {
   const url = 'http://localhost:3000/lyric'
   const data = Object.assign({}, commonParams, {
     songmid: mid,

@@ -35,8 +35,6 @@
       }
     },
     mounted() {
-      console.log(this.commentlist)
-      console.log(this.commenttotal)
     },
     filters: {
       formatDate(time) {
