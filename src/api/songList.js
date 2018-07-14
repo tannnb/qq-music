@@ -84,7 +84,7 @@ export function processSongsUrl(songs) {
       let midUrlInfo = res.url_mid.data.midurlinfo
       midUrlInfo.forEach((info, index) => {
         let song = songs[index]
-        song.url = `http://dl.stream.qqmusic.qq.com/${info.purl}`
+        song.url = info.purl
       })
     }
     return songs

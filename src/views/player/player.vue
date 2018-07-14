@@ -20,7 +20,16 @@
           </div>
           <div class="playerlyer">
             <div class="playerlist-Wrapper">
-              <player-list></player-list>
+              <player-list @handleSelectSong="handleSelectSong"></player-list>
+            </div>
+            <div class="playerSong-wrapper">
+              <div class="songInfo">
+                <div class="avatar">
+                  <img :src="currentSong.image">
+                </div>
+                <div class="name">歌曲名:{{currentSong.name}}</div>
+                <div class="singer">歌曲名:{{currentSong.singer}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -43,10 +52,16 @@
           </div>
           <div class="playerFun">
             <div class="iconwrapper">
-              <i class="icon-cycle"></i>
+              <div @click="changeMode">
+                <i :class="iconMode"></i>
+              </div>
               <i class="icon-collect"></i>
               <i class="icon-down"></i>
-              <i class="icon-sound"></i>
+              <div>
+                <i class="icon-sound"></i>
+                <Progress-bar :percent="volume" @percentChange="onPercentvolumeChange"></Progress-bar>
+              </div>
+
             </div>
             <div>
             </div>
@@ -59,13 +74,15 @@
 
     <!-- 最小化 -->
     <div class="mini-player" v-show="!fullScreen">
-      <div class="avatar" @click="open"><img :src="currentSong.image" alt=""></div>
+      <div class="avatar" @click.stop="open"><img :src="currentSong.image" alt=""></div>
       <div class="mini-progress">
         <div class="header">
           <div class="musicName">{{currentSong.name}}-{{currentSong.singer}}</div>
           <div class="musictime">{{format(currentTime)}}/{{format(currentSong.duration)}}</div>
         </div>
-        <div></div>
+        <div>
+          <Progress-bar :percent="percent" @percentChange="onPercentChange"></Progress-bar>
+        </div>
       </div>
       <div class="playerState">
         <i :class="playIcon" @click="togglePlaying"></i>
@@ -84,15 +101,19 @@
 
 <script>
   import {mapGetters, mapMutations} from 'vuex'
+  import {playMode} from "../../api/config"
   import PlayerList from '../../components/player-list/player-list'
   import ProgressBar from '../../components/progress-bar/progress-bar'
+  import {shuffle} from "../../utils/util"
+
 
   export default {
     name: "player",
     data() {
       return {
         currentTime: 0,
-        songReady: false
+        songReady: false,
+        volume: 1
       }
     },
     components: {
@@ -100,9 +121,12 @@
       ProgressBar
     },
     computed: {
-      ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing', 'currentIndex']),
+      ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing', 'currentIndex', 'mode','sequenceList']),
       playIcon() {
         return this.playing ? 'icon-pause' : 'icon-play'
+      },
+      iconMode() {
+        return this.mode === playMode.sequence ? 'icon-queue' : this.mode === playMode.loop ? 'icon-cycle' : 'icon-round'
       },
       disableCls() {
         return this.songReady ? '' : 'disableCls'
@@ -116,7 +140,9 @@
       ...mapMutations({
         setFullscreen: 'SET_FULL_SCREEN',
         setPlayState: 'SET_PLAYING_STATE',
-        setCurrentIndex: 'SET_CURRENTINDEX'
+        setCurrentIndex: 'SET_CURRENTINDEX',
+        setPlayMode: 'SET_MODE',
+        setPlaylist:'SET_PLAYLIST'
       }),
       back() {
         this.setFullscreen(false)
@@ -157,7 +183,6 @@
           this.togglePlaying()
         }
         this.songReady = false
-        this.$refs.audio.volume = 0.5
       },
 
       // 缓冲完成
@@ -167,24 +192,59 @@
       error() {
         this.songReady = true
       },
+      // 当前歌曲播放结束
       end() {
-        this.next()
+        if(this.mode === playMode.loop){
+          this.loop()
+        }else{
+          this.next()
+        }
       },
+      loop(){
+        this.$refs.audio.currentTime = 0
+        this.$refs.audio.play()
+      },
+
       // 获取播放的时间
       updateTime(e) {
         this.currentTime = e.target.currentTime
       },
 
-      // 音量
-      volume() {
+      // 切换播放模式
+      changeMode() {
+        const mode = (this.mode + 1) % 3
+        this.setPlayMode(mode)
+        let list = null
+        if(mode === playMode.random){
+          list = shuffle(this.sequenceList)   // 随机
+        }else{
+          list = this.sequenceList  // 顺序
+        }
+        this.resetCurrentIndex(list)
+        this.setPlaylist(list)
       },
+      resetCurrentIndex(list){
+          let index = list.findIndex((item) => {
+            return item.id === this.currentSong.id
+          })
+        this.setCurrentIndex(index)
+      },
+      handleSelectSong(index){
+        console.log(index)
+        this.setCurrentIndex(index)
+      },
+
 
       onPercentChange(percent) {
         // 设置歌曲位置
-         this.$refs.audio.currentTime = this.currentSong.duration * percent
+        this.$refs.audio.currentTime = this.currentSong.duration * percent
         if (!this.playing) {
           this.togglePlaying()
         }
+      },
+      // 音量
+      onPercentvolumeChange(percent) {
+        this.$refs.audio.volume = percent.toFixed(1)
       },
 
       _pad(num, n = 2) {
@@ -204,7 +264,10 @@
 
     },
     watch: {
-      currentSong() {
+      currentSong(newSong,oldSong) {
+        if(newSong.id === oldSong.id){
+          return
+        }
         this.$nextTick(() => {
           this.$refs.audio.play()
         })
@@ -298,18 +361,53 @@
 
         .playerlyer {
           display flex
-          height: 100%
+          height: calc(100% - 56px)
           .playerlist-Wrapper {
-            width 80%
+            width 70%
             height: 100%
             overflow-y auto
+          }
+          .playerSong-wrapper {
+            padding-left 30px
+            flex 1
+            width 30%
+            display flex
+            justify-content center
+            .songInfo {
+              .avatar {
+                position: relative;
+                display: block;
+                width: 186px;
+                height: 186px;
+                margin: auto;
+                img {
+                  width 100%
+                  vertical-align top
+                }
+                &:after {
+                  content: "";
+                  position: absolute;
+                  left: 9px;
+                  top: 0;
+                  width: 201px;
+                  height: 180px;
+                  background url("./album_cover_player.png") 0 0 no-repeat
+                }
+              }
+              .name, .singer {
+                padding-top 10px
+                text-align center
+                font-size 14px
+                color: rgba(255, 255, 255, 0.5)
+              }
+            }
           }
         }
       }
 
       .player_music {
         position: absolute
-        bottom 50px
+        bottom 18px
         left: 50%
         transform translateX(-50%)
         display flex

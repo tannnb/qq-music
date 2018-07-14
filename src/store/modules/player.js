@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
 import {playMode} from "../../api/config";
+import {shuffle} from "../../utils/util";
 
 const state = {
   singer: {},
@@ -9,7 +10,7 @@ const state = {
   sequenceList: [],
   mode: playMode.sequence,
   currentIndex: -1,
-  audioVolume:false
+  audioVolume: false
 }
 
 const getters = {
@@ -26,11 +27,22 @@ const getters = {
   audioVolume: state => state.audioVolume,
 }
 
+function findIndex(list, song) {
+  return list.findIndex(item => {
+    return item.id === song.id
+  })
+}
 
 const actions = {
-  selectPlay(context, {list,index}) {
+  selectPlay(context, {list, index}) {
     context.commit(types.SET_SEQUENCE_LIST, list)
-    context.commit(types.SET_PLAYLIST, list)
+    if (context.state.mode === playMode.random) {
+      let randomList = shuffle(list)
+      context.commit(types.SET_PLAYLIST, randomList)
+      index = findIndex(randomList, list[index])
+    } else {
+      context.commit(types.SET_PLAYLIST, list)
+    }
     context.commit(types.SET_CURRENTINDEX, index)
     context.commit(types.SET_FULL_SCREEN, true)
     context.commit(types.SET_PLAYING_STATE, true)
@@ -42,25 +54,25 @@ const mutations = {
   [types.SET_SINGER](state, singer) {
     state.singer = singer
   },
-  [types.SET_PLAYING_STATE](state,flag){
+  [types.SET_PLAYING_STATE](state, flag) {
     state.playing = flag
   },
-  [types.SET_FULL_SCREEN](state,flag){
+  [types.SET_FULL_SCREEN](state, flag) {
     state.fullScreen = flag
   },
-  [types.SET_PLAYLIST](state,list){
+  [types.SET_PLAYLIST](state, list) {
     state.playlist = list
   },
-  [types.SET_SEQUENCE_LIST](state,list){
+  [types.SET_SEQUENCE_LIST](state, list) {
     state.sequenceList = list
   },
-  [types.SET_MODE](state,mode){
+  [types.SET_MODE](state, mode) {
     state.mode = mode
   },
-  [types.SET_CURRENTINDEX](state,index){
+  [types.SET_CURRENTINDEX](state, index) {
     state.currentIndex = index
   },
-  [types.SET_AUDIOVOLUME](state,volume) {
+  [types.SET_AUDIOVOLUME](state, volume) {
     state.audioVolume = volume
   }
 }

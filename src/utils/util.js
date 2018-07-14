@@ -32,7 +32,7 @@ export class CreateBanner {
 }
 
 export class CreateAblum {
-  constructor(musicData){
+  constructor(musicData) {
     this.album_id = musicData.album_id
     this.album_mid = musicData.album_mid
     this.album_name = musicData.album_name
@@ -42,7 +42,6 @@ export class CreateAblum {
     this.image = `http://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.album_mid}.jpg?max_age=2592000`
   }
 }
-
 
 
 function filterSinger(singer) {
@@ -71,3 +70,5 @@ export function shuffle(arr) {
   }
   return _arr
 }
+
+

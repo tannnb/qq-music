@@ -20,12 +20,24 @@
         default: 0
       }
     },
+    data(){
+      return {
+        move: {
+          status: false,  // 是否可拖动
+          startX: 0,      // 记录最开始点击的X坐标
+          left: 0,        // 记录当前已经移动的距离
+        }
+      }
+    },
     created() {
       this.touch = {}
     },
     mounted() {
       this.$nextTick(() => {
         this.bindEvents()
+        const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth    // 进度条长度
+        const offsetWidth = this.newPercent * barWidth
+        this._offset(offsetWidth)
       })
     },
     watch: {
@@ -50,22 +62,23 @@
       },
       mousedown(e) {
         // 记录点击的位置
-        this.touch.initiated = true
-        this.touch.startX = e.clientX
-        this.touch.left = this.$refs.progress.clientWidth
+        this.move.status = true;
+        this.move.startX = e.clientX
+        this.move.left = this.$refs.progress.clientWidth
       },
       mousemove(e) {
-        if (!this.touch.initiated) {
-          return
+        if (!this.move.status) {
+          return false
         }
-        const deltaX = e.clientX - this.touch.startX
-        const offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth, Math.max(0, this.touch.left + deltaX))
-        this._offset(offsetWidth)
+        let endX = e.clientX;
+        let dist = endX - this.move.startX;
+        let offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth,Math.max(0,this.move.left + dist));
+        this._offset(offsetWidth);
+        this._triggerPercent()
       },
       mouseup(e) {
         e.stopPropagation();
-        this.touch.initiated = false
-        this._triggerPercent()
+        this.move.status = false;
       },
       _triggerPercent() {
         const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
@@ -73,8 +86,8 @@
         this.$emit('percentChange', percent)
       },
       progressClick(e){
-        const deltaX = e.clientX - this.touch.startX
-        const offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth, Math.max(0, this.touch.left + deltaX))
+        let rect = this.$refs.progress.getBoundingClientRect();
+        let offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth,Math.max(0,e.clientX - rect.left));
         this._offset(offsetWidth)
         this._triggerPercent()
       },

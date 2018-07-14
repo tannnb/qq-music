@@ -74,10 +74,8 @@
           list: this.songs,
           index: index
         })
-        console.log(items)
       },
       appendPlayer(items) {
-        console.log(items)
       },
 
       _getDiscList() {
@@ -89,7 +87,10 @@
           if (res.code === ERR_OK) {
             this.playList = res.cdlist[0]
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
-              this.songs = songs
+              //  排除没有url的歌曲
+              this.songs =  songs.filter((currentSong) => {
+                return currentSong.url.length !== 0
+              })
             })
           }
         })
