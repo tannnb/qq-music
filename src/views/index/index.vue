@@ -28,7 +28,7 @@
   import Slider from './slider'
   import newAlbum from './newAlbum'
   import topList from './toplist'
-  import {getDiscList} from '../../api/disc'
+  import {getDiscList,getNewAlbumSong} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
 
 
@@ -94,9 +94,8 @@
 
       // 新碟首发
       handleNewAblum(song){
-        /*getDiscList(song.album_mid).then(res => {
-          console.log(res)
-          if (res.code === ERR_OK) {
+        getNewAlbumSong(song.album_mid).then(res => {
+        /*  if (res.code === ERR_OK) {
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
               //  排除没有url的歌曲
               this.songs =  songs.filter((currentSong) => {
@@ -107,8 +106,8 @@
                 index: 0
               })
             })
-          }
-        })*/
+          }*/
+        })
       },
       _normalizeSongs(list) {
         let ret = []
@@ -120,9 +119,7 @@
         return ret
       },
 
-      handleTopList(){
-
-      }
+      handleTopList(){}
 
     }
   }

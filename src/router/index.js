@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Music from '../views/Music/Music'
+import Singer from '../views/singer/singer'
+import Album from '../views/album/album'
 
 Vue.use(Router)
 
@@ -21,10 +23,21 @@ export default new Router({
           component:() => import('@/views/index/index')
         },
         {
-          path:':id',
+          path:'/:id',
           component:() => import('@/views/disc/recomPlayDisc')
+        },
+        {
+          path:'singer',
+          name:'singer',
+          component:Singer
+        },
+        {
+          path:'album',
+          name:'album',
+          component:Album
         }
       ]
-    }
+    },
+
   ]
 })

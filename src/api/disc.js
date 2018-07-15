@@ -31,10 +31,10 @@ export function getDiscList(id) {
     }
     return Promise.resolve(ret)
   })
-
 }
 
-export function review(mid,pagenum=0) {
+
+export function review(mid, pagenum = 0) {
   const url = 'http://localhost:3000/review'
 
   const data = Object.assign({}, commonParams, {
@@ -64,8 +64,31 @@ export function review(mid,pagenum=0) {
   })
 }
 
+export function getNewAlbumSong(mid) {
+  const url = 'http://localhost:3000/getNewAlbumSong'
 
+  const data = Object.assign({}, commonParams, {
+    albummid: mid,
+    g_tk: 125702638,
+    hostUin: 0,
+    jsonpCallback:'albuminfoCallback',
+    loginUin:976275430,
+    platform: 'yqq',
+    needNewCode: 0
+  })
 
-
-
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    /* let ret = res.data
+     if (typeof ret === 'string') {
+       const reg = /^\w+\(({.+})\)$/
+       const matches = ret.match(reg)
+       if (matches) {
+         ret = JSON.parse(matches[1])
+       }
+     }*/
+    return Promise.resolve(res)
+  })
+}
 

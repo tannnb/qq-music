@@ -23,31 +23,31 @@
           },
           {
             label:'歌手',
-            url:'/singer'
+            url:'/music/singer'
           },
           {
             label:'专辑',
-            url:'/album'
+            url:'/music/album'
           },
           {
             label:'排行榜',
-            url:'/rank'
+            url:'/music/rank'
           },
           {
             label:'分类歌单',
-            url:'/sort'
+            url:'/music/sort'
           },
           {
             label:'电台',
-            url:'/station'
+            url:'/music/station'
           },
           {
             label:'数字专辑',
-            url:'/digitalalbum'
+            url:'/music/digitalalbum'
           },
           {
             label:'MV',
-            url:'/mv'
+            url:'/music/mv'
           }
         ]
       }
