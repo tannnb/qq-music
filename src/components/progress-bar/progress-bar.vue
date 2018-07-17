@@ -35,7 +35,7 @@
       this.$nextTick(() => {
         this.bindEvents()
         const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth    // 进度条长度
-        const offsetWidth = this.newPercent * barWidth
+        const offsetWidth = this.percent * barWidth
         this._offset(offsetWidth)
       })
     },
