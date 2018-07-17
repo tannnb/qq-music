@@ -11,6 +11,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapGetters} from 'vuex'
+
   const progressBtnWidth = 16;
   export default {
     props: {
@@ -28,6 +30,9 @@
         }
       }
     },
+    computed:{
+      ...mapGetters(['fullScreen'])
+    },
     created() {
       this.touch = {}
     },
@@ -35,9 +40,10 @@
       this.$nextTick(() => {
         this.bindEvents()
         const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth    // 进度条长度
-        const offsetWidth = this.newPercent * barWidth
+        const offsetWidth = this.percent * barWidth
         this._offset(offsetWidth)
       })
+
     },
     watch: {
       percent(newPercent) {
@@ -58,6 +64,11 @@
       unbindEvents(){
         document.removeEventListener('mousemove',this.mousemove);
         document.removeEventListener('mouseup',this.mouseup);
+      },
+      init(){
+        const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth    // 进度条长度
+        const offsetWidth = this.percent * barWidth
+        this._offset(offsetWidth)
       },
       mousedown(e) {
         // 记录点击的位置

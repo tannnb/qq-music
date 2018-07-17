@@ -20,11 +20,7 @@ export default new Router({
       children:[
         {
           path:'index',
-          component:() => import('@/views/index/index')
-        },
-        {
-          path:'/:id',
-          component:() => import('@/views/disc/recomPlayDisc')
+          component:() => import('@/views/index/index'),
         },
         {
           path:'singer',
@@ -35,6 +31,10 @@ export default new Router({
           path:'album',
           name:'album',
           component:Album
+        },
+        {
+          path:':id',
+          component:() => import('@/views/disc/recomPlayDisc')
         }
       ]
     },

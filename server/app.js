@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const IndexController = require('./controller/index')
 const DiscController = require('./controller/disc')
+const SingerController = require('./controller/singer')
 
 
 // 加载解析json的中间件
@@ -34,6 +35,8 @@ app.get('/getDiscList', DiscController.getDiscList)
 app.post('/getPurlUrl', bodyParser.json(),DiscController.getPurlUrl)
 app.get('/lyric',DiscController.getLyric)
 app.get('/review',DiscController.review)
+
+app.get('/singer',SingerController.getSingerList)
 
 
 

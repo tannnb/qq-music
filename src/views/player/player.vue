@@ -60,7 +60,7 @@
               <div class="musictime">{{format(currentTime)}} / {{format(currentSong.duration)}}</div>
             </div>
             <div>
-            <Progress-bar :percent="percent" @percentChange="onPercentChange"></Progress-bar>
+            <Progress-bar ref="maxProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
             </div>
           </div>
           <div class="playerFun">
@@ -71,7 +71,7 @@
               <i class="icon-collect"></i>
               <i class="icon-down"></i>
               <div style="display: flex">
-                <i class="icon-sound"></i>
+                <i :class="iconMute" @click="toggleMute"></i>
                 <Progress-bar style="width: 120px"  :percent="volume" @percentChange="onPercentvolumeChange"></Progress-bar>
               </div>
             </div>
@@ -94,7 +94,7 @@
             <div class="musictime">{{format(currentTime)}}/{{format(currentSong.duration)}}</div>
           </div>
           <div>
-           <Progress-bar :percent="percent" @percentChange="onPercentChange"></Progress-bar>
+           <Progress-bar ref="miniProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
           </div>
         </div>
         <div class="playerState">
@@ -131,6 +131,7 @@
         currentTime: 0,
         songReady: false,
         volume: 1,
+        isMute:true,
         currentLyric: null,
         currentLineNum: 0
       }
@@ -147,6 +148,9 @@
       },
       iconMode() {
         return this.mode === playMode.sequence ? 'icon-queue' : this.mode === playMode.loop ? 'icon-cycle' : 'icon-round'
+      },
+      iconMute(){
+        return this.isMute === true? 'icon-sound':'icon-mute'
       },
       disableCls() {
         return this.songReady ? '' : 'disableCls'
@@ -166,10 +170,15 @@
       }),
       back() {
         this.setFullscreen(false)
-        // console.log(this.percent)
+       this.$nextTick(() => {
+         this.$refs.miniProgress.init()
+       })
       },
       open() {
         this.setFullscreen(true)
+        this.$nextTick(() => {
+          this.$refs.maxProgress.init()
+        })
       },
       // 播放 暂停
       togglePlaying() {
@@ -310,9 +319,20 @@
       },
       // 音量
       onPercentvolumeChange(percent) {
-        console.log('onPercentvolumeChange :' + percent)
+        percent === 0? this.isMute = false:  this.isMute = true
         this.volume = percent;
         this.$refs.audio.volume = percent.toFixed(1)
+      },
+      // 禁音/取消禁音
+      toggleMute(){
+        const cacheVolume = this.volume
+        if(this.isMute){
+         this.isMute = false
+          this.$refs.audio.volume = 0
+        }else{
+          this.isMute = true
+          this.$refs.audio.volume = cacheVolume
+        }
       },
 
       _pad(num, n = 2) {
