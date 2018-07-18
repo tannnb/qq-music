@@ -15,13 +15,17 @@
     <div class="singerContent">
       <div v-if="currentIndex === 0" class="hotWrapper">
         <ul class="HotAvatar">
-          <li class="items" v-for="(items,index) in singerList.slice(0,10)" :key="items.singer_id">
+          <li class="items" v-for="(items,index) in singerList.slice(0,10)"
+              @click.stop="handleSelectItem(items)"
+              :key="items.singer_id">
             <img class="avatar" :src="items.singer_pic" alt="">
             <div class="singer_name">{{items.singer_name}}</div>
           </li>
         </ul>
         <ul class="defaultAvatar">
-          <li class="items" v-for="(items,index) in singerList.slice(10)" :key="items.singer_id">
+          <li class="items" v-for="(items,index) in singerList.slice(10)"
+              @click.stop="handleSelectItem(items)"
+              :key="items.singer_id">
             <div class="singer_name"> {{items.singer_name}}</div>
           </li>
         </ul>
@@ -29,7 +33,9 @@
 
       <div class="defaultWrapper" v-if="currentIndex !== 0">
         <ul class="defaultAvatar">
-          <li class="items" v-for="(items,index) in singerList" :key="items.singer_id">
+          <li class="items" v-for="(items,index) in singerList"
+              @click.stop="handleSelectItem(items)"
+              :key="items.singer_id">
             <div class="singer_name"> {{items.singer_name}}</div>
           </li>
         </ul>
@@ -44,6 +50,7 @@
 </template>
 
 <script>
+  import {mapActions,mapGetters} from 'vuex'
   import {getSingerList} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
   import SingerTag from './singertag'
@@ -79,6 +86,11 @@
       this._getSingerList()
     },
     methods: {
+      ...mapActions([
+        'saveDiscInfo',
+        'saveSingID',
+        'selectPlay'
+      ]),
       asyncData() {
         const data = {
           "area": this.area,
@@ -94,7 +106,7 @@
             this.singerList = ret.singerlist
             this.tags = ret.tags
             this.allpage = this.singerList.length
-            console.log( this.singerList)
+            console.log(ret)
           }
         })
       },
@@ -129,6 +141,14 @@
         this.cur_page = index
         this.sin = this.sin + COUNT
         this.asyncData()
+      },
+      handleSelectItem(items){
+        this.$router.push({
+          path:`/music/singer/${items.singer_mid}`
+        })
+        // 保存歌曲信息
+        this.saveDiscInfo(items)
+        this.saveSingID(items.singer_mid)
       }
     }
   }

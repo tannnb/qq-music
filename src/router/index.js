@@ -23,21 +23,25 @@ export default new Router({
           component:() => import('@/views/index/index'),
         },
         {
+          path:'index/:id',
+          component:() => import('@/views/disc/recomPlayDisc')
+        },
+        {
           path:'singer',
           name:'singer',
           component:Singer
         },
         {
+          path:'singer/:mid',
+          name:'singer_desc',
+          component: () => import('@/views/singer_desc/singer_desc')
+        },
+        {
           path:'album',
           name:'album',
           component:Album
-        },
-        {
-          path:':id',
-          component:() => import('@/views/disc/recomPlayDisc')
         }
       ]
-    },
-
+    }
   ]
 })

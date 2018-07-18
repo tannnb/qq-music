@@ -42,3 +42,26 @@ export function getSingerList(options) {
 }
 
 
+
+export function getSingerDesc(mid) {
+  const url = 'http://localhost:3000/singerdesc'
+
+  const data = Object.assign({}, commonParams, {
+    platform: 'yqq',
+    singermid: mid,
+    order: 'listen',
+    loginUin: 0,
+    hostUin: 0,
+    needNewCode: 0,
+    begin: 0,
+    num: 80,
+    songstatus: 1,
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+

@@ -1,24 +1,22 @@
 <template>
-  <div class="disc-wrapper">
+  <div class="singer-desc">
     <div class="singerWrapper">
-      <div class="logo"><img :src="playList.logo" alt=""></div>
+      <div class="logo"><img :src="initDisc.singer_pic" alt=""></div>
       <div class="singerItem">
-        <div class="dissname">{{playList.dissname}}</div>
-        <div class="tags"><i class="icon-user"></i> {{playList.nickname}}</div>
-        <div class="tags" v-if="playList.tags">标签：{{playList.tags[0].name}}</div>
-        <div class="tags">播放量：{{_paddListen(playList.visitnum)}}</div>
+        <div class="dissname">{{initDisc.singer_name}}</div>
+        <div class="tags"><i class="icon-user"></i> {{initDisc.country}}</div>
+        <div class="tags" v-if="singerInfo">单曲：{{singerInfo.total}}</div>
         <div class="tags">收藏量：</div>
         <div class="funBtn">
           <span class="active"
                 :class=" songs.length === 0? 'notSong':'' "
                 @click="handlePlayAll"
-          > <i class="icon-play"></i> 播放全部</span>
+          > <i class="icon-play"></i> 播放歌手热门歌曲</span>
           <span><i class="icon-collect"></i>收藏</span>
-          <span><i class="icon-pinglun"></i>评论</span>
-          <span><i class="icon-more"></i>更多</span>
         </div>
       </div>
     </div>
+
     <div class="list-wrapper">
       <List-view
         v-if="songs.length !== '' "
@@ -26,52 +24,46 @@
         @handlePlayer="handlePlayer"
         @appendPlayer="appendPlayer"
       ></List-view>
-      <div class="introduction">
-        <div class="name">简介</div>
-        <div class="desc">{{playList.desc}}</div>
-      </div>
     </div>
-    <div class="list-wrapper" style="width: 860px">
-      <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>
-    </div>
+
   </div>
 </template>
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
+  import {getSingerDesc} from '../../api/singer'
+  import {ERR_OK} from "../../api/config";
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
-  import {ERR_OK} from "../../api/config";
-  import {getDiscList, review} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
+
 
   export default {
     data() {
       return {
-        playList: {},
-        songs: [],
-        commentlist: null,
-        commenttotal: ''
+        singerlist: null,
+        singerInfo: '',
+        songs: []
       }
-    },
-    created() {
-      this._getDiscList()
     },
     components: {
       ListView,
       reviewList
     },
+    created() {
+      this._getSingerDesc()
+    },
     computed: {
-      ...mapGetters([
-        'disc',
-        'mid'
-      ])
+      ...mapGetters(['mid', 'initDisc'])
     },
     methods: {
       ...mapActions([
         'selectPlay'
       ]),
+      // 追加歌曲
+      appendPlayer(){
 
+      },
       handlePlayer(items, index) {
         this.selectPlay({
           list: this.songs,
@@ -87,19 +79,16 @@
           index: 0
         })
       },
-
-      appendPlayer(items) {
-      },
-
-      _getDiscList() {
+      _getSingerDesc() {
         if (!this.mid) {
-          this.$router.push('/music/index')
+          this.$router.push('/music/singer')
           return
         }
-        getDiscList(this.mid).then(res => {
-          if (res.code === ERR_OK) {
-            this.playList = res.cdlist[0]
-            processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
+        getSingerDesc(this.mid).then(res => {
+          if (res.data.code === ERR_OK) {
+            this.singerInfo = res.data.data
+            this.singerlist = res.data.data.list
+            processSongsUrl(this._normalizeSongs(res.data.data.list)).then((songs) => {
               //  排除没有url的歌曲
               this.songs = songs.filter((currentSong) => {
                 return currentSong.url.length !== 0
@@ -107,44 +96,33 @@
             })
           }
         })
-        review(this.mid).then(res => {
-          if (res.data.code === ERR_OK) {
-            this.commentlist = res.data.comment.commentlist
-            this.commenttotal = res.data.comment.commenttotal
-          }
-        })
       },
       _normalizeSongs(list) {
         let ret = []
         list.forEach((musicData) => {
-          if (isValidMusic(musicData)) {
-            ret.push(createSong(musicData))
+          if (isValidMusic(musicData.musicData)) {
+            ret.push(createSong(musicData.musicData))
           }
         })
         return ret
-      },
-
-      _paddListen(number) {
-        return (number / 10000).toFixed(1) + '万'
       }
-
     }
-
   }
 </script>
 
 <style lang="stylus" scoped>
 
-  .disc-wrapper
+  .singer-desc {
     width 1200px
     margin 0 auto
-    min-height: 100px
-    .singerWrapper
+    .singerWrapper {
       display flex
       padding 40px 0 35px 0
       .logo {
         width 250px
         height 250px
+        border-radius 50%
+        overflow hidden
         img {
           width 100%
           vertical-align top
@@ -192,17 +170,27 @@
 
       }
 
-    .list-wrapper
+    }
+
+    .list-wrapper {
       display flex
-      .introduction
+      .introduction {
         padding-left 30px
-        .name
+        .name {
           font-size: 15px
           font-weight: 400
           line-height: 46px
-        .desc
+        }
+        .desc {
           max-height: 88px
           font-size: 14px
           line-height: 22px
           overflow: hidden
+        }
+
+      }
+    }
+
+  }
+
 </style>

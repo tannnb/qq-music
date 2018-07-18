@@ -76,7 +76,7 @@
       // 歌单推荐
       handleSelectRecomPlay(item){
         this.$router.push({
-          path:`/music/${item.id}`
+          path:`/music/index/${item.id}`
         })
         // 保存歌曲信息
         this.saveDiscInfo(item)
@@ -85,11 +85,11 @@
 
       // 新歌首发
       handleNewSong(item) {
-        this.$router.push({
-          path:`/music/${item.album_mid}`
+       /* this.$router.push({
+          path:`/music/index/${item.album_mid}`
         })
         this.saveDiscInfo(item)
-        this.saveSingID(item.album_mid)
+        this.saveSingID(item.album_mid)*/
       },
 
       // 新碟首发

@@ -37,6 +37,7 @@ app.get('/lyric',DiscController.getLyric)
 app.get('/review',DiscController.review)
 
 app.get('/singer',SingerController.getSingerList)
+app.get('/singerdesc',SingerController.getSingerDesc)
 
 
 
