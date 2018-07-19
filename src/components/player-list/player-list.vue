@@ -9,11 +9,11 @@
       <li class="items"
           v-for="(items,index) in playlist"
           :key="items.id"
-          @click="handleSelectSong(index)"
           :class="currentSong.id == items.id? 'active':'' ">
         <div class="song">
-          <img v-if="currentSong.id == items.id" src="./wave.gif" alt="">
-          {{items.name}}</div>
+           <div><img v-if="currentSong.id == items.id" src="./wave.gif" alt="">{{items.name}}</div>
+          <i class="icon-play"  @click="handleSelectSong(index)"></i>
+        </div>
         <div class="singer">{{items.singer}}</div>
         <div class="duration">{{format(items.duration)}}</div>
       </li>
@@ -63,11 +63,12 @@
     line-height 40px
     font-size 13px
     .song{
-      flex 0 0 200
-      width 200px
+      flex 1
+      padding-right 20px
     }
     .singer{
-      flex 1
+      flex 0 0 200
+      width 200px
       padding 0 20px
     }
     .duration{
@@ -84,11 +85,28 @@
       font-size 13px
       border-bottom 1px solid rgba(255, 255, 255, 0.07)
       .song{
-        flex 0 0 200
-        width 200px
+        flex 1
+        display flex
+        justify-content space-between
+        align-items center
+        padding-right 20px
+        i{
+          display none
+          font-size:38px
+          cursor pointer
+          &:hover{
+            color: #fff
+          }
+        }
+        &:hover{
+          i {
+            display block
+          }
+        }
       }
       .singer{
-        flex 1
+        flex 0 0 200
+        width 200px
         padding 0 20px
       }
       .duration{

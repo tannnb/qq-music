@@ -1,6 +1,7 @@
 <template>
   <div class="singerWrapper">
     <div class="singerBg">
+      <h3 class="title">万千歌手，尽在眼前</h3>
       <img src="./bg_singer.jpg" alt="">
     </div>
     <div class="mod_singer_tag">
@@ -158,11 +159,22 @@
 
   .singerWrapper {
     .singerBg {
+      position: relative
       width 100%
       img {
         width 100%
         vertical-align top
         user-select: none;
+      }
+      .title{
+        position: absolute
+        top: 50%
+        left 50%
+        transform translate(-50%,-50%)
+        font-size 60px
+        font-family "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+        color: #fff
+        user-select none
       }
     }
     .mod_singer_tag {
