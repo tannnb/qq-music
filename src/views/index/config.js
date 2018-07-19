@@ -80,6 +80,12 @@ export const config = {
         index: 12,
         id: 3295,
         text: '2018世界杯'
+      },
+      {
+        type: 'playlist',
+        index: 13,
+        id: 3298,
+        text: '无损音乐'
       }
     ]
   }

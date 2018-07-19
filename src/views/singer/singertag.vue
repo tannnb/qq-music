@@ -23,11 +23,6 @@
         default: 0
       }
     },
-   /* computed:{
-      currentIndexs(){
-        return this.currentIndex
-      }
-    },*/
     methods: {
       selectItem(items, index) {
         this.$emit('selectItemTag', items, index)

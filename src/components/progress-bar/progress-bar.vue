@@ -120,7 +120,7 @@
       position: relative;
       top: 13px;
       height: 4px;
-      background: rgba(0, 0, 0, .3);
+      background: rgba(0, 0, 0, .1);
       cursor pointer
       .progress {
         position: absolute;

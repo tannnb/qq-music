@@ -107,7 +107,6 @@
             this.singerList = ret.singerlist
             this.tags = ret.tags
             this.allpage = this.singerList.length
-            console.log(ret)
           }
         })
       },

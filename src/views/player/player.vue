@@ -87,7 +87,7 @@
     <!-- 最小化 -->
     <transition name="mini">
       <div class="mini-player" v-show="!fullScreen">
-        <div class="avatar" @click.stop="open"><img :src="currentSong.image" alt=""></div>
+        <div class="avatar" @click.stop="open"><img  :class="cdCls" :src="currentSong.image"></div>
         <div class="mini-progress">
           <div class="header">
             <div class="musicName">{{currentSong.name}}-{{currentSong.singer}}</div>
@@ -98,7 +98,9 @@
           </div>
         </div>
         <div class="playerState">
-          <i :class="playIcon" @click="togglePlaying"></i>
+          <span :class="disableCls"><i class="icon-prev" @click="prev"></i></span>
+          <span :class="disableCls"><i :class="playIcon" @click="togglePlaying"></i></span>
+          <span :class="disableCls"><i class="icon-next" @click="next"></i></span>
         </div>
       </div>
     </transition>
@@ -145,6 +147,9 @@
       ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing', 'currentIndex', 'mode', 'sequenceList']),
       playIcon() {
         return this.playing ? 'icon-pause' : 'icon-play'
+      },
+      cdCls() {
+        return this.playing ? 'play' : 'play pause'
       },
       iconMode() {
         return this.mode === playMode.sequence ? 'icon-queue' : this.mode === playMode.loop ? 'icon-cycle' : 'icon-round'
@@ -598,6 +603,7 @@
       background #fff
       border: 1px solid #d4d4d4
       box-shadow 0 0 4px #cacaca
+      border-radius 100px
       &.mini-enter-active, &.mini-leave-active {
         transition: all 0.2s
       }
@@ -608,10 +614,14 @@
         flex 0 0 100
         width 60px
         height: 60%
+        border-radius 50%
         cursor pointer
+        overflow hidden
         img {
           width 100%
           vertical-align top
+          &.play { animation: rotate 20s linear infinite}
+          &.pause { animation-play-state: paused}
         }
       }
       .mini-progress {
@@ -633,19 +643,28 @@
         display flex
         align-items center
         justify-content center
-        flex 0 0 100
-        width 100px
+        flex 0 0 180
+        width 180px
         text-align center
-        i {
+        span {
           color: #31c27c
           font-size 30px
           cursor pointer
+          &:nth-child(2){
+            margin 0 20px
+          }
         }
+
         .icon-play {
-          font-size 40px
+
         }
       }
     }
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0)}
+    100% { transform: rotate(360deg) }
   }
 
 </style>

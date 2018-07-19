@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const IndexController = require('./controller/index')
 const DiscController = require('./controller/disc')
 const SingerController = require('./controller/singer')
+const AlbumController = require('./controller/album')
 
 
 // 加载解析json的中间件
@@ -32,12 +33,20 @@ app.get('/newSongType', IndexController.newSongType)
 app.get('/newAlbumArea', IndexController.newAlbumArea)
 app.get('/getNewAlbumSong', DiscController.getNewAlbumSong)
 app.get('/getDiscList', DiscController.getDiscList)
+
+// 获取歌曲信息以及播放地址
 app.post('/getPurlUrl', bodyParser.json(),DiscController.getPurlUrl)
 app.get('/lyric',DiscController.getLyric)
+
+// 获取评论
 app.get('/review',DiscController.review)
 
+// 歌手
 app.get('/singer',SingerController.getSingerList)
 app.get('/singerdesc',SingerController.getSingerDesc)
+
+// 专辑
+app.get('/getAlbum',AlbumController.getAlbum)
 
 
 

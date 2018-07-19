@@ -72,7 +72,7 @@ export function getNewAlbumSong(mid) {
     g_tk: 125702638,
     hostUin: 0,
     jsonpCallback:'albuminfoCallback',
-    loginUin:976275430,
+    loginUin:0,
     platform: 'yqq',
     needNewCode: 0
   })
