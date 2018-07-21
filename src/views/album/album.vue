@@ -2,7 +2,8 @@
   <div class="albumWrapper">
     <div class="album-tags-wrapper">
       <div class="tagItem">
-        <Singer-tag class="singer-tag" v-if="albumTags&&albumTags.area" :tag="albumTags.area" :currentIndex="currentAreaIndex" @selectItemTag="selectItemAreaIndex"></Singer-tag>
+        <Singer-tag class="singer-tag" v-if="albumTags&&albumTags.area" :tag="albumTags.area"
+                    :currentIndex="currentAreaIndex" @selectItemTag="selectItemAreaIndex"></Singer-tag>
       </div>
       <div v-show="currentAreaIndex !== 0" class="tagItem">
         <span class="title">流派</span>
@@ -38,23 +39,29 @@
       </div>
     </div>
     <div class="album-content-wrapper">
-      <div>{{defaultTitle}}</div>
+      <div class="defaultTitle">{{defaultTitle}}</div>
       <ul class="content-items">
         <li v-for="(items,index) in albumList"
             class="items"
+            @click="selectAlbumItem(items,index)"
             :key="items.album_id">
           <img class="avatar" :src="_addUri(items.album_mid)">
-          <div class="name">{{items.album_name}}</div>
-          <div class="singer">{{filterSinger(items.singers)}}</div>
-          <div class="time">{{items.public_time}}</div>
+          <p class="name">{{items.album_name}}</p>
+          <p class="singer">{{filterSinger(items.singers)}}</p>
+          <p class="time">{{items.public_time}}</p>
         </li>
       </ul>
+      <div class="page-wrapper">
+        <Pagination v-if="allpage>0" @pagetions="pagetions" :allpage="allpage"></Pagination>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import {getAlbum} from "../../api/album";
+  import Pagination from '../singer/pagination'
   import {ERR_OK} from "../../api/config";
   import SingerTag from '../singer/singertag'
 
@@ -64,6 +71,7 @@
         albumList: [],
         albumTags: {},
         albumTagsArea: [],
+        allpage: 0,
 
         currentAreaIndex: 0,
         currentGenreIndex: 0,
@@ -77,11 +85,13 @@
         company: -1,  // 唱片公司
         genre: -1,   // 流派
         type: -1,   // 类型
-        year: -1    // 年代
+        year: -1,    // 年代
+        sin: 0       // 分页页数
       }
     },
     components: {
-      SingerTag
+      SingerTag,
+      Pagination
     },
     created() {
       this._getAlbum()
@@ -92,13 +102,18 @@
       }, false)
     },
     methods: {
+      ...mapActions([
+        'saveDiscInfo',
+        'saveSingID'
+      ]),
       _getAlbum() {
         const data = {
           area: this.area,
           company: this.company,
           genre: this.genre,
           type: this.type,
-          year: this.year
+          year: this.year,
+          sin: this.sin
         }
         getAlbum(data).then(res => {
           if (res.data.code === ERR_OK) {
@@ -108,7 +123,7 @@
             this.albumTags = res.data.albumlib.data.tags
             // initAreaTag
             this.albumTagsArea = this._initnormalize(res.data.albumlib.data.tags)
-            console.log(this.albumList)
+            this.allpage = this.albumList.length
           }
         })
       },
@@ -149,11 +164,13 @@
       },
       selectItemGenreIndex(items, index) {
         this.currentGenreIndex = index
-        console.log(items)
+        this.genre = items.id
+        this._getAlbum()
       },
       selectItemTypeIndex(items, index) {
         this.currentTypeIndex = index
-        console.log(items)
+        this.type = items.id
+        this._getAlbum()
       },
 
       selectYear() {
@@ -164,13 +181,30 @@
       },
       selectItemYear(items, index) {
         this.defaultYear = items.name
-        console.log(items.name)
+        this.year = items.id
+        this._getAlbum()
       },
       selectItemCompany(items, index) {
         this.defaultCompany = items.name
-        console.log(items)
-      }
+        this.company = items.id
+        this._getAlbum()
+      },
 
+      // 选择专辑
+      selectAlbumItem(items, index) {
+        this.$router.push({
+          path: `/music/album/${items.album_mid}`
+        })
+        // 保存专辑信息
+        this.saveDiscInfo(items)
+        this.saveSingID(items.album_mid)
+      },
+      pagetions(index) {
+        let currentSin = index - 1
+        this.sin = (currentSin * 10) + (currentSin * 10)
+        console.log(this.sin)
+        this._getAlbum()
+      }
     }
   }
 </script>
@@ -179,7 +213,6 @@
 
   .albumWrapper {
     background: linear-gradient(#f3f3f3, #fff);
-    padding-bottom 20px
     .album-tags-wrapper {
       width 1200px
       padding-top 60px
@@ -202,6 +235,7 @@
           padding-left: 66px;
           .selectItem {
             position: relative
+            z-index 3
             .name {
               height: 26px;
               line-height: 27px;
@@ -226,6 +260,7 @@
               padding 19px 10px 6px 66px
               box-sizing border-box
               box-shadow 0 0 10px rgba(183, 183, 183, .65)
+              background-color #fff
               li {
                 height: 26px;
                 line-height: 27px;
@@ -252,14 +287,22 @@
     .album-content-wrapper {
       width 1200px
       margin 0 auto
+      .defaultTitle {
+        font-size 24px
+        font-weight 700
+        padding 20px 0
+      }
       .content-items {
         display flex
         flex-flow wrap
         .items {
           width 20%
+          padding-bottom 44px
           .avatar {
             width 224px
             height: 224px
+            padding-bottom 14px
+            cursor pointer
             img {
               width 100%
               vertical-align top
@@ -269,9 +312,38 @@
             font-size 15px
             color: #333
             padding 4px 0
+            max-width: 100%;
+            font-weight: 400;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 22px;
+            max-height: 44px;
+            cursor pointer
+            &:hover {
+              color: #31c27c
+            }
+          }
+          .singer, .time {
+            font-size 14px
+            color: #999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 22px;
+          }
+          .singer {
+            cursor pointer
+            &:hover {
+              color: #31c27c
+            }
+          }
+          .time {
           }
         }
       }
+    }
+    .page-wrapper {
+      text-align center
     }
   }
 
@@ -279,10 +351,14 @@
 
 <!--
 
-y.gtimg.cn/music/photo_new/T002R300x300M000001l5Hzc4PKkwb.jpg?max_age=2592000
+1 sin -> 0     0*10+0*10
+2 sin -> 20    1*10+1*10
+3 sin -> 40    2*10+2*10
+4 sin -> 60    3*10+3*10
 
+...
 
+12 sin 220     11*10 + 11*10  110+110=220
 
 
 -->
-

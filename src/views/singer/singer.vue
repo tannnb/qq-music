@@ -89,8 +89,7 @@
     methods: {
       ...mapActions([
         'saveDiscInfo',
-        'saveSingID',
-        'selectPlay'
+        'saveSingID'
       ]),
       asyncData() {
         const data = {

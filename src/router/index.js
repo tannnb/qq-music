@@ -40,7 +40,12 @@ export default new Router({
           path:'album',
           name:'album',
           component:Album
-        }
+        },
+        {
+          path:'album/:mid',
+          name:'album_desc',
+          component: () => import('@/views/album_desc/album_desc')
+        },
       ]
     }
   ]

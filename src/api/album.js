@@ -22,8 +22,8 @@ export function getAlbum(options) {
           "year": options.year ? options.year : -1,
           "sort": 5,
           "get_tags": 1,
-          "sin": 0,
-          "num": 20,
+          "sin":options.sin ? options.sin : 0,
+          "num": 19,
           "click_albumid": 0
         },
         "module": "music.web_album_library"

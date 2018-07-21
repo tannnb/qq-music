@@ -91,6 +91,7 @@
         <div class="mini-progress">
           <div class="header">
             <div class="musicName">{{currentSong.name}}-{{currentSong.singer}}</div>
+            <div class="playingLyric">{{playingLyric}}</div>
             <div class="musictime">{{format(currentTime)}}/{{format(currentSong.duration)}}</div>
           </div>
           <div>
@@ -135,7 +136,8 @@
         volume: 1,
         isMute:true,
         currentLyric: null,
-        currentLineNum: 0
+        currentLineNum: 0,
+        playingLyric:'歌词加载中...'
       }
     },
     components: {
@@ -290,11 +292,13 @@
             this.currentLyric.play()
           }
         }).catch(() => {
+          this.playingLyric = '暂无歌词'
           this.currentLyric = null
           this.currentLineNum = 0
         })
       },
       handleLyric({lineNum, txt}) {
+        this.playingLyric = txt
         this.currentLineNum = lineNum
         if(lineNum>3){
           let lineEl = this.$refs.lyricLine[lineNum-3]
@@ -305,7 +309,6 @@
       },
 
       handleSelectSong(index) {
-        console.log(index)
         this.setCurrentIndex(index)
       },
 
@@ -634,6 +637,11 @@
           font-size 13px
           color #4f504f
           .musicName {
+          }
+          .playingLyric{
+            font-size 15px
+            font-weight 400
+            color #31c27c
           }
           .musictime {
           }
