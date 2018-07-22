@@ -38,8 +38,8 @@
                        :class="{'current':currentLineNum === index}"
                        v-for="(line,index) in currentLyric.lines">{{line.txt}}</p>
                   </div>
-                  <div class="pure-music">
-                    <p>歌词加载中,请稍后...</p>
+                  <div class="pure-music" v-show="isPureMusic">
+                    <p>暂无歌词请欣赏...</p>
                   </div>
                 </div>
               </Scroll>
@@ -137,6 +137,7 @@
         isMute:true,
         currentLyric: null,
         currentLineNum: 0,
+        isPureMusic: false,
         playingLyric:'歌词加载中...'
       }
     },
@@ -192,6 +193,7 @@
         if (!this.songReady) {
           return false
         }
+        this.playingLyric = ''
         this.setPlayState(!this.playing)
         if(this.currentLyric){
           this.currentLyric.togglePlay()
@@ -291,6 +293,7 @@
           if (this.playing) {
             this.currentLyric.play()
           }
+          this.isPureMusic = !this.currentLyric.lines.length
         }).catch(() => {
           this.playingLyric = '暂无歌词'
           this.currentLyric = null

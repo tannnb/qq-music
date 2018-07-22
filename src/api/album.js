@@ -22,7 +22,7 @@ export function getAlbum(options) {
           "year": options.year ? options.year : -1,
           "sort": 5,
           "get_tags": 1,
-          "sin":options.sin ? options.sin : 0,
+          "sin": options.sin ? options.sin : 0,
           "num": 19,
           "click_albumid": 0
         },
@@ -45,5 +45,34 @@ export function getAlbum(options) {
     return Promise.resolve(res)
   })
 }
+
+
+export function getAlbumDesc(mid) {
+  const url = 'http://localhost:3000/getAlbumDesc'
+
+  const data = Object.assign({}, commonParams, {
+    albummid: mid,
+    g_tk: '1194859437',
+    loginUin: 0,
+    hostUin: 0,
+    platform: 'yqq',
+    needNewCode: 0
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    /* let ret = res.data
+     if (typeof ret === 'string') {
+       const reg = /^\w+\(({.+})\)$/
+       const matches = ret.match(reg)
+       if (matches) {
+         ret = JSON.parse(matches[1])
+       }
+     }*/
+    return Promise.resolve(res)
+  })
+}
+
 
 

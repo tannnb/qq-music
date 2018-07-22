@@ -47,6 +47,7 @@ app.get('/singerdesc',SingerController.getSingerDesc)
 
 // 专辑
 app.get('/getAlbum',AlbumController.getAlbum)
+app.get('/getAlbumDesc',AlbumController.getAlbumDesc)
 
 
 
