@@ -7,7 +7,7 @@
           <img :src="items.avatarurl">
         </div>
         <div class="info">
-          <div class="nick">{{items.nick}}</div>
+          <div class="nick">{{items.nick}} <img class="vip" :src="items.vipicon" alt=""> </div>
           <div class="desc" v-html="items.rootcommentcontent"></div>
           <div class="time">{{items.time | formatDate}}</div>
         </div>
@@ -35,6 +35,7 @@
       }
     },
     mounted() {
+      console.log(this.commentlist)
     },
     filters: {
       formatDate(time) {
@@ -79,6 +80,10 @@
           color: #999
           font-size 13px
           padding-bottom 6px
+          .vip{
+            width 22px
+            vertical-align middle
+          }
         }
         .desc {
           padding-bottom 10px

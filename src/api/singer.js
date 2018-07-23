@@ -41,8 +41,6 @@ export function getSingerList(options) {
   })
 }
 
-
-
 export function getSingerDesc(mid) {
   const url = 'http://localhost:3000/singerdesc'
 
@@ -64,4 +62,56 @@ export function getSingerDesc(mid) {
     return Promise.resolve(res)
   })
 }
+
+export function getSingerAlbum(mid) {
+  const url = 'http://localhost:3000/getSingerAlbum'
+
+  const data = Object.assign({}, commonParams, {
+    platform: 'yqq',
+    singermid: mid,
+    order: 'time',
+    loginUin: 0,
+    hostUin: 0,
+    needNewCode: 0,
+    begin: 0,
+    num: 5,
+    songstatus: 1,
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function getSingerMv(mid) {
+  const url = 'http://localhost:3000/getSingerMv'
+
+  const data = Object.assign({}, commonParams, {
+    g_tk: 1194859437,
+    cid: 205360581,
+    platform: 'yqq',
+    singermid: mid,
+    order: 'listen',
+    loginUin: 0,
+    hostUin: 0,
+    needNewCode: 0,
+    begin: 0,
+    num: 5
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+
+
+
+
+
+
 

@@ -20,12 +20,14 @@
       </div>
     </div>
     <div class="list-wrapper">
-      <List-view
-        v-if="songs.length !== '' "
-        :song="songs"
-        @handlePlayer="handlePlayer"
-        @appendPlayer="appendPlayer"
-      ></List-view>
+     <div class="listContent">
+       <List-view
+         v-if="songs.length !== '' "
+         :song="songs"
+         @handlePlayer="handlePlayer"
+         @appendPlayer="appendPlayer"
+       ></List-view>
+     </div>
       <div class="introduction">
         <div class="name">简介</div>
         <div class="desc">{{playList.desc}}</div>
@@ -194,7 +196,12 @@
 
     .list-wrapper
       display flex
+      .listContent{
+        flex 1
+      }
       .introduction
+        flex 0 0 300
+        width 300px
         padding-left 30px
         .name
           font-size: 15px

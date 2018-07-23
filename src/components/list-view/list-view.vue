@@ -1,5 +1,4 @@
 <template>
-  <div>
     <ul class="list-view">
       <div class="itemFirst">
         <div class="count"></div>
@@ -24,7 +23,6 @@
         <div class="time">{{format(items.duration)}}</div>
       </li>
     </ul>
-  </div>
 </template>
 
 <script>
@@ -62,8 +60,9 @@
 
 <style lang="stylus" scoped>
 
+
   .list-view {
-    width 860px
+    width 100%
     .itemFirst {
       display flex
       line-height 50px
@@ -73,6 +72,7 @@
       background #FBFBFD
       .count {
         width 6%
+        text-align center
       }
       .sing {
         width 48%
@@ -103,6 +103,7 @@
       .count {
         width 6%
         color: #999
+        text-align center
       }
       .sing {
         position: relative

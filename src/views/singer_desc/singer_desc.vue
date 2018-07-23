@@ -19,6 +19,7 @@
 
     <div class="list-wrapper">
       <List-view
+        class="singerContentList"
         v-if="songs.length !== '' "
         :song="songs"
         @handlePlayer="handlePlayer"
@@ -31,7 +32,7 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
-  import {getSingerDesc} from '../../api/singer'
+  import {getSingerDesc, getSingerAlbum, getSingerMv} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
@@ -52,6 +53,8 @@
     },
     created() {
       this._getSingerDesc()
+      // this._getSingerAlbum()
+      this._getSingerMv()
     },
     computed: {
       ...mapGetters(['mid', 'initDisc'])
@@ -61,7 +64,7 @@
         'selectPlay'
       ]),
       // 追加歌曲
-      appendPlayer(){
+      appendPlayer() {
 
       },
       handlePlayer(items, index) {
@@ -97,6 +100,32 @@
           }
         })
       },
+
+      _getSingerAlbum() {
+        if (!this.mid) {
+          this.$router.push('/music/singer')
+          return
+        }
+        getSingerAlbum(this.mid).then(res => {
+          console.log(res)
+        })
+      },
+      _getSingerMv() {
+        if (!this.mid) {
+          this.$router.push('/music/singer')
+          return
+        }
+        getSingerMv(this.mid).then(res => {
+          let ret = res.data
+          const reg = /\((\{.+\})\)/
+          const matches = ret.match(reg)
+          if (matches) {
+            ret = JSON.parse(matches[1])
+          }
+          console.log(ret)
+        })
+      },
+
       _normalizeSongs(list) {
         let ret = []
         list.forEach((musicData) => {
@@ -174,6 +203,11 @@
 
     .list-wrapper {
       display flex
+      .singerContentList {
+        .list-view {
+          width 100% !important
+        }
+      }
       .introduction {
         padding-left 30px
         .name {
