@@ -4,18 +4,7 @@ module.exports = {
 
   getDiscList: (req, res) => {
     const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
-    axios.get(url, {
-      headers: {
-        referer: 'https://c.y.qq.com/'
-      },
-      params: req.query
-    })
-      .then((response) => {
-        res.json(response.data)
-      })
-      .catch((e) => {
-        console.log('请求失败')
-      })
+    response(url,req,res)
   },
 
   getPurlUrl: (req, res) => {
@@ -58,18 +47,7 @@ module.exports = {
 
   review: (req, res) => {
     const url = 'https://c.y.qq.com/base/fcgi-bin/fcg_global_comment_h5.fcg'
-    axios.get(url, {
-      headers: {
-        referer: 'https://c.y.qq.com/'
-      },
-      params: req.query
-    })
-      .then((response) => {
-        res.json(response.data)
-      })
-      .catch((e) => {
-        console.log('请求失败')
-      })
+    response(url,req,res)
   },
 
   getNewAlbumSong: (req, res) => {
@@ -96,6 +74,20 @@ module.exports = {
       })
   }
 
-
 }
 
+
+function response(url,req,res){
+  axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/'
+    },
+    params: req.query
+  })
+    .then((response) => {
+      res.json(response.data)
+    })
+    .catch((e) => {
+      console.log('请求失败')
+    })
+}

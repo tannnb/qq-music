@@ -4,13 +4,11 @@ import axios from 'axios'
 
 export function gethotkey() {
   const url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
-
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     loginUin: 0,
     needNewCode: 0
   })
-
   return jsonp(url, data, options)
 }
 

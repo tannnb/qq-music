@@ -62,7 +62,7 @@
 
 
   .list-view {
-    width 100%
+
     .itemFirst {
       display flex
       line-height 50px

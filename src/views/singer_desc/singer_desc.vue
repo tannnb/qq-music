@@ -73,6 +73,7 @@
           index: index
         })
       },
+
       handlePlayAll() {
         if (this.songs.length === 0) {
           return false

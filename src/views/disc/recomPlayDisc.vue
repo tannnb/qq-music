@@ -5,7 +5,7 @@
       <div class="singerItem">
         <div class="dissname">{{playList.dissname}}</div>
         <div class="tags"><i class="icon-user"></i> {{playList.nickname}}</div>
-        <div class="tags" v-if="playList.tags">标签：{{playList.tags[0].name}}</div>
+        <div class="tags" v-if="playList.tags">标签：{{filterSinger(playList.tags)}}</div>
         <div class="tags">播放量：{{_paddListen(playList.visitnum)}}</div>
         <div class="tags">收藏量：</div>
         <div class="funBtn">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="list-wrapper">
-     <div class="listContent">
+      <div class="listContent">
        <List-view
          v-if="songs.length !== '' "
          :song="songs"
@@ -33,7 +33,7 @@
         <div class="desc">{{playList.desc}}</div>
       </div>
     </div>
-    <div class="list-wrapper" style="width: 860px">
+    <div class="reviewWrapper">
       <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>
     </div>
   </div>
@@ -101,6 +101,7 @@
         getDiscList(this.mid).then(res => {
           if (res.code === ERR_OK) {
             this.playList = res.cdlist[0]
+            console.log( this.playList)
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
               //  排除没有url的歌曲
               this.songs = songs.filter((currentSong) => {
@@ -128,8 +129,17 @@
 
       _paddListen(number) {
         return (number / 10000).toFixed(1) + '万'
+      },
+      filterSinger(singer) {
+        let ret = []
+        if (!singer) {
+          return ''
+        }
+        singer.forEach((s) => {
+          ret.push(s.name)
+        })
+        return ret.join('/')
       }
-
     }
 
   }
@@ -196,8 +206,9 @@
 
     .list-wrapper
       display flex
+      width 1200px
       .listContent{
-        flex 1
+        width 860px
       }
       .introduction
         flex 0 0 300
@@ -212,4 +223,6 @@
           font-size: 14px
           line-height: 22px
           overflow: hidden
+    .reviewWrapper
+      width 860px
 </style>
