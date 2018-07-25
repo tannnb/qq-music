@@ -1,15 +1,15 @@
 <template>
   <div class="singer-desc">
-    <div class="singerWrapper">
-     <div class="logo" v-if="singerInfo"><img  :src="uri(singerInfo.singer_mid,true)" alt=""></div>
-      <div class="singerItem">
+    <div class="singerWrapper"  v-if="singerInfo">
+     <div class="logo"><img  :src="uri(singerInfo.singer_mid,true)" alt=""></div>
+      <div class="singerItem" >
         <div class="dissname">{{singerInfo.singer_name}}</div>
         <div class="tags"><i class="icon-user"></i> {{initDisc.country}}</div>
         <div class="singerTotal">
           <div class="" v-if="singerInfo">单曲<span class="weight">{{singerInfo.total}}</span></div>
           <div class="">专辑<span class="weight">{{singer_ablum.total}}</span></div>
+          <div class="">MV<span class="weight">{{singer_mv.total}}</span></div>
         </div>
-
         <div class="funBtn">
           <span class="active"
                 :class=" songs.length === 0? 'notSong':'' "
@@ -33,11 +33,22 @@
       <ul class="content">
         <li v-for="(items,index) in singer_ablum.list"
             :key="index"
-            class="items"
-        >
+            class="items">
           <img class="avatar" :src="uri(items.albumMID)" alt="">
           <p class="albumName">{{items.albumName}}</p>
           <p class="pubTime">{{items.pubTime}}</p>
+        </li>
+      </ul>
+    </div>
+    <div class="singer_ablum">
+      <h4 class="header">MV</h4>
+      <ul class="content">
+        <li v-for="(items,index) in singer_mv.list"
+            :key="index"
+            class="items">
+          <img class="pic" :src="items.pic" alt="">
+          <p class="albumName">{{items.title}}</p>
+          <p class="pubTime">{{items.listenCount | listen}}</p>
         </li>
       </ul>
     </div>
@@ -50,6 +61,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import {getSingerDesc, getSingerAlbum, getSingerMv} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
+  import {paddListenCount} from "../../utils/tool";
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
@@ -62,7 +74,8 @@
         singerlist: null,
         singerInfo: null,
         songs: [],
-        singer_ablum: {}
+        singer_ablum: {},
+        singer_mv:{}
       }
     },
     components: {
@@ -76,6 +89,11 @@
     },
     computed: {
       ...mapGetters(['mid', 'initDisc'])
+    },
+    filters:{
+      listen(count){
+        return paddListenCount(count)
+      }
     },
     methods: {
       ...mapActions([
@@ -133,7 +151,6 @@
         getSingerAlbum(this.mid).then(res => {
           if (res.data.code === ERR_OK) {
             this.singer_ablum = res.data.data
-            console.log(this.singer_ablum)
           }
         })
       },
@@ -149,6 +166,10 @@
           if (matches) {
             ret = JSON.parse(matches[1])
           }
+          if(ret.code === ERR_OK){
+            this.singer_mv = ret.data
+            console.log(this.singer_mv)
+          }
         })
       },
 
@@ -159,7 +180,7 @@
             ret.push(createSong(musicData.musicData))
           }
         })
-        return ret
+       return ret
       }
     }
   }
@@ -200,7 +221,6 @@
           font-size 16px
           color: #333
           cursor pointer
-
           div{
             margin-right  20px
             &:hover{
@@ -283,10 +303,19 @@
         display flex
         justify-content space-between
         .items {
+          width 20%
           .avatar {
             width 224px
             cursor pointer
             img {
+              width 100%
+              vertical-align top
+            }
+          }
+          .pic{
+            width 224px
+            height:126px
+            img{
               width 100%
               vertical-align top
             }
@@ -296,6 +325,9 @@
             font-size 14px
             color: #333
             cursor pointer
+            text-overflow ellipsis
+            white-space nowrap
+            overflow hidden
             &:hover {
               color: #31c27c
             }
