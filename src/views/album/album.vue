@@ -47,7 +47,7 @@
             :key="items.album_id">
           <img class="avatar" :src="_addUri(items.album_mid)">
           <p class="name">{{items.album_name}}</p>
-          <p class="singer">{{filterSinger(items.singers)}}</p>
+          <p class="singer">{{items.singers | filterSingers}}</p>
           <p class="time">{{items.public_time}}</p>
         </li>
       </ul>
@@ -60,6 +60,7 @@
 
 <script>
   import {mapActions} from 'vuex'
+  import {filterSinger} from "../../utils/tool";
   import {getAlbum} from "../../api/album";
   import Pagination from '../singer/pagination'
   import {ERR_OK} from "../../api/config";
@@ -95,6 +96,11 @@
     },
     created() {
       this._getAlbum()
+    },
+    filters:{
+      filterSingers(singer){
+        return filterSinger(singer)
+      }
     },
     mounted() {
       document.addEventListener('click', () => {
@@ -144,16 +150,6 @@
         return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
       },
 
-      filterSinger(singer) {
-        let ret = []
-        if (!singer) {
-          return ''
-        }
-        singer.forEach((s) => {
-          ret.push(s.singer_name)
-        })
-        return ret.join('/')
-      },
 
       // 地区
       selectItemAreaIndex(items, index) {

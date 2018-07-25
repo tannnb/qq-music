@@ -80,14 +80,6 @@ export function getNewAlbumSong(mid) {
   return axios.get(url, {
     params: data
   }).then((res) => {
-    /* let ret = res.data
-     if (typeof ret === 'string') {
-       const reg = /^\w+\(({.+})\)$/
-       const matches = ret.match(reg)
-       if (matches) {
-         ret = JSON.parse(matches[1])
-       }
-     }*/
     return Promise.resolve(res)
   })
 }

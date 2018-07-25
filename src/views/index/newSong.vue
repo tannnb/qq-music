@@ -17,7 +17,7 @@
               <div class="item">
                 <div class="title">{{item.title}}</div>
                 <div class="name">{{item.name}}</div>
-                <div class="duration">{{format(item.duration)}}</div>
+                <div class="duration" v-if="item">{{item.duration | formats}}</div>
               </div>
             </div>
           </swiper-slide>
@@ -35,6 +35,7 @@
   import MTitle from './m-title'
   import {ERR_OK} from "../../api/config";
   import {newSongType} from '../../api/recommend'
+  import {format} from "../../utils/tool";
   import {CreateSong} from "../../utils/util";
 
   export default {
@@ -47,6 +48,11 @@
     },
     components:{
       MTitle
+    },
+    filters:{
+      formats(times){
+        return format(times)
+      }
     },
     data() {
       return {
@@ -89,22 +95,6 @@
           })
         })
         return ret
-      },
-
-
-      _pad(num, n = 2) {
-        let len = num.toString().length
-        while (len < n) {
-          num = '0' + num
-          len++
-        }
-        return num
-      },
-      format(interval) {
-        interval = interval | 0
-        const minute = interval / 60 | 0
-        const second = this._pad(interval % 60)
-        return `${minute}:${second}`
       },
 
       _initNewSongList(songList) {

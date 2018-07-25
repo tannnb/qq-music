@@ -20,17 +20,24 @@
         </div>
         <div class="singer">{{items.singer}}</div>
         <div class="albumn">{{items.album}}</div>
-        <div class="time">{{format(items.duration)}}</div>
+        <div class="time">{{items.duration | formats}}</div>
       </li>
     </ul>
 </template>
 
 <script>
-  export default {
+ import {format} from "../../utils/tool";
+
+ export default {
     props: {
       song: {
         type: Array,
         default: []
+      }
+    },
+    filters:{
+      formats(times){
+        return format(times)
       }
     },
     methods: {
@@ -39,20 +46,6 @@
       },
       handleAppendItem(items,index){
         this.$emit('appendPlayer',items,index)
-      },
-      _pad(num, n = 2) {
-        let len = num.toString().length
-        while (len < n) {
-          num = '0' + num
-          len++
-        }
-        return num
-      },
-      format(interval) {
-        interval = interval | 0
-        const minute = interval / 60 | 0
-        const second = this._pad(interval % 60)
-        return `${minute}:${second}`
       }
     }
   }
@@ -62,7 +55,7 @@
 
 
   .list-view {
-
+      width 100%
     .itemFirst {
       display flex
       line-height 50px

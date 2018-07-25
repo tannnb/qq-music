@@ -31,6 +31,8 @@ app.get('/musicu', IndexController.musicu)
 app.get('/recommend', IndexController.recommend)
 app.get('/newSongType', IndexController.newSongType)
 app.get('/newAlbumArea', IndexController.newAlbumArea)
+
+
 app.get('/getNewAlbumSong', DiscController.getNewAlbumSong)
 app.get('/getDiscList', DiscController.getDiscList)
 

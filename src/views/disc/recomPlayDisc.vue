@@ -6,7 +6,7 @@
         <div class="dissname">{{playList.dissname}}</div>
         <div class="tags"><i class="icon-user"></i> {{playList.nickname}}</div>
         <div class="tags" v-if="playList.tags">标签：{{filterSinger(playList.tags)}}</div>
-        <div class="tags">播放量：{{_paddListen(playList.visitnum)}}</div>
+        <div class="tags">播放量：{{playList.visitnum | listen}}</div>
         <div class="tags">收藏量：</div>
         <div class="funBtn">
           <span class="active"
@@ -30,7 +30,7 @@
      </div>
       <div class="introduction">
         <div class="name">简介</div>
-        <div class="desc">{{playList.desc}}</div>
+        <div class="desc" v-html="playList.desc"></div>
       </div>
     </div>
     <div class="reviewWrapper">
@@ -44,6 +44,7 @@
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
   import {ERR_OK} from "../../api/config";
+  import {paddListenCount} from "../../utils/tool";
   import {getDiscList, review} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
 
@@ -68,6 +69,14 @@
         'disc',
         'mid'
       ])
+    },
+    filters:{
+      listen(count){
+        return paddListenCount(count)
+      },
+      filterSingers(singer){
+        return filterSinger(singer)
+      }
     },
     methods: {
       ...mapActions([
@@ -127,9 +136,6 @@
         return ret
       },
 
-      _paddListen(number) {
-        return (number / 10000).toFixed(1) + '万'
-      },
       filterSinger(singer) {
         let ret = []
         if (!singer) {

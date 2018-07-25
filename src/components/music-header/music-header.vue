@@ -24,7 +24,9 @@
                 :key="index"
                 @click="handleSelectHotKey(items.k)"
                 class="hotkey-item">
-              <span class="rank">{{index}}</span> <span class="name">{{items.k}}</span> <span class="Playamount">{{_paddFied(items.n)}}</span>
+              <span class="rank">{{index}}</span>
+              <span class="name">{{items.k}}</span>
+              <span class="Playamount">{{items.n | paddListenCounts}}</span>
             </li>
           </ul>
           <div>
@@ -51,6 +53,7 @@
   import IconSvg from '../../components/svg-icon/svg-nav'
   import {gethotkey} from '../../api/recommend'
   import {ERR_OK} from "../../api/config";
+  import {paddListenCount} from "../../utils/tool";
 
   export default {
     name: "music-header",
@@ -95,6 +98,11 @@
     created() {
       this._gethotkey()
     },
+    filters:{
+      paddListenCounts(count){
+        return paddListenCount(count)
+      }
+    },
     computed: {
       ...mapGetters(['searchHistory']),
     },
@@ -129,9 +137,6 @@
             this.hotKey = this._normal(res.data.hotkey)
           }
         })
-      },
-      _paddFied(count) {
-        return (count / 10000).toFixed(1) + '万'
       },
       _normal(item) {
         return item.slice(0, 5)

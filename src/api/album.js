@@ -1,4 +1,3 @@
-import jsonp from '../utils/jsonp'
 import {commonParams, options} from './config'
 import axios from 'axios'
 
@@ -34,14 +33,6 @@ export function getAlbum(options) {
   return axios.get(url, {
     params: data
   }).then((res) => {
-    /* let ret = res.data
-     if (typeof ret === 'string') {
-       const reg = /^\w+\(({.+})\)$/
-       const matches = ret.match(reg)
-       if (matches) {
-         ret = JSON.parse(matches[1])
-       }
-     }*/
     return Promise.resolve(res)
   })
 }
@@ -49,7 +40,6 @@ export function getAlbum(options) {
 
 export function getAlbumDesc(mid) {
   const url = 'http://localhost:3000/getAlbumDesc'
-
   const data = Object.assign({}, commonParams, {
     albummid: mid,
     g_tk: '1194859437',
@@ -62,14 +52,6 @@ export function getAlbumDesc(mid) {
   return axios.get(url, {
     params: data
   }).then((res) => {
-    /* let ret = res.data
-     if (typeof ret === 'string') {
-       const reg = /^\w+\(({.+})\)$/
-       const matches = ret.match(reg)
-       if (matches) {
-         ret = JSON.parse(matches[1])
-       }
-     }*/
     return Promise.resolve(res)
   })
 }

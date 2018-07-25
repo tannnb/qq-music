@@ -57,7 +57,7 @@
           <div class="progress-wrapper">
             <div class="header">
               <div class="musicName">{{currentSong.name}}-{{currentSong.singer}}</div>
-              <div class="musictime">{{format(currentTime)}} / {{format(currentSong.duration)}}</div>
+              <div class="musictime">{{currentTime | formats}} / {{currentSong.duration | formats}}</div>
             </div>
             <div>
             <Progress-bar ref="maxProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
@@ -92,7 +92,7 @@
           <div class="header">
             <div class="musicName">{{currentSong.name}}-{{currentSong.singer}}</div>
             <div class="playingLyric">{{playingLyric}}</div>
-            <div class="musictime">{{format(currentTime)}}/{{format(currentSong.duration)}}</div>
+            <div class="musictime">{{currentTime | formats}}/{{currentSong.duration | formats}}</div>
           </div>
           <div>
            <Progress-bar ref="miniProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
@@ -124,6 +124,7 @@
   import ProgressBar from '../../components/progress-bar/progress-bar'
   import Scroll from '../../components/scroll/scroll'
   import {shuffle} from "../../utils/util"
+  import {format} from "../../utils/tool";
   import Lyric from 'lyric-parser'
 
 
@@ -182,12 +183,14 @@
          this.$refs.miniProgress.init()
        })
       },
+
       open() {
         this.setFullscreen(true)
         this.$nextTick(() => {
           this.$refs.maxProgress.init()
         })
       },
+
       // 播放 暂停
       togglePlaying() {
         if (!this.songReady) {
@@ -199,6 +202,7 @@
           this.currentLyric.togglePlay()
         }
       },
+
       // 上一曲
       prev() {
         if (!this.songReady) {
@@ -218,6 +222,7 @@
           this.songReady = false
         }
       },
+
       // 下一曲
       next() {
         if (!this.songReady) {
@@ -245,6 +250,7 @@
       error() {
         this.songReady = true
       },
+
       // 当前歌曲播放结束
       end() {
         if (this.mode === playMode.loop) {
@@ -253,6 +259,8 @@
           this.next()
         }
       },
+
+      // 循环
       loop() {
         this.$refs.audio.currentTime = 0
         this.$refs.audio.play()
@@ -286,6 +294,7 @@
         })
         this.setCurrentIndex(index)
       },
+
       // 获取歌词
       getLyric() {
         this.currentSong.getLyric().then((lyric) => {
@@ -344,23 +353,7 @@
           this.isMute = true
           this.$refs.audio.volume = cacheVolume
         }
-      },
-
-      _pad(num, n = 2) {
-        let len = num.toString().length
-        while (len < n) {
-          num = '0' + num
-          len++
-        }
-        return num
-      },
-      format(interval) {
-        interval = interval | 0
-        const minute = interval / 60 | 0
-        const second = this._pad(interval % 60)
-        return `${minute}:${second}`
-      },
-
+      }
     },
     watch: {
       currentSong(newSong, oldSong) {
@@ -381,7 +374,12 @@
           newplaying ? auido.play() : auido.pause()
         })
       }
-    }
+    },
+    filters:{
+      formats(times){
+        return format(times)
+      }
+    },
   }
 </script>
 

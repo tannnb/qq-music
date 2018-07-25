@@ -34,9 +34,6 @@
         default: ''
       }
     },
-    mounted() {
-      console.log(this.commentlist)
-    },
     filters: {
       formatDate(time) {
         let date = new Date(time * 1000);

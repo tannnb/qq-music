@@ -1,22 +1,23 @@
 <template>
   <div class="singer-desc">
     <div class="singerWrapper">
-      <div class="logo"><img :src="initDisc.singer_pic" alt=""></div>
+     <div class="logo" v-if="singerInfo"><img  :src="uri(singerInfo.singer_mid,true)" alt=""></div>
       <div class="singerItem">
-        <div class="dissname">{{initDisc.singer_name}}</div>
+        <div class="dissname">{{singerInfo.singer_name}}</div>
         <div class="tags"><i class="icon-user"></i> {{initDisc.country}}</div>
-        <div class="tags" v-if="singerInfo">单曲：{{singerInfo.total}}</div>
-        <div class="tags">收藏量：</div>
+        <div class="singerTotal">
+          <div class="" v-if="singerInfo">单曲<span class="weight">{{singerInfo.total}}</span></div>
+          <div class="">专辑<span class="weight">{{singer_ablum.total}}</span></div>
+        </div>
+
         <div class="funBtn">
           <span class="active"
                 :class=" songs.length === 0? 'notSong':'' "
                 @click="handlePlayAll"
           > <i class="icon-play"></i> 播放歌手热门歌曲</span>
-          <span><i class="icon-collect"></i>收藏</span>
         </div>
       </div>
     </div>
-
     <div class="list-wrapper">
       <List-view
         class="singerContentList"
@@ -26,6 +27,21 @@
         @appendPlayer="appendPlayer"
       ></List-view>
     </div>
+
+    <div class="singer_ablum">
+      <h4 class="header">专辑</h4>
+      <ul class="content">
+        <li v-for="(items,index) in singer_ablum.list"
+            :key="index"
+            class="items"
+        >
+          <img class="avatar" :src="uri(items.albumMID)" alt="">
+          <p class="albumName">{{items.albumName}}</p>
+          <p class="pubTime">{{items.pubTime}}</p>
+        </li>
+      </ul>
+    </div>
+
 
   </div>
 </template>
@@ -39,12 +55,14 @@
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
 
 
+
   export default {
     data() {
       return {
         singerlist: null,
-        singerInfo: '',
-        songs: []
+        singerInfo: null,
+        songs: [],
+        singer_ablum: {}
       }
     },
     components: {
@@ -53,7 +71,7 @@
     },
     created() {
       this._getSingerDesc()
-      // this._getSingerAlbum()
+      this._getSingerAlbum()
       this._getSingerMv()
     },
     computed: {
@@ -63,6 +81,10 @@
       ...mapActions([
         'selectPlay'
       ]),
+      uri(uri,flag) {
+        let count = flag? '1':'2'
+        return `https://y.gtimg.cn/music/photo_new/T00${count}R300x300M000${uri}.jpg?max_age=2592000`
+      },
       // 追加歌曲
       appendPlayer() {
 
@@ -83,6 +105,7 @@
           index: 0
         })
       },
+
       _getSingerDesc() {
         if (!this.mid) {
           this.$router.push('/music/singer')
@@ -108,7 +131,10 @@
           return
         }
         getSingerAlbum(this.mid).then(res => {
-          console.log(res)
+          if (res.data.code === ERR_OK) {
+            this.singer_ablum = res.data.data
+            console.log(this.singer_ablum)
+          }
         })
       },
       _getSingerMv() {
@@ -123,7 +149,6 @@
           if (matches) {
             ret = JSON.parse(matches[1])
           }
-          console.log(ret)
         })
       },
 
@@ -168,6 +193,25 @@
         .tags {
           font-size 15px
           padding 6px 0
+        }
+        .singerTotal{
+          display flex
+          padding-top 12px
+          font-size 16px
+          color: #333
+          cursor pointer
+
+          div{
+            margin-right  20px
+            &:hover{
+              color: #31c27c
+            }
+          }
+          .weight{
+            padding-left 6px
+            font-size 26px
+            font-weight 'poppin,Tahoma,Arial,\5FAE\8F6F\96C5\9ED1,sans-serif'
+          }
         }
         .funBtn {
           span {
@@ -226,6 +270,44 @@
       }
     }
 
+    .singer_ablum {
+
+      .header {
+        padding 12px 0 4px 0
+        font-size 20px
+        line-height 60px
+        font-weight 700
+        font-family "Microsoft YaHei UI"
+      }
+      .content {
+        display flex
+        justify-content space-between
+        .items {
+          .avatar {
+            width 224px
+            cursor pointer
+            img {
+              width 100%
+              vertical-align top
+            }
+          }
+          .albumName {
+            padding 12px 0 8px 0
+            font-size 14px
+            color: #333
+            cursor pointer
+            &:hover {
+              color: #31c27c
+            }
+          }
+          .pubTime {
+            color: #999
+            font-size 12px
+          }
+        }
+      }
+    }
   }
 
 </style>
+

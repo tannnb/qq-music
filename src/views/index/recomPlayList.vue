@@ -10,7 +10,7 @@
             <div class="playlist_item_box" @click="handleSelectItem(items)">
               <div class="coverImg"><img :src="items.image" alt=""></div>
               <p class="title">{{items.title}}</p>
-              <p class="listen_num">播放量:{{_paddListen(items.duration)}}</p>
+              <p class="listen_num">播放量:{{items.duration | listen}}</p>
             </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -25,6 +25,7 @@
 <script>
   import {ERR_OK} from "../../api/config";
   import {config} from './config'
+  import {paddListenCount} from "../../utils/tool";
   import {Createrecommend} from '../../utils/util'
   import {recommend} from '../../api/recommend'
   import MusicSubheader from '../../components/music-subHeader/music-subHeader'
@@ -67,6 +68,11 @@
     created() {
       this.recomPlaylist = this._normalizeSongs(this.recomPlaylistData)
     },
+    filters:{
+      listen(count){
+        return paddListenCount(count)
+      }
+    },
     methods: {
       _normalizeSongs(list, flag) {
         let ret = []
@@ -88,10 +94,6 @@
           }
         })
         return ret
-      },
-
-      _paddListen(number) {
-        return (number / 10000).toFixed(1) + '万'
       },
 
       handleSelectNavItem(index, items) {

@@ -15,7 +15,7 @@
           <i class="icon-play"  @click="handleSelectSong(index)"></i>
         </div>
         <div class="singer">{{items.singer}}</div>
-        <div class="duration">{{format(items.duration)}}</div>
+        <div class="duration">{{items.duration | formats}}</div>
       </li>
     </ul>
   </div>
@@ -23,30 +23,22 @@
 
 <script>
   import {mapGetters} from 'vuex'
+  import {format} from "../../utils/tool";
 
   export default {
     name: "player-list",
     computed: {
       ...mapGetters(['playlist','currentSong'])
     },
+    filters:{
+      formats(times){
+        return format(times)
+      }
+    },
     methods:{
       handleSelectSong(index){
         this.$emit('handleSelectSong',index)
-      },
-      _pad(num, n = 2) {
-        let len = num.toString().length
-        while (len < n) {
-          num = '0' + num
-          len++
-        }
-        return num
-      },
-      format(interval) {
-        interval = interval | 0
-        const minute = interval / 60 | 0
-        const second = this._pad(interval % 60)
-        return `${minute}:${second}`
-      },
+      }
     }
   }
 </script>

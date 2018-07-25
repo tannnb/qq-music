@@ -43,7 +43,6 @@
     },
     created() {
       this.toplistData = this.toplist.group_list[0].list.slice(0, 5)
-      console.log(this.toplist.group_list[0])
     },
     methods:{
       _padd(item){
