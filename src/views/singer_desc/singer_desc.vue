@@ -189,9 +189,10 @@
 <style lang="stylus" scoped>
 
   .singer-desc {
-    width 1200px
-    margin 0 auto
+    background: linear-gradient(#f3f3f3, #fff);
     .singerWrapper {
+      width 1200px
+      margin 0 auto
       display flex
       padding 40px 0 35px 0
       .logo {
@@ -267,6 +268,8 @@
     }
 
     .list-wrapper {
+      width 1200px
+      margin 0 auto
       display flex
       .singerContentList {
         .list-view {
@@ -291,7 +294,8 @@
     }
 
     .singer_ablum {
-
+      width 1200px
+      margin 0 auto
       .header {
         padding 12px 0 4px 0
         font-size 20px

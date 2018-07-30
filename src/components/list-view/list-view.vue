@@ -143,7 +143,6 @@
           color: #31c27c
           .funBtn:nth-child(even) {
             display block
-            background #fff
           }
         }
         &:hover {

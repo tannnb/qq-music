@@ -46,6 +46,11 @@ export default new Router({
           name:'album_desc',
           component: () => import('@/views/album_desc/album_desc')
         },
+        {
+          path:'station',
+          name:'station',
+          component:() => import('@/views/station/station')
+        },
       ]
     }
   ]

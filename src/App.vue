@@ -3,8 +3,12 @@
     <keep-alive>
       <router-view/>
     </keep-alive>
+
     <Player></Player>
+
     <vue-ins-progress-bar></vue-ins-progress-bar>
+
+    <a href="javascript:void(0)" ref="btn" @click="backTop" class="btn" title="回到顶部"></a>
   </div>
 </template>
 
@@ -14,11 +18,14 @@
 
   export default {
     name: 'App',
+    data() {
+      return {
+        timer: null,
+        istop: true
+      }
+    },
     components: {
       Player
-    },
-    mounted() {
-      this.$insProgress.finish()
     },
     computed: {
       ...mapGetters(['fullScreen'])
@@ -48,6 +55,38 @@
       this.$router.afterEach((to, from) => {
         this.$insProgress.finish()
       })
+    },
+    mounted() {
+      this.$insProgress.finish()
+      window.onscroll = this.userScroll;
+    },
+    methods: {
+      userScroll() {
+        let oTop = document.documentElement.scrollTop || document.body.scrollTop;
+        let oHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        let Obtn = this.$refs.btn
+        if (oTop >= oHeight) {
+          Obtn.style.display = "block";
+        } else {
+          Obtn.style.display = "none"
+        }
+        if (this.istop) {
+          clearInterval(this.timer)
+        }
+        this.istop = true;
+      },
+      backTop() {
+        clearInterval(this.timer);
+        this.timer = setInterval(() => {
+          let oTop = document.documentElement.scrollTop || document.body.scrollTop;
+          let ispeed = Math.floor(-oTop / 6);
+          document.documentElement.scrollTop = document.body.scrollTop = oTop + ispeed;
+          this.istop = false;
+          if (oTop == 0) {
+            clearInterval(this.timer)
+          }
+        }, 30)
+      }
     }
   }
 </script>
@@ -64,5 +103,20 @@
   .paddingBtoom {
     padding-bottom 100px
   }
+
+  .btn {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    right: 65px;
+    bottom: 60px;
+    display: none;
+    background: url("./images/top_bg.png") no-repeat left top;
+  }
+
+  .btn:hover {
+    background: url("./images/top_bg.png") no-repeat 0 -39px;
+  }
+
 
 </style>

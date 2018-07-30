@@ -5,6 +5,7 @@ const IndexController = require('./controller/index')
 const DiscController = require('./controller/disc')
 const SingerController = require('./controller/singer')
 const AlbumController = require('./controller/album')
+const radioController = require('./controller/radiolist')
 
 
 // 加载解析json的中间件
@@ -52,6 +53,9 @@ app.get('/getSingerMv',SingerController.getSingerMv)
 // 专辑
 app.get('/getAlbum',AlbumController.getAlbum)
 app.get('/getAlbumDesc',AlbumController.getAlbumDesc)
+
+// 电台
+app.get('/station',radioController.station)
 
 
 
