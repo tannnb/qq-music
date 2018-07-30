@@ -47,6 +47,7 @@ app.get('/review',DiscController.review)
 // 歌手
 app.get('/singer',SingerController.getSingerList)
 app.get('/singerdesc',SingerController.getSingerDesc)
+app.get('/gerSingerFan',SingerController.gerSingerFan)
 app.get('/getSingerAlbum',SingerController.getSingerAlbum)
 app.get('/getSingerMv',SingerController.getSingerMv)
 

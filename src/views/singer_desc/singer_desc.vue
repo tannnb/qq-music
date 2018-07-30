@@ -4,7 +4,6 @@
      <div class="logo"><img  :src="uri(singerInfo.singer_mid,true)" alt=""></div>
       <div class="singerItem" >
         <div class="dissname">{{singerInfo.singer_name}}</div>
-        <div class="tags"><i class="icon-user"></i> {{initDisc.country}}</div>
         <div class="singerTotal">
           <div class="" v-if="singerInfo">单曲<span class="weight">{{singerInfo.total}}</span></div>
           <div class="">专辑<span class="weight">{{singer_ablum.total}}</span></div>
@@ -15,6 +14,7 @@
                 :class=" songs.length === 0? 'notSong':'' "
                 @click="handlePlayAll"
           > <i class="icon-play"></i> 播放歌手热门歌曲</span>
+          <span class="music_num"> <i class="icon-add"></i> 关注{{music_num | listen}}</span>
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
-  import {getSingerDesc, getSingerAlbum, getSingerMv} from '../../api/singer'
+  import {getSingerDesc, getSingerAlbum, getSingerMv,gerSingerFan} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import ListView from '../../components/list-view/list-view'
@@ -75,7 +75,8 @@
         singerInfo: null,
         songs: [],
         singer_ablum: {},
-        singer_mv:{}
+        singer_mv:{},
+        music_num:null
       }
     },
     components: {
@@ -141,6 +142,9 @@
             })
           }
         })
+        gerSingerFan(this.mid).then(res => {
+          this.music_num =  res.data.data.music_num
+        })
       },
 
       _getSingerAlbum() {
@@ -168,7 +172,6 @@
           }
           if(ret.code === ERR_OK){
             this.singer_mv = ret.data
-            console.log(this.singer_mv)
           }
         })
       },
@@ -206,21 +209,22 @@
         }
       }
       .singerItem {
-        padding-left 40px
+        padding-left 60px
         .dissname {
-          padding-top 13px
+          padding-top 40px
           padding-bottom 10px
           font-size 32px
         }
         .tags {
           font-size 15px
           padding 6px 0
+          color: #888787
         }
         .singerTotal{
           display flex
-          padding-top 12px
-          font-size 16px
-          color: #333
+          padding-top 30px
+          font-size 15px
+          color: #797676
           cursor pointer
           div{
             margin-right  20px
@@ -231,17 +235,17 @@
           .weight{
             padding-left 6px
             font-size 26px
-            font-weight 'poppin,Tahoma,Arial,\5FAE\8F6F\96C5\9ED1,sans-serif'
+            font-family  'arial'
           }
         }
         .funBtn {
           span {
             display inline-block
-            border: 1px solid #c9c9c9
+            border: 1px solid #ccc
             padding 10px 30px
             margin 20px 0
             font-size 15px
-            color: #333
+            color: #7d7b7b
             border-radius 2px
             cursor pointer
             &:hover {

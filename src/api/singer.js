@@ -108,6 +108,29 @@ export function getSingerMv(mid) {
 }
 
 
+export function gerSingerFan(mid) {
+  const url = 'http://localhost:3000/gerSingerFan'
+
+  const data = Object.assign({}, commonParams, {
+    reqtype: 1,
+    singermid: mid,
+    g_tk: 1194859437,
+    loginUin: 0,
+    hostUin: 0,
+    platform: 'yqq',
+    format: 'jsonp',
+    cid: 205361944,
+    needNewCode: 0
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+
 
 
 
