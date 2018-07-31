@@ -38,6 +38,9 @@
     <div class="list-wrapper" style="width: 860px">
      <!-- <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>-->
     </div>
+
+    <Loading v-if="!albumInfo"></Loading>
+
   </div>
 </template>
 
@@ -48,6 +51,7 @@
   import {ERR_OK} from "../../api/config";
   import {processSongsUrl, isValidMusic, createSong} from "../../api/songList";
   import ListView from '../../components/list-view/list-view'
+  import Loading from '../../components/loading/loading'
 
   export default {
     name: "album_desc",
@@ -60,7 +64,8 @@
       }
     },
     components: {
-      ListView
+      ListView,
+      Loading
     },
     created() {
       this._getAlbumDesc()

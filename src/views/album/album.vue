@@ -55,6 +55,9 @@
         <Pagination v-if="allpage>0" @pagetions="pagetions" :allpage="allpage"></Pagination>
       </div>
     </div>
+
+    <Loading v-if="albumList.length === 0"></Loading>
+
   </div>
 </template>
 
@@ -65,6 +68,7 @@
   import Pagination from '../singer/pagination'
   import {ERR_OK} from "../../api/config";
   import SingerTag from '../singer/singertag'
+  import Loading from '../../components/loading/loading'
 
   export default {
     data() {
@@ -92,7 +96,8 @@
     },
     components: {
       SingerTag,
-      Pagination
+      Pagination,
+      Loading
     },
     created() {
       this._getAlbum()

@@ -53,6 +53,7 @@
       </ul>
     </div>
 
+    <Loading v-if="songs.length === 0"></Loading>
 
   </div>
 </template>
@@ -64,6 +65,7 @@
   import {paddListenCount} from "../../utils/tool";
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
+  import Loading from '../../components/loading/loading'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
 
 
@@ -81,7 +83,8 @@
     },
     components: {
       ListView,
-      reviewList
+      reviewList,
+      Loading
     },
     created() {
       this._getSingerDesc()

@@ -9,7 +9,8 @@
           :key="items.id">
         <a :class='[currentIndex===index? "active":""]'
            @click="handleSelect(items)"
-           href="javascript:void(0)"> {{items.label}} </a></li>
+           :href="items.url"
+           target= "_blank"> {{items.label}} </a></li>
     </ul>
 
     <div class="music-search">
@@ -75,19 +76,23 @@
           },
           {
             label: '我的音乐',
-            id: '1'
+            id: '1',
+            url:'https://y.qq.com/portal/profile.html'
           },
           {
             label: '客户端',
-            id: '2'
+            id: '2',
+            url:'https://y.qq.com/download/index.html'
           },
           {
             label: '音乐号',
-            id: '3'
+            id: '3',
+            url:'https://y.qq.com/vip/daren_recruit/apply.html'
           },
           {
             label: 'VIP',
-            id: '4'
+            id: '4',
+            url:'https://y.qq.com/portal/vipportal/index.html'
           }
         ],
         search_Area: false,

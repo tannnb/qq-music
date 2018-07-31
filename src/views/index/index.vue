@@ -15,6 +15,9 @@
     <!-- 排行榜 -->
     <top-list v-if="toplist"  :toplist="toplist"></top-list>
 
+
+    <Loading v-if="!recomPlaylistData"></Loading>
+
   </div>
 
 </template>
@@ -28,6 +31,7 @@
   import Slider from './slider'
   import newAlbum from './newAlbum'
   import topList from './toplist'
+  import Loading from '../../components/loading/loading'
   import {getDiscList,getNewAlbumSong} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
 
@@ -47,7 +51,8 @@
       NewSong,
       Slider,
       newAlbum,
-      topList
+      topList,
+      Loading
     },
     created() {
       this._musicu()

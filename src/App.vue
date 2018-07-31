@@ -58,7 +58,7 @@
     },
     mounted() {
       this.$insProgress.finish()
-      window.onscroll = this.userScroll;
+      window.addEventListener('scroll', this.userScroll);
     },
     methods: {
       userScroll() {

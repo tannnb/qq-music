@@ -47,15 +47,19 @@
       </div>
     </div>
 
+    <Loading v-if="singerList.length === 0"></Loading>
+
+
   </div>
 </template>
 
 <script>
-  import {mapActions,mapGetters} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
   import {getSingerList} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
   import SingerTag from './singertag'
   import Pagination from './pagination'
+  import Loading from '../../components/loading/loading'
 
 
   const COUNT = 80
@@ -81,7 +85,8 @@
     },
     components: {
       SingerTag,
-      Pagination
+      Pagination,
+      Loading
     },
     created() {
       this._getSingerList()
@@ -141,9 +146,9 @@
         this.sin = this.sin + COUNT
         this.asyncData()
       },
-      handleSelectItem(items){
+      handleSelectItem(items) {
         this.$router.push({
-          path:`/music/singer/${items.singer_mid}`
+          path: `/music/singer/${items.singer_mid}`
         })
         // 保存歌曲信息
         this.saveDiscInfo(items)
@@ -164,11 +169,11 @@
         vertical-align top
         user-select: none;
       }
-      .title{
+      .title {
         position: absolute
         top: 50%
         left 50%
-        transform translate(-50%,-50%)
+        transform translate(-50%, -50%)
         font-size 60px
         font-family "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
         color: #fff
@@ -240,7 +245,7 @@
           }
         }
       }
-      .defaultWrapper{
+      .defaultWrapper {
         .defaultAvatar {
           display flex
           justify-content space-between

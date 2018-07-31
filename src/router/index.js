@@ -47,9 +47,29 @@ export default new Router({
           component: () => import('@/views/album_desc/album_desc')
         },
         {
+          path:'rank',
+          name:'rank',
+          component:() => import('@/views/rank/rank')
+        },
+        {
+          path:'sort',
+          name:'sort',
+          component:() => import('@/views/sort/sort')
+        },
+        {
+          path:'digitalalbum',
+          name:'digitalalbum',
+          component:() => import('@/views/digitalalbum/digitalalbum')
+        },
+        {
           path:'station',
           name:'station',
           component:() => import('@/views/station/station')
+        },
+        {
+          path:'mv',
+          name:'mv',
+          component:() => import('@/views/mv/mv')
         },
       ]
     }
