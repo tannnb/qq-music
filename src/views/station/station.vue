@@ -35,7 +35,6 @@
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import Loading from '../../components/loading/loading'
-
   export default {
     name: "station",
     data() {
@@ -60,14 +59,14 @@
     },
     mounted() {
       setTimeout(() => {
-        this._calculateHeight();
+       this.$nextTick(() => {
+         this._calculateHeight();
+       })
         this.stationContent = this.$refs.stationContent.offsetLeft
         this.$refs.tagsWrapper.style.left =  this.stationContent - 240 + 'px'
         this.$refs.tagsWrapper.style.opacity =  1
       }, 500)
-
       window.addEventListener('scroll', this.radioScroll);
-
     },
     computed: {
       currentIndex() {
@@ -82,7 +81,6 @@
       }
     },
     methods: {
-
       _station() {
         station().then(res => {
           let ret = res.data
@@ -99,11 +97,14 @@
           }
         })
       },
-
       radioScroll() {
         this.scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+        if(this.scrollY>=80){
+          this.$refs.tagsWrapper.style.top = '40px'
+        }else{
+          this.$refs.tagsWrapper.style.top = '142px'
+        }
       },
-
       // 获取所有tag对应高度
       _calculateHeight() {
         let itemList = this.$refs.itemlist
@@ -123,7 +124,6 @@
 </script>
 
 <style lang="stylus" scoped>
-
   .stationWrapper {
     padding-top 35px
     background: linear-gradient(#f3f3f3, #fff);
@@ -140,12 +140,11 @@
       }
     }
   }
-
   .slider {
     .taglist {
       position: fixed
       left: 40px
-      top: 180px
+      top: 142px
       transition all .3s
       opacity 0
       background url("./radio_sidebar.png") 0 0 no-repeat;
@@ -185,7 +184,6 @@
       }
     }
   }
-
   .stationContent {
     .item {
       .title {
@@ -210,7 +208,6 @@
       .radioItem {
         display flex
         flex-wrap wrap
-
         .radioItem_li {
           width 25%
           padding-bottom: 44px;
@@ -241,6 +238,4 @@
       }
     }
   }
-
-
 </style>

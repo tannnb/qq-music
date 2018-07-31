@@ -19,6 +19,7 @@ const options = {
   height: '3px'
 }
 
+
 Vue.use(VueInsProgressBar, options)
 
 Vue.use(VueAwesomeSwiper)
