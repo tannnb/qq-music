@@ -21,13 +21,13 @@
     </div>
     <div class="list-wrapper">
       <div class="listContent">
-       <List-view
-         v-if="songs.length !== '' "
-         :song="songs"
-         @handlePlayer="handlePlayer"
-         @appendPlayer="appendPlayer"
-       ></List-view>
-     </div>
+        <List-view
+          v-if="songs.length !== '' "
+          :song="songs"
+          @handlePlayer="handlePlayer"
+          @appendPlayer="appendPlayer"
+        ></List-view>
+      </div>
       <div class="introduction">
         <div class="name">简介</div>
         <div class="desc" v-html="playList.desc"></div>
@@ -70,11 +70,11 @@
         'mid'
       ])
     },
-    filters:{
-      listen(count){
+    filters: {
+      listen(count) {
         return paddListenCount(count)
       },
-      filterSingers(singer){
+      filterSingers(singer) {
         return filterSinger(singer)
       }
     },
@@ -110,7 +110,7 @@
         getDiscList(this.mid).then(res => {
           if (res.code === ERR_OK) {
             this.playList = res.cdlist[0]
-            console.log( this.playList)
+            console.log(this.playList)
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
               //  排除没有url的歌曲
               this.songs = songs.filter((currentSong) => {
@@ -154,11 +154,11 @@
 <style lang="stylus" scoped>
 
   .disc-wrapper
-    width 1200px
-    margin 0 auto
-    min-height: 100px
+    background: linear-gradient(#f3f3f3, #fff);
     .singerWrapper
       display flex
+      width 1200px
+      margin 0 auto
       padding 40px 0 35px 0
       .logo {
         width 250px
@@ -211,9 +211,10 @@
       }
 
     .list-wrapper
-      display flex
       width 1200px
-      .listContent{
+      margin 0 auto
+      display flex
+      .listContent {
         width 860px
       }
       .introduction
@@ -230,5 +231,6 @@
           line-height: 22px
           overflow: hidden
     .reviewWrapper
-      width 860px
+      width 1200px
+      margin 0 auto
 </style>

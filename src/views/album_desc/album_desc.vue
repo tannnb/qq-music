@@ -136,9 +136,12 @@
 
 <style lang="stylus" scoped>
   .album_descWrapper {
-    width 1200px
-    margin 0 auto
+    padding-top 40px
+    background: linear-gradient(#f3f3f3, #fff);
     .ablum_desc_singerInfo {
+      width 1200px
+      margin 0 auto
+      padding-bottom 40px
       position: relative
       display flex
       .avatar {
@@ -213,6 +216,8 @@
       }
     }
     .list-wrapper {
+      width 1200px
+      margin 0 auto
       display flex
       .introduction {
         padding-left 30px

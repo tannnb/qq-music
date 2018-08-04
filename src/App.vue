@@ -59,6 +59,19 @@
     mounted() {
       this.$insProgress.finish()
       window.addEventListener('scroll', this.userScroll);
+
+      let OriginTitile = document.title, titleTime;
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+          document.title = '大佬欢迎下次再来！';
+          clearTimeout(titleTime);
+        } else {
+          document.title = '勇士，你来啦⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄!';
+          titleTime = setTimeout(function () {
+            document.title = OriginTitile;
+          }, 2000);
+        }
+      });
     },
     methods: {
       userScroll() {
