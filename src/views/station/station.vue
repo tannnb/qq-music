@@ -119,6 +119,9 @@
       selectMenu(index){
         document.documentElement.scrollTop = document.body.scrollTop = this.listHeight[index]
       }
+    },
+    beforeDestroy(){
+      window.removeEventListener('scroll',this.radioScroll);
     }
   }
 </script>

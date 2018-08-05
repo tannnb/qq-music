@@ -1,7 +1,7 @@
 <template>
   <div class="sort_desc">
     <div class="sort_singerInfo" v-if="cdlist && cdlist.length !== 0">
-      <div class="avatar"><img :src="cdlist.logo" ></div>
+      <div class="avatar"><img :src="cdlist.logo"></div>
       <div class="singerInfo">
         <h2 class="songName">{{cdlist.dissname}}</h2>
         <div class="simgerName"><i class="icon-user"></i>{{cdlist.nickname}}</div>
@@ -10,7 +10,8 @@
           <li>播放量：{{cdlist.visitnum | listen}}</li>
         </ul>
         <div class="funBtn">
-          <span class="active" :class=" songs.length === 0? 'notSong':'' " @click="handlePlayAll"> <i class="icon-play"></i> 播放全部</span>
+          <span class="active" :class=" songs.length === 0? 'notSong':'' " @click="handlePlayAll"> <i
+            class="icon-play"></i> 播放全部</span>
           <span><i class="icon-collect"></i>收藏</span>
           <span><i class="icon-pinglun"></i>评论</span>
           <span><i class="icon-more"></i>更多</span>
@@ -27,6 +28,10 @@
         ></List-view>
         <p class="notSongUrl" v-if="notSongUrl">暂时没有找到歌曲,o(╥﹏╥)o</p>
       </div>
+      <div class="introduction">
+        <div class="name">简介</div>
+        <div class="desc" v-html="cdlist.desc"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -41,41 +46,41 @@
 
   export default {
     name: "sort_desc",
-    data(){
+    data() {
       return {
-        cdlist:[],
-        songs:[],
-        notSongUrl:false
+        cdlist: [],
+        songs: [],
+        notSongUrl: false
       }
     },
-    components:{
+    components: {
       ListView
     },
     computed: {
       ...mapGetters(['mid', 'initDisc'])
     },
-    filters:{
-      listen(count){
+    filters: {
+      listen(count) {
         return paddListenCount(count)
       }
     },
-    created(){
+    created() {
       this._getSortDesc()
     },
-    methods:{
+    methods: {
       ...mapActions([
         'selectPlay'
       ]),
-      _getSortDesc(){
+      _getSortDesc() {
         if (!this.mid) {
           this.$router.push('/music/album')
           return
         }
         getSortDesc(this.mid).then(res => {
-          if(res.subcode=== ERR_OK){
+          if (res.subcode === ERR_OK) {
             this.notSongUrl = false
             this.cdlist = res.cdlist[0]
-            console.log( this.cdlist)
+            console.log(this.cdlist)
             processSongsUrl(this._normalizeSongs(this.cdlist.songlist)).then(songs => {
               this.songs = songs.filter((currentSong) => {
                 return currentSong.url.length !== 0
@@ -105,9 +110,9 @@
           ret.push(s.name)
         })
         return ret.join(' ')
-  },
-      handlePlayAll(){
-        if(this.notSongUrl){
+      },
+      handlePlayAll() {
+        if (this.notSongUrl) {
           alert('暂无歌曲')
           return
         }
@@ -116,13 +121,13 @@
           index: 0
         })
       },
-      handlePlayer(items, index){
+      handlePlayer(items, index) {
         this.selectPlay({
           list: this.songs,
           index: index
         })
       },
-      appendPlayer(){
+      appendPlayer() {
 
       }
     }
@@ -130,10 +135,10 @@
 </script>
 
 <style lang="stylus" scoped>
-  .sort_desc{
+  .sort_desc {
     padding-top 40px
     background: linear-gradient(#f3f3f3, #fff);
-    .sort_singerInfo{
+    .sort_singerInfo {
       display flex
       width 1200px
       margin 0 auto
@@ -197,16 +202,33 @@
         }
       }
     }
-    .sort_singerContent{
+    .sort_singerContent {
       display flex
       width 1200px
       margin 0 auto
-      .sort_singerlist{
+      .sort_singerlist {
         width 860px
-        .notSongUrl{
+        .notSongUrl {
           margin 60px auto 30px auto
           text-align center
           color: #999
+        }
+      }
+
+      .introduction {
+        flex 0 0 300
+        width 300px
+        padding-left 30px
+        .name {
+          font-size: 15px
+          font-weight: 400
+          line-height: 46px
+        }
+        .desc {
+
+          font-size: 14px
+          line-height: 22px
+          overflow: hidden
         }
       }
 
