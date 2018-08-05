@@ -31,7 +31,7 @@ export function getSortList(categoryId,sortId,sin) {
     categoryId,
     sortId,
     sin,
-    ein: 29,
+    ein: 29+sin,
   })
 
   return axios.get(url, {

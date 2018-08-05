@@ -27,15 +27,13 @@
     </div>
     <div class="content-wrapper">
         <div class="items" v-for="(items,index) in SortList" :key="index">
-          <div class="avatar">
-            <img :src="items.imgurl" alt="">
-          </div>
+          <div class="avatar"><img :src="items.imgurl" alt=""></div>
           <div class="dissname">{{items.dissname}}</div>
           <div class="name">{{items.creator.name}}</div>
           <div class="listnum">播放量：{{items.listennum | listen}}</div>
         </div>
         <div class="page-wrapper">
-          <Pagination v-if="allpage>0" @pagetions="pagetions" :allpage="allpage"></Pagination>
+          <Pagination ref='pagination' v-if="allpage>0" @pagetions="pagetions"  :allpage="allpage"></Pagination>
         </div>
     </div>
   </div>
@@ -59,7 +57,8 @@
         allpage:'',
         categoryId:10000000,
         sortId:5,
-        sin:0
+        sin:0,
+
       }
     },
     filters:{
@@ -105,6 +104,7 @@
         this.currentIndex = items.categoryId
         this.categoryId = items.categoryId
         this.currentSelect = items.categoryName
+        this.$refs.pagination.setCurrent(1)
         this._getSortList()
       },
       handleTab(id){
@@ -114,6 +114,7 @@
       },
       pagetions(count){
         this.sin = (count-1)*30
+        console.log( this.sin)
         this._getSortList()
       }
     }

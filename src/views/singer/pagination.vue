@@ -50,6 +50,9 @@
         if (index == this.current) return;
         this.current = index;
         this.$emit('pagetions',index)
+      },
+      setCurrent(current){
+        this.current = current
       }
     }
   }
