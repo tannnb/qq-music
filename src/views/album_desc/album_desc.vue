@@ -39,8 +39,11 @@
      <!-- <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>-->
     </div>
 
-    <Loading v-if="!albumInfo"></Loading>
-
+    <Loading v-if="!notSongUrl && albumInfo.length === 0"></Loading>
+    <confirm ref="confirm"
+             @confirm="confirmClear"
+             text="暂时没有找个歌曲呢o(╥﹏╥)o"
+             confirmBtnText="确定"></confirm>
   </div>
 </template>
 
@@ -52,20 +55,23 @@
   import {processSongsUrl, isValidMusic, createSong} from "../../api/songList";
   import ListView from '../../components/list-view/list-view'
   import Loading from '../../components/loading/loading'
+  import Confirm from '../../components/confirm/confirm'
 
   export default {
     name: "album_desc",
     data() {
       return {
-        albumInfo: null,
+        albumInfo: [],
         songs: [],
         commentlist: null,
-        commenttotal: ''
+        commenttotal: '',
+        notSongUrl:false
       }
     },
     components: {
       ListView,
-      Loading
+      Loading,
+      Confirm
     },
     created() {
       this._getAlbumDesc()
@@ -86,13 +92,22 @@
           return
         }
         getAlbumDesc(this.mid).then(res => {
+
+          // 版权问题 无法读取
+          if(res.data.code === 400){
+            this.notSongUrl = true
+            this.albumInfo = [1]
+            return
+          }
           if (res.data.code === ERR_OK) {
+            this.notSongUrl = false
             this.albumInfo = res.data.data
-            console.log(this.albumInfo)
             processSongsUrl(this._normalizeSongs(res.data.data.list)).then((songs) => {
               this.songs = songs.filter((currentSong) => {
                 return currentSong.url.length !== 0
               })
+            }).catch(err => {
+              this.notSongUrl = true
             })
             /*review(this.mid).then(res => {
               console.log(res)
@@ -115,6 +130,10 @@
         return ret
       },
       handlePlayAll() {
+        if (this.notSongUrl) {
+          this.$refs.confirm.show()
+          return
+        }
         this.selectPlay({
           list: this.songs,
           index: 0
@@ -128,7 +147,8 @@
       },
       appendPlayer() {
 
-      }
+      },
+      confirmClear(){}
 
     }
   }
@@ -238,3 +258,8 @@
 
   }
 </style>
+
+<!--//  https://y.gtimg.cn/music/photo_new/T002R300x300M000 00424Hth4cnV2N.jpg?max_age=2592000
+//  https://y.gtimg.cn/music/photo_new/T002R300x300M00000424Hth4cnV2N.jpg?max_age=2592000
+
+//  https://y.gtimg.cn/music/photo_new/T002R300x300M000 004TuCpJ0QiSvh.jpg?max_age=2592000-->

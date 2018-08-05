@@ -110,7 +110,6 @@
         getDiscList(this.mid).then(res => {
           if (res.code === ERR_OK) {
             this.playList = res.cdlist[0]
-            console.log(this.playList)
             processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
               //  排除没有url的歌曲
               this.songs = songs.filter((currentSong) => {

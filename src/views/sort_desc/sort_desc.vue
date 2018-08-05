@@ -33,6 +33,12 @@
         <div class="desc" v-html="cdlist.desc"></div>
       </div>
     </div>
+
+    <Loading v-if="!notSongUrl && songs.length === 0"></Loading>
+    <confirm ref="confirm"
+             @confirm="confirmClear"
+             text="暂时没有找个歌曲呢o(╥﹏╥)o"
+             confirmBtnText="确定"></confirm>
   </div>
 </template>
 
@@ -43,6 +49,8 @@
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import ListView from '../../components/list-view/list-view'
+  import Loading from '../../components/loading/loading'
+  import Confirm from '../../components/confirm/confirm'
 
   export default {
     name: "sort_desc",
@@ -54,7 +62,9 @@
       }
     },
     components: {
-      ListView
+      ListView,
+      Loading,
+      Confirm
     },
     computed: {
       ...mapGetters(['mid', 'initDisc'])
@@ -80,12 +90,10 @@
           if (res.subcode === ERR_OK) {
             this.notSongUrl = false
             this.cdlist = res.cdlist[0]
-            console.log(this.cdlist)
             processSongsUrl(this._normalizeSongs(this.cdlist.songlist)).then(songs => {
               this.songs = songs.filter((currentSong) => {
                 return currentSong.url.length !== 0
               })
-
             }).catch(err => {
               this.notSongUrl = true
             })
@@ -113,7 +121,7 @@
       },
       handlePlayAll() {
         if (this.notSongUrl) {
-          alert('暂无歌曲')
+          this.$refs.confirm.show()
           return
         }
         this.selectPlay({
@@ -128,6 +136,9 @@
         })
       },
       appendPlayer() {
+
+      },
+      confirmClear(){
 
       }
     }

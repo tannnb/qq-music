@@ -93,8 +93,9 @@
 
       // 新歌首发
       handleNewSong(item) {
+        console.log(item)
         /* this.$router.push({
-           path:`/music/index/${item.album_mid}`
+           path:`/music/album/${item.album_mid}`
          })
          this.saveDiscInfo(item)
          this.saveSingID(item.album_mid)*/

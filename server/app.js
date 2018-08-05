@@ -7,6 +7,7 @@ const SingerController = require('./controller/singer')
 const AlbumController = require('./controller/album')
 const radioController = require('./controller/radiolist')
 const sortController = require('./controller/sort')
+const searchContenter = require('./controller/search')
 
 
 // 加载解析json的中间件
@@ -63,6 +64,11 @@ app.get('/getSortDesc',sortController.getSortDesc)
 
 // 电台
 app.get('/station',radioController.station)
+
+
+// 搜索
+app.get('./gethotkey',searchContenter.gethotkey)
+app.get('./clientSearch',searchContenter.clientSearch)
 
 
 
