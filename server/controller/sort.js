@@ -8,6 +8,10 @@ module.exports = {
   getSortList: (req, res) => {
     const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
     response(url, req, res)
+  },
+  getSortDesc: (req, res) => {
+    const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
+    response(url, req, res)
   }
 }
 

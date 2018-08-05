@@ -59,6 +59,7 @@ app.get('/getAlbumDesc',AlbumController.getAlbumDesc)
 // 分类歌单
 app.get('/getSortTags',sortController.getSortTags)
 app.get('/getSortList',sortController.getSortList)
+app.get('/getSortDesc',sortController.getSortDesc)
 
 // 电台
 app.get('/station',radioController.station)

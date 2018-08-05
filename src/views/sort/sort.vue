@@ -26,7 +26,10 @@
       </div>
     </div>
     <div class="content-wrapper">
-        <div class="items" v-for="(items,index) in SortList" :key="index">
+        <div class="items"
+             v-for="(items,index) in SortList"
+             @click="handleSelectSort(items,index)"
+             :key="index">
           <div class="avatar"><img :src="items.imgurl" alt=""></div>
           <div class="dissname">{{items.dissname}}</div>
           <div class="name">{{items.creator.name}}</div>
@@ -40,6 +43,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import {getSortTags,getSortList} from "../../api/sort";
   import {paddListenCount} from "../../utils/tool";
   import {ERR_OK} from "../../api/config";
@@ -57,8 +61,7 @@
         allpage:'',
         categoryId:10000000,
         sortId:5,
-        sin:0,
-
+        sin:0
       }
     },
     filters:{
@@ -74,6 +77,10 @@
       this._getSortList()
     },
     methods: {
+      ...mapActions([
+        'saveDiscInfo',
+        'saveSingID'
+      ]),
       _getSortTags() {
         getSortTags().then(res => {
           let ret = res.data.trim()
@@ -92,7 +99,6 @@
           const Reg = /^\w+\(({.+})\)$/
           const matches = ret.match(Reg)
           const objArr = JSON.parse(matches[1])
-          console.log(objArr)
           if(objArr.code === ERR_OK){
             this.SortList = objArr.data.list
             this.allpage = objArr.data.sum
@@ -114,8 +120,15 @@
       },
       pagetions(count){
         this.sin = (count-1)*30
-        console.log( this.sin)
         this._getSortList()
+      },
+      handleSelectSort(items){
+        this.$router.push({
+          path: `/music/sort/${items.dissid}`
+        })
+        // 保存专辑信息
+        this.saveDiscInfo(items)
+        this.saveSingID(items.dissid)
       }
     }
   }
@@ -207,6 +220,7 @@
         .avatar{
           width 224px
           height:224px
+          cursor pointer
           img{
             width 100%
             vertical-align top
@@ -254,3 +268,4 @@
 
 </style>
 
+// 4227518947
