@@ -8,6 +8,7 @@ const AlbumController = require('./controller/album')
 const radioController = require('./controller/radiolist')
 const sortController = require('./controller/sort')
 const searchContenter = require('./controller/search')
+const RankController = require('./controller/rank')
 
 
 // 加载解析json的中间件
@@ -56,6 +57,12 @@ app.get('/getSingerMv',SingerController.getSingerMv)
 // 专辑
 app.get('/getAlbum',AlbumController.getAlbum)
 app.get('/getAlbumDesc',AlbumController.getAlbumDesc)
+
+
+// 排行榜单
+app.get('/toplistOpt',RankController.toplistOpt)
+app.get('/toplistCp',RankController.toplistCp)
+
 
 // 分类歌单
 app.get('/getSortTags',sortController.getSortTags)
