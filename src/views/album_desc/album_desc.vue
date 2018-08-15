@@ -42,7 +42,7 @@
     <Loading v-if="!notSongUrl && albumInfo.length === 0"></Loading>
     <confirm ref="confirm"
              @confirm="confirmClear"
-             text="暂时没有找个歌曲呢o(╥﹏╥)o"
+             text="暂时没有找到歌曲呢o(╥﹏╥)o"
              confirmBtnText="确定"></confirm>
   </div>
 </template>

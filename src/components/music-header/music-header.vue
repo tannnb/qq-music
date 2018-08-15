@@ -16,14 +16,14 @@
     <div class="music-search">
       <div class="search-container">
         <input type="text" @focus="handleFocus" @blur="handleBlur" v-model="hotKeyQuery">
-        <span @click.stop><Icon-svg class="svgIcon" iconClass="search"></Icon-svg></span>
+        <span @click.stop="handleSearchPage"><Icon-svg class="svgIcon" iconClass="search" ></Icon-svg></span>
       </div>
       <transition name="down">
         <div class="search-history" v-show="search_Area">
           <ul>
             <li v-for="(items,index) in hotKey"
                 :key="index"
-                @click="handleSelectHotKey(items.k)"
+                @click="handleSelectHotKey(items)"
                 class="hotkey-item">
               <span class="rank">{{index}}</span>
               <span class="name">{{items.k}}</span>
@@ -38,7 +38,7 @@
             <div v-if="searchHistory.length" @click.stop>
               <div class="searchItem" v-for="(items,index) in searchHistory" :key="index"
                    @click="handleSelectHotKey(items)">
-                <span>{{items}}</span>
+                <span>{{items.k}}</span>
                 <span @click.stop="handleDetele(items)"><Icon-svg class="svgIcon" iconClass="delete"></Icon-svg></span>
               </div>
             </div>
@@ -128,7 +128,8 @@
       },
       handleSelectHotKey(items) {
         this.saveSearcHistory(items)
-        this.hotKeyQuery = items
+        this.hotKeyQuery = items.k
+        this.$router.push('/music/search')
       },
       handleDeleteAll() {
         this.clearSearchHistory()
@@ -144,7 +145,10 @@
         })
       },
       _normal(item) {
-        return item.slice(0, 5)
+        return item.slice(0, 8)
+      },
+      handleSearchPage(){
+        this.$router.push({ path: '/music/search', query: { key: this.hotKeyQuery }})
       }
     }
   }
@@ -216,13 +220,16 @@
           font-size 14px
           box-sizing border-box
         }
-        .svgIcon {
+        span{
+          display inline-block
           position absolute
           top 0px
           right 0px
           color #9a9a9a
           padding 9px 10px
           cursor pointer
+        }
+        .svgIcon {
           &:hover {
             color: #31c27c
           }

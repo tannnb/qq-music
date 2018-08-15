@@ -1,80 +1,82 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Music from '../views/Music/Music'
-import Singer from '../views/singer/singer'
-import Album from '../views/album/album'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path:'/',
-      redirect:'/music'
+      path: '/',
+      redirect: '/music'
     },
     {
       path: '/music',
       name: 'music',
-      component: Music,
-      redirect:'/music/index',
-      children:[
+      component: () => import('@/views/Music/Music'),
+      redirect: '/music/index',
+      children: [
         {
-          path:'index',
-          component:() => import('@/views/index/index'),
+          path: 'index',
+          component: () => import('@/views/index/index')
         },
         {
-          path:'index/:id',
-          component:() => import('@/views/disc/recomPlayDisc')
+          path: 'index/:id',
+          component: () => import('@/views/disc/recomPlayDisc')
         },
         {
-          path:'singer',
-          name:'singer',
-          component:Singer
+          path: 'singer',
+          name: 'singer',
+          component: () => import('@/views/singer/singer')
         },
         {
-          path:'singer/:mid',
-          name:'singer_desc',
+          path: 'singer/:mid',
+          name: 'singer_desc',
           component: () => import('@/views/singer_desc/singer_desc')
         },
         {
-          path:'album',
-          name:'album',
-          component:Album
+          path: 'album',
+          name: 'album',
+          component: () => import('@/views/album/album'),
         },
         {
-          path:'album/:mid',
-          name:'album_desc',
+          path: 'album/:mid',
+          name: 'album_desc',
           component: () => import('@/views/album_desc/album_desc')
         },
         {
-          path:'rank',
-          name:'rank',
-          component:() => import('@/views/rank/rank')
+          path: 'rank',
+          name: 'rank',
+          component: () => import('@/views/rank/rank')
         },
         {
-          path:'sort',
-          name:'sort',
-          component:() => import('@/views/sort/sort')
+          path: 'sort',
+          name: 'sort',
+          component: () => import('@/views/sort/sort')
         },
         {
-          path:'sort/:mid',
-          name:'sort_desc',
-          component:() => import('@/views/sort_desc/sort_desc')
+          path: 'sort/:mid',
+          name: 'sort_desc',
+          component: () => import('@/views/sort_desc/sort_desc')
         },
         {
-          path:'digitalalbum',
-          name:'digitalalbum',
-          component:() => import('@/views/digitalalbum/digitalalbum')
+          path: 'digitalalbum',
+          name: 'digitalalbum',
+          component: () => import('@/views/digitalalbum/digitalalbum')
         },
         {
-          path:'station',
-          name:'station',
-          component:() => import('@/views/station/station')
+          path: 'station',
+          name: 'station',
+          component: () => import('@/views/station/station')
         },
         {
-          path:'mv',
-          name:'mv',
-          component:() => import('@/views/mv/mv')
+          path: 'mv',
+          name: 'mv',
+          component: () => import('@/views/mv/mv')
+        },
+        {
+          path: 'search',
+          name: 'search',
+          component: () => import('@/views/search/search')
         },
       ]
     }

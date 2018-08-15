@@ -5,18 +5,18 @@
                      @handleSelectRecomPlay="handleSelectRecomPlay"/>
 
     <!-- 新歌首发 -->
-    <New-song v-if="newSongData" :newSongData="newSongData" @handleNewSong="handleNewSong"/>
+  <!--  <New-song v-if="newSongData" :newSongData="newSongData" @handleNewSong="handleNewSong"/>-->
 
 
     <!-- 轮播图 -->
-    <Slider v-if="focus" :focus="focus"></Slider>
+   <!-- <Slider v-if="focus" :focus="focus"></Slider>-->
 
 
     <!-- 新碟首发 -->
-    <new-album v-if="newAlbum" :newAlbum="newAlbum" @handleNewAblum="handleNewAblum"></new-album>
+   <!-- <new-album v-if="newAlbum" :newAlbum="newAlbum" @handleNewAblum="handleNewAblum"></new-album>-->
 
     <!-- 排行榜 -->
-    <top-list v-if="toplist" :toplist="toplist"></top-list>
+  <!--  <top-list v-if="toplist" :toplist="toplist"></top-list>-->
 
 
     <Loading v-if="!recomPlaylistData"></Loading>

@@ -12,7 +12,10 @@
           :class="currentSong.id == items.id? 'active':'' ">
         <div class="song">
            <div><img v-if="currentSong.id == items.id" src="./wave.gif" alt="">{{items.name}}</div>
-          <i class="icon-play"  @click="handleSelectSong(index)"></i>
+            <div class="user-fun-btn">
+              <i class="icon-play"  @click="handleSelectSong(index)" alt="播放当前歌曲"></i>
+              <a class="downIcon icon-down" :href="items.url" download="items.name" target="_blank" :alt="items.name"></a>
+            </div>
         </div>
         <div class="singer">{{items.singer}}</div>
         <div class="duration">{{items.duration | formats}}</div>
@@ -82,16 +85,20 @@
         justify-content space-between
         align-items center
         padding-right 20px
-        i{
+        .user-fun-btn{
+          display flex
+        }
+        i,.downIcon{
           display none
           font-size:38px
+          margin-right 20px
           cursor pointer
           &:hover{
             color: #fff
           }
         }
         &:hover{
-          i {
+          i,.downIcon {
             display block
           }
         }

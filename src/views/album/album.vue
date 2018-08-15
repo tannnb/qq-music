@@ -203,8 +203,10 @@
       pagetions(index) {
         let currentSin = index - 1
         this.sin = (currentSin * 10) + (currentSin * 10)
-        console.log(this.sin)
         this._getAlbum()
+        setTimeout(() => {
+          document.documentElement.scrollTop = document.body.scrollTop = 0;
+        },200)
       }
     }
   }

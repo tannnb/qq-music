@@ -69,7 +69,6 @@
                 <i :class="iconMode"></i>
               </div>
               <i class="icon-collect"></i>
-              <i class="icon-down"></i>
               <div style="display: flex">
                 <i :class="iconMute" @click="toggleMute"></i>
                 <Progress-bar style="width: 120px"  :percent="volume" @percentChange="onPercentvolumeChange"></Progress-bar>
@@ -320,6 +319,7 @@
         }
       },
 
+      // 播放歌曲
       handleSelectSong(index) {
         this.setCurrentIndex(index)
       },

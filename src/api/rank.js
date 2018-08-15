@@ -20,7 +20,7 @@ export function toplistOpt(options) {
   })
 }
 
-export function toplistCp(date,topid,type) {
+export function toplistCp(date,topid,type,song_begin=0) {
   const url = 'http://localhost:3000/toplistCp'
 
   const data = Object.assign({}, {
@@ -29,7 +29,7 @@ export function toplistCp(date,topid,type) {
     date,
     topid,
     type:type == 1? 'top':'global',
-    song_begin: 0,
+    song_begin,
     song_num: 30,
     loginUin: 0,
     hostUin: 0,
