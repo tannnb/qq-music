@@ -11,7 +11,9 @@
           :key="items.id"
           :class="currentSong.id == items.id? 'active':'' ">
         <div class="song">
-           <div><img v-if="currentSong.id == items.id" src="./wave.gif" alt="">{{items.name}}</div>
+           <div>
+             <img v-if="currentSong.id == items.id && playing === true" src="./wave.gif" alt="">
+             {{items.name}}</div>
             <div class="user-fun-btn">
               <i class="icon-play"  @click="handleSelectSong(index)" alt="播放当前歌曲"></i>
               <a class="downIcon icon-down" :href="items.url" download="items.name" target="_blank" :alt="items.name"></a>
@@ -31,7 +33,7 @@
   export default {
     name: "player-list",
     computed: {
-      ...mapGetters(['playlist','currentSong'])
+      ...mapGetters(['playlist','currentSong','playing'])
     },
     filters:{
       formats(times){

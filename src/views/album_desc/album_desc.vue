@@ -40,6 +40,7 @@
     </div>
 
     <Loading v-if="!notSongUrl && albumInfo.length === 0"></Loading>
+    <vue-progress-bar></vue-progress-bar>
     <confirm ref="confirm"
              @confirm="confirmClear"
              text="暂时没有找到歌曲呢o(╥﹏╥)o"
@@ -74,6 +75,7 @@
       Confirm
     },
     created() {
+      this.$Progress.start()
       this._getAlbumDesc()
     },
     computed: {
@@ -97,6 +99,7 @@
           if(res.data.code === 400){
             this.notSongUrl = true
             this.albumInfo = [1]
+            this.$Progress.finish()
             return
           }
           if (res.data.code === ERR_OK) {
@@ -106,8 +109,10 @@
               this.songs = songs.filter((currentSong) => {
                 return currentSong.url.length !== 0
               })
+              this.$Progress.finish()
             }).catch(err => {
               this.notSongUrl = true
+              this.$Progress.finish()
             })
             /*review(this.mid).then(res => {
               console.log(res)

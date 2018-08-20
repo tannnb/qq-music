@@ -36,6 +36,7 @@
     <div class="reviewWrapper">
       <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>
     </div>
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 
@@ -58,6 +59,7 @@
       }
     },
     created() {
+      this.$Progress.start()
       this._getDiscList()
     },
     components: {
@@ -116,6 +118,7 @@
                 return currentSong.url.length !== 0
               })
             })
+            this.$Progress.finish()
           }
         })
         review(this.mid).then(res => {

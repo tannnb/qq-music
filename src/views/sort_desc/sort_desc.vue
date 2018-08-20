@@ -35,6 +35,7 @@
     </div>
 
     <Loading v-if="!notSongUrl && songs.length === 0"></Loading>
+    <vue-progress-bar></vue-progress-bar>
     <confirm ref="confirm"
              @confirm="confirmClear"
              text="暂时没有找个歌曲呢o(╥﹏╥)o"
@@ -75,6 +76,7 @@
       }
     },
     created() {
+      this.$Progress.start()
       this._getSortDesc()
     },
     methods: {
@@ -94,8 +96,10 @@
               this.songs = songs.filter((currentSong) => {
                 return currentSong.url.length !== 0
               })
+              this.$Progress.finish()
             }).catch(err => {
               this.notSongUrl = true
+              this.$Progress.finish()
             })
           }
         })

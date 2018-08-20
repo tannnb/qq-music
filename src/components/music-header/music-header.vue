@@ -129,7 +129,7 @@
       handleSelectHotKey(items) {
         this.saveSearcHistory(items)
         this.hotKeyQuery = items.k
-        this.$router.push('/music/search')
+        this.$router.push({ path: '/music/search', query: { key: items }})
       },
       handleDeleteAll() {
         this.clearSearchHistory()
@@ -144,12 +144,15 @@
           }
         })
       },
+
       _normal(item) {
         return item.slice(0, 8)
       },
+
       handleSearchPage(){
-        this.$router.push({ path: '/music/search', query: { key: this.hotKeyQuery }})
+       this.$router.push({ path: '/music/search', query: { key: this.hotKeyQuery }})
       }
+
     }
   }
 </script>

@@ -39,6 +39,8 @@
           <Pagination ref='pagination' v-if="allpage>0" @pagetions="pagetions"  :allpage="allpage"></Pagination>
         </div>
     </div>
+    <Loading v-if="SortList.length === 0"></Loading>
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 
@@ -48,6 +50,7 @@
   import {paddListenCount} from "../../utils/tool";
   import {ERR_OK} from "../../api/config";
   import Pagination from '../singer/pagination'
+  import Loading from '../../components/loading/loading'
 
   export default {
     name: "sort",
@@ -57,7 +60,7 @@
         currentIndex:null,
         currentSelect:'',
         currentTagIndex:1,
-        SortList:null,
+        SortList:[],
         allpage:'',
         categoryId:10000000,
         sortId:5,
@@ -70,9 +73,11 @@
       }
     },
     components:{
-      Pagination
+      Pagination,
+      Loading
     },
     created() {
+      this.$Progress.start()
       this._getSortTags()
       this._getSortList()
     },
@@ -103,7 +108,7 @@
             this.SortList = objArr.data.list
             this.allpage = objArr.data.sum
           }
-
+          this.$Progress.finish()
         })
       },
       handleSelectTags(items,index){

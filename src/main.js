@@ -11,16 +11,23 @@ import 'swiper/dist/css/swiper.css'
 import  './styles/index.styl'
 import './fonts/iconfont'
 
-import VueInsProgressBar from 'vue-ins-progress-bar'
+import VueProgressBar from 'vue-progressbar'
 
 const options = {
-  position: 'fixed',
-  show: true,
-  height: '3px'
+  color: '#31c27c',
+  failedColor: '#874b4b',
+  thickness: '4px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
 }
 
-
-Vue.use(VueInsProgressBar, options)
+Vue.use(VueProgressBar, options)
 
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueLazyload)

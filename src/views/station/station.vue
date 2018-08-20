@@ -26,7 +26,7 @@
     </div>
 
     <Loading v-if="stationList.length === 0"></Loading>
-
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 
@@ -55,6 +55,7 @@
       }
     },
     created() {
+      this.$Progress.start()
       this._station()
     },
     mounted() {
@@ -95,6 +96,7 @@
               return currentVal.name
             })
           }
+          this.$Progress.finish()
         })
       },
       radioScroll() {

@@ -57,6 +57,7 @@
     </div>
 
     <Loading v-if="albumList.length === 0"></Loading>
+    <vue-progress-bar></vue-progress-bar>
 
   </div>
 </template>
@@ -101,6 +102,7 @@
     },
     created() {
       this._getAlbum()
+      this.$Progress.start()
     },
     filters:{
       filterSingers(singer){
@@ -108,6 +110,7 @@
       }
     },
     mounted() {
+
       document.addEventListener('click', () => {
         this.selectItemIndex = 0
       }, false)
@@ -135,6 +138,7 @@
             // initAreaTag
             this.albumTagsArea = this._initnormalize(res.data.albumlib.data.tags)
             this.allpage = this.albumList.length
+            this.$Progress.finish()
           }
         })
       },

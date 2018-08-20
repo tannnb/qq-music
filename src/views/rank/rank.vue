@@ -59,6 +59,7 @@
       </div>
     </div>
     <Loading ref="loadcomponent" v-if="songs.length === 0"></Loading>
+    <vue-progress-bar></vue-progress-bar>
     <confirm ref="confirm" text="暂时没有找到歌曲呢o(╥﹏╥)o" confirmBtnText="确定"></confirm>
   </div>
 </template>
@@ -104,6 +105,7 @@
       Pagination
     },
     created() {
+      this.$Progress.start()
       this._toplistOpt().then(res => {
         this.listOpt = res
         const child = res[0].List[0]
@@ -120,6 +122,7 @@
             this.song_begin = this.songTable.song_begin
             this.getSong(this.songlist)
             this.allpage = res.data.total_song_num
+            this.$Progress.finish()
           }
         })
 

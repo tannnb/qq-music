@@ -74,8 +74,8 @@ app.get('/station',radioController.station)
 
 
 // 搜索
-app.get('./gethotkey',searchContenter.gethotkey)
-app.get('./clientSearch',searchContenter.clientSearch)
+app.get('/gethotkey',searchContenter.gethotkey)
+app.get('/clientSearch',searchContenter.clientSearch)
 
 
 

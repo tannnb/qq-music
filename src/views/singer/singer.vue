@@ -48,7 +48,7 @@
     </div>
 
     <Loading v-if="singerList.length === 0"></Loading>
-
+    <vue-progress-bar></vue-progress-bar>
 
   </div>
 </template>
@@ -90,6 +90,7 @@
     },
     created() {
       this._getSingerList()
+      this.$Progress.start()
     },
     methods: {
       ...mapActions([
@@ -111,6 +112,7 @@
             this.singerList = ret.singerlist
             this.tags = ret.tags
             this.allpage = this.singerList.length
+            this.$Progress.finish()
           }
         })
       },

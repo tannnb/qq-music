@@ -6,7 +6,7 @@
 
     <Player></Player>
 
-    <vue-ins-progress-bar></vue-ins-progress-bar>
+
 
     <a href="javascript:void(0)" ref="btn" @click="backTop" class="btn" title="回到顶部"></a>
   </div>
@@ -45,21 +45,10 @@
       }
     },
     created() {
-      this.$insProgress.start()
 
-      this.$router.beforeEach((to, from, next) => {
-        this.$insProgress.start()
-        next()
-      })
-
-      this.$router.afterEach((to, from) => {
-        this.$insProgress.finish()
-      })
     },
     mounted() {
-      this.$insProgress.finish()
       window.addEventListener('scroll', this.userScroll);
-
       let OriginTitile = document.title, titleTime;
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) {

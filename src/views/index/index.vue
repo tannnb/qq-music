@@ -20,6 +20,7 @@
 
 
     <Loading v-if="!recomPlaylistData"></Loading>
+    <vue-progress-bar></vue-progress-bar>
 
   </div>
 
@@ -58,6 +59,7 @@
       Loading
     },
     created() {
+      this.$Progress.start()
       this._musicu()
     },
     computed: {
@@ -77,6 +79,7 @@
             this.focus = res.focus.data.content;
             this.newAlbum = res.new_album.data
             this.toplist = res.toplist.data
+            this.$Progress.finish()
           }
         })
       },

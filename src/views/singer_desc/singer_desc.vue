@@ -54,6 +54,7 @@
     </div>
 
     <Loading v-if="songs.length === 0"></Loading>
+    <vue-progress-bar></vue-progress-bar>
 
   </div>
 </template>
@@ -87,6 +88,7 @@
       Loading
     },
     created() {
+      this.$Progress.start()
       this._getSingerDesc()
       this._getSingerAlbum()
       this._getSingerMv()
@@ -143,6 +145,7 @@
                 return currentSong.url.length !== 0
               })
             })
+            this.$Progress.finish()
           }
         })
         gerSingerFan(this.mid).then(res => {
