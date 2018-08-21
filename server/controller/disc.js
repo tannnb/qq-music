@@ -1,5 +1,6 @@
 const axios = require('axios')
 
+
 module.exports = {
 
   getDiscList: (req, res) => {
@@ -18,7 +19,7 @@ module.exports = {
     }).then((response) => {
       res.json(response.data)
     }).catch((e) => {
-      console.log('请求失败')
+      res.json({code:404,msg:'请求失败'})
     })
   },
 
@@ -41,7 +42,7 @@ module.exports = {
       }
       res.json(ret)
     }).catch((e) => {
-      console.log('请求失败')
+      res.json({code:404,msg:'请求失败'})
     })
   },
 
@@ -70,7 +71,7 @@ module.exports = {
         res.json(ret)
       })
       .catch((e) => {
-        console.log('请求失败')
+        res.json({code:404,msg:'请求失败'})
       })
   }
 
@@ -88,6 +89,6 @@ function response(url,req,res){
       res.json(response.data)
     })
     .catch((e) => {
-      console.log('请求失败')
+      res.json({code:404,msg:'请求失败'})
     })
 }

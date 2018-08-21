@@ -1,5 +1,4 @@
-import jsonp from '../utils/jsonp'
-import {commonParams, options} from './config'
+import {commonParams} from './config'
 import axios from 'axios'
 
 

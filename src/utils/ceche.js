@@ -35,7 +35,7 @@ export function saveSearch(query) {
   let searches = storage.get(SEARCH_KEY, [])
 
   insertArray(searches, query, (item) => {
-    return item.n === query.n
+    return item === query
   }, SEARCH_MAX_LENGTH)
 
   storage.set(SEARCH_KEY, searches)
@@ -49,7 +49,7 @@ export function loadSearch() {
 export function deleteSearch(song) {
   let searches = storage.get(SEARCH_KEY, [])
   deleteFromArray(searches, (item) => {
-    return item.n === song.n
+    return item === song
   })
   storage.set(SEARCH_KEY, searches)
   return searches

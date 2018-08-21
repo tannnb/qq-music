@@ -22,6 +22,6 @@ function response(url, req, res) {
       res.json(response.data)
     })
     .catch((e) => {
-      console.log('请求失败')
+      res.json({code:404,msg:'请求失败'})
     })
 }

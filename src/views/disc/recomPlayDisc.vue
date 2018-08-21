@@ -1,13 +1,12 @@
 <template>
   <div class="disc-wrapper">
-    <div class="singerWrapper">
+    <div class="singerWrapper" v-if="playList">
       <div class="logo"><img :src="playList.logo" alt=""></div>
       <div class="singerItem">
         <div class="dissname">{{playList.dissname}}</div>
         <div class="tags"><i class="icon-user"></i> {{playList.nickname}}</div>
         <div class="tags" v-if="playList.tags">标签：{{filterSinger(playList.tags)}}</div>
-        <div class="tags">播放量：{{playList.visitnum | listen}}</div>
-        <div class="tags">收藏量：</div>
+        <div class="tags" v-if="playList.visitnum">播放量：{{playList.visitnum | listen}}</div>
         <div class="funBtn">
           <span class="active"
                 :class=" songs.length === 0? 'notSong':'' "
@@ -27,6 +26,7 @@
           @handlePlayer="handlePlayer"
           @appendPlayer="appendPlayer"
         ></List-view>
+        <p class="noSong" v-if="songs.length === 0">暂时没有找到歌曲，抱歉！</p>
       </div>
       <div class="introduction">
         <div class="name">简介</div>
@@ -37,6 +37,9 @@
       <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>
     </div>
     <vue-progress-bar></vue-progress-bar>
+    <confirm ref="confirm"
+             text="暂时没有找到歌曲，抱歉！"
+             confirmBtnText="确定"></confirm>
   </div>
 </template>
 
@@ -44,6 +47,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
+  import Confirm from '../../components/confirm/confirm'
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import {getDiscList, review} from '../../api/disc'
@@ -64,7 +68,8 @@
     },
     components: {
       ListView,
-      reviewList
+      reviewList,
+      Confirm
     },
     computed: {
       ...mapGetters([
@@ -86,6 +91,9 @@
       ]),
 
       handlePlayer(items, index) {
+        if(this.songs.length === 0){
+          return
+        }
         this.selectPlay({
           list: this.songs,
           index: index
@@ -218,6 +226,9 @@
       display flex
       .listContent {
         width 860px
+        .noSong{
+          margin 100px auto
+        }
       }
       .introduction
         flex 0 0 300

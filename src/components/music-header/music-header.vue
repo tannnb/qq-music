@@ -10,13 +10,13 @@
         <a :class='[currentIndex===index? "active":""]'
            @click="handleSelect(items)"
            :href="items.url"
-           target= "_blank"> {{items.label}} </a></li>
+           target="_blank"> {{items.label}} </a></li>
     </ul>
 
     <div class="music-search">
       <div class="search-container">
-        <input type="text" @focus="handleFocus" @blur="handleBlur" v-model="hotKeyQuery">
-        <span @click.stop="handleSearchPage"><Icon-svg class="svgIcon" iconClass="search" ></Icon-svg></span>
+        <input type="text" @focus="handleFocus" @blur="handleBlur"  v-model="hotKeyQuery">
+        <span @click.stop="handleSearchPage"><Icon-svg class="svgIcon" iconClass="search"></Icon-svg></span>
       </div>
       <transition name="down">
         <div class="search-history" v-show="search_Area">
@@ -37,8 +37,8 @@
             </div>
             <div v-if="searchHistory.length" @click.stop>
               <div class="searchItem" v-for="(items,index) in searchHistory" :key="index"
-                   @click="handleSelectHotKey(items)">
-                <span>{{items.k}}</span>
+                   @click="handleSelectHotKey(items,true)">
+                <span>{{items}}</span>
                 <span @click.stop="handleDetele(items)"><Icon-svg class="svgIcon" iconClass="delete"></Icon-svg></span>
               </div>
             </div>
@@ -77,22 +77,22 @@
           {
             label: '我的音乐',
             id: '1',
-            url:'https://y.qq.com/portal/profile.html'
+            url: 'https://y.qq.com/portal/profile.html'
           },
           {
             label: '客户端',
             id: '2',
-            url:'https://y.qq.com/download/index.html'
+            url: 'https://y.qq.com/download/index.html'
           },
           {
             label: '音乐号',
             id: '3',
-            url:'https://y.qq.com/vip/daren_recruit/apply.html'
+            url: 'https://y.qq.com/vip/daren_recruit/apply.html'
           },
           {
             label: 'VIP',
             id: '4',
-            url:'https://y.qq.com/portal/vipportal/index.html'
+            url: 'https://y.qq.com/portal/vipportal/index.html'
           }
         ],
         search_Area: false,
@@ -103,8 +103,8 @@
     created() {
       this._gethotkey()
     },
-    filters:{
-      paddListenCounts(count){
+    filters: {
+      paddListenCounts(count) {
         return paddListenCount(count)
       }
     },
@@ -126,10 +126,14 @@
       handleBlur() {
         this.search_Area = false
       },
-      handleSelectHotKey(items) {
-        this.saveSearcHistory(items)
-        this.hotKeyQuery = items.k
-        this.$router.push({ path: '/music/search', query: { key: items }})
+      handleSelectHotKey(items, flag) {
+        if (flag) {
+          this.hotKeyQuery = items
+        } else {
+          this.hotKeyQuery = items.k
+        }
+        this.saveSearcHistory(this.hotKeyQuery)
+        this.$router.push({path: '/music/search', query: {key: this.hotKeyQuery}})
       },
       handleDeleteAll() {
         this.clearSearchHistory()
@@ -149,8 +153,8 @@
         return item.slice(0, 8)
       },
 
-      handleSearchPage(){
-       this.$router.push({ path: '/music/search', query: { key: this.hotKeyQuery }})
+      handleSearchPage() {
+        this.$router.push({path: '/music/search', query: {key: this.hotKeyQuery}})
       }
 
     }
@@ -223,7 +227,7 @@
           font-size 14px
           box-sizing border-box
         }
-        span{
+        span {
           display inline-block
           position absolute
           top 0px

@@ -6,7 +6,7 @@ module.exports = {
     response(url, req, res)
   },
   clientSearch: (req, res) => {
-    const url = 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp'
+    const url = ' https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp'
     response(url, req, res)
   }
 }
@@ -14,7 +14,8 @@ module.exports = {
 function response(url, req, res) {
   axios.get(url, {
     headers: {
-      referer: 'https://c.y.qq.com/'
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
     },
     params: req.query
   })
@@ -22,7 +23,7 @@ function response(url, req, res) {
       res.json(response.data)
     })
     .catch((e) => {
-      console.log('请求失败')
+      res.json({code:404,msg:'请求失败'})
     })
 }
 

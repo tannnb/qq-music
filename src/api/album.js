@@ -1,4 +1,4 @@
-import {commonParams, options} from './config'
+import {commonParams} from './config'
 import axios from 'axios'
 
 export function getAlbum(options) {

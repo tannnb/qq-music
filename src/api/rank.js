@@ -1,8 +1,8 @@
-import {commonParams, options} from './config'
+import {commonParams} from './config'
 import axios from "axios/index";
 
 
-export function toplistOpt(options) {
+export function toplistOpt() {
   const url = 'http://localhost:3000/toplistOpt'
 
   const data = Object.assign({},commonParams, {

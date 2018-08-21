@@ -42,12 +42,8 @@
             url:'/music/station'
           },
           {
-            label:'数字专辑',
-            url:'/music/digitalalbum'
-          },
-          {
-            label:'MV',
-            url:'/music/mv'
+            label:'搜索',
+            url:'/music/search'
           }
         ]
       }

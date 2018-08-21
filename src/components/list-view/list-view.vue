@@ -141,14 +141,8 @@
         }
         &:hover {
           color: #31c27c
-          .funBtn:nth-child(even) {
+          .funBtn{
             display block
-          }
-        }
-        &:hover {
-          .funBtn:nth-child(odd) {
-            display block
-            background #FBFBFD
           }
         }
       }

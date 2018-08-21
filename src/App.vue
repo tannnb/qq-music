@@ -3,11 +3,7 @@
     <keep-alive>
       <router-view/>
     </keep-alive>
-
     <Player></Player>
-
-
-
     <a href="javascript:void(0)" ref="btn" @click="backTop" class="btn" title="回到顶部"></a>
   </div>
 </template>
@@ -119,6 +115,7 @@
   .btn:hover {
     background: url("./images/top_bg.png") no-repeat 0 -39px;
   }
+
 
 
 </style>
