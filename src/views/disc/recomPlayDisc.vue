@@ -13,7 +13,7 @@
                 @click="handlePlayAll"
           > <i class="icon-play"></i> 播放全部</span>
           <span><i class="icon-collect"></i>收藏</span>
-          <span><i class="icon-pinglun"></i>评论</span>
+          <span  @click="handleClickComment"><i class="icon-pinglun"></i>评论({{commenttotal}})</span>
           <span><i class="icon-more"></i>更多</span>
         </div>
       </div>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="reviewWrapper">
-      <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>
+      <review-list ref="reviewList" v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>
     </div>
     <vue-progress-bar></vue-progress-bar>
     <confirm ref="confirm"
@@ -155,7 +155,13 @@
           ret.push(s.name)
         })
         return ret.join('/')
+      },
+
+      handleClickComment(){
+       const Top = this.$refs.reviewList.$el.offsetTop
+        document.documentElement.scrollTop = document.body.scroll = Top
       }
+
     }
 
   }

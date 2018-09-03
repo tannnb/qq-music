@@ -47,18 +47,17 @@
             <div class="duration">{{items.duration | formatTimes}}</div>
           </li>
         </ul>
+        <div class="no-songlist" v-if="songs.length === 0">暂无该排行信息 o(╥﹏╥)o</div>
        <div class="page-wrapper">
           <Pagination v-if="allpage" @pagetions="pagetions" :allpage="allpage"></Pagination>
         </div>
 
-
         <div class="miniloading-wrapper" v-if="miniLoadingFlag">
           <Mini-loading></Mini-loading>
         </div>
-        <div class="no-songlist" v-if="songs.length === 0">暂无该排行信息 o(╥﹏╥)o</div>
       </div>
     </div>
-    <Loading ref="loadcomponent" v-if="songs.length === 0"></Loading>
+    <Loading ref="loadcomponent" v-if="songs.length === 0 && notSongUrl"></Loading>
     <vue-progress-bar></vue-progress-bar>
     <confirm ref="confirm" text="暂时没有找到歌曲呢o(╥﹏╥)o" confirmBtnText="确定"></confirm>
   </div>
@@ -90,7 +89,8 @@
         songType: '',
         songTable:null,
         songs:[],
-        miniLoadingFlag:false
+        miniLoadingFlag:false,
+        notSongUrl:true
       }
     },
     filters:{
@@ -156,12 +156,17 @@
       },
 
       getSong(song){
+
         processSongsUrl(this._normalizeSongs(song)).then((songs) => {
+          this.notSongUrl = false
           this.songs = songs.filter((currentSong) => {
             return currentSong.url.length !== 0
           })
         }).catch(err => {
-          this.notSongUrl = true
+          if (this.songs.length === 0) {
+            this.$refs.confirm.show()
+          }
+          this.notSongUrl = false
         })
       },
 

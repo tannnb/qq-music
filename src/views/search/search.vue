@@ -71,6 +71,7 @@
         hotKey: '',
         searchInputText: '',
         searchObjArr: [],
+        defaultFirstSong:[],
         zhida: {},
         songs: [],
         page: 1,
@@ -80,15 +81,34 @@
     },
     created() {
       this.$Progress.start()
+
       if (this.$route.query.key) {
         this.searchInputText = this.$route.query.key
-      } else {
-        this.searchInputText = this.searchHistory[0]
+        this._clientSearch()
+        this._gethotkey()
+        this.$Progress.finish()
+        return
       }
-      this._gethotkey()
+
+      // 本地存在搜索历史
+      if (this.searchHistory.length !== 0) {
+        this.searchInputText = this.searchHistory[0]
+        this._gethotkey()
+        this._clientSearch()
+        this.$Progress.finish()
+        return
+      }
+
       // 若是本地缓存也没有歌曲
       if (this.searchHistory.length === 0) {
-        this.searchInputText = this.defaultFirstSong[0]
+        // 先请求热搜
+        this._gethotkey().then(res => {
+          this.$Progress.finish()
+          this.searchInputText = res[0].k
+          this._clientSearch()
+        }).catch(e => {
+          this.$Progress.finish()
+        })
       }
     },
     components: {
@@ -117,13 +137,17 @@
       ]),
 
       _gethotkey() {
-        gethotkey().then(res => {
-          if (res.code === ERR_OK) {
-            this.defaultFirstSong = res.data.hotkey
-            this.hotKey = shuffle(res.data.hotkey).slice(0, 5)
-          }
-          this.$Progress.finish()
-          this._clientSearch()
+        return new Promise((resolve, reject) => {
+          gethotkey().then(res => {
+            if (res.code === ERR_OK) {
+              this.defaultFirstSong = res.data.hotkey
+              this.hotKey = (res.data.hotkey).slice(0, 5)
+              resolve(res.data.hotkey)
+            }
+          })
+          .catch(e => {
+            reject(e)
+          })
         })
       },
 

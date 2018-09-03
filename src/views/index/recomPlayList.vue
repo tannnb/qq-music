@@ -5,7 +5,7 @@
                     @handleSelectItem="handleSelectNavItem"/>
     <div class="swiperWrapper">
       <div class="swiperWrapper-outer">
-        <swiper :options="swiperOption">
+        <swiper  :options="swiperOption">
           <swiper-slide v-for="(items,index) in recomPlaylist" :key="index">
             <div class="playlist_item_box" @click="handleSelectItem(items)">
               <div class="coverImg"><img :src="items.image" alt=""></div>
@@ -103,10 +103,10 @@
         recommend(isFirstIndex).then(res => {
           if (res.code === ERR_OK) {
             if (!isFirstIndex) {
-              this.recomPlaylist = this._normalizeSongs(res.recomPlaylist.data.v_hot).slice(0,12)
+              this.recomPlaylist = this._normalizeSongs(res.recomPlaylist.data.v_hot).slice(0,15)
               return
             }
-            this.recomPlaylist = this._normalizeSongs(res.playlist.data.v_playlist, true).slice(0,12)
+            this.recomPlaylist = this._normalizeSongs(res.playlist.data.v_playlist, true).slice(0,15)
           }
         })
       },

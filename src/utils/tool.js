@@ -1,4 +1,3 @@
-
 // 时间转换
 export function format(interval) {
   interval = interval | 0
@@ -19,6 +18,9 @@ function _pad(num, n = 2) {
 
 // 播放数
 export function paddListenCount(number) {
+  if (Number(number) < 10000) {
+    return number
+  }
   return (number / 10000).toFixed(1) + '万'
 }
 

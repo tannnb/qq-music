@@ -5,15 +5,13 @@
       <img src="./bg_singer.jpg" alt="">
     </div>
     <div class="mod_singer_tag">
-      <Singer-tag v-if="tags" :tag="tags.index" :currentIndex="currentIndex"
-                  @selectItemTag="selectItemIndex"></Singer-tag>
-      <Singer-tag v-if="tags" :tag="tags.area" :currentIndex="currentArea" @selectItemTag="selectItemArea"></Singer-tag>
-      <Singer-tag v-if="tags" :tag="tags.sex" :currentIndex="currentSex" @selectItemTag="selectItemSex"></Singer-tag>
-      <Singer-tag v-if="tags" :tag="tags.genre" :currentIndex="currentGenre"
-                  @selectItemTag="selectItemGenre"></Singer-tag>
+      <Singer-tag v-if="tags" :tag="tags.index" :currentIndex="currentIndex" @selectItemTag="selectItemIndex" />
+      <Singer-tag v-if="tags" :tag="tags.area" :currentIndex="currentArea" @selectItemTag="selectItemArea" />
+      <Singer-tag v-if="tags" :tag="tags.sex" :currentIndex="currentSex" @selectItemTag="selectItemSex" />
+      <Singer-tag v-if="tags" :tag="tags.genre" :currentIndex="currentGenre" @selectItemTag="selectItemGenre" />
     </div>
 
-    <div class="singerContent">
+    <div ref="singerContent" class="singerContent">
       <div v-if="currentIndex === 0" class="hotWrapper">
         <ul class="HotAvatar">
           <li class="items" v-for="(items,index) in singerList.slice(0,10)"
@@ -147,6 +145,10 @@
         this.cur_page = index
         this.sin = this.sin + COUNT
         this.asyncData()
+        const scrollTop = this.$refs.singerContent.offsetTop
+        setTimeout(() => {
+          window.scrollTo(0, scrollTop)
+        },300)
       },
       handleSelectItem(items) {
         this.$router.push({

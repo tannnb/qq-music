@@ -103,17 +103,18 @@
   }
 
   .btn {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     position: fixed;
     right: 65px;
     bottom: 60px;
     display: none;
+    transition all .3s;
     background: url("./images/top_bg.png") no-repeat left top;
   }
 
   .btn:hover {
-    background: url("./images/top_bg.png") no-repeat 0 -39px;
+    background: url("./images/top_bg.png") no-repeat 0 -60px;
   }
 
 
