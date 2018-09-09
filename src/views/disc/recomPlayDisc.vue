@@ -24,7 +24,7 @@
           v-if="songs.length !== '' "
           :song="songs"
           @handlePlayer="handlePlayer"
-          @appendPlayer="appendPlayer"
+          @appendPlayer="handleAppendPlayer"
         ></List-view>
         <p class="noSong" v-if="songs.length === 0">暂时没有找到歌曲，抱歉！</p>
       </div>
@@ -87,7 +87,8 @@
     },
     methods: {
       ...mapActions([
-        'selectPlay'
+        'selectPlay',
+        'insertSong'
       ]),
 
       handlePlayer(items, index) {
@@ -109,7 +110,8 @@
         })
       },
 
-      appendPlayer(items) {
+      handleAppendPlayer(items) {
+       this.insertSong(items)
       },
 
       _getDiscList() {

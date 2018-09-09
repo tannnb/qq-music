@@ -133,6 +133,7 @@
 
       ...mapActions([
         'selectPlay',
+        'insertSong',
         'saveSearcHistory'
       ]),
 
@@ -221,8 +222,8 @@
         })
       },
 
-      appendPlayer(items, index) {
-
+      appendPlayer(items) {
+        this.insertSong(items)
       },
 
       avatar(mid) {

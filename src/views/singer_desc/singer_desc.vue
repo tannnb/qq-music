@@ -103,15 +103,16 @@
     },
     methods: {
       ...mapActions([
-        'selectPlay'
+        'selectPlay',
+        'insertSong'
       ]),
       uri(uri,flag) {
         let count = flag? '1':'2'
         return `https://y.gtimg.cn/music/photo_new/T00${count}R300x300M000${uri}.jpg?max_age=2592000`
       },
       // 追加歌曲
-      appendPlayer() {
-
+      appendPlayer(items) {
+        this.insertSong(items)
       },
       handlePlayer(items, index) {
         this.selectPlay({

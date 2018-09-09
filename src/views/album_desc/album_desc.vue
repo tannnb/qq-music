@@ -83,7 +83,8 @@
     },
     methods: {
       ...mapActions([
-        'selectPlay'
+        'selectPlay',
+        'insertSong'
       ]),
       _addUri(mid) {
         return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
@@ -150,8 +151,8 @@
           index: index
         })
       },
-      appendPlayer() {
-
+      appendPlayer(items) {
+        this.insertSong(items)
       },
       confirmClear(){}
 

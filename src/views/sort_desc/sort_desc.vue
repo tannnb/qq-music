@@ -81,7 +81,8 @@
     },
     methods: {
       ...mapActions([
-        'selectPlay'
+        'selectPlay',
+        'insertSong'
       ]),
       _getSortDesc() {
         if (!this.mid) {
@@ -139,8 +140,8 @@
           index: index
         })
       },
-      appendPlayer() {
-
+      appendPlayer(items) {
+        this.insertSong(items)
       },
       confirmClear(){
 
