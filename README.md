@@ -18,7 +18,7 @@ npm run app 或者yarn run app
 
 # 项目打包
 npm run build
-
+```
 
 ## 技术栈
 
