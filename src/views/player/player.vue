@@ -405,11 +405,7 @@
         }
         this.$nextTick(() => {
           this.$refs.audio.play()
-          if (this.$route.path == '/music/station') {
-            this.getStateLyric()
-          } else {
-            this.getLyric()
-          }
+          this.getLyric()
         })
       },
       playing(newplaying) {

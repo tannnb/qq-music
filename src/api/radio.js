@@ -92,7 +92,7 @@ export default class Song {
     this.filename = `C400${this.mid}.m4a`
     this.url = url
   }
-  getStateLyric(){
+  getLyric(){
     if (this.lyric) {
       return Promise.resolve(this.lyric)
     }
