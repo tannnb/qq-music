@@ -86,6 +86,30 @@ export const config = {
         index: 13,
         id: 3298,
         text: '无损音乐'
+      },
+      {
+        type: 'playlist',
+        index: 14,
+        id: 107,
+        text: '背景音乐'
+      },
+      {
+        type: 'playlist',
+        index: 15,
+        id: 27,
+        text: '睡前'
+      },
+      {
+        type: 'playlist',
+        index: 16,
+        id: 81,
+        text: '劲爆DJ'
+      },
+      {
+        type: 'playlist',
+        index: 17,
+        id: 3317,
+        text: '官方歌单'
       }
     ]
   }
