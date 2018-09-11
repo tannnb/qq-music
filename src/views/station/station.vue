@@ -15,8 +15,13 @@
              v-for="(items,index) in stationList.groupList">
           <h4 class="title">{{items.name}}</h4>
           <ul class="radioItem">
-            <li class="radioItem_li" v-for="(item,index) in items.radioList">
-              <img class="avatar" :src="item.radioImg" alt="">
+            <li class="radioItem_li"
+                v-for="(item,index) in items.radioList"
+                :key="item.radioId"
+                @click.stop="handelClickRadio(item)">
+              <div class="avatar">
+                <img :src="item.radioImg" alt="">
+              </div>
               <p class="radioName">{{item.radioName}}</p>
               <p class="listenNum">播放量: {{item.listenNum | listen}}</p>
             </li>
@@ -24,17 +29,23 @@
         </div>
       </div>
     </div>
-
+    <confirm ref="confirm"
+             :text="confirmText"
+             confirmBtnText="确定"></confirm>
     <Loading v-if="stationList.length === 0"></Loading>
     <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 
 <script>
-  import {station} from "../../api/radio";
+  import {mapActions} from 'vuex'
+  import {station,getRadioDesc,createSong} from "../../api/radio";
+  import {processSongsUrl} from "../../api/songList";
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import Loading from '../../components/loading/loading'
+  import Confirm from '../../components/confirm/confirm'
+
   export default {
     name: "station",
     data() {
@@ -43,11 +54,13 @@
         tags: [],
         listHeight: [],
         scrollY: 0,
-        stationContent:0
+        stationContent: 0,
+        confirmText: ''
       }
     },
     components: {
-      Loading
+      Loading,
+      Confirm
     },
     filters: {
       listen(count) {
@@ -60,12 +73,12 @@
     },
     mounted() {
       setTimeout(() => {
-       this.$nextTick(() => {
-         this._calculateHeight();
-       })
+        this.$nextTick(() => {
+          this._calculateHeight();
+        })
         this.stationContent = this.$refs.stationContent.offsetLeft
-        this.$refs.tagsWrapper.style.left =  this.stationContent - 240 + 'px'
-        this.$refs.tagsWrapper.style.opacity =  1
+        this.$refs.tagsWrapper.style.left = this.stationContent - 240 + 'px'
+        this.$refs.tagsWrapper.style.opacity = 1
       }, 500)
       window.addEventListener('scroll', this.radioScroll);
     },
@@ -82,6 +95,9 @@
       }
     },
     methods: {
+      ...mapActions([
+        'selectPlay'
+      ]),
       _station() {
         station().then(res => {
           let ret = res.data
@@ -101,9 +117,9 @@
       },
       radioScroll() {
         this.scrollY = document.documentElement.scrollTop || document.body.scrollTop;
-        if(this.scrollY>=80){
+        if (this.scrollY >= 80) {
           this.$refs.tagsWrapper.style.top = '40px'
-        }else{
+        } else {
           this.$refs.tagsWrapper.style.top = '142px'
         }
       },
@@ -118,12 +134,53 @@
           this.listHeight.push(height);
         }
       },
-      selectMenu(index){
+      selectMenu(index) {
         document.documentElement.scrollTop = document.body.scrollTop = this.listHeight[index]
+      },
+      async handelClickRadio(item) {
+        if (Number(item.radioId) === 99) {
+          this.$refs.confirm.show()
+          this.confirmText = '个性电台需要登录,暂时无法收听！'
+          return
+        }
+        try {
+          // 获取随机歌曲信息
+          const res = await getRadioDesc(item.radioId)
+          const {songlist} = res.data
+          if (songlist.code === ERR_OK) {
+            const track_list = songlist.data.track_list
+            try {
+              // 获取播放地址
+              const songsData = await processSongsUrl(this._normalizeSongs(track_list))
+              this.songs = songsData.filter((currentSong) => {
+                return currentSong.url.length !== 0
+              })
+              this.selectPlay({
+                list: this.songs,
+                index: 0
+              })
+            } catch (e) {
+              this.$refs.confirm.show()
+              this.confirmText = '歌曲地址获取失败！'
+            }
+          }
+        } catch (e) {
+          this.$refs.confirm.show()
+          this.confirmText = '电台获取失败！'
+        }
+      },
+      _normalizeSongs(list) {
+        let ret = []
+        list.forEach((musicData) => {
+          if (musicData.mid) {
+            ret.push(createSong(musicData))
+          }
+        })
+        return ret
       }
     },
-    beforeDestroy(){
-      window.removeEventListener('scroll',this.radioScroll);
+    beforeDestroy() {
+      window.removeEventListener('scroll', this.radioScroll);
     }
   }
 </script>
@@ -145,6 +202,7 @@
       }
     }
   }
+
   .slider {
     .taglist {
       position: fixed
@@ -189,6 +247,7 @@
       }
     }
   }
+
   .stationContent {
     .item {
       .title {
@@ -218,7 +277,16 @@
           padding-bottom: 44px;
           .avatar {
             width 222px
-            vertical-align top
+            overflow hidden
+            cursor pointer
+            img {
+              vertical-align top
+              width 100%
+              transition all .2s
+              &:hover {
+                transform scale(1.1)
+              }
+            }
           }
           .radioName {
             padding 12px 0 6px 0

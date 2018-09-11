@@ -5,19 +5,24 @@ import {
   deleteSearch,
   loadSearch,
   saveSingId,
-  loadSingId
+  loadSingId,
+  saveFavorite,
+  deleteFavorite,
+  loadFavorite
 } from '../../utils/ceche'
-import storage from "good-storage";
+
 
 
 const state = {
   initSearchHistory: loadSearch(),
-  initMid: loadSingId()
+  initMid: loadSingId(),
+  favoriteList: loadFavorite()
 }
 
 const getters = {
   searchHistory: state => state.initSearchHistory,
-  mid: state => state.initMid
+  mid: state => state.initMid,
+  favoriteList: state => state.favoriteList
 }
 
 
@@ -37,8 +42,13 @@ const actions = {
   // 保存id/mid
   saveSingID({commit}, id) {
     commit(types.SAVE_SINGID, saveSingId(id))
+  },
+  saveFavoriteList({commit},song){
+    commit(types.SET_FAVORITE_LIST, saveFavorite(song))
+  },
+  deleteFavoriteList({commit},song){
+    commit(types.SET_FAVORITE_LIST, deleteFavorite(song))
   }
-
 }
 
 
@@ -48,6 +58,9 @@ const mutations = {
   },
   [types.SAVE_SINGID](state, payload) {
     state.initMid = payload
+  },
+  [types.SET_FAVORITE_LIST](state, list) {
+    state.favoriteList = list
   }
 }
 

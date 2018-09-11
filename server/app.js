@@ -71,6 +71,8 @@ app.get('/getSortDesc',sortController.getSortDesc)
 
 // 电台
 app.get('/station',radioController.station)
+app.get('/getRadioDesc',radioController.getRadioDesc)
+app.get('/back_lyric',radioController.back_lyric)
 
 
 // 搜索

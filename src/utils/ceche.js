@@ -4,6 +4,8 @@ const SEARCH_KEY = '__search__'
 const SEARCH_MAX_LENGTH = 5
 
 const ID_KEY = '__saveID__'
+const FAVORITE_KEY = '__favorite__'
+const FAVORITE_MAX_LEN = 200
 
 // 增加
 function insertArray(arr, val, compare, maxLen) {
@@ -67,4 +69,26 @@ export function saveSingId(id) {
 // 读取歌手ID/mid
 export function loadSingId() {
   return storage.get(ID_KEY, '')
+}
+// 收藏
+export function saveFavorite(song) {
+  let songs = storage.get(FAVORITE_KEY, [])
+  insertArray(songs, song, (item) => {
+    return song.id === item.id
+  }, FAVORITE_MAX_LEN)
+  storage.set(FAVORITE_KEY, songs)
+  return songs
+}
+
+export function deleteFavorite(song) {
+  let songs = storage.get(FAVORITE_KEY, [])
+  deleteFromArray(songs, (item) => {
+    return item.id === song.id
+  })
+  storage.set(FAVORITE_KEY, songs)
+  return songs
+}
+
+export function loadFavorite() {
+  return storage.get(FAVORITE_KEY,[])
 }

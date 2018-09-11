@@ -60,18 +60,17 @@
               <div class="musictime">{{currentTime | formats}} / {{currentSong.duration | formats}}</div>
             </div>
             <div>
-            <Progress-bar ref="maxProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
+              <Progress-bar ref="maxProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
             </div>
           </div>
           <div class="playerFun">
             <div class="iconwrapper">
-              <div @click="changeMode">
-                <i :class="iconMode"></i>
-              </div>
-              <i class="icon-collect"></i>
+              <div @click="changeMode"><i :class="iconMode"></i></div>
+              <i class="icon-collect" :class="favoriteIcon" @click="toggleFavorite(currentSong)"></i>
               <div style="display: flex">
                 <i :class="iconMute" @click="toggleMute"></i>
-                <Progress-bar style="width: 120px"  :percent="volume" @percentChange="onPercentvolumeChange"></Progress-bar>
+                <Progress-bar style="width: 120px" :percent="volume"
+                              @percentChange="onPercentvolumeChange"></Progress-bar>
               </div>
             </div>
             <div>
@@ -86,7 +85,7 @@
     <!-- 最小化 -->
     <transition name="mini">
       <div class="mini-player" v-show="!fullScreen">
-        <div class="avatar" @click.stop="open"><img  :class="cdCls" :src="currentSong.image"></div>
+        <div class="avatar" @click.stop="open"><img :class="cdCls" :src="currentSong.image"></div>
         <div class="mini-progress">
           <div class="header">
             <div class="musicName">{{currentSong.name}}-{{currentSong.singer}}</div>
@@ -94,7 +93,7 @@
             <div class="musictime">{{currentTime | formats}}/{{currentSong.duration | formats}}</div>
           </div>
           <div>
-           <Progress-bar ref="miniProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
+            <Progress-bar ref="miniProgress" :percent="percent" @percentChange="onPercentChange"></Progress-bar>
           </div>
         </div>
         <div class="playerState">
@@ -117,7 +116,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
+  import {mapGetters, mapMutations,mapActions} from 'vuex'
   import {playMode} from "../../api/config"
   import PlayerList from '../../components/player-list/player-list'
   import ProgressBar from '../../components/progress-bar/progress-bar'
@@ -134,11 +133,11 @@
         currentTime: 0,
         songReady: false,
         volume: 1,
-        isMute:true,
+        isMute: true,
         currentLyric: null,
         currentLineNum: 0,
         isPureMusic: false,
-        playingLyric:'歌词加载中...'
+        playingLyric: '歌词加载中...'
       }
     },
     components: {
@@ -147,7 +146,7 @@
       Scroll
     },
     computed: {
-      ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing', 'currentIndex', 'mode', 'sequenceList']),
+      ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing', 'currentIndex', 'mode', 'sequenceList','favoriteList']),
       playIcon() {
         return this.playing ? 'icon-pause' : 'icon-play'
       },
@@ -157,8 +156,8 @@
       iconMode() {
         return this.mode === playMode.sequence ? 'icon-queue' : this.mode === playMode.loop ? 'icon-cycle' : 'icon-round'
       },
-      iconMute(){
-        return this.isMute === true? 'icon-sound':'icon-mute'
+      iconMute() {
+        return this.isMute === true ? 'icon-sound' : 'icon-mute'
       },
       disableCls() {
         return this.songReady ? '' : 'disableCls'
@@ -166,6 +165,9 @@
       // 获取播放比例
       percent() {
         return this.currentTime / this.currentSong.duration
+      },
+      favoriteIcon() {
+        return this.getFavoriteIcon(this.currentSong)
       }
     },
     methods: {
@@ -176,11 +178,22 @@
         setPlayMode: 'SET_MODE',
         setPlaylist: 'SET_PLAYLIST'
       }),
+      ...mapActions([
+        'deleteFavoriteList',
+        'saveFavoriteList'
+      ]),
       back() {
         this.setFullscreen(false)
-       this.$nextTick(() => {
-         this.$refs.miniProgress.init()
-       })
+        this.$nextTick(() => {
+          this.$refs.miniProgress.init()
+        })
+      },
+
+      getFavoriteIcon(song) {
+        if (this.isFavorite(song)) {
+          return 'icon-favorite'
+        }
+        return 'icon-not-favorite'
       },
 
       open() {
@@ -197,7 +210,7 @@
         }
         this.playingLyric = ''
         this.setPlayState(!this.playing)
-        if(this.currentLyric){
+        if (this.currentLyric) {
           this.currentLyric.togglePlay()
         }
       },
@@ -207,9 +220,9 @@
         if (!this.songReady) {
           return false
         }
-        if(this.playlist.length === 1){
+        if (this.playlist.length === 1) {
           this.loop()
-        }else{
+        } else {
           let index = this.currentIndex - 1
           if (index === -1) {
             index = this.playlist.length - 1
@@ -227,9 +240,9 @@
         if (!this.songReady) {
           return false
         }
-        if(this.playlist.length === 1){
+        if (this.playlist.length === 1) {
           this.loop()
-        }else{
+        } else {
           let index = this.currentIndex + 1
           if (index === this.playlist.length) {
             index = 0
@@ -264,7 +277,7 @@
         this.$refs.audio.currentTime = 0
         this.$refs.audio.play()
         // 回到顶部
-        if(this.currentLyric){
+        if (this.currentLyric) {
           this.currentLyric.seek(0)
         }
       },
@@ -308,14 +321,27 @@
           this.currentLineNum = 0
         })
       },
+      getStateLyric() {
+        this.currentSong.getStateLyric().then((lyric) => {
+          this.currentLyric = new Lyric(lyric, this.handleLyric)
+          if (this.playing) {
+            this.currentLyric.play()
+          }
+          this.isPureMusic = !this.currentLyric.lines.length
+        }).catch(() => {
+          this.playingLyric = '暂无歌词'
+          this.currentLyric = null
+          this.currentLineNum = 0
+        })
+      },
       handleLyric({lineNum, txt}) {
         this.playingLyric = txt
         this.currentLineNum = lineNum
-        if(lineNum>3){
-          let lineEl = this.$refs.lyricLine[lineNum-3]
-          this.$refs.lyricList.scrollToElement(lineEl,1000)
-        }else{
-          this.$refs.lyricList.scrollTo(0,0,1000)
+        if (lineNum > 3) {
+          let lineEl = this.$refs.lyricLine[lineNum - 3]
+          this.$refs.lyricList.scrollToElement(lineEl, 1000)
+        } else {
+          this.$refs.lyricList.scrollTo(0, 0, 1000)
         }
       },
 
@@ -332,27 +358,41 @@
           this.togglePlaying()
         }
         // 拖动进度条，让歌词滚动到对应位置
-        if(this.currentLyric){
-          const currentTime =  this.$refs.audio.currentTime
-          this.currentLyric.seek(currentTime*1000)
+        if (this.currentLyric) {
+          const currentTime = this.$refs.audio.currentTime
+          this.currentLyric.seek(currentTime * 1000)
         }
       },
       // 音量
       onPercentvolumeChange(percent) {
-        percent === 0? this.isMute = false:  this.isMute = true
+        percent === 0 ? this.isMute = false : this.isMute = true
         this.volume = percent;
         this.$refs.audio.volume = percent.toFixed(1)
       },
       // 禁音/取消禁音
-      toggleMute(){
+      toggleMute() {
         const cacheVolume = this.volume
-        if(this.isMute){
-         this.isMute = false
+        if (this.isMute) {
+          this.isMute = false
           this.$refs.audio.volume = 0
-        }else{
+        } else {
           this.isMute = true
           this.$refs.audio.volume = cacheVolume
         }
+      },
+      // 收藏
+      toggleFavorite(currentSong) {
+        if (this.isFavorite(currentSong)) {
+          this.deleteFavoriteList(currentSong)
+        } else {
+          this.saveFavoriteList(currentSong)
+        }
+      },
+      isFavorite(song) {
+        const index = this.favoriteList.findIndex((item) => {
+          return item.id === song.id
+        })
+        return index > -1
       }
     },
     watch: {
@@ -360,12 +400,16 @@
         if (oldSong && newSong.id === oldSong.id) {
           return
         }
-        if(this.currentLyric){
+        if (this.currentLyric) {
           this.currentLyric.stop()
         }
         this.$nextTick(() => {
           this.$refs.audio.play()
-          this.getLyric()
+          if (this.$route.path == '/music/station') {
+            this.getStateLyric()
+          } else {
+            this.getLyric()
+          }
         })
       },
       playing(newplaying) {
@@ -375,8 +419,8 @@
         })
       }
     },
-    filters:{
-      formats(times){
+    filters: {
+      formats(times) {
         return format(times)
       }
     },
@@ -506,7 +550,7 @@
               vertical-align: top
               width: 100%
               max-height: 200px
-              margin-top  20px
+              margin-top 20px
               overflow: hidden
               .lyric-wrapper {
                 width: 80%
@@ -589,6 +633,14 @@
                 color: #fff
               }
             }
+            .icon-collect{
+              &.icon-favorite{
+                color: #3be22e
+              }
+              &.icon-not-favorite{
+                color: #9e9e9e
+              }
+            }
           }
         }
       }
@@ -624,8 +676,12 @@
         img {
           width 100%
           vertical-align top
-          &.play { animation: rotate 20s linear infinite}
-          &.pause { animation-play-state: paused}
+          &.play {
+            animation: rotate 20s linear infinite
+          }
+          &.pause {
+            animation-play-state: paused
+          }
         }
       }
       .mini-progress {
@@ -639,7 +695,7 @@
           color #4f504f
           .musicName {
           }
-          .playingLyric{
+          .playingLyric {
             font-size 15px
             font-weight 400
             color #31c27c
@@ -659,7 +715,7 @@
           color: #31c27c
           font-size 30px
           cursor pointer
-          &:nth-child(2){
+          &:nth-child(2) {
             margin 0 20px
           }
         }
@@ -672,8 +728,12 @@
   }
 
   @keyframes rotate {
-    0% { transform: rotate(0)}
-    100% { transform: rotate(360deg) }
+    0% {
+      transform: rotate(0)
+    }
+    100% {
+      transform: rotate(360deg)
+    }
   }
 
 </style>

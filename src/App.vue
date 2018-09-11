@@ -117,6 +117,4 @@
     background: url("./images/top_bg.png") no-repeat 0 -60px;
   }
 
-
-
 </style>
