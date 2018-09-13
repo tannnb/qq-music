@@ -17,7 +17,8 @@
       </div>
       <div class="rankContent">
 
-        <div class="content-Header"><strong class="tags">{{ListName}}</strong> <span class="time">{{showtime}}</span></div>
+        <div class="content-Header"><strong class="tags">{{ListName}}</strong> <span class="time">{{showtime}}</span>
+        </div>
         <div class="content-fun" v-if="songTable">
           <span class="active"
                 :class=" songs.length === 0? 'notSong':'' "
@@ -48,7 +49,7 @@
           </li>
         </ul>
         <div class="no-songlist" v-if="songs.length === 0">暂无该排行信息 o(╥﹏╥)o</div>
-       <div class="page-wrapper">
+        <div class="page-wrapper">
           <Pagination v-if="allpage" @pagetions="pagetions" :allpage="allpage"></Pagination>
         </div>
 
@@ -57,14 +58,13 @@
         </div>
       </div>
     </div>
-    <Loading ref="loadcomponent" v-if="songs.length === 0 && notSongUrl"></Loading>
     <vue-progress-bar></vue-progress-bar>
     <confirm ref="confirm" text="暂时没有找到歌曲呢o(╥﹏╥)o" confirmBtnText="确定"></confirm>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapActions,mapMutations} from 'vuex'
+  import {mapGetters, mapActions, mapMutations} from 'vuex'
   import {toplistOpt, toplistCp} from '../../api/rank'
   import {format} from "../../utils/tool";
   import {processSongsUrl, isValidMusic, createSong} from "../../api/songList";
@@ -72,29 +72,30 @@
   import MiniLoading from '../../components/miniLoading/miniLoading'
   import Confirm from '../../components/confirm/confirm'
   import Pagination from '../singer/pagination'
-  import {ERR_OK} from "../../api/config";
+  import {ERR_OK} from "../../api/config"
+  import {LoadingMixin} from "../../utils/mixin"
 
 
   export default {
+    mixins: [LoadingMixin],
     data() {
       return {
-        song_begin:0,
-        allpage:null,
+        song_begin: 0,
+        allpage: null,
         listOpt: [],
         currentIndex: 4,
-        ListName:'',
-        showtime:'',
+        ListName: '',
+        showtime: '',
         update_key: '',
         topID: '',
         songType: '',
-        songTable:null,
-        songs:[],
-        miniLoadingFlag:false,
-        notSongUrl:true
+        songTable: null,
+        songs: [],
+        miniLoadingFlag: false
       }
     },
-    filters:{
-      formatTimes(times){
+    filters: {
+      formatTimes(times) {
         return format(times)
       }
     },
@@ -106,6 +107,7 @@
     },
     created() {
       this.$Progress.start()
+      this.showLoading = this.CreateLoading('排行榜加载中，请稍后...')
       this._toplistOpt().then(res => {
         this.listOpt = res
         const child = res[0].List[0]
@@ -114,9 +116,8 @@
         this.topID = child.topID
         this.ListName = child.ListName
         this.showtime = child.showtime
-
-        toplistCp( this.update_key, this.topID, this.songType,this.song_begin).then(res => {
-          if(res.data.code === ERR_OK){
+        toplistCp(this.update_key, this.topID, this.songType, this.song_begin).then(res => {
+          if (res.data.code === ERR_OK) {
             this.songlist = res.data.songlist
             this.songTable = res.data
             this.song_begin = this.songTable.song_begin
@@ -128,7 +129,7 @@
 
       })
     },
-    mounted(){
+    mounted() {
 
     },
     methods: {
@@ -155,42 +156,43 @@
         })
       },
 
-      getSong(song){
-
-        processSongsUrl(this._normalizeSongs(song)).then((songs) => {
-          this.notSongUrl = false
-          this.songs = songs.filter((currentSong) => {
-            return currentSong.url.length !== 0
+      getSong(song) {
+        processSongsUrl(this._normalizeSongs(song))
+          .then((songs) => {
+            this.showLoading.hide()
+            this.songs = songs.filter((currentSong) => {
+              return currentSong.url.length !== 0
+            })
           })
-        }).catch(err => {
-          if (this.songs.length === 0) {
-            this.$refs.confirm.show()
-          }
-          this.notSongUrl = false
-        })
+          .catch(err => {
+            this.showLoading.hide()
+            if (this.songs.length === 0) {
+              this.$refs.confirm.show()
+            }
+          })
       },
 
-      getRankCls(song_begin,index) {
-        if (song_begin === 0){
+      getRankCls(song_begin, index) {
+        if (song_begin === 0) {
           if (index <= 2) {
             return `icon icon${index}`
           } else {
             return ''
           }
         }
-        if (song_begin > 0){
+        if (song_begin > 0) {
           return ''
         }
 
       },
-      getRankText(song_begin,index) {
-        if (song_begin === 0){
+      getRankText(song_begin, index) {
+        if (song_begin === 0) {
           if (index > 2) {
             return `${song_begin + 1 + index}`
           }
         }
 
-        if (song_begin > 0){
+        if (song_begin > 0) {
           return `${song_begin + 1 + index}`
         }
       },
@@ -213,8 +215,8 @@
 
 
         this.songType = this.songType
-        toplistCp( this.update_key, this.topID, this.songType).then(res => {
-          if(res.data.code === ERR_OK){
+        toplistCp(this.update_key, this.topID, this.songType).then(res => {
+          if (res.data.code === ERR_OK) {
             this.songlist = res.data.songlist
             this.songTable = res.data
             this.getSong(this.songlist)
@@ -222,10 +224,10 @@
 
             // 若是没有歌曲
             setTimeout(() => {
-              if(this.songlist.length ===0){
+              if (this.songlist.length === 0) {
                 this.$refs.loadcomponent.hide()
               }
-            },1000)
+            }, 1000)
           }
           this.miniLoadingFlag = false
         }).catch(err => {
@@ -244,7 +246,7 @@
       },
 
       // 播放全部
-      handlePlayAll(){
+      handlePlayAll() {
         if (this.songs.length === 0) {
           this.$refs.confirm.show()
           return
@@ -254,7 +256,7 @@
           index: 0
         })
       },
-      handleSelectSong(index){
+      handleSelectSong(index) {
         this.selectPlay({
           list: this.songs,
           index: index
@@ -263,9 +265,9 @@
 
       // 分页
       pagetions(index) {
-        this.song_begin = (index-1)*30
-        toplistCp( this.update_key, this.topID, this.songType,this.song_begin).then(res => {
-          if(res.data.code === ERR_OK){
+        this.song_begin = (index - 1) * 30
+        toplistCp(this.update_key, this.topID, this.songType, this.song_begin).then(res => {
+          if (res.data.code === ERR_OK) {
             this.songlist = res.data.songlist
             this.songTable = res.data
             this.song_begin = this.songTable.song_begin
@@ -275,7 +277,7 @@
         })
         setTimeout(() => {
           document.documentElement.scrollTop = document.body.scrollTop = 0;
-        },200)
+        }, 200)
       }
 
 
@@ -292,12 +294,12 @@
       display flex
       width 1200px
       margin 0 auto
-      .slider-wrapper{
+      .slider-wrapper {
         flex 0 0 150
         width 150px
       }
       .slider {
-         border: 1px solid rgba(153, 153, 153, .2)
+        border: 1px solid rgba(153, 153, 153, .2)
         .slider-items {
           .title {
             display block
@@ -330,19 +332,19 @@
         position: relative
         flex 1
         padding-left 30px
-        .content-Header{
+        .content-Header {
           margin-top: 20px;
-          .tags{
+          .tags {
             font-weight: 400;
             font-size: 24px;
           }
-          .time{
+          .time {
             font-size: 14px;
             padding-left 10px
             color: #333333
           }
         }
-        .content-fun{
+        .content-fun {
           span {
             display inline-block
             border: 1px solid #ccc
@@ -370,16 +372,17 @@
           }
 
         }
-        .content-songTitle{}
-        .content-songList{
-          .songList-Item{
+        .content-songTitle {
+        }
+        .content-songList {
+          .songList-Item {
             display flex
             align-items center
             padding 10px 0
-            &:nth-child(even){
-              background rgba(0,0,0,.01)
+            &:nth-child(even) {
+              background rgba(0, 0, 0, .01)
             }
-            .ranking{
+            .ranking {
               flex 0 0 80
               width 80px
               text-align center
@@ -403,46 +406,46 @@
                 }
               }
             }
-            .avatar{
+            .avatar {
               width 60px
               padding-right 10px
-              img{
+              img {
                 width 100%
                 vertical-align top
               }
             }
-            .name{
+            .name {
               flex 1
               display flex
               align-items center
               font-size 15px
               color: #373737
-              .nameInfo{
+              .nameInfo {
                 flex 1
-                .isonly{
+                .isonly {
                   color: #31c27c
                   padding 2px 6px
                   margin-left 6px
                   font-size 13px
-                  border:1px solid #31c27c
+                  border: 1px solid #31c27c
                   border-radius 4px
                 }
               }
-              .player{
+              .player {
                 flex 0 0 100
                 width 100px
-                span{
+                span {
                   display none
                   font-size 44px
                   cursor pointer
                   color: #b1b1b1
-                  &:hover{
+                  &:hover {
                     color: #31c27c
                   }
                 }
               }
             }
-            .singer{
+            .singer {
               flex 0 0 170
               width 170px
               margin-right 20px
@@ -452,15 +455,15 @@
               text-overflow ellipsis
               white-space nowrap
             }
-            .duration{
+            .duration {
               flex 0 0 100
               width 100px
               font-size 14px
               color: #999
             }
-            &:hover{
-              .name{
-                .icon-play{
+            &:hover {
+              .name {
+                .icon-play {
                   display block
                 }
               }
@@ -468,10 +471,10 @@
           }
         }
 
-        .page-wrapper{
+        .page-wrapper {
           text-align center
         }
-        .miniloading-wrapper{
+        .miniloading-wrapper {
           position: absolute
           top: 100px
           left 0
@@ -480,7 +483,7 @@
           z-index 10
         }
 
-        .no-songlist{
+        .no-songlist {
           font-size 16px
           text-align center
           padding 100px 0

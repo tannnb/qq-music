@@ -18,8 +18,6 @@
     <!-- 排行榜 -->
   <!--  <top-list v-if="toplist" :toplist="toplist"></top-list>-->
 
-
-    <Loading v-if="!recomPlaylistData"></Loading>
     <vue-progress-bar></vue-progress-bar>
 
   </div>
@@ -35,12 +33,13 @@
   import Slider from './slider'
   import newAlbum from './newAlbum'
   import topList from './toplist'
-  import Loading from '../../components/loading/loading'
   import {getDiscList, getNewAlbumSong} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
+  import {LoadingMixin} from "../../utils/mixin";
 
 
   export default {
+    mixins: [LoadingMixin],
     data() {
       return {
         recomPlaylistData: null,
@@ -55,8 +54,7 @@
       NewSong,
       Slider,
       newAlbum,
-      topList,
-      Loading
+      topList
     },
     created() {
       this.$Progress.start()
@@ -72,6 +70,7 @@
         'selectPlay'
       ]),
       _musicu() {
+        const showLoading = this.CreateLoading('加载中，请稍后...')
         musicu().then(res => {
           if (res.code === ERR_OK) {
             this.recomPlaylistData = res.recomPlaylist.data.v_hot;
@@ -80,6 +79,7 @@
             this.newAlbum = res.new_album.data
             this.toplist = res.toplist.data
             this.$Progress.finish()
+            showLoading.hide()
           }
         })
       },

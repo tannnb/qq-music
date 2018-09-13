@@ -56,7 +56,6 @@
       </div>
     </div>
 
-    <Loading v-if="albumList.length === 0"></Loading>
     <vue-progress-bar></vue-progress-bar>
 
   </div>
@@ -69,9 +68,10 @@
   import Pagination from '../singer/pagination'
   import {ERR_OK} from "../../api/config";
   import SingerTag from '../singer/singertag'
-  import Loading from '../../components/loading/loading'
+  import {LoadingMixin} from "../../utils/mixin"
 
   export default {
+    mixins: [LoadingMixin],
     data() {
       return {
         albumList: [],
@@ -97,20 +97,18 @@
     },
     components: {
       SingerTag,
-      Pagination,
-      Loading
+      Pagination
     },
     created() {
       this._getAlbum()
       this.$Progress.start()
     },
-    filters:{
-      filterSingers(singer){
+    filters: {
+      filterSingers(singer) {
         return filterSinger(singer)
       }
     },
     mounted() {
-
       document.addEventListener('click', () => {
         this.selectItemIndex = 0
       }, false)
@@ -129,18 +127,24 @@
           year: this.year,
           sin: this.sin
         }
-        getAlbum(data).then(res => {
-          if (res.data.code === ERR_OK) {
-            // list
-            this.albumList = res.data.albumlib.data.list
-            // tag
-            this.albumTags = res.data.albumlib.data.tags
-            // initAreaTag
-            this.albumTagsArea = this._initnormalize(res.data.albumlib.data.tags)
-            this.allpage = this.albumList.length
-            this.$Progress.finish()
-          }
-        })
+        const showLoading = this.CreateLoading('专辑列表加载中，请稍后...')
+        getAlbum(data)
+          .then(res => {
+            showLoading.hide()
+            if (res.data.code === ERR_OK) {
+              // list
+              this.albumList = res.data.albumlib.data.list
+              // tag
+              this.albumTags = res.data.albumlib.data.tags
+              // initAreaTag
+              this.albumTagsArea = this._initnormalize(res.data.albumlib.data.tags)
+              this.allpage = this.albumList.length
+              this.$Progress.finish()
+            }
+          })
+          .catch( e => {
+            showLoading.hide()
+          })
       },
       _initnormalize(tags) {
         let area = tags.area
@@ -210,7 +214,7 @@
         this._getAlbum()
         setTimeout(() => {
           document.documentElement.scrollTop = document.body.scrollTop = 0;
-        },200)
+        }, 200)
       }
     }
   }

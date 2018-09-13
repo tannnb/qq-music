@@ -39,14 +39,16 @@
 
 <script>
   import {mapActions} from 'vuex'
-  import {station,getRadioDesc,createSong} from "../../api/radio";
+  import {station, getRadioDesc, createSong} from "../../api/radio";
   import {processSongsUrl} from "../../api/songList";
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import Loading from '../../components/loading/loading'
   import Confirm from '../../components/confirm/confirm'
+  import {LoadingMixin} from "../../utils/mixin"
 
   export default {
+    mixins: [LoadingMixin],
     name: "station",
     data() {
       return {
@@ -69,6 +71,7 @@
     },
     created() {
       this.$Progress.start()
+      this.showLoading = this.CreateLoading('电台加载中，请稍后...')
       this._station()
     },
     mounted() {
@@ -99,21 +102,27 @@
         'selectPlay'
       ]),
       _station() {
-        station().then(res => {
-          let ret = res.data
-          const reg = /^\w+\(({.+})/
-          const matches = ret.match(reg)
-          if (matches) {
-            ret = JSON.parse(matches[1] + '}')
-          }
-          if (ret.code === ERR_OK) {
-            this.stationList = ret.data.data
-            this.tags = this.stationList.groupList.map((currentVal) => {
-              return currentVal.name
-            })
-          }
-          this.$Progress.finish()
-        })
+        station()
+          .then(res => {
+            this.showLoading.hide()
+            let ret = res.data
+            const reg = /^\w+\(({.+})/
+            const matches = ret.match(reg)
+            if (matches) {
+              ret = JSON.parse(matches[1] + '}')
+            }
+            if (ret.code === ERR_OK) {
+              this.stationList = ret.data.data
+              this.tags = this.stationList.groupList.map((currentVal) => {
+                return currentVal.name
+              })
+            }
+            this.$Progress.finish()
+          })
+          .catch(e => {
+            this.$Progress.finish()
+            this.showLoading.hide()
+          })
       },
       radioScroll() {
         this.scrollY = document.documentElement.scrollTop || document.body.scrollTop;

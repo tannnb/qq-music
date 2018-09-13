@@ -39,7 +39,6 @@
           <Pagination ref='pagination' v-if="allpage>0" @pagetions="pagetions"  :allpage="allpage"></Pagination>
         </div>
     </div>
-    <Loading v-if="SortList.length === 0"></Loading>
     <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
@@ -50,9 +49,10 @@
   import {paddListenCount} from "../../utils/tool";
   import {ERR_OK} from "../../api/config";
   import Pagination from '../singer/pagination'
-  import Loading from '../../components/loading/loading'
+  import {LoadingMixin} from "../../utils/mixin"
 
   export default {
+    mixins: [LoadingMixin],
     name: "sort",
     data() {
       return {
@@ -73,13 +73,14 @@
       }
     },
     components:{
-      Pagination,
-      Loading
+      Pagination
     },
-    created() {
+    async created() {
       this.$Progress.start()
-      this._getSortTags()
-      this._getSortList()
+      this.showLoading = this.CreateLoading('歌单加载中，请稍后...')
+      await this._getSortTags()
+      await this._getSortList()
+      this.showLoading.hide()
     },
     methods: {
       ...mapActions([

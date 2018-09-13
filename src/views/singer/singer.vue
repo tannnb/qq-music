@@ -5,10 +5,10 @@
       <img src="./bg_singer.jpg" alt="">
     </div>
     <div class="mod_singer_tag">
-      <Singer-tag v-if="tags" :tag="tags.index" :currentIndex="currentIndex" @selectItemTag="selectItemIndex" />
-      <Singer-tag v-if="tags" :tag="tags.area" :currentIndex="currentArea" @selectItemTag="selectItemArea" />
-      <Singer-tag v-if="tags" :tag="tags.sex" :currentIndex="currentSex" @selectItemTag="selectItemSex" />
-      <Singer-tag v-if="tags" :tag="tags.genre" :currentIndex="currentGenre" @selectItemTag="selectItemGenre" />
+      <Singer-tag v-if="tags" :tag="tags.index" :currentIndex="currentIndex" @selectItemTag="selectItemIndex"/>
+      <Singer-tag v-if="tags" :tag="tags.area" :currentIndex="currentArea" @selectItemTag="selectItemArea"/>
+      <Singer-tag v-if="tags" :tag="tags.sex" :currentIndex="currentSex" @selectItemTag="selectItemSex"/>
+      <Singer-tag v-if="tags" :tag="tags.genre" :currentIndex="currentGenre" @selectItemTag="selectItemGenre"/>
     </div>
 
     <div ref="singerContent" class="singerContent">
@@ -58,10 +58,11 @@
   import SingerTag from './singertag'
   import Pagination from './pagination'
   import Loading from '../../components/loading/loading'
-
+  import {LoadingMixin} from "../../utils/mixin"
 
   const COUNT = 80
   export default {
+    mixins: [LoadingMixin],
     name: "singer",
     data() {
       return {
@@ -104,15 +105,21 @@
           "sin": this.sin,
           "cur_page": this.cur_page,
         }
-        getSingerList(data).then(res => {
-          if (res.data.code === ERR_OK) {
-            let ret = res.data.singerList.data
-            this.singerList = ret.singerlist
-            this.tags = ret.tags
-            this.allpage = this.singerList.length
-            this.$Progress.finish()
-          }
-        })
+        const showLoading = this.CreateLoading('歌手加载中，请稍后...')
+        getSingerList(data)
+          .then(res => {
+            showLoading.hide()
+            if (res.data.code === ERR_OK) {
+              let ret = res.data.singerList.data
+              this.singerList = ret.singerlist
+              this.tags = ret.tags
+              this.allpage = this.singerList.length
+              this.$Progress.finish()
+            }
+          })
+          .catch(e => {
+            showLoading.hide()
+          })
       },
       _getSingerList() {
         this.asyncData()
@@ -148,7 +155,7 @@
         const scrollTop = this.$refs.singerContent.offsetTop
         setTimeout(() => {
           window.scrollTo(0, scrollTop)
-        },300)
+        }, 300)
       },
       handleSelectItem(items) {
         this.$router.push({
