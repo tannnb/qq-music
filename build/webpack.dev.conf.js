@@ -47,20 +47,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       poll: config.dev.poll,
     },
     before(app){
-      app.get('/api/musicu', function (req, res) {
-        const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
-        axios.get(url, {
-          headers: {
-            referer: 'https://c.y.qq.com/'
-          },
-          params: req.query
-        }).then((response) => {
-          res.json(response.data)
-        }).catch((e) => {
-         console.log('转发出错啦')
-          res.json(e)
-        })
-      })
+
     }
   },
   plugins: [

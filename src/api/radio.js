@@ -2,10 +2,10 @@ import {commonParams, ERR_OK, options} from './config'
 import axios from 'axios'
 import {Base64} from "js-base64";
 
+const debug = process.env.NODE_ENV !== 'production'
 
 export function station() {
-  const url = 'http://localhost:3000/station'
-
+  const url = debug ? 'http://localhost:3000/station' : '/pc/station'
   const data = Object.assign({}, commonParams, {
     channel: 'radio',
     page: 'index',
@@ -27,8 +27,7 @@ export function station() {
 
 
 export function getRadioDesc(id) {
-  const url = 'http://localhost:3000/getRadioDesc'
-
+  const url = debug ? 'http://localhost:3000/getRadioDesc' : '/pc/getRadioDesc'
   const data = Object.assign({}, commonParams, {
     g_tk: 5381,
     loginUin: 0,
@@ -59,7 +58,7 @@ export function getRadioDesc(id) {
 }
 
 export function StateLyric(mid) {
-  const url = 'http://localhost:3000/back_lyric'
+  const url = debug ? 'http://localhost:3000/back_lyric' : '/pc/back_lyric'
   const data = Object.assign({}, commonParams, {
     songmid: mid,
     platform: 'yqq',
@@ -79,7 +78,7 @@ export function StateLyric(mid) {
 
 
 export default class Song {
-  constructor({id, mid,albumdesc,isonly, singer, name, album, duration, image, url}) {
+  constructor({id, mid, albumdesc, isonly, singer, name, album, duration, image, url}) {
     this.id = id
     this.albumdesc = albumdesc
     this.isonly = isonly
@@ -92,7 +91,8 @@ export default class Song {
     this.filename = `C400${this.mid}.m4a`
     this.url = url
   }
-  getLyric(){
+
+  getLyric() {
     if (this.lyric) {
       return Promise.resolve(this.lyric)
     }
@@ -104,7 +104,7 @@ export default class Song {
         const str = matches.replace(/\)$/, '')
         const listOpt = JSON.parse(str)
         if (listOpt.retcode === ERR_OK) {
-          this.lyric =  Base64.decode(listOpt.lyric)
+          this.lyric = Base64.decode(listOpt.lyric)
           resolve(this.lyric)
         } else {
           reject('no lyric')
@@ -118,8 +118,8 @@ export function createSong(musicData) {
   return new Song({
     id: musicData.id,
     album: musicData.album.name,
-    albumdesc:musicData.album.title,
-    isonly:musicData.isonly,
+    albumdesc: musicData.album.title,
+    isonly: musicData.isonly,
     mid: musicData.mid,
     singer: filterSinger(musicData.singer),
     name: musicData.name,

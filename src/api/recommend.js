@@ -2,6 +2,8 @@ import jsonp from '../utils/jsonp'
 import {commonParams, options} from './config'
 import axios from 'axios'
 
+const debug = process.env.NODE_ENV !== 'production'
+
 export function gethotkey() {
   const url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
   const data = Object.assign({}, commonParams, {
@@ -14,8 +16,7 @@ export function gethotkey() {
 
 
 export function musicu() {
-  const url = 'http://localhost:3000/musicu'
-
+  const url = debug ? 'http://localhost:3000/musicu' : '/pc/musicu'
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,
@@ -97,8 +98,7 @@ export function musicu() {
 
 
 export function recommend(id) {
-  const url = 'http://localhost:3000/recommend'
-
+  const url = debug ? 'http://localhost:3000/recommend' : '/pc/recommend'
   const recomPlaylist = {
     "comm": {"ct": 24},
     "recomPlaylist": {
@@ -140,8 +140,7 @@ export function recommend(id) {
 
 
 export function newSongType(id) {
-  const url = 'http://localhost:3000/newSongType'
-
+  const url = debug ? 'http://localhost:3000/newSongType' : '/pc/newSongType'
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,
@@ -166,8 +165,7 @@ export function newSongType(id) {
 
 
 export function newAlbumArea(id) {
-  const url = 'http://localhost:3000/newAlbumArea'
-
+  const url = debug ? 'http://localhost:3000/newAlbumArea' : '/pc/newAlbumArea'
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,

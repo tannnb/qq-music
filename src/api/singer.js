@@ -1,10 +1,10 @@
 import {commonParams} from './config'
 import axios from "axios/index";
 
+const debug = process.env.NODE_ENV !== 'production'
 
 export function getSingerList(options) {
-  const url = 'http://localhost:3000/singer'
-
+  const url = debug ? 'http://localhost:3000/singer' : '/pc/singer'
   const params = Object.assign({}, {
     "comm": {
       "ct": 24,
@@ -41,8 +41,7 @@ export function getSingerList(options) {
 }
 
 export function getSingerDesc(mid) {
-  const url = 'http://localhost:3000/singerdesc'
-
+  const url = debug ? 'http://localhost:3000/singerdesc' : '/pc/singerdesc'
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     singermid: mid,
@@ -63,8 +62,7 @@ export function getSingerDesc(mid) {
 }
 
 export function getSingerAlbum(mid) {
-  const url = 'http://localhost:3000/getSingerAlbum'
-
+  const url = debug ? 'http://localhost:3000/getSingerAlbum' : '/pc/getSingerAlbum'
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     singermid: mid,
@@ -85,8 +83,7 @@ export function getSingerAlbum(mid) {
 }
 
 export function getSingerMv(mid) {
-  const url = 'http://localhost:3000/getSingerMv'
-
+  const url = debug ? 'http://localhost:3000/getSingerMv' : '/pc/getSingerMv'
   const data = Object.assign({}, commonParams, {
     g_tk: 1194859437,
     cid: 205360581,
@@ -109,8 +106,7 @@ export function getSingerMv(mid) {
 
 
 export function gerSingerFan(mid) {
-  const url = 'http://localhost:3000/gerSingerFan'
-
+  const url = debug ? 'http://localhost:3000/gerSingerFan' : '/pc/gerSingerFan'
   const data = Object.assign({}, commonParams, {
     reqtype: 1,
     singermid: mid,

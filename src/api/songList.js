@@ -1,11 +1,12 @@
 import {commonParams} from "./config";
 import {ERR_OK} from "./config";
 import axios from 'axios'
-import { Base64 } from 'js-base64'
+import {Base64} from 'js-base64'
 
+const debug = process.env.NODE_ENV !== 'production'
 
 export default class Song {
-  constructor({id, mid,albumdesc,isonly, singer, name, album, duration, image, url}) {
+  constructor({id, mid, albumdesc, isonly, singer, name, album, duration, image, url}) {
     this.id = id
     this.albumdesc = albumdesc
     this.isonly = isonly
@@ -41,8 +42,8 @@ export default class Song {
 export function createSong(musicData) {
   return new Song({
     id: musicData.songid,
-    albumdesc:musicData.albumdesc,
-    isonly:musicData.isonly,
+    albumdesc: musicData.albumdesc,
+    isonly: musicData.isonly,
     mid: musicData.songmid,
     singer: filterSinger(musicData.singer),
     name: musicData.songname,
@@ -55,7 +56,7 @@ export function createSong(musicData) {
 
 // 获取歌词
 function getLyric(mid) {
-  const url = 'http://localhost:3000/lyric'
+  const url = debug ? 'http://localhost:3000/lyric' : '/pc/lyric'
   const data = Object.assign({}, commonParams, {
     songmid: mid,
     platform: 'yqq',
@@ -95,8 +96,7 @@ export function processSongsUrl(songs) {
 
 
 export function getSongsUrl(songs) {
-  const url = 'http://localhost:3000/getPurlUrl'
-
+  const url = debug ? 'http://localhost:3000/getPurlUrl' : '/pc/getPurlUrl'
   let mids = []
   let types = []
 
@@ -124,20 +124,20 @@ export function getSongsUrl(songs) {
         comm: data,
         url_mid: urlMid
       })
-      .then((response) => {
-        const res = response.data
-        if (res.code === ERR_OK) {
-          let urlMid = res.url_mid
-          if (urlMid && urlMid.code === ERR_OK) {
-            const info = urlMid.data.midurlinfo[0]
-            info && info.purl ? resolve(res):retry()
+        .then((response) => {
+          const res = response.data
+          if (res.code === ERR_OK) {
+            let urlMid = res.url_mid
+            if (urlMid && urlMid.code === ERR_OK) {
+              const info = urlMid.data.midurlinfo[0]
+              info && info.purl ? resolve(res) : retry()
+            } else {
+              retry()
+            }
           } else {
             retry()
           }
-        } else {
-          retry()
-        }
-      })
+        })
     }
 
     function retry() {

@@ -1,11 +1,11 @@
 import {commonParams} from './config'
 import axios from "axios/index";
 
+const debug = process.env.NODE_ENV !== 'production'
 
 export function toplistOpt() {
-  const url = 'http://localhost:3000/toplistOpt'
-
-  const data = Object.assign({},commonParams, {
+  const url = debug ? 'http://localhost:3000/toplistOpt' : '/pc/toplistOpt'
+  const data = Object.assign({}, commonParams, {
     page: 'index',
     format: 'html',
     tpl: 'macv4',
@@ -20,15 +20,14 @@ export function toplistOpt() {
   })
 }
 
-export function toplistCp(date,topid,type,song_begin=0) {
-  const url = 'http://localhost:3000/toplistCp'
-
+export function toplistCp(date, topid, type, song_begin = 0) {
+  const url = debug ? 'http://localhost:3000/toplistCp' : '/pc/toplistCp'
   const data = Object.assign({}, {
     tpl: 3,
     page: 'detail',
     date,
     topid,
-    type:type == 1? 'top':'global',
+    type: type == 1 ? 'top' : 'global',
     song_begin,
     song_num: 30,
     loginUin: 0,

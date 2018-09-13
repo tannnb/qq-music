@@ -1,8 +1,10 @@
 import {commonParams} from './config'
 import axios from 'axios'
 
+const debug = process.env.NODE_ENV !== 'production'
+
 export function getSortTags() {
-  const url = 'http://localhost:3000/getSortTags'
+  const url = debug ? 'http://localhost:3000/getSortTags' : '/pc/getSortTags'
   const data = Object.assign({}, commonParams, {
     g_tk: '455128728',
     loginUin: 0,
@@ -18,8 +20,8 @@ export function getSortTags() {
   })
 }
 
-export function getSortList(categoryId,sortId,sin) {
-  const url = 'http://localhost:3000/getSortList'
+export function getSortList(categoryId, sortId, sin) {
+  const url = debug ? 'http://localhost:3000/getSortList' : '/pc/getSortList'
   const data = Object.assign({}, commonParams, {
     picmid: 1,
     g_tk: 455128728,
@@ -31,7 +33,7 @@ export function getSortList(categoryId,sortId,sin) {
     categoryId,
     sortId,
     sin,
-    ein: 29+sin,
+    ein: 29 + sin,
   })
 
   return axios.get(url, {
@@ -43,12 +45,12 @@ export function getSortList(categoryId,sortId,sin) {
 
 
 export function getSortDesc(mid) {
-  const url = 'http://localhost:3000/getSortDesc'
+  const url = debug ? 'http://localhost:3000/getSortDesc' : '/pc/getSortDesc'
   const data = Object.assign({}, commonParams, {
     type: 1,
     json: 1,
     onlysong: 0,
-    disstid:mid,
+    disstid: mid,
     g_tk: 775521381,
     loginUin: 0,
     hostUin: 0,

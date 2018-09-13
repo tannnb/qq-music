@@ -1,10 +1,10 @@
 import {commonParams} from './config'
 import axios from 'axios'
 
+const debug = process.env.NODE_ENV !== 'production'
 
 export function getDiscList(id) {
-  const url = 'http://localhost:3000/getDiscList'
-
+  const url = debug ? 'http://localhost:3000/getDiscList' : '/pc/getDiscList'
   const data = Object.assign({}, commonParams, {
     type: 1,
     json: 1,
@@ -34,8 +34,7 @@ export function getDiscList(id) {
 
 
 export function review(mid, pagenum = 0) {
-  const url = 'http://localhost:3000/review'
-
+  const url = debug ? 'http://localhost:3000/review' : '/pc/review'
   const data = Object.assign({}, commonParams, {
     hostUin: 0,
     inCharset: 'utf8',
@@ -64,14 +63,13 @@ export function review(mid, pagenum = 0) {
 }
 
 export function getNewAlbumSong(mid) {
-  const url = 'http://localhost:3000/getNewAlbumSong'
-
+  const url = debug ? 'http://localhost:3000/getNewAlbumSong' : '/pc/getNewAlbumSong'
   const data = Object.assign({}, commonParams, {
     albummid: mid,
     g_tk: 125702638,
     hostUin: 0,
-    jsonpCallback:'albuminfoCallback',
-    loginUin:0,
+    jsonpCallback: 'albuminfoCallback',
+    loginUin: 0,
     platform: 'yqq',
     needNewCode: 0
   })

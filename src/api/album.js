@@ -1,9 +1,10 @@
 import {commonParams} from './config'
 import axios from 'axios'
 
-export function getAlbum(options) {
-  const url = 'http://localhost:3000/getAlbum'
+const debug = process.env.NODE_ENV !== 'production'
 
+export function getAlbum(options) {
+  const url = debug ? 'http://localhost:3000/getAlbum' : '/pc/getAlbum'
   const data = Object.assign({}, commonParams, {
     g_tk: 1194859437,
     hostUin: 0,
@@ -39,7 +40,7 @@ export function getAlbum(options) {
 
 
 export function getAlbumDesc(mid) {
-  const url = 'http://localhost:3000/getAlbumDesc'
+  const url = debug ? 'http://localhost:3000/getAlbumDesc' : '/pc/getAlbumDesc'
   const data = Object.assign({}, commonParams, {
     albummid: mid,
     g_tk: '1194859437',

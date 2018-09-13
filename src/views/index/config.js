@@ -17,6 +17,12 @@ export const config = {
       },
       {
         type: 'playlist',
+        index: 14,
+        id: 107,
+        text: '背景音乐'
+      },
+      {
+        type: 'playlist',
         index: 2,
         id: 3212,
         text: '2016年'
@@ -38,6 +44,12 @@ export const config = {
         index: 5,
         id: 43,
         text: 'R&B'
+      },
+      {
+        type: 'playlist',
+        index: 17,
+        id: 3317,
+        text: '官方歌单'
       },
       {
         type: 'playlist',
@@ -87,12 +99,7 @@ export const config = {
         id: 3298,
         text: '无损音乐'
       },
-      {
-        type: 'playlist',
-        index: 14,
-        id: 107,
-        text: '背景音乐'
-      },
+
       {
         type: 'playlist',
         index: 15,
@@ -104,12 +111,6 @@ export const config = {
         index: 16,
         id: 81,
         text: '劲爆DJ'
-      },
-      {
-        type: 'playlist',
-        index: 17,
-        id: 3317,
-        text: '官方歌单'
       }
     ]
   }

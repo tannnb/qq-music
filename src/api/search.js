@@ -1,9 +1,10 @@
 import {commonParams} from './config'
 import axios from 'axios'
 
-export function clientSearch(query, page, zhida, perpage) {
-  const url = 'http://localhost:3000/clientSearch'
+const debug = process.env.NODE_ENV !== 'production'
 
+export function clientSearch(query, page, zhida, perpage) {
+  const url = debug ? 'http://localhost:3000/clientSearch' : '/pc/clientSearch'
   const data = Object.assign({}, commonParams, {
     w: query,
     p: page,

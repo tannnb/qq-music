@@ -5,13 +5,15 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueLazyload from 'vue-lazyload'
+import CreateAPI from 'vue-create-api'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import IconSvg from './components/svg-icon/svg-nav'
 import 'swiper/dist/css/swiper.css'
 import  './styles/index.styl'
 import './fonts/iconfont'
-
 import VueProgressBar from 'vue-progressbar'
+import Loading from './components/loading/loading'
+
 
 const options = {
   color: '#31c27c',
@@ -30,9 +32,16 @@ const options = {
 Vue.use(VueProgressBar, options)
 
 Vue.use(VueAwesomeSwiper)
+
 Vue.use(VueLazyload)
+
 Vue.component('icon-svg', IconSvg)
 
+Vue.use(CreateAPI, {
+  componentPrefix: 'cube-',
+  apiPrefix: '$create-'
+})
+Vue.createAPI(Loading, true)
 
 Vue.config.productionTip = false
 
