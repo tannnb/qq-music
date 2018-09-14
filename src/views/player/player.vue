@@ -653,8 +653,7 @@
       width 76%
       padding 10px 20px
       background #fff
-      border: 1px solid #d4d4d4
-      box-shadow 0 0 4px #cacaca
+      border: 1px solid #efefef
       border-radius 100px
       &.mini-enter-active, &.mini-leave-active {
         transition: all 0.2s
@@ -708,21 +707,21 @@
         width 180px
         text-align center
         span {
-          color: #31c27c
+          color: #d6d6d6
           font-size 30px
           cursor pointer
+          &:hover{
+            color: #31c27c
+          }
           &:nth-child(2) {
             margin 0 20px
           }
         }
-
         .icon-play {
-
         }
       }
     }
   }
-
   @keyframes rotate {
     0% {
       transform: rotate(0)
@@ -731,5 +730,4 @@
       transform: rotate(360deg)
     }
   }
-
 </style>
