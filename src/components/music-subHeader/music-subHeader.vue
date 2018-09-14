@@ -1,27 +1,22 @@
 <template>
   <div class="subHeader">
-    <div class="title" v-if="datas.title">{{datas.title}}</div>
-    <ul class="subTitle">
-      <li
-        v-if="navList.length"
-        v-for="(items,index) in navList"
-        :key="index"
-        @click="handleSelectItem(index,items)"
-        :class=" index === currentIndex? 'active':'' "
-      >{{items.text}}
+    <div class="title" v-if="content.title">{{content.title}}</div>
+    <ul class="subTitle" v-if="navList.length">
+      <li v-for="(items,index) in navList"
+          :key="index"
+          @click="handleSelectItem(index,items)"
+          :class=" index === currentIndex? 'active':'' ">{{items.text}}
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-
-  import {shuffle} from "../../utils/util";
-
+  import {shuffle} from "../../utils/util"
   export default {
     name: "music-subHeader",
     props: {
-      datas: {
+      content: {
         type: Object,
         default: () => {
         }
@@ -32,12 +27,10 @@
       }
     },
     created() {
-      let first = this.datas.firstRecommend ? this.datas.firstRecommend : null
-      let list;
+      let first = this.content.firstRecommend ? this.content.firstRecommend : null
+      let list
       if (first !== null) {
-        list = shuffle(this.datas.navList).splice(0, 5)
-      } else {
-        list = this.datas.navList
+        list = shuffle(this.content.navList).splice(0, 5)
       }
       this.navList = [first, ...list]
     },
@@ -50,10 +43,10 @@
 </script>
 
 <style lang="stylus" scoped>
-  .subHeader {
+  .subHeader
     width 1200px
     margin 0 auto
-    .title {
+    .title
       padding 50px 0 24px 0
       line-height 40px
       text-align center
@@ -61,25 +54,19 @@
       color: #545454
       letter-spacing 6px
       font-weight bold
-    }
-    .subTitle {
+    .subTitle
       display: flex
       justify-content center
       align-items center
-      li {
+      li
         line-height 22px
         font-size 15px
         margin 0 24px
         padding-bottom 40px
         color: #333
         cursor pointer
-        &:hover {
+        &:hover
           color: #31c27c
-        }
-        &.active {
+        &.active
           color: #31c27c
-        }
-      }
-    }
-  }
 </style>

@@ -68,10 +68,11 @@
   import reviewList from '../../components/review-list/review-list'
   import Loading from '../../components/loading/loading'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
-
+  import {LoadingMixin} from "../../utils/mixin"
 
 
   export default {
+    mixins: [LoadingMixin],
     data() {
       return {
         singerlist: null,

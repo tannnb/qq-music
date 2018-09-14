@@ -1,25 +1,26 @@
 <template>
   <div>
+
     <!-- 歌单推荐 -->
-    <recom-play-list v-if="recomPlaylistData" :recomPlaylistData="recomPlaylistData"
-                     @handleSelectRecomPlay="handleSelectRecomPlay"/>
+    <recom-play-list
+      v-if="recomPlaylistData"
+      :recomPlaylistData="recomPlaylistData"
+      @handleSelectRecomPlay="handleSelectRecomPlay" />
+
 
     <!-- 新歌首发 -->
-  <!--  <New-song v-if="newSongData" :newSongData="newSongData" @handleNewSong="handleNewSong"/>-->
-
+    <!--  <New-song v-if="newSongData" :newSongData="newSongData" @handleNewSong="handleNewSong"/>-->
 
     <!-- 轮播图 -->
-   <!-- <Slider v-if="focus" :focus="focus"></Slider>-->
-
+    <!-- <Slider v-if="focus" :focus="focus"></Slider>-->
 
     <!-- 新碟首发 -->
-   <!-- <new-album v-if="newAlbum" :newAlbum="newAlbum" @handleNewAblum="handleNewAblum"></new-album>-->
+    <!-- <new-album v-if="newAlbum" :newAlbum="newAlbum" @handleNewAblum="handleNewAblum"></new-album>-->
 
     <!-- 排行榜 -->
-  <!--  <top-list v-if="toplist" :toplist="toplist"></top-list>-->
+    <!--  <top-list v-if="toplist" :toplist="toplist"></top-list>-->
 
     <vue-progress-bar></vue-progress-bar>
-
   </div>
 
 </template>
@@ -36,6 +37,7 @@
   import {getDiscList, getNewAlbumSong} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
   import {LoadingMixin} from "../../utils/mixin";
+
 
 
   export default {
@@ -57,8 +59,7 @@
       topList
     },
     created() {
-      this.$Progress.start()
-      this._musicu()
+      this.$_getRecomPlayData()
     },
     computed: {
       ...mapGetters(['songs'])
@@ -69,19 +70,21 @@
         'saveSingID',
         'selectPlay'
       ]),
-      _musicu() {
-        const showLoading = this.CreateLoading('加载中，请稍后...')
-        musicu().then(res => {
-          if (res.code === ERR_OK) {
-            this.recomPlaylistData = res.recomPlaylist.data.v_hot;
-            this.newSongData = res.new_song.data;
-            this.focus = res.focus.data.content;
-            this.newAlbum = res.new_album.data
-            this.toplist = res.toplist.data
+
+      async $_getRecomPlayData() {
+        this.$Progress.start()
+        this.showLoading = this.CreateLoading('加载中，请稍后...')
+        try {
+          const response = await musicu()
+          if (response.code === ERR_OK) {
+            this.recomPlaylistData = response.recomPlaylist.data.v_hot;
             this.$Progress.finish()
-            showLoading.hide()
+            this.showLoading.hide()
           }
-        })
+        } catch (e) {
+          this.showLoading.hide()
+          this.$Progress.finish()
+        }
       },
 
       // 歌单推荐
@@ -96,7 +99,6 @@
 
       // 新歌首发
       handleNewSong(item) {
-        console.log(item)
         /* this.$router.push({
            path:`/music/album/${item.album_mid}`
          })
@@ -130,15 +132,16 @@
         })
         return ret
       },
-
-      handleTopList() {
-      }
-
+      handleTopList() {}
     }
   }
 </script>
 
 <style lang="stylus" scoped>
 
+  .avatar-wrapper{
+    width 200px
+    height:200px
+  }
 
 </style>

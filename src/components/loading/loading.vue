@@ -38,7 +38,7 @@
   }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   .loadingWrapper
     position: fixed
     top: 0
@@ -48,6 +48,7 @@
     margin auto
     z-index 100
     background white
+    overflow hidden
     &.fade-enter-active, &.fade-leave-active
       transition all 0.3s
     &.fade-enter, &.fade-leave-to

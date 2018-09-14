@@ -1,14 +1,15 @@
 <template>
   <div class="container">
-    <MusicSubheader :datas="recomPlaylistTitle"
+    <MusicSubheader :content="recomPlaylistTitle"
                     :currentIndex="recomCurrentIndex"
                     @handleSelectItem="handleSelectNavItem"/>
     <div class="swiperWrapper">
       <div class="swiperWrapper-outer">
-        <swiper  :options="swiperOption">
-          <swiper-slide v-for="(items,index) in recomPlaylist" :key="index">
+        <swiper :options="swiperOption">
+          <swiper-slide v-for="items in recomPlaylist"
+                        :key="items.id">
             <div class="playlist_item_box" @click="handleSelectItem(items)">
-              <div class="coverImg"><img :src="items.image" alt=""></div>
+              <div class="coverImg"><Avatar-hover :avatarUri="items.image" /></div>
               <p class="title">{{items.title}}</p>
               <p class="listen_num">播放量:{{items.duration | listen}}</p>
             </div>
@@ -29,7 +30,7 @@
   import {Createrecommend} from '../../utils/util'
   import {recommend} from '../../api/recommend'
   import MusicSubheader from '../../components/music-subHeader/music-subHeader'
-
+  import AvatarHover from '../../components/AvatarHover/AvatarHover'
 
   export default {
     props: {
@@ -40,6 +41,7 @@
     },
     components: {
       MusicSubheader,
+      AvatarHover
     },
     data() {
       return {
@@ -68,12 +70,21 @@
     created() {
       this.recomPlaylist = this._normalizeSongs(this.recomPlaylistData)
     },
-    filters:{
-      listen(count){
-        return paddListenCount(count)
-      }
-    },
     methods: {
+      handleSelectNavItem(index, items) {
+        this.recomCurrentIndex = index
+        // 判断是否选择 "为您推荐"
+        let isFirstIndex = items.index === 0 ? '' : items.id
+        recommend(isFirstIndex).then(res => {
+          if (res.code === ERR_OK) {
+            if (!isFirstIndex) {
+              this.recomPlaylist = this._normalizeSongs(res.recomPlaylist.data.v_hot).slice(0, 15)
+              return
+            }
+            this.recomPlaylist = this._normalizeSongs(res.playlist.data.v_playlist, true).slice(0, 15)
+          }
+        })
+      },
       _normalizeSongs(list, flag) {
         let ret = []
         list.forEach((musicData) => {
@@ -81,7 +92,6 @@
           if (!flag && musicData.content_id) {
             ret.push(new Createrecommend({...musicData}))
           }
-
           if (flag && musicData.tid) {
             ret.push(new Createrecommend({
               content_id: musicData.tid,
@@ -95,26 +105,14 @@
         })
         return ret
       },
-
-      handleSelectNavItem(index, items) {
-        this.recomCurrentIndex = index
-        // 判断是否选择 "为您推荐"
-        let isFirstIndex = items.index === 0 ? '' : items.id
-        recommend(isFirstIndex).then(res => {
-          if (res.code === ERR_OK) {
-            if (!isFirstIndex) {
-              this.recomPlaylist = this._normalizeSongs(res.recomPlaylist.data.v_hot).slice(0,15)
-              return
-            }
-            this.recomPlaylist = this._normalizeSongs(res.playlist.data.v_playlist, true).slice(0,15)
-          }
-        })
-      },
-
-      handleSelectItem(items){
-        this.$emit('handleSelectRecomPlay',items)
+      handleSelectItem(items) {
+        this.$emit('handleSelectRecomPlay', items)
       }
-
+    },
+    filters: {
+      listen(count) {
+        return paddListenCount(count)
+      }
     }
   }
 </script>
@@ -136,25 +134,10 @@
       }
       .playlist_item_box {
         width 224px
-        .coverImg {
-          width 100%
-          overflow hidden
-          cursor pointer
-          &:hover {
-            img {
-              transform scale(1.05)
-            }
-          }
-          img {
-            transition all .4s
-            width 100%
-            vertical-align top
-          }
-        }
-
         .title {
           padding 10px 0 8px 0
           font-size 14px
+          line-height 20px
           color: #000
           cursor pointer
           &:hover {
@@ -166,7 +149,6 @@
           color: #999
         }
       }
-
       .slider-prev, .slider-next {
         transition all .3s
         position: absolute
