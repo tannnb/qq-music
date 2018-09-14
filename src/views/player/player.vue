@@ -116,7 +116,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations,mapActions} from 'vuex'
+  import {mapGetters, mapMutations, mapActions} from 'vuex'
   import {playMode} from "../../api/config"
   import PlayerList from '../../components/player-list/player-list'
   import ProgressBar from '../../components/progress-bar/progress-bar'
@@ -146,7 +146,7 @@
       Scroll
     },
     computed: {
-      ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing', 'currentIndex', 'mode', 'sequenceList','favoriteList']),
+      ...mapGetters(['fullScreen', 'playlist', 'currentSong', 'playing', 'currentIndex', 'mode', 'sequenceList', 'favoriteList']),
       playIcon() {
         return this.playing ? 'icon-pause' : 'icon-play'
       },
@@ -411,7 +411,7 @@
       playing(newplaying) {
         this.$nextTick(() => {
           const auido = this.$refs.audio
-          newplaying ? auido.play() : auido.pause()
+          newplaying ? setTimeout(() => auido.play(), 500) : auido.pause()
         })
       }
     },
@@ -629,11 +629,11 @@
                 color: #fff
               }
             }
-            .icon-collect{
-              &.icon-favorite{
+            .icon-collect {
+              &.icon-favorite {
                 color: #3be22e
               }
-              &.icon-not-favorite{
+              &.icon-not-favorite {
                 color: #9e9e9e
               }
             }
@@ -710,7 +710,7 @@
           color: #d6d6d6
           font-size 30px
           cursor pointer
-          &:hover{
+          &:hover {
             color: #31c27c
           }
           &:nth-child(2) {
@@ -722,6 +722,7 @@
       }
     }
   }
+
   @keyframes rotate {
     0% {
       transform: rotate(0)
