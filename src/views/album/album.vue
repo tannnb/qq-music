@@ -45,7 +45,7 @@
             class="items"
             @click="selectAlbumItem(items,index)"
             :key="items.album_id">
-          <img class="avatar" :src="_addUri(items.album_mid)">
+          <div class="avatar"><Avatar-hover :avatarUri="_addUri(items.album_mid)"></Avatar-hover></div>
           <p class="name">{{items.album_name}}</p>
           <p class="singer">{{items.singers | filterSingers}}</p>
           <p class="time">{{items.public_time}}</p>
@@ -57,7 +57,6 @@
     </div>
 
     <vue-progress-bar></vue-progress-bar>
-
   </div>
 </template>
 
@@ -69,6 +68,7 @@
   import {ERR_OK} from "../../api/config";
   import SingerTag from '../singer/singertag'
   import {LoadingMixin} from "../../utils/mixin"
+  import AvatarHover from '../../components/AvatarHover/AvatarHover'
 
   export default {
     mixins: [LoadingMixin],
@@ -97,11 +97,12 @@
     },
     components: {
       SingerTag,
-      Pagination
+      Pagination,
+      AvatarHover
     },
     created() {
       this._getAlbum()
-      this.$Progress.start()
+
     },
     filters: {
       filterSingers(singer) {
@@ -118,7 +119,7 @@
         'saveDiscInfo',
         'saveSingID'
       ]),
-      _getAlbum() {
+      async _getAlbum() {
         const data = {
           area: this.area,
           company: this.company,
@@ -127,24 +128,23 @@
           year: this.year,
           sin: this.sin
         }
+        this.$Progress.start()
         const showLoading = this.CreateLoading('专辑列表加载中，请稍后...')
-        getAlbum(data)
-          .then(res => {
+        try {
+          const response = await getAlbum(data)
+          if (response.data.code === ERR_OK) {
+            const data = response.data.albumlib.data
+            this.albumList = data.list                            // list
+            this.albumTags = data.tags                            // tag
+            this.albumTagsArea = this._initnormalize(data.tags)   // initAreaTag
+            this.allpage = this.albumList.length
+            this.$Progress.finish()
             showLoading.hide()
-            if (res.data.code === ERR_OK) {
-              // list
-              this.albumList = res.data.albumlib.data.list
-              // tag
-              this.albumTags = res.data.albumlib.data.tags
-              // initAreaTag
-              this.albumTagsArea = this._initnormalize(res.data.albumlib.data.tags)
-              this.allpage = this.albumList.length
-              this.$Progress.finish()
-            }
-          })
-          .catch( e => {
-            showLoading.hide()
-          })
+          }
+        }catch (e) {
+          this.$Progress.finish()
+          showLoading.hide()
+        }
       },
       _initnormalize(tags) {
         let area = tags.area
@@ -162,7 +162,6 @@
       _addUri(mid) {
         return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
       },
-
 
       // 地区
       selectItemAreaIndex(items, index) {
@@ -221,7 +220,6 @@
 </script>
 
 <style lang="stylus" scoped>
-
   .albumWrapper {
     background: linear-gradient(#f3f3f3, #fff);
     .album-tags-wrapper {
@@ -311,18 +309,11 @@
           padding-bottom 44px
           .avatar {
             width 224px
-            height: 224px
-            padding-bottom 14px
-            cursor pointer
-            img {
-              width 100%
-              vertical-align top
-            }
           }
           .name {
             font-size 15px
             color: #333
-            padding 4px 0
+            padding 10px 0 12px 0
             max-width: 100%;
             font-weight: 400;
             overflow: hidden;
@@ -335,12 +326,12 @@
             }
           }
           .singer, .time {
-            font-size 14px
+            font-size 13px
+            padding-bottom 6px
             color: #999;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            height: 22px;
           }
           .singer {
             cursor pointer
@@ -359,17 +350,3 @@
   }
 
 </style>
-
-<!--
-
-1 sin -> 0     0*10+0*10
-2 sin -> 20    1*10+1*10
-3 sin -> 40    2*10+2*10
-4 sin -> 60    3*10+3*10
-
-...
-
-12 sin 220     11*10 + 11*10  110+110=220
-
-
--->

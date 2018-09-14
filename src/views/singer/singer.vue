@@ -45,7 +45,6 @@
       </div>
     </div>
 
-    <Loading v-if="singerList.length === 0"></Loading>
     <vue-progress-bar></vue-progress-bar>
 
   </div>
@@ -57,7 +56,6 @@
   import {ERR_OK} from "../../api/config";
   import SingerTag from './singertag'
   import Pagination from './pagination'
-  import Loading from '../../components/loading/loading'
   import {LoadingMixin} from "../../utils/mixin"
 
   const COUNT = 80
@@ -84,8 +82,7 @@
     },
     components: {
       SingerTag,
-      Pagination,
-      Loading
+      Pagination
     },
     created() {
       this._getSingerList()
@@ -96,7 +93,7 @@
         'saveDiscInfo',
         'saveSingID'
       ]),
-      asyncData() {
+      async asyncData() {
         const data = {
           "area": this.area,
           "sex": this.sex,
@@ -106,20 +103,19 @@
           "cur_page": this.cur_page,
         }
         const showLoading = this.CreateLoading('歌手加载中，请稍后...')
-        getSingerList(data)
-          .then(res => {
-            showLoading.hide()
-            if (res.data.code === ERR_OK) {
-              let ret = res.data.singerList.data
-              this.singerList = ret.singerlist
-              this.tags = ret.tags
-              this.allpage = this.singerList.length
-              this.$Progress.finish()
-            }
-          })
-          .catch(e => {
-            showLoading.hide()
-          })
+        try {
+          const response = await getSingerList(data)
+          showLoading.hide()
+          if (response.data.code === ERR_OK) {
+            let ret = response.data.singerList.data
+            this.singerList = ret.singerlist
+            this.tags = ret.tags
+            this.allpage = this.singerList.length
+            this.$Progress.finish()
+          }
+        }catch (e) {
+          showLoading.hide()
+        }
       },
       _getSingerList() {
         this.asyncData()
@@ -170,7 +166,6 @@
 </script>
 
 <style lang="stylus" scoped>
-
   .singerWrapper {
     .singerBg {
       position: relative

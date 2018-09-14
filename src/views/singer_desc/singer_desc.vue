@@ -10,14 +10,18 @@
           <div class="">MV<span class="weight">{{singer_mv.total}}</span></div>
         </div>
         <div class="funBtn">
-          <span class="active"
-                :class=" songs.length === 0? 'notSong':'' "
-                @click="handlePlayAll"
-          > <i class="icon-play"></i> 播放歌手热门歌曲</span>
-          <span class="music_num"> <i class="icon-add"></i> 关注{{music_num | listen}}</span>
+          <div class="funBtn-Btn"
+               :class="songs && songs.length === 0? 'notSong':'active'"
+               @click="handlePlayAll">
+            <i class="icon-play"></i><span>播放歌手热门歌曲</span>
+          </div>
+          <div class="funBtn-Btn">
+            <i class="icon-add"></i><span>关注{{music_num | listen}}</span>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="list-wrapper">
       <List-view
         class="singerContentList"
@@ -34,7 +38,7 @@
         <li v-for="(items,index) in singer_ablum.list"
             :key="index"
             class="items">
-          <img class="avatar" :src="uri(items.albumMID)" alt="">
+          <div class="avatar"><Avatar-hover :avatarUri="uri(items.albumMID)"></Avatar-hover></div>
           <p class="albumName">{{items.albumName}}</p>
           <p class="pubTime">{{items.pubTime}}</p>
         </li>
@@ -46,14 +50,13 @@
         <li v-for="(items,index) in singer_mv.list"
             :key="index"
             class="items">
-          <img class="pic" :src="items.pic" alt="">
+          <div class="avatar"><Avatar-hover :avatarUri="items.pic"></Avatar-hover></div>
           <p class="albumName">{{items.title}}</p>
           <p class="pubTime">{{items.listenCount | listen}}</p>
         </li>
       </ul>
     </div>
 
-    <Loading v-if="songs.length === 0"></Loading>
     <vue-progress-bar></vue-progress-bar>
 
   </div>
@@ -66,10 +69,9 @@
   import {paddListenCount} from "../../utils/tool";
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
-  import Loading from '../../components/loading/loading'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
   import {LoadingMixin} from "../../utils/mixin"
-
+  import AvatarHover from '../../components/AvatarHover/AvatarHover'
 
   export default {
     mixins: [LoadingMixin],
@@ -86,10 +88,9 @@
     components: {
       ListView,
       reviewList,
-      Loading
+      AvatarHover
     },
     created() {
-      this.$Progress.start()
       this._getSingerDesc()
       this._getSingerAlbum()
       this._getSingerMv()
@@ -132,47 +133,68 @@
         })
       },
 
-      _getSingerDesc() {
+      async _getSingerDesc() {
         if (!this.mid) {
           this.$router.push('/music/singer')
           return
         }
-        getSingerDesc(this.mid).then(res => {
-          if (res.data.code === ERR_OK) {
-            this.singerInfo = res.data.data
-            this.singerlist = res.data.data.list
-            processSongsUrl(this._normalizeSongs(res.data.data.list)).then((songs) => {
+        this.$Progress.start()
+        this.showLoading = this.CreateLoading('歌手信息加载中，请稍后...')
+        try {
+          const response = await getSingerDesc(this.mid)
+          if (response.data.code === ERR_OK) {
+            this.singerInfo = response.data.data
+            this.singerlist = response.data.data.list
+            // 获取播放地址
+            processSongsUrl(this._normalizeSongs(response.data.data.list)).then((songs) => {
               //  排除没有url的歌曲
               this.songs = songs.filter((currentSong) => {
                 return currentSong.url.length !== 0
               })
+              this.$Progress.finish()
+              this.showLoading.hide()
+            }).catch(e => {
+              this.$Progress.finish()
+              this.showLoading.hide()
             })
-            this.$Progress.finish()
           }
-        })
-        gerSingerFan(this.mid).then(res => {
-          this.music_num =  res.data.data.music_num
-        })
+        }catch (e) {
+          this.$Progress.finish()
+          this.showLoading.hide()
+        }
+
+        // 获取MV
+        try {
+          const response = await gerSingerFan(this.mid)
+          this.music_num =  response.data.data.music_num
+        }catch (e) {
+          console.log('MV获取失败')
+        }
       },
 
-      _getSingerAlbum() {
+      async _getSingerAlbum() {
         if (!this.mid) {
           this.$router.push('/music/singer')
           return
         }
-        getSingerAlbum(this.mid).then(res => {
-          if (res.data.code === ERR_OK) {
-            this.singer_ablum = res.data.data
+        try {
+          const response = await getSingerAlbum(this.mid)
+          if (response.data.code === ERR_OK) {
+            this.singer_ablum = response.data.data
           }
-        })
+        }catch (e) {
+          console.log('歌手详情获取失败')
+        }
+
       },
-      _getSingerMv() {
+      async _getSingerMv() {
         if (!this.mid) {
           this.$router.push('/music/singer')
           return
         }
-        getSingerMv(this.mid).then(res => {
-          let ret = res.data
+        try {
+          const response = await getSingerMv(this.mid)
+          let ret = response.data
           const reg = /\((\{.+\})\)/
           const matches = ret.match(reg)
           if (matches) {
@@ -181,9 +203,10 @@
           if(ret.code === ERR_OK){
             this.singer_mv = ret.data
           }
-        })
+        }catch (e) {
+          console.log('MV获取失败')
+        }
       },
-
       _normalizeSongs(list) {
         let ret = []
         list.forEach((musicData) => {
@@ -209,7 +232,6 @@
       .logo {
         width 250px
         height 250px
-        border-radius 50%
         overflow hidden
         img {
           width 100%
@@ -243,40 +265,46 @@
           .weight{
             padding-left 6px
             font-size 26px
+            color #494949
             font-family  'arial'
           }
         }
         .funBtn {
-          span {
-            display inline-block
-            border: 1px solid #ccc
+          display flex
+          .funBtn-Btn {
+            display flex
+            justify-content center
+            align-items center
+            border: 1px solid #c9c9c9
             padding 10px 30px
-            margin 20px 0
+            margin 20px 10px 20px 0
             font-size 15px
-            color: #7d7b7b
+            color: #333
             border-radius 2px
             cursor pointer
+            &.active {
+              background #31c27c
+              color: #fff
+              border-color #31c27c
+              &:hover {
+                background #2CAF6F
+              }
+            }
+            &.notSong {
+              border-color #cfcfcf
+              user-select none
+              cursor: not-allowed
+            }
             &:hover {
               background #EDEDED
             }
-          }
-          .active {
-            background #31c27c
-            color: #fff
-            border-color #31c27c
-            &:hover {
-              background #2CAF6F
-            }
-            &.notSong {
-              border-color #848484
-              user-select none
+            i {
+              font-size 18px
+              padding-right 6px
             }
           }
-
         }
-
       }
-
     }
 
     .list-wrapper {
@@ -320,13 +348,8 @@
         justify-content space-between
         .items {
           width 20%
-          .avatar {
-            width 224px
-            cursor pointer
-            img {
-              width 100%
-              vertical-align top
-            }
+          .avatar{
+            width 100%
           }
           .pic{
             width 224px
