@@ -70,7 +70,6 @@
         'saveSingID',
         'selectPlay'
       ]),
-
       async $_getRecomPlayData() {
         this.$Progress.start()
         this.showLoading = this.CreateLoading('加载中，请稍后...')
@@ -131,8 +130,7 @@
           }
         })
         return ret
-      },
-      handleTopList() {}
+      }
     }
   }
 </script>

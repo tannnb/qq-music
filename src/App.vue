@@ -109,10 +109,8 @@
     right: 65px;
     bottom: 60px;
     display: none;
-    transition all .3s;
     background: url("./images/top_bg.png") no-repeat left top;
   }
-
   .btn:hover {
     background: url("./images/top_bg.png") no-repeat 0 -60px;
   }
