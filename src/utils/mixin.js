@@ -6,6 +6,13 @@ export const LoadingMixin = {
           content:message
         },
       }).show()
+    },
+    CreateToast(message){
+      return this.$createToast({
+        $props: {
+          content:message
+        }
+      }).show()
     }
   }
 }

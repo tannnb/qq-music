@@ -13,6 +13,7 @@ import  './styles/index.styl'
 import './fonts/iconfont'
 import VueProgressBar from 'vue-progressbar'
 import Loading from './components/loading/loading'
+import Toast from './components/Toast/Toast'
 
 
 const options = {
@@ -42,6 +43,7 @@ Vue.use(CreateAPI, {
   apiPrefix: '$create-'
 })
 Vue.createAPI(Loading, true)
+Vue.createAPI(Toast, true)
 
 Vue.config.productionTip = false
 

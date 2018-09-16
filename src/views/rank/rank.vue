@@ -1,9 +1,12 @@
 <template>
   <div class="rankWrapper">
     <div class="rank-main">
+
       <div class="slider-wrapper">
         <div class="slider">
-          <ul @click="handleSlider(items)" class="slider-items" clas v-for="(items,index) in listOpt"
+          <ul @click="handleSlider(items)"
+              class="slider-items"
+              v-for="(items,index) in listOpt"
               :key="items.GroupID">
             <span class="title">{{items.GroupName}}</span>
             <li class="item"
@@ -15,18 +18,22 @@
           </ul>
         </div>
       </div>
-      <div class="rankContent">
 
-        <div class="content-Header"><strong class="tags">{{ListName}}</strong> <span class="time">{{showtime}}</span>
+      <div class="rankContent">
+        <div class="content-Header">
+          <strong class="tags">{{ListName}}</strong>
+          <span class="time">{{showtime}}</span>
         </div>
-        <div class="content-fun" v-if="songTable">
-          <span class="active"
-                :class=" songs.length === 0? 'notSong':'' "
-                @click="handlePlayAll"
-          > <i class="icon-play"></i> 播放全部</span>
-          <span> <i class="icon-pinglun"></i>全部评论({{songTable.comment_num}})</span>
+        <div class="funBtn" v-if="songTable">
+          <div class="funBtn-Btn"
+               :class="songs && songs.length === 0? 'notSong':'active'"
+               @click="handlePlayAll">
+            <i class="icon-play"></i><span>播放全部</span>
+          </div>
+          <div class="funBtn-Btn">
+            <i class="icon-pinglun"></i><span>全部评论({{songTable.comment_num}})</span>
+          </div>
         </div>
-        <div class="content-songTitle"></div>
         <ul class="content-songList">
           <li v-for="(items,index) in songs"
               class="songList-Item"
@@ -34,7 +41,7 @@
             <div class="ranking">
               <span :class="getRankCls(song_begin,index)">{{getRankText(song_begin,index)}}</span>
             </div>
-            <div class="avatar"><img :src="items.image"></div>
+            <div class="avatar"><img :src="items.image" alt="" :title="items.name"></div>
             <div class="name">
               <div class="nameInfo">
                 <span>{{items.name}}</span>
@@ -52,12 +59,9 @@
         <div class="page-wrapper">
           <Pagination v-if="allpage" @pagetions="pagetions" :allpage="allpage"></Pagination>
         </div>
-
-        <div class="miniloading-wrapper" v-if="miniLoadingFlag">
-          <Mini-loading></Mini-loading>
-        </div>
       </div>
     </div>
+
     <vue-progress-bar></vue-progress-bar>
     <confirm ref="confirm" text="暂时没有找到歌曲呢o(╥﹏╥)o" confirmBtnText="确定"></confirm>
   </div>
@@ -67,9 +71,7 @@
   import {mapGetters, mapActions, mapMutations} from 'vuex'
   import {toplistOpt, toplistCp} from '../../api/rank'
   import {format} from "../../utils/tool";
-  import {processSongsUrl, isValidMusic, createSong} from "../../api/songList";
-  import Loading from '../../components/loading/loading'
-  import MiniLoading from '../../components/miniLoading/miniLoading'
+  import {processSongsUrl, createSong} from "../../api/songList";
   import Confirm from '../../components/confirm/confirm'
   import Pagination from '../singer/pagination'
   import {ERR_OK} from "../../api/config"
@@ -100,34 +102,11 @@
       }
     },
     components: {
-      Loading,
-      MiniLoading,
       Confirm,
       Pagination
     },
     created() {
-      this.$Progress.start()
-      this.showLoading = this.CreateLoading('排行榜加载中，请稍后...')
-      this._toplistOpt().then(res => {
-        this.listOpt = res
-        const child = res[0].List[0]
-        this.songType = res[0].Type
-        this.update_key = child.update_key
-        this.topID = child.topID
-        this.ListName = child.ListName
-        this.showtime = child.showtime
-        toplistCp(this.update_key, this.topID, this.songType, this.song_begin).then(res => {
-          if (res.data.code === ERR_OK) {
-            this.songlist = res.data.songlist
-            this.songTable = res.data
-            this.song_begin = this.songTable.song_begin
-            this.getSong(this.songlist)
-            this.allpage = res.data.total_song_num
-            this.$Progress.finish()
-          }
-        })
-
-      })
+      this.getToplistCp()
     },
     mounted() {
 
@@ -139,6 +118,36 @@
       ...mapMutations({
         setCurrentIndex: 'SET_CURRENTINDEX'
       }),
+
+      async getToplistCp() {
+        this.$Progress.start()
+        this.showLoading = this.CreateLoading('排行榜加载中，请稍后...')
+        try {
+          // 获取左侧排行榜信息
+          const response = await this._toplistOpt()
+          this.$Progress.finish()
+          this.listOpt = response
+          const child = response[0].List[0]
+          this.songType = response[0].Type
+          // 设置默认第一个选中
+          this.update_key = child.update_key
+          this.topID = child.topID
+          this.ListName = child.ListName
+          this.showtime = child.showtime
+
+          const listCp = await toplistCp(this.update_key, this.topID, this.songType, this.song_begin)
+          if (listCp.data.code === ERR_OK) {
+            this.songlist = listCp.data.songlist
+            this.songTable = listCp.data
+            this.song_begin = this.songTable.song_begin
+            this.allpage = listCp.data.total_song_num
+            this.getSong(this.songlist)
+          }
+        } catch (e) {
+          this.$Progress.finish()
+          this.showLoading.hide()
+        }
+      },
 
       _toplistOpt() {
         return new Promise((resolve, reject) => {
@@ -156,20 +165,19 @@
         })
       },
 
-      getSong(song) {
-        processSongsUrl(this._normalizeSongs(song))
-          .then((songs) => {
-            this.showLoading.hide()
-            this.songs = songs.filter((currentSong) => {
-              return currentSong.url.length !== 0
-            })
+      async getSong(song) {
+        try {
+          const response = await processSongsUrl(this._normalizeSongs(song))
+          this.showLoading.hide()
+          this.songs = response.filter((currentSong) => {
+            return currentSong.url.length !== 0
           })
-          .catch(err => {
-            this.showLoading.hide()
-            if (this.songs.length === 0) {
-              this.$refs.confirm.show()
-            }
-          })
+        } catch (e) {
+          this.showLoading.hide()
+          if (this.songs.length === 0) {
+            this.$refs.confirm.show()
+          }
+        }
       },
 
       getRankCls(song_begin, index) {
@@ -191,7 +199,6 @@
             return `${song_begin + 1 + index}`
           }
         }
-
         if (song_begin > 0) {
           return `${song_begin + 1 + index}`
         }
@@ -202,37 +209,38 @@
       },
 
       // 切换榜单
-      handleSelectSlider(item) {
+      async handleSelectSlider(item) {
+        this.showToast = this.CreateToast()
         // 切换榜单，从第一页开始
         this.song_begin = 0
-
         this.miniLoadingFlag = true
         this.currentIndex = item.topID
         this.ListName = item.ListName
         this.showtime = item.showtime
         this.update_key = item.update_key
         this.topID = item.topID
-
-
         this.songType = this.songType
-        toplistCp(this.update_key, this.topID, this.songType).then(res => {
-          if (res.data.code === ERR_OK) {
-            this.songlist = res.data.songlist
-            this.songTable = res.data
-            this.getSong(this.songlist)
-            this.allpage = res.data.total_song_num
 
-            // 若是没有歌曲
+        try {
+          const response = await toplistCp(this.update_key, this.topID, this.songType)
+          // 若是没有歌曲
+          if (response.data.code === ERR_OK) {
+            this.showToast.hide()
+            this.songlist = response.data.songlist
+            this.songTable = response.data
+            this.getSong(this.songlist)
+            this.allpage = response.data.total_song_num
             setTimeout(() => {
-              if (this.songlist.length === 0) {
-                this.$refs.loadcomponent.hide()
-              }
-            }, 1000)
+              document.documentElement.scrollTop = document.body.scrollTop = 0;
+            }, 200)
           }
-          this.miniLoadingFlag = false
-        }).catch(err => {
-          this.miniLoadingFlag = false
-        })
+          if (response.data === ' ') {
+            this.showToast.hide()
+            this.$refs.confirm.show()
+          }
+        } catch (e) {
+          this.showToast.hide()
+        }
       },
 
       _normalizeSongs(list) {
@@ -256,6 +264,7 @@
           index: 0
         })
       },
+
       handleSelectSong(index) {
         this.selectPlay({
           list: this.songs,
@@ -264,23 +273,26 @@
       },
 
       // 分页
-      pagetions(index) {
+      async pagetions(index) {
         this.song_begin = (index - 1) * 30
-        toplistCp(this.update_key, this.topID, this.songType, this.song_begin).then(res => {
-          if (res.data.code === ERR_OK) {
-            this.songlist = res.data.songlist
-            this.songTable = res.data
+        this.showToast = this.CreateToast()
+        try {
+          const response =  await toplistCp(this.update_key, this.topID, this.songType, this.song_begin)
+          if(response.data.code === ERR_OK){
+            this.showToast.hide()
+            this.songlist = response.data.songlist
+            this.songTable = response.data
             this.song_begin = this.songTable.song_begin
+            this.allpage = response.data.total_song_num
             this.getSong(this.songlist)
-            this.allpage = res.data.total_song_num
+            setTimeout(() => {
+              document.documentElement.scrollTop = document.body.scrollTop = 0;
+            }, 200)
           }
-        })
-        setTimeout(() => {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-        }, 200)
+        }catch (e) {
+          this.showToast.hide()
+        }
       }
-
-
     }
   }
 </script>
@@ -344,44 +356,48 @@
             color: #333333
           }
         }
-        .content-fun {
-          span {
-            display inline-block
-            border: 1px solid #ccc
+        .funBtn {
+          display flex
+          .funBtn-Btn {
+            display flex
+            justify-content center
+            align-items center
+            border: 1px solid #c9c9c9
             padding 10px 30px
-            margin 20px 0
+            margin 20px 10px 20px 0
             font-size 15px
             color: #333
             border-radius 2px
             cursor pointer
+            &.active {
+              background #31c27c
+              color: #fff
+              border-color #31c27c
+              &:hover {
+                background #2CAF6F
+              }
+            }
+            &.notSong {
+              border-color #cfcfcf
+              user-select none
+              cursor: not-allowed
+            }
             &:hover {
               background #EDEDED
             }
-          }
-          .active {
-            background #31c27c
-            color: #fff
-            border-color #31c27c
-            &:hover {
-              background #2CAF6F
-            }
-            &.notSong {
-              border-color #848484
-              user-select none
+            i {
+              font-size 18px
+              padding-right 6px
             }
           }
-
-        }
-        .content-songTitle {
         }
         .content-songList {
+          background white
           .songList-Item {
             display flex
             align-items center
             padding 10px 0
-            &:nth-child(even) {
-              background rgba(0, 0, 0, .01)
-            }
+            border-bottom 1px solid #f2f2f2
             .ranking {
               flex 0 0 80
               width 80px
@@ -409,6 +425,7 @@
             .avatar {
               width 60px
               padding-right 10px
+              cursor pointer
               img {
                 width 100%
                 vertical-align top
@@ -420,6 +437,10 @@
               align-items center
               font-size 15px
               color: #373737
+              cursor pointer
+              &:hover {
+                color: #31c27c
+              }
               .nameInfo {
                 flex 1
                 .isonly {
@@ -472,6 +493,7 @@
         }
 
         .page-wrapper {
+          padding-top 20px
           text-align center
         }
         .miniloading-wrapper {

@@ -28,7 +28,7 @@
                   <img :src="currentSong.image">
                 </div>
                 <div class="name">歌曲名:{{currentSong.name}}</div>
-                <div class="singer">歌曲名:{{currentSong.singer}}</div>
+                <div class="singer">歌手:{{currentSong.singer}}</div>
               </div>
               <Scroll class="middle-r" ref="lyricList" :data="currentLyric && currentLyric.lines">
                 <div class="lyric-wrapper">
