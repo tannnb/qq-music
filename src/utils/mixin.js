@@ -13,6 +13,22 @@ export const LoadingMixin = {
           content:message
         }
       }).show()
+    },
+    CreateDialog(options){
+      return this.$createDialog({
+        $props: {
+          text:options.message,
+          confirmBtnText:options.confirmBtnText,
+          cancelBtnText:options.cancelBtnText,
+          showClose:options.showClose,
+          cancelBtn:options.cancelBtn
+        },
+        $events:{
+          confirm(){
+            options.confirmBtn && options.confirmBtn()
+          }
+        }
+      }).show()
     }
   }
 }

@@ -544,13 +544,12 @@
             .middle-r {
               display: inline-block
               vertical-align: top
-              width: 100%
+              width: 80%
+              margin: 20px 10% 0 10%
               max-height: 200px
-              margin-top 20px
               overflow: hidden
               .lyric-wrapper {
-                width: 80%
-                margin: 0 auto
+                width: 100%
                 overflow: hidden
                 text-align: center
                 .text {

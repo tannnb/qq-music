@@ -46,9 +46,6 @@
     </div>
 
     <vue-progress-bar></vue-progress-bar>
-    <confirm ref="confirm"
-             text="暂时没有找到歌曲，抱歉！"
-             confirmBtnText="确定"></confirm>
 
   </div>
 </template>
@@ -57,7 +54,6 @@
   import {mapGetters, mapActions} from 'vuex'
   import ListView from '../../components/list-view/list-view'
   import reviewList from '../../components/review-list/review-list'
-  import Confirm from '../../components/confirm/confirm'
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import {getDiscList, review} from '../../api/disc'
@@ -79,8 +75,7 @@
     },
     components: {
       ListView,
-      reviewList,
-      Confirm
+      reviewList
     },
     computed: {
       ...mapGetters([
@@ -101,8 +96,23 @@
         'selectPlay',
         'insertSong'
       ]),
+
+      copyrightIssue(message) {
+        var vm = this
+        this.CreateDialog({
+          message: message ? message : '抱歉，因版权限制,暂无法获取！',
+          confirmBtnText: '立即返回',
+          cancelBtn: false,
+          showClose: true,
+          confirmBtn() {
+            vm.$router.push('/music/index')
+          }
+        })
+      },
+
       handlePlayer(items, index) {
         if (this.songs.length === 0) {
+          this.copyrightIssue()
           return
         }
         this.selectPlay({
@@ -112,6 +122,7 @@
       },
       handlePlayAll() {
         if (this.songs.length === 0) {
+          this.copyrightIssue()
           return false
         }
         this.selectPlay({
@@ -123,31 +134,36 @@
         this.insertSong(items)
       },
       async _getDiscList() {
+        this.$Progress.start()
+        this.showLoading = this.CreateLoading('加载中，请稍后...')
         if (!this.mid) {
+          this.showLoading.hide()
+          this.$Progress.finish()
           this.$router.push('/music/index')
           return
         }
-        this.showLoading = this.CreateLoading('加载中，请稍后...')
-        this.$Progress.start()
 
         // 获取歌曲列表
         try {
           const response = await getDiscList(this.mid)
           if (response.code === ERR_OK) {
             this.playList = response.cdlist[0]
-            // 获取播放地址
-            processSongsUrl(this._normalizeSongs(response.cdlist[0].songlist)).then((songs) => {
+
+            try {
+              // 获取播放地址
+              const result = await processSongsUrl(this._normalizeSongs(response.cdlist[0].songlist))
               //  排除没有url的歌曲
-              this.songs = songs.filter(currentSong => {
+              this.songs = result.filter(currentSong => {
                 return currentSong.url.length !== 0
               })
               this.showLoading.hide()
               this.$Progress.finish()
-            }).catch(e => {
+            }catch (e) {
               this.showLoading.hide()
               this.$Progress.finish()
-              this.$refs.confirm.show()
-            })
+              this.copyrightIssue()
+            }
+
             // 获取评论
             review(this.mid).then(res => {
               if (res.data.code === ERR_OK) {
@@ -155,10 +171,12 @@
                 this.commenttotal = res.data.comment.commenttotal
               }
             })
+
           }
         } catch (e) {
           this.showLoading.hide()
           this.$Progress.finish()
+          this.copyrightIssue()
         }
       },
       _normalizeSongs(list) {

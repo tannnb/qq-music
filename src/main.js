@@ -14,6 +14,7 @@ import './fonts/iconfont'
 import VueProgressBar from 'vue-progressbar'
 import Loading from './components/loading/loading'
 import Toast from './components/Toast/Toast'
+import Dialog from './components/confirm/confirm'
 
 
 const options = {
@@ -44,6 +45,7 @@ Vue.use(CreateAPI, {
 })
 Vue.createAPI(Loading, true)
 Vue.createAPI(Toast, true)
+Vue.createAPI(Dialog, true)
 
 Vue.config.productionTip = false
 

@@ -1,8 +1,8 @@
 <template>
   <div class="singer-desc">
-    <div class="singerWrapper"  v-if="singerInfo">
-     <div class="logo"><img  :src="uri(singerInfo.singer_mid,true)" alt=""></div>
-      <div class="singerItem" >
+    <div class="singerWrapper" v-if="singerInfo">
+      <div class="logo"><img :src="uri(singerInfo.singer_mid,true)" alt=""></div>
+      <div class="singerItem">
         <div class="dissname">{{singerInfo.singer_name}}</div>
         <div class="singerTotal">
           <div class="" v-if="singerInfo">单曲<span class="weight">{{singerInfo.total}}</span></div>
@@ -38,7 +38,9 @@
         <li v-for="(items,index) in singer_ablum.list"
             :key="index"
             class="items">
-          <div class="avatar"><Avatar-hover :avatarUri="uri(items.albumMID)"></Avatar-hover></div>
+          <div class="avatar">
+            <Avatar-hover :avatarUri="uri(items.albumMID)"></Avatar-hover>
+          </div>
           <p class="albumName">{{items.albumName}}</p>
           <p class="pubTime">{{items.pubTime}}</p>
         </li>
@@ -50,7 +52,9 @@
         <li v-for="(items,index) in singer_mv.list"
             :key="index"
             class="items">
-          <div class="avatar"><Avatar-hover :avatarUri="items.pic"></Avatar-hover></div>
+          <div class="avatar">
+            <Avatar-hover :avatarUri="items.pic"></Avatar-hover>
+          </div>
           <p class="albumName">{{items.title}}</p>
           <p class="pubTime">{{items.listenCount | listen}}</p>
         </li>
@@ -64,7 +68,7 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
-  import {getSingerDesc, getSingerAlbum, getSingerMv,gerSingerFan} from '../../api/singer'
+  import {getSingerDesc, getSingerAlbum, getSingerMv, gerSingerFan} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import ListView from '../../components/list-view/list-view'
@@ -81,8 +85,8 @@
         singerInfo: null,
         songs: [],
         singer_ablum: {},
-        singer_mv:{},
-        music_num:null
+        singer_mv: {},
+        music_num: null
       }
     },
     components: {
@@ -98,8 +102,8 @@
     computed: {
       ...mapGetters(['mid', 'initDisc'])
     },
-    filters:{
-      listen(count){
+    filters: {
+      listen(count) {
         return paddListenCount(count)
       }
     },
@@ -108,14 +112,15 @@
         'selectPlay',
         'insertSong'
       ]),
-      uri(uri,flag) {
-        let count = flag? '1':'2'
+      uri(uri, flag) {
+        let count = flag ? '1' : '2'
         return `https://y.gtimg.cn/music/photo_new/T00${count}R300x300M000${uri}.jpg?max_age=2592000`
       },
       // 追加歌曲
       appendPlayer(items) {
         this.insertSong(items)
       },
+
       handlePlayer(items, index) {
         this.selectPlay({
           list: this.songs,
@@ -123,8 +128,22 @@
         })
       },
 
+      copyrightIssue(message) {
+        var vm = this
+        this.CreateDialog({
+          message: message ? message : '抱歉，因版权限制,暂无法查看该歌手下歌曲！',
+          confirmBtnText: '返回专辑页面',
+          cancelBtn: false,
+          showClose: true,
+          confirmBtn() {
+            vm.$router.push('/music/singer')
+          }
+        })
+      },
+
       handlePlayAll() {
         if (this.songs.length === 0) {
+          this.copyrightIssue()
           return false
         }
         this.selectPlay({
@@ -134,41 +153,50 @@
       },
 
       async _getSingerDesc() {
+        this.$Progress.start()
+        this.showLoading = this.CreateLoading('歌手信息加载中，请稍后...')
         if (!this.mid) {
+          this.$Progress.finish()
+          this.showLoading.hide()
           this.$router.push('/music/singer')
           return
         }
-        this.$Progress.start()
-        this.showLoading = this.CreateLoading('歌手信息加载中，请稍后...')
+
         try {
           const response = await getSingerDesc(this.mid)
           if (response.data.code === ERR_OK) {
             this.singerInfo = response.data.data
             this.singerlist = response.data.data.list
+
             // 获取播放地址
-            processSongsUrl(this._normalizeSongs(response.data.data.list)).then((songs) => {
+            try {
+              const result = await processSongsUrl(this._normalizeSongs(response.data.data.list))
               //  排除没有url的歌曲
-              this.songs = songs.filter((currentSong) => {
+              this.songs = result.filter((currentSong) => {
                 return currentSong.url.length !== 0
               })
               this.$Progress.finish()
               this.showLoading.hide()
-            }).catch(e => {
+            } catch (e) {
               this.$Progress.finish()
               this.showLoading.hide()
-            })
+              this.copyrightIssue()
+            }
           }
-        }catch (e) {
+        } catch (e) {
           this.$Progress.finish()
           this.showLoading.hide()
+          this.copyrightIssue()
         }
 
         // 获取MV
         try {
           const response = await gerSingerFan(this.mid)
-          this.music_num =  response.data.data.music_num
-        }catch (e) {
-          console.log('MV获取失败')
+          this.music_num = response.data.data.music_num
+        } catch (e) {
+          this.CreateDialog({
+            message: 'MV获取失败'
+          })
         }
       },
 
@@ -182,10 +210,11 @@
           if (response.data.code === ERR_OK) {
             this.singer_ablum = response.data.data
           }
-        }catch (e) {
-          console.log('歌手详情获取失败')
+        } catch (e) {
+          this.CreateDialog({
+            message: '歌手详情获取失败'
+          })
         }
-
       },
       async _getSingerMv() {
         if (!this.mid) {
@@ -200,11 +229,13 @@
           if (matches) {
             ret = JSON.parse(matches[1])
           }
-          if(ret.code === ERR_OK){
+          if (ret.code === ERR_OK) {
             this.singer_mv = ret.data
           }
-        }catch (e) {
-          console.log('MV获取失败')
+        } catch (e) {
+          this.CreateDialog({
+            message: 'MV获取失败'
+          })
         }
       },
       _normalizeSongs(list) {
@@ -214,7 +245,7 @@
             ret.push(createSong(musicData.musicData))
           }
         })
-       return ret
+        return ret
       }
     }
   }
@@ -250,23 +281,23 @@
           padding 6px 0
           color: #888787
         }
-        .singerTotal{
+        .singerTotal {
           display flex
           padding-top 30px
           font-size 15px
           color: #797676
           cursor pointer
-          div{
-            margin-right  20px
-            &:hover{
+          div {
+            margin-right 20px
+            &:hover {
               color: #31c27c
             }
           }
-          .weight{
+          .weight {
             padding-left 6px
             font-size 26px
             color #494949
-            font-family  'arial'
+            font-family 'arial'
           }
         }
         .funBtn {
@@ -348,13 +379,13 @@
         justify-content space-between
         .items {
           width 20%
-          .avatar{
+          .avatar {
             width 100%
           }
-          .pic{
+          .pic {
             width 224px
-            height:126px
-            img{
+            height: 126px
+            img {
               width 100%
               vertical-align top
             }

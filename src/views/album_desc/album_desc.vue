@@ -15,13 +15,14 @@
           <li>发行公司：{{albumInfo.company}}</li>
         </ul>
         <div class="funBtn">
-          <span class="active"
-                :class=" songs.length === 0? 'notSong':'' "
-                @click="handlePlayAll"
-          > <i class="icon-play"></i> 播放全部</span>
-          <span><i class="icon-collect"></i>收藏</span>
-          <span><i class="icon-pinglun"></i>评论</span>
-          <span><i class="icon-more"></i>更多</span>
+          <div class="funBtn-Btn"
+               :class="songs && songs.length === 0? 'notSong':'active'"
+               @click="handlePlayAll">
+            <i class="icon-play"></i><span>播放全部</span>
+          </div>
+          <div class="funBtn-Btn"><i class="icon-collect"></i><span>收藏</span></div>
+          <div class="funBtn-Btn"><i class="icon-pinglun"></i><span>评论</span></div>
+          <div class="funBtn-Btn"><i class="icon-more"></i><span>更多</span></div>
         </div>
       </div>
     </div>
@@ -36,15 +37,9 @@
       </div>
     </div>
     <div class="list-wrapper" style="width: 860px">
-     <!-- <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>-->
+      <!-- <review-list v-if="commentlist" :commentlist="commentlist" :commenttotal="commenttotal"></review-list>-->
     </div>
-
-    <Loading v-if="!notSongUrl && albumInfo.length === 0"></Loading>
     <vue-progress-bar></vue-progress-bar>
-    <confirm ref="confirm"
-             @confirm="confirmClear"
-             text="暂时没有找到歌曲呢o(╥﹏╥)o"
-             confirmBtnText="确定"></confirm>
   </div>
 </template>
 
@@ -55,10 +50,10 @@
   import {ERR_OK} from "../../api/config";
   import {processSongsUrl, isValidMusic, createSong} from "../../api/songList";
   import ListView from '../../components/list-view/list-view'
-  import Loading from '../../components/loading/loading'
-  import Confirm from '../../components/confirm/confirm'
+  import {LoadingMixin} from "../../utils/mixin"
 
   export default {
+    mixins: [LoadingMixin],
     name: "album_desc",
     data() {
       return {
@@ -66,16 +61,13 @@
         songs: [],
         commentlist: null,
         commenttotal: '',
-        notSongUrl:false
+        notSongUrl: false
       }
     },
     components: {
-      ListView,
-      Loading,
-      Confirm
+      ListView
     },
     created() {
-      this.$Progress.start()
       this._getAlbumDesc()
     },
     computed: {
@@ -87,43 +79,78 @@
         'insertSong'
       ]),
       _addUri(mid) {
-        return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
+        try {
+          return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
+        }catch (e) {
+          return ''
+        }
       },
-      _getAlbumDesc() {
+
+      copyrightIssue(message) {
+        var vm = this
+        this.CreateDialog({
+          message: message ? message : '抱歉，因版权限制,暂无法查看该专辑下歌曲！',
+          confirmBtnText: '返回专辑页面',
+          cancelBtn: false,
+          showClose:true,
+          confirmBtn() {
+            vm.$router.push('/music/album')
+          }
+        })
+      },
+
+      async _getAlbumDesc() {
+        this.$Progress.start()
+        this.showLoading = this.CreateLoading('加载中，请稍后...')
         if (!this.mid) {
+          this.$Progress.finish()
+          this.showLoading.hide()
           this.$router.push('/music/album')
           return
         }
-        getAlbumDesc(this.mid).then(res => {
+        try {
+          const response = await getAlbumDesc(this.mid)
 
-          // 版权问题 无法读取
-          if(res.data.code === 400){
-            this.notSongUrl = true
+          // 版权问题 无法获取
+          if (response.data.code === 404) {
+            console.log(response)
             this.albumInfo = [1]
             this.$Progress.finish()
+            this.showLoading.hide()
+            this.copyrightIssue(response.data.data.albumTips)
             return
           }
-          if (res.data.code === ERR_OK) {
+
+          if (response.data.code === ERR_OK) {
             this.notSongUrl = false
-            this.albumInfo = res.data.data
-            processSongsUrl(this._normalizeSongs(res.data.data.list)).then((songs) => {
-              this.songs = songs.filter((currentSong) => {
+            this.albumInfo = response.data.data
+            try {
+              const result = await  processSongsUrl(this._normalizeSongs(response.data.data.list))
+              this.songs = result.filter((currentSong) => {
                 return currentSong.url.length !== 0
               })
               this.$Progress.finish()
-            }).catch(err => {
-              this.notSongUrl = true
+              this.showLoading.hide()
+              /*
+              // 获取评论
+              review(this.mid).then(res => {
+                console.log(res)
+                if (res.data.code === ERR_OK) {
+                  this.commentlist = res.data.comment.commentlist
+                  this.commenttotal = res.data.comment.commenttotal
+                }
+              })*/
+            } catch (e) {
               this.$Progress.finish()
-            })
-            /*review(this.mid).then(res => {
-              console.log(res)
-              if (res.data.code === ERR_OK) {
-                this.commentlist = res.data.comment.commentlist
-                this.commenttotal = res.data.comment.commenttotal
-              }
-            })*/
+              this.showLoading.hide()
+              this.copyrightIssue()
+            }
           }
-        })
+        } catch (e) {
+          this.showLoading.hide()
+          this.$Progress.finish()
+          this.copyrightIssue()
+        }
 
       },
       _normalizeSongs(list) {
@@ -136,8 +163,8 @@
         return ret
       },
       handlePlayAll() {
-        if (this.notSongUrl) {
-          this.$refs.confirm.show()
+        if (this.songs.length === 0) {
+          this.copyrightIssue()
           return
         }
         this.selectPlay({
@@ -154,7 +181,6 @@
       appendPlayer(items) {
         this.insertSong(items)
       },
-      confirmClear(){}
 
     }
   }
@@ -212,32 +238,39 @@
           }
         }
         .funBtn {
-          span {
-            display inline-block
+          display flex
+          .funBtn-Btn {
+            display flex
+            justify-content center
+            align-items center
             border: 1px solid #c9c9c9
             padding 10px 30px
-            margin 20px 0
+            margin 20px 10px 20px 0
             font-size 15px
             color: #333
             border-radius 2px
             cursor pointer
+            &.active {
+              background #31c27c
+              color: #fff
+              border-color #31c27c
+              &:hover {
+                background #2CAF6F
+              }
+            }
+            &.notSong {
+              border-color #cfcfcf
+              user-select none
+              cursor: not-allowed
+            }
             &:hover {
               background #EDEDED
             }
-          }
-          .active {
-            background #31c27c
-            color: #fff
-            border-color #31c27c
-            &:hover {
-              background #2CAF6F
-            }
-            &.notSong {
-              border-color #848484
-              user-select none
+            i {
+              font-size 18px
+              padding-right 6px
             }
           }
-
         }
       }
     }

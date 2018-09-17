@@ -63,16 +63,14 @@
     </div>
 
     <vue-progress-bar></vue-progress-bar>
-    <confirm ref="confirm" text="暂时没有找到歌曲呢o(╥﹏╥)o" confirmBtnText="确定"></confirm>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapActions, mapMutations} from 'vuex'
+  import {mapActions, mapMutations} from 'vuex'
   import {toplistOpt, toplistCp} from '../../api/rank'
   import {format} from "../../utils/tool";
   import {processSongsUrl, createSong} from "../../api/songList";
-  import Confirm from '../../components/confirm/confirm'
   import Pagination from '../singer/pagination'
   import {ERR_OK} from "../../api/config"
   import {LoadingMixin} from "../../utils/mixin"
@@ -102,14 +100,10 @@
       }
     },
     components: {
-      Confirm,
       Pagination
     },
     created() {
       this.getToplistCp()
-    },
-    mounted() {
-
     },
     methods: {
       ...mapActions([
@@ -126,6 +120,7 @@
           // 获取左侧排行榜信息
           const response = await this._toplistOpt()
           this.$Progress.finish()
+          this.showLoading.hide()
           this.listOpt = response
           const child = response[0].List[0]
           this.songType = response[0].Type
@@ -175,7 +170,9 @@
         } catch (e) {
           this.showLoading.hide()
           if (this.songs.length === 0) {
-            this.$refs.confirm.show()
+            this.CreateDialog({
+              message:'暂时没有找到歌曲呢o(╥﹏╥)o'
+            })
           }
         }
       },
@@ -236,7 +233,9 @@
           }
           if (response.data === ' ') {
             this.showToast.hide()
-            this.$refs.confirm.show()
+            this.CreateDialog({
+              message:'暂时没有找到歌曲呢o(╥﹏╥)o'
+            })
           }
         } catch (e) {
           this.showToast.hide()
@@ -256,7 +255,9 @@
       // 播放全部
       handlePlayAll() {
         if (this.songs.length === 0) {
-          this.$refs.confirm.show()
+          this.CreateDialog({
+            message:'暂时没有找到歌曲呢o(╥﹏╥)o'
+          })
           return
         }
         this.selectPlay({

@@ -20,7 +20,7 @@
                 :key="item.radioId"
                 @click.stop="handelClickRadio(item)">
               <div class="avatar">
-                <img :src="item.radioImg" alt="">
+                <Avatar-hover :avatar-uri="item.radioImg"></Avatar-hover>
               </div>
               <p class="radioName">{{item.radioName}}</p>
               <p class="listenNum">播放量: {{item.listenNum | listen}}</p>
@@ -29,10 +29,6 @@
         </div>
       </div>
     </div>
-    <confirm ref="confirm"
-             :text="confirmText"
-             confirmBtnText="确定"></confirm>
-    <Loading v-if="stationList.length === 0"></Loading>
     <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
@@ -43,8 +39,7 @@
   import {processSongsUrl} from "../../api/songList";
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
-  import Loading from '../../components/loading/loading'
-  import Confirm from '../../components/confirm/confirm'
+  import AvatarHover from '../../components/AvatarHover/AvatarHover'
   import {LoadingMixin} from "../../utils/mixin"
 
   export default {
@@ -56,23 +51,21 @@
         tags: [],
         listHeight: [],
         scrollY: 0,
-        stationContent: 0,
-        confirmText: ''
+        stationContent: 0
       }
-    },
-    components: {
-      Loading,
-      Confirm
     },
     filters: {
       listen(count) {
         return paddListenCount(count)
       }
     },
+    components:{
+      AvatarHover
+    },
     created() {
-      this.$Progress.start()
-      this.showLoading = this.CreateLoading('电台加载中，请稍后...')
+
       this._station()
+
     },
     mounted() {
       setTimeout(() => {
@@ -101,28 +94,29 @@
       ...mapActions([
         'selectPlay'
       ]),
-      _station() {
-        station()
-          .then(res => {
-            this.showLoading.hide()
-            let ret = res.data
-            const reg = /^\w+\(({.+})/
-            const matches = ret.match(reg)
-            if (matches) {
-              ret = JSON.parse(matches[1] + '}')
-            }
-            if (ret.code === ERR_OK) {
-              this.stationList = ret.data.data
-              this.tags = this.stationList.groupList.map((currentVal) => {
-                return currentVal.name
-              })
-            }
-            this.$Progress.finish()
-          })
-          .catch(e => {
-            this.$Progress.finish()
-            this.showLoading.hide()
-          })
+      async _station() {
+        this.$Progress.start()
+        this.showLoading = this.CreateLoading('电台加载中，请稍后...')
+        try {
+          const response = await station()
+          this.showLoading.hide()
+          this.$Progress.finish()
+          let ret = response.data
+          const reg = /^\w+\(({.+})/
+          const matches = ret.match(reg)
+          if (matches) {
+            ret = JSON.parse(matches[1] + '}')
+          }
+          if (ret.code === ERR_OK) {
+            this.stationList = ret.data.data
+            this.tags = this.stationList.groupList.map((currentVal) => {
+              return currentVal.name
+            })
+          }
+        }catch (e) {
+          this.$Progress.finish()
+          this.showLoading.hide()
+        }
       },
       radioScroll() {
         this.scrollY = document.documentElement.scrollTop || document.body.scrollTop;
@@ -148,8 +142,9 @@
       },
       async handelClickRadio(item) {
         if (Number(item.radioId) === 99) {
-          this.$refs.confirm.show()
-          this.confirmText = '个性电台需要登录,暂时无法收听！'
+           this.CreateDialog({
+             message:'个性电台需要登录,暂时无法收听！'
+            })
           return
         }
         try {
@@ -169,13 +164,15 @@
                 index: 0
               })
             } catch (e) {
-              this.$refs.confirm.show()
-              this.confirmText = '歌曲地址获取失败！'
+              this.CreateDialog({
+                message:'歌曲地址获取失败！'
+              })
             }
           }
         } catch (e) {
-          this.$refs.confirm.show()
-          this.confirmText = '电台获取失败！'
+           this.CreateDialog({
+              message:'电台获取失败！'
+            })
         }
       },
       _normalizeSongs(list) {
@@ -307,6 +304,10 @@
             line-height: 22px;
             color: #333
             font-size 15px
+            cursor pointer
+            &:hover{
+              color: #31c27c
+            }
           }
           .listenNum {
             color: #999;
