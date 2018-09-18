@@ -1,6 +1,9 @@
 # QQ音乐(vue版)
 
-使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容，移动端可访问(tannnb.com/h5music),获得更好体验
+使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容，移动端可访问[♫Music♫](http://tannnb.com/h5music),获得更好体验
+
+![二维码](https://qr.api.cli.im/qr?data=http%253A%252F%252Ftannnb.com%252Fh5music&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=cee72587fe4c6b20b1b5c8cd72880398)
+
 
 > [在线演示地址](http://tannnb.com/pcmusic)
 
