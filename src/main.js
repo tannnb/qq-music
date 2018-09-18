@@ -7,8 +7,11 @@ import store from './store'
 import VueLazyload from 'vue-lazyload'
 import CreateAPI from 'vue-create-api'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import comp from '@vue-foldable/baidu'
 import IconSvg from './components/svg-icon/svg-nav'
 import 'swiper/dist/css/swiper.css'
+import 'DPlayer/dist/DPlayer.min.css';
+import '@vue-foldable/baidu/dist/baidu.css'
 import  './styles/index.styl'
 import './fonts/iconfont'
 import VueProgressBar from 'vue-progressbar'
@@ -36,6 +39,8 @@ Vue.use(VueProgressBar, options)
 Vue.use(VueAwesomeSwiper)
 
 Vue.use(VueLazyload)
+
+Vue.component('baidu-foldable', comp)
 
 Vue.component('icon-svg', IconSvg)
 

@@ -127,6 +127,46 @@ export function gerSingerFan(mid) {
 }
 
 
+export function getSingerMvUrl(vid) {
+  const url = debug ? 'http://localhost:3000/getSingerMvUrl' : '/pc/getSingerMvUrl'
+  const data = Object.assign({}, commonParams, {
+    loginUin: 0,
+    hostUin: 0,
+    outCharset: 'GB2312',
+    format: 'jsonp',
+    needNewCode: 0,
+    data: {
+      "getMvUrl": {
+        "module": "gosrf.Stream.MvUrlProxy",
+        "method": "GetMvUrls",
+        "param": {
+          "vids": [vid], "request_typet": 10001
+        }
+      }
+    }
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+
+class Dplayer {
+  constructor(){
+
+  }
+}
+
+export function createDplayer(musicData) {
+  return new Dplayer({
+
+  })
+}
+
+
 
 
 

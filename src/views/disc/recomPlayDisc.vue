@@ -23,12 +23,14 @@
 
     <div class="list-wrapper">
       <div class="listContent">
-        <List-view
-          v-if="songs.length !== '' "
-          :song="songs"
-          @handlePlayer="handlePlayer"
-          @appendPlayer="handleAppendPlayer"
-        ></List-view>
+        <baidu-foldable style="width: 100%" height="%30" async>
+          <List-view
+            v-if="songs.length !== '' "
+            :song="songs"
+            @handlePlayer="handlePlayer"
+            @appendPlayer="handleAppendPlayer"
+          />
+        </baidu-foldable>
         <p class="noSong" v-if="songs.length === 0">暂时没有找到歌曲，抱歉！</p>
       </div>
       <div class="introduction">

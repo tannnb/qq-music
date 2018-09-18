@@ -20,12 +20,14 @@
     </div>
     <div class="sort_singerContent">
       <div class="sort_singerlist">
-        <List-view
-          v-if="songs.length !== '' "
-          :song="songs"
-          @handlePlayer="handlePlayer"
-          @appendPlayer="appendPlayer"
-        ></List-view>
+        <baidu-foldable style="width: 100%" height="%30" async>
+          <List-view
+            v-if="songs.length !== '' "
+            :song="songs"
+            @handlePlayer="handlePlayer"
+            @appendPlayer="appendPlayer"
+          />
+        </baidu-foldable>
         <p class="notSongUrl" v-if="notSongUrl">暂时没有找到歌曲,o(╥﹏╥)o</p>
       </div>
       <div class="introduction">

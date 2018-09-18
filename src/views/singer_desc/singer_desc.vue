@@ -23,13 +23,15 @@
     </div>
 
     <div class="list-wrapper">
-      <List-view
-        class="singerContentList"
-        v-if="songs.length !== '' "
-        :song="songs"
-        @handlePlayer="handlePlayer"
-        @appendPlayer="appendPlayer"
-      ></List-view>
+      <baidu-foldable style="width: 100%" height="%30" async>
+        <List-view
+          class="singerContentList"
+          v-if="songs.length !== '' "
+          :song="songs"
+          @handlePlayer="handlePlayer"
+          @appendPlayer="appendPlayer"
+        />
+      </baidu-foldable>
     </div>
 
     <div class="singer_ablum">
@@ -50,7 +52,8 @@
       <h4 class="header">MV</h4>
       <ul class="content">
         <li v-for="(items,index) in singer_mv.list"
-            :key="index"
+            :key="items.id"
+            @click="handleSelectMV(items)"
             class="items">
           <div class="avatar">
             <Avatar-hover :avatarUri="items.pic"></Avatar-hover>
@@ -63,12 +66,19 @@
 
     <vue-progress-bar></vue-progress-bar>
 
+    <transition name="fade">
+     <div class="dplayer" v-if="showDplayer">
+       <div class="close-Dplayer"><i @click="closeplayer" class="icon-delete"></i></div>
+       <div ref="dplayer" ></div>
+     </div>
+    </transition>
+
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
-  import {getSingerDesc, getSingerAlbum, getSingerMv, gerSingerFan} from '../../api/singer'
+  import {mapGetters, mapActions, mapMutations} from 'vuex'
+  import {getSingerDesc, getSingerAlbum, getSingerMv, gerSingerFan,getSingerMvUrl} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
   import ListView from '../../components/list-view/list-view'
@@ -76,6 +86,7 @@
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
   import {LoadingMixin} from "../../utils/mixin"
   import AvatarHover from '../../components/AvatarHover/AvatarHover'
+  import DPlayer from 'DPlayer';
 
   export default {
     mixins: [LoadingMixin],
@@ -86,7 +97,10 @@
         songs: [],
         singer_ablum: {},
         singer_mv: {},
-        music_num: null
+        music_num: null,
+        freeflow_url:[],
+        showDplayer:false,
+        options:{}
       }
     },
     components: {
@@ -112,6 +126,9 @@
         'selectPlay',
         'insertSong'
       ]),
+      ...mapMutations({
+        setPlayState: 'SET_PLAYING_STATE'
+      }),
       uri(uri, flag) {
         let count = flag ? '1' : '2'
         return `https://y.gtimg.cn/music/photo_new/T00${count}R300x300M000${uri}.jpg?max_age=2592000`
@@ -238,6 +255,54 @@
           })
         }
       },
+
+      async handleSelectMV(items){
+        const vid = items.vid
+        const response = await getSingerMvUrl(vid)
+        if(response.data.code === ERR_OK){
+          const MvUrlData = response.data.getMvUrl
+          if(MvUrlData.code === ERR_OK){
+            const mvUrl_mp4 = MvUrlData.data[vid].mp4
+
+            const result = []
+            for(let i=0;i<mvUrl_mp4.length;i++){
+              if(mvUrl_mp4[i].freeflow_url.length !== 0){
+                for(let j=0;j<mvUrl_mp4[i].freeflow_url.length;j++){
+                  result.unshift(mvUrl_mp4[i].freeflow_url[j])
+                }
+              }
+            }
+
+           if(result.length === 0){
+             this.CreateDialog({
+               message: message ? message : '该歌手MV因版权问题,暂时无法播放！',
+               confirmBtnText: '取消',
+               cancelBtn: false
+             })
+              return
+           }
+
+            this.showDplayer = true
+            this.setPlayState(false)
+            this.$nextTick(() => {
+              const dp = new DPlayer({
+                container:this.$refs.dplayer,
+                video: {
+                  url: result[0],
+                  pic: items.pic
+                },
+                autoplay: true
+              })
+            })
+          }
+        }
+      },
+
+      closeplayer(){
+        this.showDplayer = false
+        this.setPlayState(true)
+      },
+
       _normalizeSongs(list) {
         let ret = []
         list.forEach((musicData) => {
@@ -252,6 +317,15 @@
 </script>
 
 <style lang="stylus" scoped>
+
+
+  .vue-foldable-container {
+    transition: max-height 0.3s;
+  }
+
+  .vue-foldable-mask {
+    transition: opacity 3s;
+  }
 
   .singer-desc {
     background: linear-gradient(#f3f3f3, #fff);
@@ -405,6 +479,35 @@
           .pubTime {
             color: #999
             font-size 12px
+          }
+        }
+      }
+    }
+    .dplayer{
+      position: fixed
+      top: 0
+      bottom: 0
+      width 100%
+      z-index 100
+      background rgb(52, 52, 52)
+      &.fade-enter-active, &.fade-leave-active {
+        transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32)
+      }
+      &.fade-enter, &.fade-leave-to {
+        opacity 0
+      }
+      .close-Dplayer{
+        position: fixed
+        top: 30px
+        right 30px
+        color: #fff
+        z-index: 102
+        .icon-delete{
+          font-size 34px
+          color: rgba(255, 255, 255, 0.5)
+          cursor: pointer
+          &:hover{
+            color: #fff
           }
         }
       }

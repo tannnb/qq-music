@@ -73,9 +73,9 @@
     }
     .navItem {
       display inline-block
-      padding 0 20px
+      padding 0 24px
       line-height 50px
-      font-size 14px
+      font-size 15px
       color: #5c5c5c
       cursor pointer
       &:hover {
@@ -83,6 +83,5 @@
       }
     }
   }
-
 
 </style>

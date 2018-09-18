@@ -28,12 +28,14 @@
     </div>
     <div class="ablum_desc_singerlist">
       <div class="list-wrapper">
-        <List-view
-          v-if="songs.length !== '' "
-          :song="songs"
-          @handlePlayer="handlePlayer"
-          @appendPlayer="appendPlayer"
-        ></List-view>
+        <baidu-foldable style="width: 100%" height="%30" async>
+          <List-view
+            v-if="songs.length !== '' "
+            :song="songs"
+            @handlePlayer="handlePlayer"
+            @appendPlayer="appendPlayer"
+          />
+        </baidu-foldable>
       </div>
     </div>
     <div class="list-wrapper" style="width: 860px">
@@ -108,16 +110,23 @@
           this.$router.push('/music/album')
           return
         }
+
         try {
           const response = await getAlbumDesc(this.mid)
 
           // 版权问题 无法获取
           if (response.data.code === 404) {
-            console.log(response)
-            this.albumInfo = [1]
+            this.albumInfo = []
             this.$Progress.finish()
             this.showLoading.hide()
             this.copyrightIssue(response.data.data.albumTips)
+            return
+          }
+          if(response.data.code === 1101){
+            this.albumInfo = []
+            this.$Progress.finish()
+            this.showLoading.hide()
+            this.copyrightIssue()
             return
           }
 
@@ -146,6 +155,7 @@
               this.copyrightIssue()
             }
           }
+
         } catch (e) {
           this.showLoading.hide()
           this.$Progress.finish()

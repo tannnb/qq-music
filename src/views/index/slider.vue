@@ -5,7 +5,9 @@
       <div class="swiperWrapper-outer">
         <swiper :options="swiperOptionNewSong">
           <swiper-slide class="bannerItem" v-for="(items,index) in bannerCount" :key="index">
-            <div v-for="(item,index) in items" class="item">
+            <div v-for="(item,index) in items"
+                 @click="handleClickItem(item)"
+                 class="item">
               <img :src="item.url" alt="">
             </div>
           </swiper-slide>
@@ -57,7 +59,10 @@
     methods: {
       _initNewSongList(songList) {
         const pages = []
-        songList.forEach((item, index) => {
+        const initSongList = songList.filter(current => {
+          return current.jump_info.url.indexOf('.html') == -1
+        })
+        initSongList.forEach((item, index) => {
           const page = Math.floor(index / 2)   // 向下取整
           if (!pages[page]) {
             pages[page] = []
@@ -69,6 +74,9 @@
         })
         return pages
       },
+      handleClickItem(item){
+        this.$emit('handleSelectSliderAd', item)
+      }
     }
   }
 </script>
@@ -147,6 +155,7 @@
           .item {
             flex 0 0 49%
             width 48%
+            cursor: pointer
             img {
               width 100%
               vertical-align top

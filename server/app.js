@@ -53,6 +53,7 @@ app.get('/singerdesc',SingerController.getSingerDesc)
 app.get('/gerSingerFan',SingerController.gerSingerFan)
 app.get('/getSingerAlbum',SingerController.getSingerAlbum)
 app.get('/getSingerMv',SingerController.getSingerMv)
+app.get('/getSingerMvUrl',SingerController.getSingerMvUrl)
 
 // 专辑
 app.get('/getAlbum',AlbumController.getAlbum)

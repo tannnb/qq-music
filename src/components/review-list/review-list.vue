@@ -16,9 +16,9 @@
   </div>
 </template>
 
+
 <script>
   import {formatDate} from "../../utils/date";
-
   export default {
     props: {
       commentheader: {

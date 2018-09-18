@@ -144,7 +144,7 @@
           color: #31c27c
           .funBtn {
             display block
-            background #FDFDFD
+            background #FFF
           }
         }
       }

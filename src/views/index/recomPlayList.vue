@@ -17,8 +17,8 @@
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
-      <div class="slider-prev" slot="button-prev"><span class="prev"></span></div>
-      <div class="slider-next" slot="button-prev"><span class="next"></span></div>
+      <div class="sliderList-prev" slot="button-prev"><span class="prev"></span></div>
+      <div class="sliderList-next" slot="button-prev"><span class="next"></span></div>
     </div>
   </div>
 </template>
@@ -55,8 +55,8 @@
             clickable: true,
           },
           navigation: {
-            nextEl: '.slider-next',
-            prevEl: '.slider-prev'
+            nextEl: '.sliderList-next',
+            prevEl: '.sliderList-prev'
           },
           loop: true,
           simulateTouch: false,
@@ -149,7 +149,7 @@
           color: #999
         }
       }
-      .slider-prev, .slider-next {
+      .sliderList-prev, .sliderList-next {
         transition all .3s
         position: absolute
         top 50%
@@ -163,7 +163,7 @@
         outline none
         cursor pointer
       }
-      .slider-prev {
+      .sliderList-prev {
         left -79px
         .prev {
           display inline-block
@@ -174,7 +174,7 @@
         }
       }
 
-      .slider-next {
+      .sliderList-next {
         right -79px
         .next {
           width 20px
@@ -185,10 +185,10 @@
       }
 
       &:hover {
-        .slider-prev {
+        .sliderList-prev {
           left 0
         }
-        .slider-next {
+        .sliderList-next {
           right 0
         }
       }

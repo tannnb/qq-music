@@ -5,14 +5,17 @@
     <recom-play-list
       v-if="recomPlaylistData"
       :recomPlaylistData="recomPlaylistData"
-      @handleSelectRecomPlay="handleSelectRecomPlay" />
+      @handleSelectRecomPlay="handleSelectRecomPlay"/>
 
 
     <!-- 新歌首发 -->
     <!--  <New-song v-if="newSongData" :newSongData="newSongData" @handleNewSong="handleNewSong"/>-->
 
     <!-- 轮播图 -->
-    <!-- <Slider v-if="focus" :focus="focus"></Slider>-->
+    <Slider
+      v-if="focus"
+      @handleSelectSliderAd="handleSelectSliderAd"
+      :focus="focus" />
 
     <!-- 新碟首发 -->
     <!-- <new-album v-if="newAlbum" :newAlbum="newAlbum" @handleNewAblum="handleNewAblum"></new-album>-->
@@ -37,7 +40,6 @@
   import {getDiscList, getNewAlbumSong} from '../../api/disc'
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
   import {LoadingMixin} from "../../utils/mixin";
-
 
 
   export default {
@@ -76,9 +78,10 @@
         try {
           const response = await musicu()
           if (response.code === ERR_OK) {
-            this.recomPlaylistData = response.recomPlaylist.data.v_hot;
             this.$Progress.finish()
             this.showLoading.hide()
+            this.recomPlaylistData = response.recomPlaylist.data.v_hot;
+            this.focus = response.focus.data.content
           }
         } catch (e) {
           this.showLoading.hide()
@@ -96,6 +99,16 @@
         this.saveSingID(item.id)
       },
 
+      // 精彩推荐
+      handleSelectSliderAd(item) {
+        this.$router.push({
+          path: `/music/album/${item.mid}`
+        })
+        // 保存歌曲信息
+        this.saveDiscInfo(item)
+        this.saveSingID(item.mid)
+      },
+
       // 新歌首发
       handleNewSong(item) {
         /* this.$router.push({
@@ -107,21 +120,22 @@
 
       // 新碟首发
       handleNewAblum(song) {
-        getNewAlbumSong(song.album_mid).then(res => {
-          /*  if (res.code === ERR_OK) {
-              processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
-                //  排除没有url的歌曲
-                this.songs =  songs.filter((currentSong) => {
-                  return currentSong.url.length !== 0
-                })
-                this.selectPlay({
-                  list: this.songs,
-                  index: 0
-                })
-              })
-            }*/
-        })
+        /* getNewAlbumSong(song.album_mid).then(res => {
+             if (res.code === ERR_OK) {
+               processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
+
+                 this.songs =  songs.filter((currentSong) => {
+                   return currentSong.url.length !== 0
+                 })
+                 this.selectPlay({
+                   list: this.songs,
+                   index: 0
+                 })
+               })
+             }
+        })*/
       },
+
       _normalizeSongs(list) {
         let ret = []
         list.forEach((musicData) => {
@@ -137,9 +151,9 @@
 
 <style lang="stylus" scoped>
 
-  .avatar-wrapper{
+  .avatar-wrapper {
     width 200px
-    height:200px
+    height: 200px
   }
 
 </style>
