@@ -93,7 +93,7 @@ npm run build
 ![搜索](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/7.jpg)
 
 #### MV
-![MV](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/9.jpg)
+![MV](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/9.png)
 
 #### 播放列表
 ![播放列表](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/8.jpg)
