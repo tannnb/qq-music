@@ -6,7 +6,7 @@ import {Base64} from 'js-base64'
 const debug = process.env.NODE_ENV !== 'production'
 
 export default class Song {
-  constructor({id, mid, albumdesc, isonly, singer, name, album, duration, image, url}) {
+  constructor({id, mid, albumdesc, isonly, singer, name, album, duration, image, url,cur_count,in_count,old_count,Franking_value}) {
     this.id = id
     this.albumdesc = albumdesc
     this.isonly = isonly
@@ -18,6 +18,10 @@ export default class Song {
     this.image = image
     this.filename = `C400${this.mid}.m4a`
     this.url = url
+    this.cur_count = cur_count
+    this.in_count = in_count
+    this.old_count = old_count
+    this.Franking_value = Franking_value
   }
 
   getLyric() {
@@ -39,7 +43,7 @@ export default class Song {
 
 }
 
-export function createSong(musicData) {
+export function createSong(musicData,list) {
   return new Song({
     id: musicData.songid,
     albumdesc: musicData.albumdesc,
@@ -50,7 +54,11 @@ export function createSong(musicData) {
     album: musicData.albumname,
     duration: musicData.interval,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    url: musicData.url
+    url: musicData.url,
+    cur_count: list ? list.cur_count : '',
+    in_count: list ? list.in_count : '',
+    old_count: list ? list.old_count : '',
+    Franking_value:list? list.Franking_value :''
   })
 }
 

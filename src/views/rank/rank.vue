@@ -41,6 +41,30 @@
             <div class="ranking">
               <span :class="getRankCls(song_begin,index)">{{getRankText(song_begin,index)}}</span>
             </div>
+            <div class="count" v-if="songType !== 0">
+              <div v-if="RankingStatus(items).type === 'NEW' ">
+                <div class="icon_rank_new"></div>
+              </div>
+
+              <div v-if="RankingStatus(items).type === 'DOWM' ">
+                <div class="icon_rank_down"></div>
+                <div class="content">{{RankingStatus(items).content}}</div>
+              </div>
+
+              <div v-if="RankingStatus(items).type === 'FLAT' ">
+                <div class="icon_rank_flat"></div>
+              </div>
+
+              <div v-if="RankingStatus(items).type === 'UP' ">
+                <div class="icon_rank_up"></div>
+                <div class="content"> {{RankingStatus(items).content}}</div>
+              </div>
+
+              <div v-if="RankingStatus(items).type === 'UP_HOT' ">
+                <div class="icon_rank_uphot"></div>
+                <div class="content">{{RankingStatus(items).content}}</div>
+              </div>
+            </div>
             <div class="avatar"><img :src="items.image" alt="" :title="items.name"></div>
             <div class="name">
               <div class="nameInfo">
@@ -171,10 +195,58 @@
           this.showLoading.hide()
           if (this.songs.length === 0) {
             this.CreateDialog({
-              message:'暂时没有找到歌曲呢o(╥﹏╥)o'
+              message: '暂时没有找到歌曲呢o(╥﹏╥)o'
             })
           }
         }
+      },
+
+      RankingStatus(item) {
+        const Franking_value = Number(item.Franking_value)
+        const oldCount = Number(item.old_count)  // 原来排行
+        const curCount = Number(item.cur_count)  // 当前排行
+        const inCount = Number(item.in_count)
+
+        // 新歌
+        if (Franking_value === 0) {
+          return {
+            type: 'NEW',
+            content: 'NEW'
+          }
+        }
+
+        // 下降
+        if (String(inCount).indexOf(".") == -1 && oldCount - curCount < 0) {
+          return {
+            type: 'DOWM',
+            content: Math.abs(oldCount - curCount)
+          }
+        }
+
+        // 没有升降
+        if (String(inCount).indexOf(".") == -1 && oldCount - curCount == 0) {
+          return {
+            type: 'FLAT',
+            content: '-'
+          }
+        }
+
+        // 上升
+        if (String(inCount).indexOf(".") == -1 && oldCount - curCount > 0) {
+          return {
+            type: 'UP',
+            content: oldCount - curCount
+          }
+        }
+
+        // 呈现几何上升 热度暴涨
+        if (String(inCount).indexOf(".") > -1 && curCount - oldCount > 0) {
+          return {
+            type: 'UP_HOT',
+            content: `${(Number(item.in_count) * 100).toFixed(0)}%`
+          }
+        }
+
       },
 
       getRankCls(song_begin, index) {
@@ -234,7 +306,7 @@
           if (response.data === ' ') {
             this.showToast.hide()
             this.CreateDialog({
-              message:'暂时没有找到歌曲呢o(╥﹏╥)o'
+              message: '暂时没有找到歌曲呢o(╥﹏╥)o'
             })
           }
         } catch (e) {
@@ -246,7 +318,7 @@
         let ret = []
         list.forEach((musicData) => {
           if (musicData.data.songid && musicData.data.albummid) {
-            ret.push(createSong(musicData.data))
+            ret.push(createSong(musicData.data, musicData))
           }
         })
         return ret
@@ -256,7 +328,7 @@
       handlePlayAll() {
         if (this.songs.length === 0) {
           this.CreateDialog({
-            message:'暂时没有找到歌曲呢o(╥﹏╥)o'
+            message: '暂时没有找到歌曲呢o(╥﹏╥)o'
           })
           return
         }
@@ -278,8 +350,8 @@
         this.song_begin = (index - 1) * 30
         this.showToast = this.CreateToast()
         try {
-          const response =  await toplistCp(this.update_key, this.topID, this.songType, this.song_begin)
-          if(response.data.code === ERR_OK){
+          const response = await toplistCp(this.update_key, this.topID, this.songType, this.song_begin)
+          if (response.data.code === ERR_OK) {
             this.showToast.hide()
             this.songlist = response.data.songlist
             this.songTable = response.data
@@ -290,7 +362,7 @@
               document.documentElement.scrollTop = document.body.scrollTop = 0;
             }, 200)
           }
-        }catch (e) {
+        } catch (e) {
           this.showToast.hide()
         }
       }
@@ -423,6 +495,52 @@
                 }
               }
             }
+            .count {
+              display flex
+              flex 0 0 60
+              padding-right 20px
+              align-items center
+              justify-content center
+              width 60px
+              .icon_rank_new {
+                width: 23px;
+                height: 8px;
+                background url("../../images/icon_rank.png")
+                background-position: 0 -40px;
+              }
+              .icon_rank_down {
+                width: 14px;
+                height: 13px;
+                margin: 18px auto 4px auto;
+                background url("../../images/icon_rank.png")
+                background-position: 0 -15px;
+              }
+              .icon_rank_flat {
+                width: 14px;
+                height: 3px;
+                background url("../../images/icon_rank.png")
+                background-position: 0 -30px;
+              }
+              .icon_rank_up {
+                width: 14px;
+                height: 13px;
+                margin: 18px auto 4px auto;
+                background url("../../images/icon_rank.png")
+                background-position: 0 0;
+              }
+              .icon_rank_uphot {
+                width: 14px;
+                height: 13px;
+                margin: 18px auto 4px auto;
+                background url("../../images/icon_rank.png")
+                background-position: 0 -60px;
+              }
+              .content {
+                text-align center
+                font-size 13px
+                color: #999
+              }
+            }
             .avatar {
               width 60px
               padding-right 10px
@@ -444,6 +562,11 @@
               }
               .nameInfo {
                 flex 1
+                font-size 14px
+                color: #868484
+                &:hover {
+                  color: #31c27c
+                }
                 .isonly {
                   color: #31c27c
                   padding 2px 6px

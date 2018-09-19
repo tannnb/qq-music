@@ -81,6 +81,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .hidden
     overflow hidden
+    padding-right 5px
   .confirm
     position: fixed
     left: 0
