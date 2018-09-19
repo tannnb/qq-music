@@ -46,6 +46,16 @@
         showFlag: false
       }
     },
+    watch:{
+      showFlag(newValue,oldValue){
+        const body = document.querySelector('body')
+        if(newValue === true){
+          body.classList.add('hidden')
+        }else{
+          body.classList.remove('hidden')
+        }
+      }
+    },
     methods: {
       show() {
         this.showFlag = true
@@ -69,7 +79,8 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
+  .hidden
+    overflow hidden
   .confirm
     position: fixed
     left: 0

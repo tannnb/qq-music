@@ -20,6 +20,16 @@
         showFlag:false
       }
     },
+    watch:{
+      showFlag(newValue,oldValue){
+        const body = document.querySelector('body')
+        if(newValue === true){
+          body.classList.add('hidden')
+        }else{
+          body.classList.remove('hidden')
+        }
+      }
+    },
     methods:{
       show() {
         this.showFlag = true
@@ -30,7 +40,10 @@
     }
   }
 </script>
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus">
+  .hidden
+    overflow hidden
+    padding-right 5px
   .loading
     position: fixed
     top 0
