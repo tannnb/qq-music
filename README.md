@@ -83,24 +83,27 @@ npm run build
 #### 歌手列表
 ![歌手列表](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/2.jpg)
 
+#### 歌手详情
+![歌手列表](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/3.jpg)
+
 #### 专辑
-![专辑](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/3.jpg)
+![专辑](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/4.jpg)
 
 #### 排行榜
-![排行榜](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/4.jpg)
+![排行榜](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/5.jpg)
 
 #### 分类歌单
-![分类歌单](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/5.jpg)
+![分类歌单](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/6.jpg)
 
 #### 电台
-![电台](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/6.jpg)
+![电台](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/7.jpg)
 
 #### 搜索
-![搜索](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/7.jpg)
+![搜索](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/8.jpg)
 
 #### MV
-![MV](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/9.png)
+![MV](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/9.jpg)
 
 #### 播放列表
-![播放列表](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/8.jpg)
+![播放列表](https://raw.githubusercontent.com/tannnb/qq_music/master/screenshots/10.jpg)
 
