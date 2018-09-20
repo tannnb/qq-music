@@ -13,9 +13,14 @@
            target="_blank"> {{items.label}} </a></li>
     </ul>
 
-    <div class="music-search">
+    <div class="music-search" v-if="$route.path !== '/music/search'">
       <div class="search-container">
-        <input type="text" @focus="handleFocus" @blur="handleBlur"  v-model="hotKeyQuery">
+        <input type="text"
+               placeholder="搜索音乐、歌单"
+               @focus="handleFocus"
+               @blur="handleBlur"
+               @keyup.enter="handleSearchPage"
+               v-model="hotKeyQuery">
         <span @click.stop="handleSearchPage"><Icon-svg class="svgIcon" iconClass="search"></Icon-svg></span>
       </div>
       <transition name="down">
@@ -55,8 +60,10 @@
   import {gethotkey} from '../../api/recommend'
   import {ERR_OK} from "../../api/config";
   import {paddListenCount} from "../../utils/tool";
+  import {LoadingMixin} from "../../utils/mixin";
 
   export default {
+    mixins: [LoadingMixin],
     name: "music-header",
     props: {
       currentIndex: {
@@ -154,7 +161,16 @@
       },
 
       handleSearchPage() {
-        this.$router.push({path: '/music/search', query: {key: this.hotKeyQuery}})
+        if (this.hotKeyQuery.length === 0) {
+          this.CreateDialog({
+            message: '请输入要搜索的音乐或歌单',
+            confirmBtnText: '取消',
+            cancelBtn: false
+          })
+          return
+        }
+        this.saveSearcHistory(this.hotKeyQuery)
+        this.$router.push('/music/search')
       }
 
     }

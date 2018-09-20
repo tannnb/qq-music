@@ -6,7 +6,27 @@
       <div class="searchFn">
         <input class="oInput" @keyup.enter="handleSearchBtn" type="text" v-model="searchInputText">
         <i class="icon-search" @click="handleSearchBtn"></i>
+
+        <div class="searchResultList" v-if=" responseShow.length !== 0">
+          <div v-for="(items,index) in responseShow"
+               class="resultListItem"
+               v-if="items.itemlist.length !== 0"
+               :key="items.type">
+            <div class="typeName">{{items.name}}</div>
+            <div class="typeList">
+              <span
+                v-for="(itemlist,index) in items.itemlist"
+                :key="itemlist.id"
+                @click="handleSelectItem(itemlist,items)"
+                class="info">
+                {{itemlist.name}} - {{itemlist.singer}}
+              </span>
+            </div>
+          </div>
+        </div>
+
       </div>
+
       <div class="hotSearch"> 热门搜索:
         <a v-for="(items,index) in hotKey"
            @click="handleSelectHotKey(items)"
@@ -45,50 +65,42 @@
       </div>
     </div>
 
-
     <vue-progress-bar></vue-progress-bar>
-    <confirm ref="confirm"
-             text="请输入要搜索的歌手名称或者歌曲名称"
-             confirmBtnText="确定"></confirm>
+
   </div>
 </template>
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import {gethotkey} from "../../api/recommend";
-  import {clientSearch} from "../../api/search";
-  import Confirm from '../../components/confirm/confirm'
+  import {clientSearch, clientSmartBox} from "../../api/search";
   import ListView from '../../components/list-view/list-view'
   import {ERR_OK} from "../../api/config";
-  import {shuffle} from "../../utils/util";
   import {processSongsUrl, isValidMusic, createSong} from "../../api/songList";
+  import {debounce} from "../../utils/tool";
+  import {LoadingMixin} from "../../utils/mixin";
+
 
   const PERPAGE = 30
   const TYPE_SINGER = 'singer'
   export default {
+    mixins: [LoadingMixin],
     data() {
       return {
         hotKey: '',
         searchInputText: '',
         searchObjArr: [],
-        defaultFirstSong:[],
+        defaultFirstSong: [],
         zhida: {},
         songs: [],
         page: 1,
         result: [],
-        showSinger: true
+        showSinger: true,
+        responseShow: ''
       }
     },
     created() {
       this.$Progress.start()
-
-      if (this.$route.query.key) {
-        this.searchInputText = this.$route.query.key
-        this._clientSearch()
-        this._gethotkey()
-        this.$Progress.finish()
-        return
-      }
 
       // 本地存在搜索历史
       if (this.searchHistory.length !== 0) {
@@ -110,27 +122,29 @@
           this.$Progress.finish()
         })
       }
+
     },
     components: {
-      Confirm,
       ListView
     },
     computed: {
       ...mapGetters(['searchHistory']),
     },
-    watch: {
-      searchHistory(newHistory) {
-        if (newHistory) {
-          if (this.searchInputText.length === 0) {
-            return
-          }
-          this.searchInputText = newHistory[0]
-          this._clientSearch()
+    mounted() {
+      this.$watch('searchInputText', debounce((newQuery) => {
+        if (newQuery.length === 0) {
+          this.responseShow = ''
+          return
         }
-      }
+        this._clientSmartBox(newQuery)
+      }, 200))
+
+      document.addEventListener('click', () => {
+        this.responseShow = ''
+      }, false)
+
     },
     methods: {
-
       ...mapActions([
         'selectPlay',
         'insertSong',
@@ -146,27 +160,40 @@
               resolve(res.data.hotkey)
             }
           })
-          .catch(e => {
-            reject(e)
-          })
+            .catch(e => {
+              reject(e)
+            })
         })
       },
 
       _clientSearch() {
-        clientSearch(this.searchInputText, this.page, this.showSinger, PERPAGE).then(res => {
-          if (res.data.code === ERR_OK) {
-            this._genResult(res.data.data).then((result) => {
-              this.zhida = {}
-              // 是否存在歌手
-              if (result && result[0].singermid && result[0].singerid) {
-                this.zhida = result[0]
-                this.songs = result.slice(1)
-                return
-              }
-              this.songs = result
-            })
-          }
-        })
+        clientSearch(this.searchInputText, this.page, this.showSinger, PERPAGE)
+          .then(res => {
+            if (res.data.code === ERR_OK) {
+              this._genResult(res.data.data).then((result) => {
+                this.zhida = {}
+                // 是否存在歌手
+                try {
+                  if (result && result[0].singermid && result[0].singerid) {
+                    this.zhida = result[0]
+                    this.songs = result.slice(1)
+                    return
+                  }
+                  this.songs = result
+                } catch (e) {
+                  var that = this
+                  this.CreateDialog({
+                    message: '该歌曲因版权原因，无法获取',
+                    confirmBtnText: '取消',
+                    cancelBtn: false,
+                    confirmBtn() {
+                      that.responseShow = ''
+                    }
+                  })
+                }
+              })
+            }
+          })
       },
 
       _genResult(data) {
@@ -195,16 +222,54 @@
         this.searchInputText = items.k
         this.saveSearcHistory(items.k)
         this._clientSearch()
+        this.$nextTick(() => {
+          this.responseShow = ''
+        })
       },
 
       // 搜索按钮
       handleSearchBtn() {
         if (this.searchInputText.length === 0) {
-          this.$refs.confirm.show()
+          this.CreateDialog({
+            message: '请输入要搜索的歌手名称或者歌曲名称',
+            confirmBtnText: '确定'
+          })
           return
         }
         this.saveSearcHistory(this.searchInputText)
         this._clientSearch()
+        this.$nextTick(() => {
+          this.responseShow = ''
+        })
+      },
+
+      // 搜索列表
+      async _clientSmartBox(newQuery) {
+        try {
+          const response = await clientSmartBox(newQuery)
+          if (response.data.code === ERR_OK) {
+            this.responseShow = response.data.data
+          }
+        } catch (e) {
+          var vm = this
+          this.CreateDialog({
+            message: '网络错误',
+            confirmBtnText: '取消',
+            cancelBtn: false,
+            confirmBtn() {
+              vm.$router.push('/music/search')
+            }
+          })
+        }
+      },
+
+      // 点击选择
+      handleSelectItem(list, item) {
+        this.searchInputText = `${list.name} - ${list.singer}`
+        this._clientSearch()
+        this.$nextTick(() => {
+          this.responseShow = ''
+        })
       },
 
       // 播放当前
@@ -253,9 +318,9 @@
       transform translateX(-50%)
       width 640px
       height: 50px
+      z-index 20
       border-radius 3px
       background white
-      overflow hidden
       .oInput {
         border: none
         line-height 50px
@@ -277,6 +342,42 @@
         cursor pointer
         &:hover {
           color: #31c27c
+        }
+      }
+      .searchResultList {
+        width 100%
+        background white
+        border 1px solid #ccc
+        box-sizing border-box
+        .resultListItem {
+          display flex
+          .typeName {
+            display flex
+            justify-content: center
+            align-items center
+            flex 0 0 100
+            width 100px
+            font-size 15px
+            color #a7a1a1
+          }
+          .typeList {
+            flex 1
+            padding 10px 0
+            border-left 1px solid #e2e2e2
+            border-bottom 1px solid #eee
+            .info {
+              display block
+              padding-left 40px
+              line-height 38px
+              font-size 15px
+              cursor pointer
+              color: #636262
+              &:hover {
+                color white
+                background #31c27c
+              }
+            }
+          }
         }
       }
     }

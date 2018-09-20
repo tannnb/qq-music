@@ -9,6 +9,7 @@ const radioController = require('./controller/radiolist')
 const sortController = require('./controller/sort')
 const searchContenter = require('./controller/search')
 const RankController = require('./controller/rank')
+const MvController = require('./controller/mv')
 
 
 // 加载解析json的中间件
@@ -76,10 +77,13 @@ app.get('/getRadioDesc',radioController.getRadioDesc)
 app.get('/back_lyric',radioController.back_lyric)
 
 
+// mv
+app.get('/getMvlist',MvController.getMvlist)
+
 // 搜索
 app.get('/gethotkey',searchContenter.gethotkey)
 app.get('/clientSearch',searchContenter.clientSearch)
-
+app.get('/clientSmartBox',searchContenter.clientSmartBox)
 
 
 app.listen(3000, () => {

@@ -1,4 +1,4 @@
-import {commonParams} from './config'
+import {commonParams,options} from './config'
 import axios from 'axios'
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -31,4 +31,21 @@ export function clientSearch(query, page, zhida, perpage) {
   })
 }
 
+export function clientSmartBox(key) {
+  const url = debug ? 'http://localhost:3000/clientSmartBox' : '/pc/clientSmartBox'
+  const data = Object.assign({}, commonParams,options, {
+    is_xml: 0,
+    key,
+    loginUin: 0,
+    hostUin: 0,
+    platform: 'yqq',
+    needNewCode: 0
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
 
