@@ -143,7 +143,6 @@
       },
 
       async handleSelectMvItem(items){
-        console.log(items)
         const vid = items.vid
         const response = await getSingerMvUrl(vid)
         if(response.data.code === ERR_OK){
