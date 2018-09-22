@@ -42,6 +42,10 @@
             url:'/music/station'
           },
           {
+            label:'MV',
+            url:'/music/mv'
+          },
+          {
             label:'搜索',
             url:'/music/search'
           }
