@@ -291,7 +291,7 @@
                   url: result[0],
                   pic: items.pic
                 },
-                autoplay: true
+                autoplay: false
               })
             })
           }
