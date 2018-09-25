@@ -177,7 +177,7 @@
                   url: result[0],
                   pic: items.picurl
                 },
-                autoplay: true
+                autoplay: false
               })
             })
           }
