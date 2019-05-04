@@ -81,7 +81,7 @@
         </ul>
         <div class="no-songlist" v-if="songs.length === 0">暂无该排行信息 o(╥﹏╥)o</div>
         <div class="page-wrapper">
-          <Pagination v-if="allpage" @pagetions="pagetions" :allpage="allpage"></Pagination>
+          <Pagination v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="pagetions"></Pagination>
         </div>
       </div>
     </div>
@@ -95,13 +95,13 @@
   import {toplistOpt, toplistCp} from '../../api/rank'
   import {format} from "../../utils/tool";
   import {processSongsUrl, createSong} from "../../api/songList";
-  import Pagination from '../singer/pagination'
+  import Pagination from '@/components/pagination'
   import {ERR_OK} from "../../api/config"
-  import {LoadingMixin} from "../../utils/mixin"
+  import {LoadingMixin,PaginationMixin} from "../../utils/mixin"
 
 
   export default {
-    mixins: [LoadingMixin],
+    mixins: [LoadingMixin,PaginationMixin],
     data() {
       return {
         song_begin: 0,
@@ -115,7 +115,8 @@
         songType: '',
         songTable: null,
         songs: [],
-        miniLoadingFlag: false
+        miniLoadingFlag: false,
+        pageConfig:null
       }
     },
     filters: {
@@ -160,6 +161,8 @@
             this.songTable = listCp.data
             this.song_begin = this.songTable.song_begin
             this.allpage = listCp.data.total_song_num
+            this.pageConfig = this._initPagination(listCp.data.total_song_num)
+            console.log(this.pageConfig)
             this.getSong(this.songlist)
           }
         } catch (e) {

@@ -1,9 +1,7 @@
 <template>
   <div class="sort-wrapper">
     <div class="sort-tags-wrapper">
-      <div class="categoriesWrapper"
-           v-for="(items,indexs) in categories"
-           :key="indexs">
+      <div class="categoriesWrapper" v-for="(items,indexs) in categories" :key="indexs">
         <h4 class="title">{{items.categoryGroupName}}</h4>
         <ul class="item-Wrapper">
           <li v-for="(item,index) in items.items"
@@ -38,7 +36,7 @@
         <div class="listnum">播放量：{{items.listennum | listen}}</div>
       </div>
       <div class="page-wrapper">
-        <Pagination ref='pagination' v-if="allpage>0" @pagetions="pagetions" :allpage="allpage"></Pagination>
+        <Pagination ref="pagination" v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="pagetions"></Pagination>
       </div>
     </div>
     <vue-progress-bar></vue-progress-bar>
@@ -50,12 +48,12 @@
   import {getSortTags, getSortList} from "../../api/sort";
   import {paddListenCount} from "../../utils/tool";
   import {ERR_OK} from "../../api/config";
-  import Pagination from '../singer/pagination'
+  import Pagination from '@/components/pagination'
   import AvatarHover from '../../components/AvatarHover/AvatarHover'
-  import {LoadingMixin} from "../../utils/mixin"
+  import {LoadingMixin,PaginationMixin} from "../../utils/mixin"
 
   export default {
-    mixins: [LoadingMixin],
+    mixins: [LoadingMixin,PaginationMixin],
     name: "sort",
     data() {
       return {
@@ -64,10 +62,10 @@
         currentSelect: '',
         currentTagIndex: 1,
         SortList: [],
-        allpage: '',
         categoryId: 10000000,
         sortId: 5,
-        sin: 0
+        sin: 0,
+        pageConfig:null
       }
     },
     filters: {
@@ -119,7 +117,7 @@
           const objArr = JSON.parse(matches[1])
           if (objArr.code === ERR_OK) {
             this.SortList = objArr.data.list
-            this.allpage = objArr.data.sum
+            this.pageConfig = this._initPagination(objArr.data.sum)
           }
           this.showToast && this.showToast.hide()
         }catch (e) {
@@ -147,7 +145,7 @@
         this.currentIndex = items.categoryId
         this.categoryId = items.categoryId
         this.currentSelect = items.categoryName
-        this.$refs.pagination.setCurrent(1)
+        this.$refs.pagination.setCurrentIndex(1)
         this.showToast = this.CreateToast()
         this._getSortList()
       },

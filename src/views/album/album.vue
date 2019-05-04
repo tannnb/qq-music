@@ -52,7 +52,7 @@
         </li>
       </ul>
       <div class="page-wrapper">
-        <Pagination v-if="allpage>0" @pagetions="pagetions" :allpage="allpage"></Pagination>
+        <Pagination v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="pagetions"></Pagination>
       </div>
     </div>
 
@@ -64,14 +64,14 @@
   import {mapActions} from 'vuex'
   import {filterSinger} from "../../utils/tool";
   import {getAlbum} from "../../api/album";
-  import Pagination from '../singer/pagination'
+  import Pagination from '@/components/pagination'
   import {ERR_OK} from "../../api/config";
   import SingerTag from '../singer/singertag'
-  import {LoadingMixin} from "../../utils/mixin"
+  import {LoadingMixin,PaginationMixin} from "../../utils/mixin"
   import AvatarHover from '../../components/AvatarHover/AvatarHover'
 
   export default {
-    mixins: [LoadingMixin],
+    mixins: [LoadingMixin,PaginationMixin],
     data() {
       return {
         albumList: [],
@@ -87,6 +87,7 @@
         defaultCompany: '唱片公司',
         defaultTitle: '',
 
+        pageConfig:null,
         area: 7,   //地区
         company: -1,  // 唱片公司
         genre: -1,   // 流派
@@ -138,6 +139,7 @@
             this.albumTags = data.tags                            // tag
             this.albumTagsArea = this._initnormalize(data.tags)   // initAreaTag
             this.allpage = this.albumList.length
+            this.pageConfig = this._initPagination(data.total)
             this.$Progress.finish()
             showLoading.hide()
           }

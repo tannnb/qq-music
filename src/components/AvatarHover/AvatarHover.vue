@@ -1,6 +1,6 @@
 <template>
   <div class="avatar-wrapper">
-    <div class="img-cover"><img v-lazy="avatarUri" /></div>
+    <div class="img-cover"><img v-lazy="avatarUri" :key="avatarUri" /></div>
     <div class="mark-cover"></div>
   </div>
 </template>

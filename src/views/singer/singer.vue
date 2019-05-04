@@ -41,7 +41,7 @@
       </div>
 
       <div class="page-wrapper">
-        <Pagination v-if="allpage>0" @pagetions="pagetions" :allpage="allpage"></Pagination>
+        <Pagination v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="changeCurrentPage"></Pagination>
       </div>
     </div>
 
@@ -55,12 +55,12 @@
   import {getSingerList} from '../../api/singer'
   import {ERR_OK} from "../../api/config";
   import SingerTag from './singertag'
-  import Pagination from './pagination'
-  import {LoadingMixin} from "../../utils/mixin"
+  import Pagination from '@/components/pagination'
+  import {LoadingMixin,PaginationMixin} from "../../utils/mixin"
 
   const COUNT = 80
   export default {
-    mixins: [LoadingMixin],
+    mixins: [LoadingMixin,PaginationMixin],
     name: "singer",
     data() {
       return {
@@ -77,12 +77,13 @@
         genre: -100,
         index: -100,
         sin: 0,
-        cur_page: 1
+        cur_page: 1,
+        pageConfig:null
       }
     },
     components: {
       SingerTag,
-      Pagination
+      Pagination,
     },
     created() {
       this._getSingerList()
@@ -111,12 +112,14 @@
             this.singerList = ret.singerlist
             this.tags = ret.tags
             this.allpage = this.singerList.length
+            this.pageConfig = this._initPagination(ret.total)
             this.$Progress.finish()
           }
         }catch (e) {
           showLoading.hide()
         }
       },
+
       _getSingerList() {
         this.asyncData()
       },
@@ -153,6 +156,16 @@
           window.scrollTo(0, scrollTop)
         }, 300)
       },
+      changeCurrentPage(index) {
+        this.cur_page = index
+        this.sin = this.sin + COUNT
+        this.asyncData()
+        const scrollTop = this.$refs.singerContent.offsetTop
+        setTimeout(() => {
+          window.scrollTo(0, scrollTop)
+        }, 300)
+      },
+
       handleSelectItem(items) {
         this.$router.push({
           path: `/music/singer/${items.singer_mid}`

@@ -31,7 +31,7 @@
         </ul>
       </div>
       <div class="page-wrapper">
-        <Pagination v-if="allpage>0" @pagetions="pagetions" :allpage="allpage"></Pagination>
+        <Pagination v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="pagetions"></Pagination>
       </div>
     </div>
 
@@ -50,14 +50,15 @@
   import {getSingerMvUrl} from "../../api/singer"
   import Tags from '../../components/Tags/Tags'
   import AvatarHover from '../../components/AvatarHover/AvatarHover'
-  import Pagination from '../singer/pagination'
+  import Pagination from '@/components/pagination'
+
   import {paddListenCount} from "../../utils/tool"
   import {ERR_OK} from "../../api/config";
-  import {LoadingMixin} from "../../utils/mixin";
+  import {LoadingMixin,PaginationMixin} from "../../utils/mixin";
   import DPlayer from 'DPlayer';
 
   export default {
-    mixins: [LoadingMixin],
+    mixins: [LoadingMixin,PaginationMixin],
     name: "mv",
     data() {
       return {
@@ -71,6 +72,7 @@
         pageno:0,
         allpage:null,
         showDplayer:false,
+        pageConfig:null
       }
     },
     created() {
@@ -110,6 +112,7 @@
             this.mvlist = this.MvData.mvlist
             this.allpage = this.MvData.sum
             this.taglist = this.MvData.taglist
+            this.pageConfig = this._initPagination(ret.data.sum)
           }
         } catch (e) {
           this.$Progress.finish()
@@ -190,7 +193,7 @@
       },
 
       pagetions(item){
-        this.pageno = item - 1
+        this.pageno = item
         this._getMvlist()
       },
 

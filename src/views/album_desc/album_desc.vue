@@ -97,6 +97,9 @@
           showClose:true,
           confirmBtn() {
             vm.$router.push('/music/album')
+          },
+          close() {
+            vm.$router.push('/music/album')
           }
         })
       },
