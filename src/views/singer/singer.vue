@@ -17,7 +17,7 @@
           <li class="items" v-for="(items,index) in singerList.slice(0,10)"
               @click.stop="handleSelectItem(items)"
               :key="items.singer_id">
-            <img class="avatar" :src="items.singer_pic" alt="">
+            <img class="avatar" v-lazy="items.singer_pic" alt="">
             <div class="singer_name">{{items.singer_name}}</div>
           </li>
         </ul>
@@ -213,6 +213,10 @@
               border-radius 50%
               overflow hidden
               cursor pointer
+              transition all .3s
+              &:hover {
+                box-shadow 0 0 10px #ccc
+              }
             }
             .singer_name {
               font-size: 14px;

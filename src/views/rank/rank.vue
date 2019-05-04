@@ -65,7 +65,7 @@
                 <div class="content">{{RankingStatus(items).content}}</div>
               </div>
             </div>
-            <div class="avatar"><img :src="items.image" alt="" :title="items.name"></div>
+            <div class="avatar"><img v-lazy="items.image" alt="" :title="items.name"></div>
             <div class="name">
               <div class="nameInfo">
                 <span>{{items.name}}</span>

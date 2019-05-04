@@ -5,9 +5,8 @@
                     @handleSelectItem="handleSelectNavItem"/>
     <div class="swiperWrapper">
       <div class="swiperWrapper-outer">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="items in recomPlaylist"
-                        :key="items.id">
+        <swiper :options="swiperOption" ref="swiper_hook">
+          <swiper-slide v-for="items in recomPlaylist" :key="items.id">
             <div class="playlist_item_box" @click="handleSelectItem(items)">
               <div class="coverImg"><Avatar-hover :avatarUri="items.image" /></div>
               <p class="title">{{items.title}}</p>
@@ -72,6 +71,8 @@
     },
     methods: {
       handleSelectNavItem(index, items) {
+//        this.$refs.swiper_hook.swiper.slideTo(-1, 1000, false);//切换到第一个slide，速度为1秒
+        this.recomPlaylist = []
         this.recomCurrentIndex = index
         // 判断是否选择 "为您推荐"
         let isFirstIndex = items.index === 0 ? '' : items.id

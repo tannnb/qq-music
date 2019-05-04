@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+    <keep-alive><router-view/></keep-alive>
     <Player></Player>
     <a href="javascript:void(0)" ref="btn" @click="backTop" class="btn" title="回到顶部"></a>
   </div>

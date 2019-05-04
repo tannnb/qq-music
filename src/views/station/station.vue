@@ -41,7 +41,6 @@
   import {paddListenCount} from "../../utils/tool";
   import AvatarHover from '../../components/AvatarHover/AvatarHover'
   import {LoadingMixin} from "../../utils/mixin"
-
   export default {
     mixins: [LoadingMixin],
     name: "station",
@@ -63,9 +62,7 @@
       AvatarHover
     },
     created() {
-
       this._station()
-
     },
     mounted() {
       setTimeout(() => {
@@ -142,9 +139,9 @@
       },
       async handelClickRadio(item) {
         if (Number(item.radioId) === 99) {
-           this.CreateDialog({
-             message:'个性电台需要登录,暂时无法收听！'
-            })
+          this.CreateDialog({
+            message:'个性电台需要登录,暂时无法收听！'
+          })
           return
         }
         try {
@@ -170,9 +167,9 @@
             }
           }
         } catch (e) {
-           this.CreateDialog({
-              message:'电台获取失败！'
-            })
+          this.CreateDialog({
+            message:'电台获取失败！'
+          })
         }
       },
       _normalizeSongs(list) {
@@ -208,7 +205,6 @@
       }
     }
   }
-
   .slider {
     .taglist {
       position: fixed
@@ -253,7 +249,6 @@
       }
     }
   }
-
   .stationContent {
     .item {
       .title {
