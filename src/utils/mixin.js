@@ -26,6 +26,9 @@ export const LoadingMixin = {
         $events:{
           confirm(){
             options.confirmBtn && options.confirmBtn()
+          },
+          close() {
+            options.close && options.close()
           }
         }
       }).show()

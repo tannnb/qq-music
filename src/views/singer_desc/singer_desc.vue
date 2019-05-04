@@ -154,6 +154,9 @@
           showClose: true,
           confirmBtn() {
             vm.$router.push('/music/singer')
+          },
+          close() {
+            vm.$router.push('/music/singer')
           }
         })
       },

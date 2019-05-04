@@ -68,6 +68,7 @@
         this.$emit('cancel')
       },
       close() {
+        this.$emit('close')
         this.hide()
       },
       confirm() {
@@ -141,7 +142,7 @@
             flex: 1
             line-height: 30px
             padding: 10px 0
-            border-top: 1px solid rgba(204, 204, 204, 0.67)
+            border-top: 1px solid rgba(239, 238, 238, 0.67)
             color: #31c27c
             cursor pointer
             &.left
