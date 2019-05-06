@@ -105,7 +105,7 @@
     height: 60px;
     position: fixed;
     right: 65px;
-    bottom: 60px;
+    bottom: 80px;
     display: none;
     background: url("./images/top_bg.png") no-repeat left top;
   }

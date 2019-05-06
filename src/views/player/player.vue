@@ -30,19 +30,8 @@
                 <div class="name">歌曲名:{{currentSong.name}}</div>
                 <div class="singer">歌手:{{currentSong.singer}}</div>
               </div>
-              <div class="middle-r" ref="musicLyric">
-                <div class="lyric-wrapper">
-                  <div ref="lyricItem" class="lyric-item" v-if="currentLyric" :style="lyricTop">
-                    <p class="text"
-                       :class="{'current':currentLineNum === index}"
-                       v-for="(line,index) in mapLyric">{{line.txt}}</p>
-                  </div>
-                  <div class="pure-music" v-show="isPureMusic">
-                    <p>暂无歌词...</p>
-                  </div>
-                </div>
-              </div>
-              <!--<Scroll class="middle-r" ref="lyricList" :data="currentLyric && currentLyric.lines">
+              <div class="mark-scroll"></div>
+              <Scroll class="middle-r" ref="lyricList" :data="currentLyric && currentLyric.lines">
                 <div class="lyric-wrapper">
                   <div v-if="currentLyric">
                     <p ref="lyricLine"
@@ -54,7 +43,7 @@
                     <p>暂无歌词请欣赏...</p>
                   </div>
                 </div>
-              </Scroll>-->
+              </Scroll>
             </div>
           </div>
         </div>
@@ -135,9 +124,7 @@
   import Scroll from '../../components/scroll/scroll'
   import {shuffle} from "../../utils/util"
   import {format} from "../../utils/tool";
-  // import Lyric from 'lyric-parser'
-  import {Lyric} from '../../utils/tool'
-
+  import Lyric from 'lyric-parser'
   export default {
     name: "player",
     data() {
@@ -149,8 +136,7 @@
         currentLyric: null,
         currentLineNum: 0,
         isPureMusic: false,
-        playingLyric: '歌词加载中...',
-        top: 0 // 歌词居中
+        playingLyric: '歌词加载中...'
       }
     },
     components: {
@@ -181,17 +167,7 @@
       },
       favoriteIcon() {
         return this.getFavoriteIcon(this.currentSong)
-      },
-      lyricTop() {
-        return `transform :translate3d(0, ${-34 * (this.currentLineNum - this.top)}px, 0)`
       }
-    },
-    mounted() {
-      this.mapLyric = []
-    /*  window.addEventListener('resize', () => {
-        clearTimeout(this.resizeTimer)
-        this.resizeTimer = setTimeout(() => this.clacTop(), 60)
-      })*/
     },
     methods: {
       ...mapMutations({
@@ -211,28 +187,18 @@
           this.$refs.miniProgress.init()
         })
       },
-
-      // 计算歌词居中的 top值
-      clacTop() {
-        if(this.playlist && this.playlist.length === 0) return
-        let height = this.$refs.musicLyric.offsetHeight
-        this.top = Math.floor(height / 34 / 2)
-      },
-
       getFavoriteIcon(song) {
         if (this.isFavorite(song)) {
           return 'icon-favorite'
         }
         return 'icon-not-favorite'
       },
-
       open() {
         this.setFullscreen(true)
         this.$nextTick(() => {
           this.$refs.maxProgress.init()
         })
       },
-
       // 播放 暂停
       togglePlaying() {
         if (!this.songReady) {
@@ -244,7 +210,6 @@
           this.currentLyric.togglePlay()
         }
       },
-
       // 上一曲
       prev() {
         if (!this.songReady) {
@@ -264,7 +229,6 @@
           this.songReady = false
         }
       },
-
       // 下一曲
       next() {
         if (!this.songReady) {
@@ -284,7 +248,6 @@
           this.songReady = false
         }
       },
-
       // 缓冲完成
       read() {
         this.songReady = true
@@ -292,7 +255,6 @@
       error() {
         this.songReady = true
       },
-
       // 当前歌曲播放结束
       end() {
         if (this.mode === playMode.loop) {
@@ -301,7 +263,6 @@
           this.next()
         }
       },
-
       // 循环
       loop() {
         this.$refs.audio.currentTime = 0
@@ -311,12 +272,10 @@
           this.currentLyric.seek(0)
         }
       },
-
       // 获取播放的时间
       updateTime(e) {
         this.currentTime = e.target.currentTime
       },
-
       // 切换播放模式
       changeMode() {
         const mode = (this.mode + 1) % 3
@@ -336,15 +295,15 @@
         })
         this.setCurrentIndex(index)
       },
-
       // 获取歌词
       getLyric() {
         this.currentSong.getLyric().then((lyric) => {
-          this.currentLyric = new Lyric(lyric)
-          if(!this.currentLyric) return
-          // 扩展下标
-          this.mapLyric = this.currentLyric.lyric.map((item,index) => ({...item,lineNum:index}))
-          this.isPureMusic = this.mapLyric && this.mapLyric.length === 0
+          this.currentLyric = new Lyric(lyric, this.handleLyric)
+          console.log(this.currentLyric)
+          if (this.playing) {
+            this.currentLyric.play()
+          }
+          this.isPureMusic = !this.currentLyric.lines.length
         }).catch(() => {
           this.playingLyric = '暂无歌词'
           this.currentLyric = null
@@ -364,29 +323,21 @@
           this.currentLineNum = 0
         })
       },
-
-      handleLyric({lyric:{lyric}}) {
-
-       // console.log(txt,lineNum)
+      handleLyric({lineNum, txt}) {
+        console.log(lineNum,txt)
         this.playingLyric = txt
         this.currentLineNum = lineNum
         if (lineNum > 3) {
-          console.log(lineNum)
-         // let lineEl = this.$refs.lyricItem[lineNum - 3]
-          //  `transform :translate3d(0, ${-34 * (this.currentLineNum - this.top)}px, 0)`
-          // let scrollToElement = `transform :translate3d(0, ${-34 * lineEl - this.top}px, 0)`
-          this.$refs.lyricItem.style = `transform :translate3d(0, ${-34 * lineEl - this.top}px, 0)`
+          let lineEl = this.$refs.lyricLine[lineNum - 3]
+          this.$refs.lyricList.scrollToElement(lineEl, 1000)
         } else {
-          this.$refs.lyricItem.style = `transform :translate3d(0, 0, 0)`
+          this.$refs.lyricList.scrollTo(0, 0, 1000)
         }
       },
-
       // 播放歌曲
       handleSelectSong(index) {
         this.setCurrentIndex(index)
       },
-
-
       onPercentChange(percent) {
         // 设置歌曲位置
         this.$refs.audio.currentTime = this.currentSong.duration * percent
@@ -449,11 +400,6 @@
           const auido = this.$refs.audio
           newplaying ? setTimeout(() => auido.play(), 500) : auido.pause()
         })
-      },
-      fullScreen(newValue) {
-        setTimeout(() => {
-          this.clacTop()
-        },500)
       }
     },
     filters: {
@@ -465,7 +411,6 @@
 </script>
 
 <style lang="stylus" scoped>
-
   .player-wrapper {
     .normal-player {
       position: fixed
@@ -480,7 +425,6 @@
       &.fade-enter, &.fade-leave-to {
         opacity 0
       }
-
       .background {
         position: absolute
         left: 0
@@ -491,7 +435,6 @@
         opacity: 0.2
         filter: blur(20px)
       }
-
       .playerSet {
         position: absolute
         top: 10px
@@ -514,11 +457,10 @@
           }
         }
       }
-
       .playerContainer {
         position: absolute
-        top: 66px
-        bottom: 90px
+        top: 60px
+        bottom: 46px
         left: 50%
         transform translateX(-50%)
         width 90%
@@ -540,10 +482,9 @@
             }
           }
         }
-
         .playerlyer {
           display flex
-          height: 100%
+          height: calc(100% - 56px)
           .playerlist-Wrapper {
             width 70%
             height: 100%
@@ -583,43 +524,31 @@
                 color: rgba(255, 255, 255, 0.5)
               }
             }
+            .mark-scroll {
+              position: absolute
+              top:0
+              left:0
+              right: 0
+              bottom: 0
+              z-index 100
+            }
             .middle-r {
               display: inline-block
               vertical-align: top
               width: 100%
-              max-height: 300px
+              max-height: 200px
               margin-top 20px
-              top: 240px;
-              right: 0;
-              bottom: 0;
-              left: 20px;
-              overflow: hidden;
-              text-align: center;
-              -webkit-mask-image: linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0) 0,
-                rgba(255, 255, 255, 0.6) 15%,
-                rgba(255, 255, 255, 1) 25%,
-                rgba(255, 255, 255, 1) 75%,
-                rgba(255, 255, 255, 0.6) 85%,
-                rgba(255, 255, 255, 0) 100%
-              )
-
+              overflow: hidden
               .lyric-wrapper {
-                width: 100%
+                width: 90%
                 margin: 0 auto
                 overflow: hidden
-                font-size: 12px
                 text-align: center
-                line-height: 34px;
-                .lyric-item {
-                  white-space : normal nowrap
-                  transform: translate3d(0, 0, 0);
-                  transition: transform 0.6s ease-out;
-                }
                 .text {
-                  line-height: 34px
-                  color: rgba(255, 255, 255, 0.5)
+                  line-height: 28px
+                  color: rgba(237, 237, 237, 0.59)
+                  font-size: 13px
+                  white-space nowrap
                   &.current {
                     color: #3be22e
                   }
@@ -635,7 +564,6 @@
           }
         }
       }
-
       .player_music {
         position: absolute
         bottom 18px
@@ -704,20 +632,21 @@
         }
       }
     }
-
     .mini-player {
       display flex
       justify-content center
       position: fixed
-      bottom: 10px
-      left: 50%
-      transform translateX(-50%)
+      bottom: 0
+     // left: 50%
+      // transform translateX(-50%)
       z-index 99
-      width 76%
-      padding 10px 20px
+      width 100%
+      padding 10px 30px
+     // margin 0 40px
       background #fff
       border: 1px solid #efefef
-      border-radius 100px
+      box-sizing border-box
+
       &.mini-enter-active, &.mini-leave-active {
         transition: all 0.2s
       }
@@ -785,7 +714,6 @@
       }
     }
   }
-
   @keyframes rotate {
     0% {
       transform: rotate(0)
