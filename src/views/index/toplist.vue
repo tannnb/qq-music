@@ -49,7 +49,7 @@
         return item.split('·')[1]
       },
       handleSelectItem(sub){
-        console.log(sub)
+
       }
     }
   }

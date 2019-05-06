@@ -162,7 +162,6 @@
             this.song_begin = this.songTable.song_begin
             this.allpage = listCp.data.total_song_num
             this.pageConfig = this._initPagination(listCp.data.total_song_num)
-            console.log(this.pageConfig)
             this.getSong(this.songlist)
           }
         } catch (e) {

@@ -1,6 +1,6 @@
 <template>
   <div class="avatar-wrapper">
-    <div class="img-cover"><img v-lazy="avatarUri" :key="avatarUri" /></div>
+    <div v-if="Url" class="img-cover"><img v-lazy="Url" :key="Url" /></div>
     <div class="mark-cover"></div>
   </div>
 </template>
@@ -12,6 +12,11 @@
       avatarUri:{
         type:String,
         default: require('./playlist_300.png')
+      }
+    },
+    data() {
+      return {
+        Url:this.avatarUri
       }
     }
   }
@@ -25,6 +30,9 @@
     overflow hidden
     cursor pointer
     .img-cover
+      width 224px
+      height: 224px
+      background #ececec
       img
         width 100%
         height 100%

@@ -13,11 +13,11 @@
         </div>
 
         <div class="playerContainer">
-          <div class="playerNav">
+          <!--<div class="playerNav">
             <span> <i class="icon-collect"></i> 收藏</span>
             <span> <i class="icon-add"></i> 添加</span>
             <span> <i class="icon-clearall"></i> 清空</span>
-          </div>
+          </div>-->
           <div class="playerlyer">
             <div class="playerlist-Wrapper">
               <player-list @handleSelectSong="handleSelectSong"></player-list>
@@ -30,7 +30,19 @@
                 <div class="name">歌曲名:{{currentSong.name}}</div>
                 <div class="singer">歌手:{{currentSong.singer}}</div>
               </div>
-              <Scroll class="middle-r" ref="lyricList" :data="currentLyric && currentLyric.lines">
+              <div class="middle-r" ref="musicLyric">
+                <div class="lyric-wrapper">
+                  <div ref="lyricItem" class="lyric-item" v-if="currentLyric" :style="lyricTop">
+                    <p class="text"
+                       :class="{'current':currentLineNum === index}"
+                       v-for="(line,index) in mapLyric">{{line.txt}}</p>
+                  </div>
+                  <div class="pure-music" v-show="isPureMusic">
+                    <p>暂无歌词...</p>
+                  </div>
+                </div>
+              </div>
+              <!--<Scroll class="middle-r" ref="lyricList" :data="currentLyric && currentLyric.lines">
                 <div class="lyric-wrapper">
                   <div v-if="currentLyric">
                     <p ref="lyricLine"
@@ -42,7 +54,7 @@
                     <p>暂无歌词请欣赏...</p>
                   </div>
                 </div>
-              </Scroll>
+              </Scroll>-->
             </div>
           </div>
         </div>
@@ -123,8 +135,8 @@
   import Scroll from '../../components/scroll/scroll'
   import {shuffle} from "../../utils/util"
   import {format} from "../../utils/tool";
-  import Lyric from 'lyric-parser'
-
+  // import Lyric from 'lyric-parser'
+  import {Lyric} from '../../utils/tool'
 
   export default {
     name: "player",
@@ -137,7 +149,8 @@
         currentLyric: null,
         currentLineNum: 0,
         isPureMusic: false,
-        playingLyric: '歌词加载中...'
+        playingLyric: '歌词加载中...',
+        top: 0 // 歌词居中
       }
     },
     components: {
@@ -168,7 +181,17 @@
       },
       favoriteIcon() {
         return this.getFavoriteIcon(this.currentSong)
+      },
+      lyricTop() {
+        return `transform :translate3d(0, ${-34 * (this.currentLineNum - this.top)}px, 0)`
       }
+    },
+    mounted() {
+      this.mapLyric = []
+    /*  window.addEventListener('resize', () => {
+        clearTimeout(this.resizeTimer)
+        this.resizeTimer = setTimeout(() => this.clacTop(), 60)
+      })*/
     },
     methods: {
       ...mapMutations({
@@ -187,6 +210,13 @@
         this.$nextTick(() => {
           this.$refs.miniProgress.init()
         })
+      },
+
+      // 计算歌词居中的 top值
+      clacTop() {
+        if(this.playlist && this.playlist.length === 0) return
+        let height = this.$refs.musicLyric.offsetHeight
+        this.top = Math.floor(height / 34 / 2)
       },
 
       getFavoriteIcon(song) {
@@ -310,11 +340,11 @@
       // 获取歌词
       getLyric() {
         this.currentSong.getLyric().then((lyric) => {
-          this.currentLyric = new Lyric(lyric, this.handleLyric)
-          if (this.playing) {
-            this.currentLyric.play()
-          }
-          this.isPureMusic = !this.currentLyric.lines.length
+          this.currentLyric = new Lyric(lyric)
+          if(!this.currentLyric) return
+          // 扩展下标
+          this.mapLyric = this.currentLyric.lyric.map((item,index) => ({...item,lineNum:index}))
+          this.isPureMusic = this.mapLyric && this.mapLyric.length === 0
         }).catch(() => {
           this.playingLyric = '暂无歌词'
           this.currentLyric = null
@@ -334,14 +364,20 @@
           this.currentLineNum = 0
         })
       },
-      handleLyric({lineNum, txt}) {
+
+      handleLyric({lyric:{lyric}}) {
+
+       // console.log(txt,lineNum)
         this.playingLyric = txt
         this.currentLineNum = lineNum
         if (lineNum > 3) {
-          let lineEl = this.$refs.lyricLine[lineNum - 3]
-          this.$refs.lyricList.scrollToElement(lineEl, 1000)
+          console.log(lineNum)
+         // let lineEl = this.$refs.lyricItem[lineNum - 3]
+          //  `transform :translate3d(0, ${-34 * (this.currentLineNum - this.top)}px, 0)`
+          // let scrollToElement = `transform :translate3d(0, ${-34 * lineEl - this.top}px, 0)`
+          this.$refs.lyricItem.style = `transform :translate3d(0, ${-34 * lineEl - this.top}px, 0)`
         } else {
-          this.$refs.lyricList.scrollTo(0, 0, 1000)
+          this.$refs.lyricItem.style = `transform :translate3d(0, 0, 0)`
         }
       },
 
@@ -413,6 +449,11 @@
           const auido = this.$refs.audio
           newplaying ? setTimeout(() => auido.play(), 500) : auido.pause()
         })
+      },
+      fullScreen(newValue) {
+        setTimeout(() => {
+          this.clacTop()
+        },500)
       }
     },
     filters: {
@@ -476,7 +517,7 @@
 
       .playerContainer {
         position: absolute
-        top: 50px
+        top: 66px
         bottom: 90px
         left: 50%
         transform translateX(-50%)
@@ -502,13 +543,14 @@
 
         .playerlyer {
           display flex
-          height: calc(100% - 56px)
+          height: 100%
           .playerlist-Wrapper {
             width 70%
             height: 100%
             overflow-y auto
           }
           .playerSong-wrapper {
+            position: relative
             padding-left 30px
             flex 1
             width 30%
@@ -545,18 +587,39 @@
               display: inline-block
               vertical-align: top
               width: 100%
-              max-height: 200px
+              max-height: 300px
               margin-top 20px
-              overflow: hidden
+              top: 240px;
+              right: 0;
+              bottom: 0;
+              left: 20px;
+              overflow: hidden;
+              text-align: center;
+              -webkit-mask-image: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0) 0,
+                rgba(255, 255, 255, 0.6) 15%,
+                rgba(255, 255, 255, 1) 25%,
+                rgba(255, 255, 255, 1) 75%,
+                rgba(255, 255, 255, 0.6) 85%,
+                rgba(255, 255, 255, 0) 100%
+              )
+
               .lyric-wrapper {
-                width: 80%
+                width: 100%
                 margin: 0 auto
                 overflow: hidden
+                font-size: 12px
                 text-align: center
+                line-height: 34px;
+                .lyric-item {
+                  white-space : normal nowrap
+                  transform: translate3d(0, 0, 0);
+                  transition: transform 0.6s ease-out;
+                }
                 .text {
-                  line-height: 28px
-                  color: rgba(237, 237, 237, 0.59)
-                  font-size: 13px
+                  line-height: 34px
+                  color: rgba(255, 255, 255, 0.5)
                   &.current {
                     color: #3be22e
                   }

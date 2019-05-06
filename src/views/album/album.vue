@@ -130,7 +130,8 @@
           sin: this.sin
         }
         this.$Progress.start()
-        const showLoading = this.CreateLoading('专辑列表加载中，请稍后...')
+        this.showToast = this.CreateToast()
+      //  const showLoading = this.CreateLoading('专辑列表加载中，请稍后...')
         try {
           const response = await getAlbum(data)
           if (response.data.code === ERR_OK) {
@@ -141,7 +142,7 @@
             this.allpage = this.albumList.length
             this.pageConfig = this._initPagination(data.total)
             this.$Progress.finish()
-            showLoading.hide()
+            this.showToast.hide()
           }
         }catch (e) {
           this.$Progress.finish()
