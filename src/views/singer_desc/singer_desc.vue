@@ -86,7 +86,7 @@
   import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
   import {LoadingMixin} from "../../utils/mixin"
   import AvatarHover from '../../components/AvatarHover/AvatarHover'
-  import DPlayer from 'DPlayer';
+  import DPlayer from 'dplayer';
 
   export default {
     mixins: [LoadingMixin],

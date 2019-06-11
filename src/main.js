@@ -10,7 +10,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import comp from '@vue-foldable/baidu'
 import IconSvg from './components/svg-icon/svg-nav'
 import 'swiper/dist/css/swiper.css'
-import 'DPlayer/dist/DPlayer.min.css';
+import 'dplayer/dist/DPlayer.min.css';
 import '@vue-foldable/baidu/dist/baidu.css'
 import  './styles/index.styl'
 import './fonts/iconfont'

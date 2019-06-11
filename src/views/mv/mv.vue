@@ -55,7 +55,7 @@
   import {paddListenCount} from "../../utils/tool"
   import {ERR_OK} from "../../api/config";
   import {LoadingMixin,PaginationMixin} from "../../utils/mixin";
-  import DPlayer from 'DPlayer';
+  import DPlayer from 'dplayer';
 
   export default {
     mixins: [LoadingMixin,PaginationMixin],
