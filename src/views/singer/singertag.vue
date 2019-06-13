@@ -9,24 +9,24 @@
 </template>
 
 <script>
-  export default {
-    name: "singertag",
-    props: {
-      tag: {
-        type: Array,
-        default: []
-      },
-      currentIndex: {
-        type: Number,
-        default: 0
-      }
+export default {
+  name: 'singertag',
+  props: {
+    tag: {
+      type: Array,
+      default: []
     },
-    methods: {
-      selectItem(items, index) {
-        this.$emit('selectItemTag', items, index)
-      }
+    currentIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  methods: {
+    selectItem (items, index) {
+      this.$emit('selectItemTag', items, index)
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

@@ -10,23 +10,22 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import comp from '@vue-foldable/baidu'
 import IconSvg from './components/svg-icon/svg-nav'
 import 'swiper/dist/css/swiper.css'
-import 'dplayer/dist/DPlayer.min.css';
+import 'dplayer/dist/DPlayer.min.css'
 import '@vue-foldable/baidu/dist/baidu.css'
-import  './styles/index.styl'
+import './styles/index.styl'
 import './fonts/iconfont'
 import VueProgressBar from 'vue-progressbar'
 import Loading from './components/loading/loading'
 import Toast from './components/Toast/Toast'
 import Dialog from './components/confirm/confirm'
 
-
 const options = {
   color: '#31c27c',
   failedColor: '#874b4b',
-  thickness: '4px',
+  thickness: '1px',
   transition: {
     speed: '0.2s',
-    opacity: '0.6s',
+    opacity: '0.8s',
     termination: 300
   },
   autoRevert: true,
@@ -59,6 +58,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: {App},
+  components: { App },
   template: '<App/>'
 })

@@ -7,7 +7,6 @@
       :recomPlaylistData="recomPlaylistData"
       @handleSelectRecomPlay="handleSelectRecomPlay"/>
 
-
     <!-- 新歌首发 -->
     <!--  <New-song v-if="newSongData" :newSongData="newSongData" @handleNewSong="handleNewSong"/>-->
 
@@ -29,98 +28,94 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import {ERR_OK} from "../../api/config";
-  import {musicu} from '../../api/recommend'
-  import recomPlayList from './recomPlayList'
-  import NewSong from './newSong'
-  import Slider from './slider'
-  import newAlbum from './newAlbum'
-  import topList from './toplist'
-  import {getDiscList, getNewAlbumSong} from '../../api/disc'
-  import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
-  import {LoadingMixin} from "../../utils/mixin";
+import { mapActions, mapGetters } from 'vuex'
+import { ERR_OK } from '../../api/config'
+import { musicu } from '../../api/recommend'
+import recomPlayList from './recomPlayList'
+import NewSong from './newSong'
+import Slider from './slider'
+import newAlbum from './newAlbum'
+import topList from './toplist'
+import { getDiscList, getNewAlbumSong } from '../../api/disc'
+import { processSongsUrl, isValidMusic, createSong } from '../../api/songList'
+import { LoadingMixin } from '../../utils/mixin'
 
-
-  export default {
-    mixins: [LoadingMixin],
-    data() {
-      return {
-        recomPlaylistData: null,
-        newSongData: null,
-        focus: null,
-        newAlbum: null,
-        toplist: null
+export default {
+  mixins: [LoadingMixin],
+  data () {
+    return {
+      recomPlaylistData: null,
+      newSongData: null,
+      focus: null,
+      newAlbum: null,
+      toplist: null
+    }
+  },
+  components: {
+    recomPlayList,
+    NewSong,
+    Slider,
+    newAlbum,
+    topList
+  },
+  created () {
+    this.$_getRecomPlayData()
+  },
+  computed: {
+    ...mapGetters(['songs'])
+  },
+  methods: {
+    ...mapActions([
+      'saveDiscInfo',
+      'saveSingID',
+      'selectPlay'
+    ]),
+    async $_getRecomPlayData () {
+      this.$Progress.start()
+      try {
+        const response = await musicu()
+        if (response.code === ERR_OK) {
+          this.$Progress.finish()
+          this.recomPlaylistData = response.recomPlaylist.data.v_hot
+          this.focus = response.focus.data.content
+        }
+      } catch (e) {
+        this.$Progress.finish()
       }
     },
-    components: {
-      recomPlayList,
-      NewSong,
-      Slider,
-      newAlbum,
-      topList
-    },
-    created() {
-      this.$_getRecomPlayData()
-    },
-    computed: {
-      ...mapGetters(['songs'])
-    },
-    methods: {
-      ...mapActions([
-        'saveDiscInfo',
-        'saveSingID',
-        'selectPlay'
-      ]),
-      async $_getRecomPlayData() {
-        this.$Progress.start()
-        this.showLoading = this.CreateLoading('加载中，请稍后...')
-        try {
-          const response = await musicu()
-          if (response.code === ERR_OK) {
-            this.$Progress.finish()
-            this.showLoading.hide()
-            this.recomPlaylistData = response.recomPlaylist.data.v_hot;
-            this.focus = response.focus.data.content
-          }
-        } catch (e) {
-          this.showLoading.hide()
-          this.$Progress.finish()
-        }
-      },
 
-      // 歌单推荐
-      handleSelectRecomPlay(item) {
-        this.$router.push({
-          path: `/music/index/${item.id}`
-        })
-        // 保存歌曲信息
-        this.saveDiscInfo(item)
-        this.saveSingID(item.id)
-      },
+    // 歌单推荐
+    handleSelectRecomPlay (item) {
+      this.$router.push({
+        path: `/music/index/${item.id}`
+      })
+      // 保存歌曲信息
+      this.saveDiscInfo(item)
+      this.saveSingID(item.id)
+    },
 
-      // 精彩推荐
-      handleSelectSliderAd(item) {
-        this.$router.push({
-          path: `/music/album/${item.mid}`
-        })
-        // 保存歌曲信息
-        this.saveDiscInfo(item)
-        this.saveSingID(item.mid)
-      },
+    // 精彩推荐
+    handleSelectSliderAd (item) {
+      this.$router.push({
+        path: `/music/album/${item.mid}`
+      })
+      // 保存歌曲信息
+      this.saveDiscInfo(item)
+      this.saveSingID(item.mid)
+    },
 
-      // 新歌首发
-      handleNewSong(item) {
-        /* this.$router.push({
+    // 新歌首发
+    handleNewSong (item) {
+      /* this.$router.push({
            path:`/music/album/${item.album_mid}`
          })
          this.saveDiscInfo(item)
-         this.saveSingID(item.album_mid)*/
-      },
+         this.saveSingID(item.album_mid) */
+    },
 
-      // 新碟首发
-      handleNewAblum(song) {
-        /* getNewAlbumSong(song.album_mid).then(res => {
+    // 新碟首发
+    handleNewAblum (song) {
+      /* getNewAlbumSong(song.album_mid).then(res => {
              if (res.code === ERR_OK) {
                processSongsUrl(this._normalizeSongs(res.cdlist[0].songlist)).then((songs) => {
 
@@ -133,20 +128,20 @@
                  })
                })
              }
-        })*/
-      },
+        }) */
+    },
 
-      _normalizeSongs(list) {
-        let ret = []
-        list.forEach((musicData) => {
-          if (isValidMusic(musicData)) {
-            ret.push(createSong(musicData))
-          }
-        })
-        return ret
-      }
+    _normalizeSongs (list) {
+      let ret = []
+      list.forEach((musicData) => {
+        if (isValidMusic(musicData)) {
+          ret.push(createSong(musicData))
+        }
+      })
+      return ret
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

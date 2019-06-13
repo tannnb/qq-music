@@ -5,7 +5,6 @@ import history from './modules/history'
 import disc from './modules/disc'
 import player from './modules/player'
 
-
 Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 

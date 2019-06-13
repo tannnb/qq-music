@@ -17,66 +17,66 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    name: 'Dialog',
-    props: {
-      text: {
-        type: String,
-        default: ''
-      },
-      confirmBtnText: {
-        type: String,
-        default: '确定'
-      },
-      cancelBtnText: {
-        type: String,
-        default: '取消'
-      },
-      showClose: {
-        type: Boolean,
-        default: false
-      },
-      cancelBtn: {
-        type: Boolean,
-        default: true
-      }
+export default {
+  name: 'Dialog',
+  props: {
+    text: {
+      type: String,
+      default: ''
     },
-    data() {
-      return {
-        showFlag: false
-      }
+    confirmBtnText: {
+      type: String,
+      default: '确定'
     },
-    watch:{
-      showFlag(newValue,oldValue){
-        const body = document.querySelector('body')
-        if(newValue === true){
-          body.classList.add('hidden')
-        }else{
-          body.classList.remove('hidden')
-        }
-      }
+    cancelBtnText: {
+      type: String,
+      default: '取消'
     },
-    methods: {
-      show() {
-        this.showFlag = true
-      },
-      hide() {
-        this.showFlag = false
-      },
-      cancel() {
-        this.hide()
-        this.$emit('cancel')
-      },
-      close() {
-        this.$emit('close')
-        this.hide()
-      },
-      confirm() {
-        this.$emit('confirm')
-        this.hide()
+    showClose: {
+      type: Boolean,
+      default: false
+    },
+    cancelBtn: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data () {
+    return {
+      showFlag: false
+    }
+  },
+  watch: {
+    showFlag (newValue, oldValue) {
+      const body = document.querySelector('body')
+      if (newValue === true) {
+        body.classList.add('hidden')
+      } else {
+        body.classList.remove('hidden')
       }
     }
+  },
+  methods: {
+    show () {
+      this.showFlag = true
+    },
+    hide () {
+      this.showFlag = false
+    },
+    cancel () {
+      this.hide()
+      this.$emit('cancel')
+    },
+    close () {
+      this.$emit('close')
+      this.hide()
+    },
+    confirm () {
+      this.$emit('confirm')
+      this.hide()
+    }
   }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

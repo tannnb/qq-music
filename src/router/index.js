@@ -36,7 +36,7 @@ export default new Router({
         {
           path: 'album',
           name: 'album',
-          component: () => import('@/views/album/album'),
+          component: () => import('@/views/album/album')
         },
         {
           path: 'album/:mid',
@@ -72,7 +72,7 @@ export default new Router({
           path: 'search',
           name: 'search',
           component: () => import('@/views/search/search')
-        },
+        }
       ]
     }
   ]

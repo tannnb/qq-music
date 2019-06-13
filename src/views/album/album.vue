@@ -61,165 +61,164 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import {filterSinger} from "../../utils/tool";
-  import {getAlbum} from "../../api/album";
-  import Pagination from '@/components/pagination'
-  import {ERR_OK} from "../../api/config";
-  import SingerTag from '../singer/singertag'
-  import {LoadingMixin,PaginationMixin} from "../../utils/mixin"
-  import AvatarHover from '../../components/AvatarHover/AvatarHover'
+import { mapActions } from 'vuex'
+import { filterSinger } from '../../utils/tool'
+import { getAlbum } from '../../api/album'
+import Pagination from '@/components/pagination'
+import { ERR_OK } from '../../api/config'
+import SingerTag from '../singer/singertag'
+import { LoadingMixin, PaginationMixin } from '../../utils/mixin'
+import AvatarHover from '../../components/AvatarHover/AvatarHover'
 
-  export default {
-    mixins: [LoadingMixin,PaginationMixin],
-    data() {
-      return {
-        albumList: [],
-        albumTags: {},
-        albumTagsArea: [],
-        allpage: 0,
+export default {
+  mixins: [LoadingMixin, PaginationMixin],
+  data () {
+    return {
+      albumList: [],
+      albumTags: {},
+      albumTagsArea: [],
+      allpage: 0,
 
-        currentAreaIndex: 0,
-        currentGenreIndex: 0,
-        currentTypeIndex: 0,
-        selectItemIndex: 0,
-        defaultYear: '年代',
-        defaultCompany: '唱片公司',
-        defaultTitle: '',
+      currentAreaIndex: 0,
+      currentGenreIndex: 0,
+      currentTypeIndex: 0,
+      selectItemIndex: 0,
+      defaultYear: '年代',
+      defaultCompany: '唱片公司',
+      defaultTitle: '',
 
-        pageConfig:null,
-        area: 7,   //地区
-        company: -1,  // 唱片公司
-        genre: -1,   // 流派
-        type: -1,   // 类型
-        year: -1,    // 年代
-        sin: 0       // 分页页数
+      pageConfig: null,
+      area: 7, // 地区
+      company: -1, // 唱片公司
+      genre: -1, // 流派
+      type: -1, // 类型
+      year: -1, // 年代
+      sin: 0 // 分页页数
+    }
+  },
+  components: {
+    SingerTag,
+    Pagination,
+    AvatarHover
+  },
+  created () {
+    this._getAlbum()
+  },
+  filters: {
+    filterSingers (singer) {
+      return filterSinger(singer)
+    }
+  },
+  mounted () {
+    document.addEventListener('click', () => {
+      this.selectItemIndex = 0
+    }, false)
+  },
+  methods: {
+    ...mapActions([
+      'saveDiscInfo',
+      'saveSingID'
+    ]),
+    async _getAlbum () {
+      const data = {
+        area: this.area,
+        company: this.company,
+        genre: this.genre,
+        type: this.type,
+        year: this.year,
+        sin: this.sin
       }
-    },
-    components: {
-      SingerTag,
-      Pagination,
-      AvatarHover
-    },
-    created() {
-      this._getAlbum()
-
-    },
-    filters: {
-      filterSingers(singer) {
-        return filterSinger(singer)
-      }
-    },
-    mounted() {
-      document.addEventListener('click', () => {
-        this.selectItemIndex = 0
-      }, false)
-    },
-    methods: {
-      ...mapActions([
-        'saveDiscInfo',
-        'saveSingID'
-      ]),
-      async _getAlbum() {
-        const data = {
-          area: this.area,
-          company: this.company,
-          genre: this.genre,
-          type: this.type,
-          year: this.year,
-          sin: this.sin
-        }
-        this.$Progress.start()
-        this.showToast = this.CreateToast()
+      this.$Progress.start()
+      this.showToast = this.CreateToast()
       //  const showLoading = this.CreateLoading('专辑列表加载中，请稍后...')
-        try {
-          const response = await getAlbum(data)
-          if (response.data.code === ERR_OK) {
-            const data = response.data.albumlib.data
-            this.albumList = data.list                            // list
-            this.albumTags = data.tags                            // tag
-            this.albumTagsArea = this._initnormalize(data.tags)   // initAreaTag
-            this.allpage = this.albumList.length
-            this.pageConfig = this._initPagination(data.total)
-            this.$Progress.finish()
-            this.showToast.hide()
-          }
-        }catch (e) {
+      try {
+        const response = await getAlbum(data)
+        if (response.data.code === ERR_OK) {
+          const data = response.data.albumlib.data
+          this.albumList = data.list // list
+          this.albumTags = data.tags // tag
+          this.albumTagsArea = this._initnormalize(data.tags) // initAreaTag
+          this.allpage = this.albumList.length
+          this.pageConfig = this._initPagination(data.total)
           this.$Progress.finish()
-          showLoading.hide()
+          this.showToast.hide()
         }
-      },
-      _initnormalize(tags) {
-        let area = tags.area
-        area.unshift({
-          "area": 0,
-          "end": 0,
-          "id": 7,
-          "name": '推荐',
-          "start": 0,
-          "tjreport": 0
-        })
-        return area
-      },
-
-      _addUri(mid) {
-        return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
-      },
-
-      // 地区
-      selectItemAreaIndex(items, index) {
-        this.currentAreaIndex = index
-        this.area = items.id
-        this.defaultTitle = items.name
-        this._getAlbum()
-      },
-      selectItemGenreIndex(items, index) {
-        this.currentGenreIndex = index
-        this.genre = items.id
-        this._getAlbum()
-      },
-      selectItemTypeIndex(items, index) {
-        this.currentTypeIndex = index
-        this.type = items.id
-        this._getAlbum()
-      },
-
-      selectYear() {
-        this.selectItemIndex = 1
-      },
-      selectCompany() {
-        this.selectItemIndex = 2
-      },
-      selectItemYear(items, index) {
-        this.defaultYear = items.name
-        this.year = items.id
-        this._getAlbum()
-      },
-      selectItemCompany(items, index) {
-        this.defaultCompany = items.name
-        this.company = items.id
-        this._getAlbum()
-      },
-
-      // 选择专辑
-      selectAlbumItem(items, index) {
-        this.$router.push({
-          path: `/music/album/${items.album_mid}`
-        })
-        // 保存专辑信息
-        this.saveDiscInfo(items)
-        this.saveSingID(items.album_mid)
-      },
-      pagetions(index) {
-        let currentSin = index - 1
-        this.sin = (currentSin * 10) + (currentSin * 10)
-        this._getAlbum()
-        setTimeout(() => {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-        }, 200)
+      } catch (e) {
+        this.$Progress.finish()
+        this.showToast.hide()
       }
+    },
+    _initnormalize (tags) {
+      let area = tags.area
+      area.unshift({
+        'area': 0,
+        'end': 0,
+        'id': 7,
+        'name': '推荐',
+        'start': 0,
+        'tjreport': 0
+      })
+      return area
+    },
+
+    _addUri (mid) {
+      return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
+    },
+
+    // 地区
+    selectItemAreaIndex (items, index) {
+      this.currentAreaIndex = index
+      this.area = items.id
+      this.defaultTitle = items.name
+      this._getAlbum()
+    },
+    selectItemGenreIndex (items, index) {
+      this.currentGenreIndex = index
+      this.genre = items.id
+      this._getAlbum()
+    },
+    selectItemTypeIndex (items, index) {
+      this.currentTypeIndex = index
+      this.type = items.id
+      this._getAlbum()
+    },
+
+    selectYear () {
+      this.selectItemIndex = 1
+    },
+    selectCompany () {
+      this.selectItemIndex = 2
+    },
+    selectItemYear (items, index) {
+      this.defaultYear = items.name
+      this.year = items.id
+      this._getAlbum()
+    },
+    selectItemCompany (items, index) {
+      this.defaultCompany = items.name
+      this.company = items.id
+      this._getAlbum()
+    },
+
+    // 选择专辑
+    selectAlbumItem (items, index) {
+      this.$router.push({
+        path: `/music/album/${items.album_mid}`
+      })
+      // 保存专辑信息
+      this.saveDiscInfo(items)
+      this.saveSingID(items.album_mid)
+    },
+    pagetions (index) {
+      let currentSin = index - 1
+      this.sin = (currentSin * 10) + (currentSin * 10)
+      this._getAlbum()
+      setTimeout(() => {
+        document.documentElement.scrollTop = document.body.scrollTop = 0
+      }, 200)
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

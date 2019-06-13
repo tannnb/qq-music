@@ -37,67 +37,67 @@
 </template>
 
 <script>
-  export default {
-    name: 'pagination2',
-    props: {
-      // 分页配置
-      pageConfig: {
-        type: Object,
-        require: true,
-        default () {
-          return {
-            pageSize: 10,     //一页的数据条数
-            pageNo: 0,        //当前页的索引
-            total: 0,         //总的数据条数
-            pageTotal: 0,      //总的页数
-          }
-        },
-      },
-    },
-    data () {
-      return {
-        //默认显示
-        showPageNo: 8,
-        currentPage: 0
-      }
-    },
-    methods: {
-      prePage () {
-        this.currentPage -= 1
-        this.$emit('changeCurrentPage', this.currentPage)
-      },
-      nextPage () {
-        this.currentPage += 1
-        this.$emit('changeCurrentPage', this.currentPage)
-      },
-      changeCurrentPage (i) {
-        if(i === this.currentPage) return
-        this.currentPage = i
-        this.$emit('changeCurrentPage', this.currentPage)
-      },
-      setCurrentIndex(i) {
-        this.currentPage = i
-      }
-    },
-    computed: {
-      //计算总页数，如果传了pageTotal,直接取pageTotal的值，如果传了total，那么根据pageSize去计算
-      pageTotal () {
-        const config = this.pageConfig
-        if (config.pageTotal) {
-          return config.pageTotal
-        } else {
-          if (config.pageSize && config.total) {
-            return Math.ceil(config.total / config.pageSize)
-          } else {
-            return 0
-          }
+export default {
+  name: 'pagination2',
+  props: {
+    // 分页配置
+    pageConfig: {
+      type: Object,
+      require: true,
+      default () {
+        return {
+          pageSize: 10, // 一页的数据条数
+          pageNo: 0, // 当前页的索引
+          total: 0, // 总的数据条数
+          pageTotal: 0 // 总的页数
         }
-      },
+      }
+    }
+  },
+  data () {
+    return {
+      // 默认显示
+      showPageNo: 8,
+      currentPage: 0
+    }
+  },
+  methods: {
+    prePage () {
+      this.currentPage -= 1
+      this.$emit('changeCurrentPage', this.currentPage)
     },
-    created: function () {
-      this.currentPage = this.pageConfig.pageNo || 0
+    nextPage () {
+      this.currentPage += 1
+      this.$emit('changeCurrentPage', this.currentPage)
     },
+    changeCurrentPage (i) {
+      if (i === this.currentPage) return
+      this.currentPage = i
+      this.$emit('changeCurrentPage', this.currentPage)
+    },
+    setCurrentIndex (i) {
+      this.currentPage = i
+    }
+  },
+  computed: {
+    // 计算总页数，如果传了pageTotal,直接取pageTotal的值，如果传了total，那么根据pageSize去计算
+    pageTotal () {
+      const config = this.pageConfig
+      if (config.pageTotal) {
+        return config.pageTotal
+      } else {
+        if (config.pageSize && config.total) {
+          return Math.ceil(config.total / config.pageSize)
+        } else {
+          return 0
+        }
+      }
+    }
+  },
+  created: function () {
+    this.currentPage = this.pageConfig.pageNo || 0
   }
+}
 </script>
 
 <style lang="stylus" scoped>

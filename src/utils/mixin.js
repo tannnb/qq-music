@@ -3,15 +3,15 @@ export const LoadingMixin = {
     CreateLoading (message) {
       return this.$createLoading({
         $props: {
-          content: message,
-        },
+          content: message
+        }
       }).show()
     },
     CreateToast (message) {
       return this.$createToast({
         $props: {
-          content: message,
-        },
+          content: message
+        }
       }).show()
     },
     CreateDialog (options) {
@@ -21,7 +21,7 @@ export const LoadingMixin = {
           confirmBtnText: options.confirmBtnText,
           cancelBtnText: options.cancelBtnText,
           showClose: options.showClose,
-          cancelBtn: options.cancelBtn,
+          cancelBtn: options.cancelBtn
         },
         $events: {
           confirm () {
@@ -29,11 +29,11 @@ export const LoadingMixin = {
           },
           close () {
             options.close && options.close()
-          },
-        },
+          }
+        }
       }).show()
-    },
-  },
+    }
+  }
 }
 
 export const PaginationMixin = {
@@ -41,10 +41,10 @@ export const PaginationMixin = {
     _initPagination (total) {
       if (!total) throw 'argument is not undefined'
       return {
-        pageSize: 10,     //一页的数据条数
-        pageNo: 1,        //当前页的索引
-        total: total,     //总的数据条数
+        pageSize: 10, // 一页的数据条数
+        pageNo: 1, // 当前页的索引
+        total: total // 总的数据条数
       }
-    },
-  },
+    }
+  }
 }

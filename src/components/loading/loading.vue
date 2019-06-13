@@ -11,41 +11,41 @@
 </template>
 
 <script>
-  export default {
-    name: "loading",
-    props: {
-      content: {
-        type: String,
-        default: '玩命加载中...'
-      }
-    },
-    data() {
-      return {
-        showFlag: true
-      }
-    },
-    watch:{
-      showFlag(newValue,oldValue){
-        const body = document.querySelector('body')
-        if(newValue === true){
-          body.classList.add('hidden')
-        }else{
-          body.classList.remove('hidden')
-        }
-      }
-    },
-    methods: {
-      show() {
-        this.showFlag = true
-      },
-      hide() {
-        this.showFlag = false
-      },
-      LoadingCloseEvent() {
-        this.hide()
+export default {
+  name: 'loading',
+  props: {
+    content: {
+      type: String,
+      default: '玩命加载中...'
+    }
+  },
+  data () {
+    return {
+      showFlag: true
+    }
+  },
+  watch: {
+    showFlag (newValue, oldValue) {
+      const body = document.querySelector('body')
+      if (newValue === true) {
+        body.classList.add('hidden')
+      } else {
+        body.classList.remove('hidden')
       }
     }
+  },
+  methods: {
+    show () {
+      this.showFlag = true
+    },
+    hide () {
+      this.showFlag = false
+    },
+    LoadingCloseEvent () {
+      this.hide()
+    }
   }
+}
 </script>
 
 <style lang="stylus">
