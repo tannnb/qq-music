@@ -1,10 +1,9 @@
-import {commonParams} from './config'
-import axios from "axios/index";
+import { commonParams, debug } from './config'
+import axios from 'axios/index'
 
-const debug = process.env.NODE_ENV !== 'production'
-
-export function toplistOpt() {
-  const url = debug ? 'http://localhost:3000/toplistOpt' : '/pc/toplistOpt'
+export function toplistOpt () {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/toplistOpt`
   const data = Object.assign({}, commonParams, {
     page: 'index',
     format: 'html',
@@ -20,8 +19,9 @@ export function toplistOpt() {
   })
 }
 
-export function toplistCp(date, topid, type, song_begin = 0) {
-  const url = debug ? 'http://localhost:3000/toplistCp' : '/pc/toplistCp'
+export function toplistCp (date, topid, type, song_begin = 0) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/toplistCp`
   const data = Object.assign({}, {
     tpl: 3,
     page: 'detail',
@@ -42,4 +42,3 @@ export function toplistCp(date, topid, type, song_begin = 0) {
     return Promise.resolve(res)
   })
 }
-

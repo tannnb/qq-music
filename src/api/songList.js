@@ -1,12 +1,9 @@
-import {commonParams} from "./config";
-import {ERR_OK} from "./config";
+import { commonParams, debug, ERR_OK } from './config'
 import axios from 'axios'
-import {Base64} from 'js-base64'
-
-const debug = process.env.NODE_ENV !== 'production'
+import { Base64 } from 'js-base64'
 
 export default class Song {
-  constructor({id, mid, albumdesc, isonly, singer, name, album, duration, image, url,cur_count,in_count,old_count,Franking_value}) {
+  constructor ({ id, mid, albumdesc, isonly, singer, name, album, duration, image, url, cur_count, in_count, old_count, Franking_value }) {
     this.id = id
     this.albumdesc = albumdesc
     this.isonly = isonly
@@ -24,7 +21,7 @@ export default class Song {
     this.Franking_value = Franking_value
   }
 
-  getLyric() {
+  getLyric () {
     if (this.lyric) {
       return Promise.resolve(this.lyric)
     }
@@ -40,10 +37,9 @@ export default class Song {
       })
     })
   }
-
 }
 
-export function createSong(musicData,list) {
+export function createSong (musicData, list) {
   return new Song({
     id: musicData.songid,
     albumdesc: musicData.albumdesc,
@@ -58,13 +54,14 @@ export function createSong(musicData,list) {
     cur_count: list ? list.cur_count : '',
     in_count: list ? list.in_count : '',
     old_count: list ? list.old_count : '',
-    Franking_value:list? list.Franking_value :''
+    Franking_value: list ? list.Franking_value : ''
   })
 }
 
 // 获取歌词
-function getLyric(mid) {
-  const url = debug ? 'http://localhost:3000/lyric' : '/pc/lyric'
+function getLyric (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getLyric`
   const data = Object.assign({}, commonParams, {
     songmid: mid,
     platform: 'yqq',
@@ -82,9 +79,8 @@ function getLyric(mid) {
   })
 }
 
-
 // 获取播放地址
-export function processSongsUrl(songs) {
+export function processSongsUrl (songs) {
   if (!songs.length) {
     return Promise.resolve(songs)
   }
@@ -99,12 +95,11 @@ export function processSongsUrl(songs) {
     }
     return songs
   })
-
 }
 
-
-export function getSongsUrl(songs) {
-  const url = debug ? 'http://localhost:3000/getPurlUrl' : '/pc/getPurlUrl'
+export function getSongsUrl (songs) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getPurlUrl`
   let mids = []
   let types = []
 
@@ -113,8 +108,7 @@ export function getSongsUrl(songs) {
     types.push(0)
   })
 
-
-  const urlMid = genUrlMid(mids, types)   // 生成data参数
+  const urlMid = genUrlMid(mids, types) // 生成data参数
 
   const data = Object.assign({}, commonParams, {
     g_tk: 5381,
@@ -127,7 +121,7 @@ export function getSongsUrl(songs) {
   return new Promise((resolve, reject) => {
     let tryTime = 3
 
-    function request() {
+    function request () {
       return axios.post(url, {
         comm: data,
         url_mid: urlMid
@@ -148,7 +142,7 @@ export function getSongsUrl(songs) {
         })
     }
 
-    function retry() {
+    function retry () {
       if (--tryTime >= 0) {
         request()
       } else {
@@ -160,11 +154,11 @@ export function getSongsUrl(songs) {
   })
 }
 
-function genUrlMid(mids, types) {
+function genUrlMid (mids, types) {
   const guid = getUid()
   return {
     module: 'vkey.GetVkeyServer',
-    method: "CgiGetVkey",
+    method: 'CgiGetVkey',
     param: {
       guid,
       songmid: mids,
@@ -176,21 +170,20 @@ function genUrlMid(mids, types) {
   }
 }
 
-
-function getUid() {
+function getUid () {
   let _uid = ''
   if (_uid) {
     return _uid
   }
   if (!_uid) {
-    const t = (new Date).getUTCMilliseconds()
+    const t = (new Date()).getUTCMilliseconds()
     _uid = '' + Math.round(2147483647 * Math.random()) * t % 1e10
   }
   return _uid
 }
 
 // 拼接多位歌手
-function filterSinger(singer) {
+function filterSinger (singer) {
   let ret = []
   if (!singer) {
     return ''
@@ -201,7 +194,6 @@ function filterSinger(singer) {
   return ret.join('/')
 }
 
-
-export function isValidMusic(musicData) {
+export function isValidMusic (musicData) {
   return musicData.songid && musicData.albummid && (!musicData.pay || musicData.pay.payalbumprice === 0)
 }

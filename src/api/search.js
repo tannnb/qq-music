@@ -1,10 +1,9 @@
-import {commonParams,options} from './config'
+import { commonParams, options, debug } from './config'
 import axios from 'axios'
 
-const debug = process.env.NODE_ENV !== 'production'
-
-export function clientSearch(query, page, zhida, perpage) {
-  const url = debug ? 'http://localhost:3000/clientSearch' : '/pc/clientSearch'
+export function clientSearch (query, page, zhida, perpage) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/clientSearch`
   const data = Object.assign({}, commonParams, {
     w: query,
     p: page,
@@ -31,9 +30,10 @@ export function clientSearch(query, page, zhida, perpage) {
   })
 }
 
-export function clientSmartBox(key) {
-  const url = debug ? 'http://localhost:3000/clientSmartBox' : '/pc/clientSmartBox'
-  const data = Object.assign({}, commonParams,options, {
+export function clientSmartBox (key) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/clientSmartBox`
+  const data = Object.assign({}, commonParams, options, {
     is_xml: 0,
     key,
     loginUin: 0,
@@ -48,4 +48,3 @@ export function clientSmartBox(key) {
     return Promise.resolve(res)
   })
 }
-

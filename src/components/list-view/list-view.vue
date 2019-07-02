@@ -26,33 +26,37 @@
 </template>
 
 <script>
-  import {format} from "../../utils/tool";
+import { format } from '@/utils/tool'
 
-  export default {
-    props: {
-      song: {
-        type: Array,
-        default: []
-      }
+export default {
+  props: {
+    song: {
+      type: Array,
+      default: () => []
+    }
+  },
+  filters: {
+    formats (times) {
+      return format(times)
+    }
+  },
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+    handleSelectItem (items, index) {
+      this.$emit('handlePlayer', items, index)
     },
-    filters: {
-      formats(times) {
-        return format(times)
-      }
-    },
-    methods: {
-      handleSelectItem(items, index) {
-        this.$emit('handlePlayer', items, index)
-      },
-      handleAppendItem(items, index) {
-        this.$emit('appendPlayer', items, index)
-      }
+    handleAppendItem (items, index) {
+      this.$emit('appendPlayer', items, index)
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>
-
 
   .list-view {
     width 100%
@@ -60,7 +64,7 @@
       display flex
       line-height 50px
       height 50px
-      font-size 13px
+      font-size 14px
       color: #999
       background #FBFBFD
       .count {

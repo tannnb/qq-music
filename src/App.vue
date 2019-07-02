@@ -1,12 +1,15 @@
 <template>
-  <div id="app">
-    <keep-alive><router-view /></keep-alive>
-    <Player />
-    <Back-top />
-  </div>
+    <div id="app">
+        <keep-alive>
+            <router-view/>
+        </keep-alive>
+        <Player/>
+        <Back-top/>
+    </div>
 </template>
 
 <script>
+import axios from 'axios'
 import Player from '@/views/player/player'
 import BackTop from '@/components/backTop'
 import { mapGetters } from 'vuex'
@@ -60,15 +63,15 @@ export default {
 </script>
 <style lang="stylus">
 
-body {
-  overflow-x hidden
-}
+    body {
+        overflow-x hidden
+    }
 
-.noneScorllY {
-  overflow-y hidden
-}
+    .noneScorllY {
+        overflow-y hidden
+    }
 
-.paddingBtoom {
-  padding-bottom 100px
-}
+    .paddingBtoom {
+        padding-bottom 100px
+    }
 </style>

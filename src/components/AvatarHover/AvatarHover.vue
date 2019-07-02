@@ -1,25 +1,25 @@
 <template>
   <div class="avatar-wrapper">
-    <div v-if="Url" class="img-cover"><img v-lazy="Url" :key="Url" /></div>
+    <div v-if="Url" class="img-cover"><img :src="Url" :key="Url" /></div>
     <div class="mark-cover"></div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "AvatarHover",
-    props:{
-      avatarUri:{
-        type:String,
-        default: require('./playlist_300.png')
-      }
-    },
-    data() {
-      return {
-        Url:this.avatarUri
-      }
+export default {
+  name: 'AvatarHover',
+  props: {
+    avatarUri: {
+      type: String,
+      default: require('./playlist_300.png')
+    }
+  },
+  data () {
+    return {
+      Url: this.avatarUri
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

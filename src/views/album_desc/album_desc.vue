@@ -46,104 +46,103 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
-  import {getAlbumDesc} from '../../api/album'
-  import {review} from '../../api/disc'
-  import {ERR_OK} from "../../api/config";
-  import {processSongsUrl, isValidMusic, createSong} from "../../api/songList";
-  import ListView from '../../components/list-view/list-view'
-  import {LoadingMixin} from "../../utils/mixin"
+import { mapGetters, mapActions } from 'vuex'
+import { getAlbumDesc } from '../../api/album'
+import { review } from '../../api/disc'
+import { ERR_OK } from '../../api/config'
+import { processSongsUrl, isValidMusic, createSong } from '../../api/songList'
+import ListView from '../../components/list-view/list-view'
+import { LoadingMixin } from '../../utils/mixin'
 
-  export default {
-    mixins: [LoadingMixin],
-    name: "album_desc",
-    data() {
-      return {
-        albumInfo: [],
-        songs: [],
-        commentlist: null,
-        commenttotal: '',
-        notSongUrl: false
+export default {
+  mixins: [LoadingMixin],
+  name: 'album_desc',
+  data () {
+    return {
+      albumInfo: [],
+      songs: [],
+      commentlist: null,
+      commenttotal: '',
+      notSongUrl: false
+    }
+  },
+  components: {
+    ListView
+  },
+  created () {
+    this._getAlbumDesc()
+  },
+  computed: {
+    ...mapGetters(['mid', 'initDisc'])
+  },
+  methods: {
+    ...mapActions([
+      'selectPlay',
+      'insertSong'
+    ]),
+    _addUri (mid) {
+      try {
+        return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
+      } catch (e) {
+        return ''
       }
     },
-    components: {
-      ListView
-    },
-    created() {
-      this._getAlbumDesc()
-    },
-    computed: {
-      ...mapGetters(['mid', 'initDisc'])
-    },
-    methods: {
-      ...mapActions([
-        'selectPlay',
-        'insertSong'
-      ]),
-      _addUri(mid) {
-        try {
-          return `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg?max_age=2592000`
-        }catch (e) {
-          return ''
+
+    copyrightIssue (message) {
+      var vm = this
+      this.CreateDialog({
+        message: message || '抱歉，因版权限制,暂无法查看该专辑下歌曲！',
+        confirmBtnText: '返回专辑页面',
+        cancelBtn: false,
+        confirmBtn () {
+          vm.$router.push('/music/album')
+        },
+        close () {
+          vm.$router.push('/music/album')
         }
-      },
+      })
+    },
 
-      copyrightIssue(message) {
-        var vm = this
-        this.CreateDialog({
-          message: message ? message : '抱歉，因版权限制,暂无法查看该专辑下歌曲！',
-          confirmBtnText: '返回专辑页面',
-          cancelBtn: false,
-          showClose:true,
-          confirmBtn() {
-            vm.$router.push('/music/album')
-          },
-          close() {
-            vm.$router.push('/music/album')
-          }
-        })
-      },
+    async _getAlbumDesc () {
+      this.$Progress.start()
+      this.showLoading = this.CreateLoading('加载中，请稍后...')
+      if (!this.mid) {
+        this.$Progress.finish()
+        this.showLoading.hide()
+        this.$router.push('/music/album')
+        return
+      }
 
-      async _getAlbumDesc() {
-        this.$Progress.start()
-        this.showLoading = this.CreateLoading('加载中，请稍后...')
-        if (!this.mid) {
+      try {
+        const response = await getAlbumDesc(this.mid)
+
+        // 版权问题 无法获取
+        if (response.data.code === 404) {
+          this.albumInfo = []
           this.$Progress.finish()
           this.showLoading.hide()
-          this.$router.push('/music/album')
+          this.copyrightIssue(response.data.data.albumTips)
+          return
+        }
+        if (response.data.code === 1101) {
+          this.albumInfo = []
+          this.$Progress.finish()
+          this.showLoading.hide()
+          this.copyrightIssue()
           return
         }
 
-        try {
-          const response = await getAlbumDesc(this.mid)
-
-          // 版权问题 无法获取
-          if (response.data.code === 404) {
-            this.albumInfo = []
+        if (response.data.code === ERR_OK) {
+          this.notSongUrl = false
+          this.albumInfo = response.data.data
+          try {
+            const result = await processSongsUrl(this._normalizeSongs(response.data.data.list))
+            this.songs = result.filter((currentSong) => {
+              return currentSong.url.length !== 0
+            })
             this.$Progress.finish()
             this.showLoading.hide()
-            this.copyrightIssue(response.data.data.albumTips)
-            return
-          }
-          if(response.data.code === 1101){
-            this.albumInfo = []
-            this.$Progress.finish()
-            this.showLoading.hide()
-            this.copyrightIssue()
-            return
-          }
-
-          if (response.data.code === ERR_OK) {
-            this.notSongUrl = false
-            this.albumInfo = response.data.data
-            try {
-              const result = await  processSongsUrl(this._normalizeSongs(response.data.data.list))
-              this.songs = result.filter((currentSong) => {
-                return currentSong.url.length !== 0
-              })
-              this.$Progress.finish()
-              this.showLoading.hide()
-              /*
+            /*
               // 获取评论
               review(this.mid).then(res => {
                 console.log(res)
@@ -151,52 +150,50 @@
                   this.commentlist = res.data.comment.commentlist
                   this.commenttotal = res.data.comment.commenttotal
                 }
-              })*/
-            } catch (e) {
-              this.$Progress.finish()
-              this.showLoading.hide()
-              this.copyrightIssue()
-            }
+              }) */
+          } catch (e) {
+            this.$Progress.finish()
+            this.showLoading.hide()
+            this.copyrightIssue()
           }
-
-        } catch (e) {
-          this.showLoading.hide()
-          this.$Progress.finish()
-          this.copyrightIssue()
         }
-
-      },
-      _normalizeSongs(list) {
-        let ret = []
-        list.forEach((musicData) => {
-          if (isValidMusic(musicData)) {
-            ret.push(createSong(musicData))
-          }
-        })
-        return ret
-      },
-      handlePlayAll() {
-        if (this.songs.length === 0) {
-          this.copyrightIssue()
-          return
+      } catch (e) {
+        this.showLoading.hide()
+        this.$Progress.finish()
+        this.copyrightIssue()
+      }
+    },
+    _normalizeSongs (list) {
+      let ret = []
+      list.forEach((musicData) => {
+        if (isValidMusic(musicData)) {
+          ret.push(createSong(musicData))
         }
-        this.selectPlay({
-          list: this.songs,
-          index: 0
-        })
-      },
-      handlePlayer(items, index) {
-        this.selectPlay({
-          list: this.songs,
-          index: index
-        })
-      },
-      appendPlayer(items) {
-        this.insertSong(items)
-      },
-
+      })
+      return ret
+    },
+    handlePlayAll () {
+      if (this.songs.length === 0) {
+        this.copyrightIssue()
+        return
+      }
+      this.selectPlay({
+        list: this.songs,
+        index: 0
+      })
+    },
+    handlePlayer (items, index) {
+      this.selectPlay({
+        list: this.songs,
+        index: index
+      })
+    },
+    appendPlayer (items) {
+      this.insertSong(items)
     }
+
   }
+}
 </script>
 
 <style lang="stylus" scoped>

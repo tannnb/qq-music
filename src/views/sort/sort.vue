@@ -44,132 +44,131 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import {getSortTags, getSortList} from "../../api/sort";
-  import {paddListenCount} from "../../utils/tool";
-  import {ERR_OK} from "../../api/config";
-  import Pagination from '@/components/pagination'
-  import AvatarHover from '../../components/AvatarHover/AvatarHover'
-  import {LoadingMixin,PaginationMixin} from "../../utils/mixin"
+import { mapActions } from 'vuex'
+import { getSortTags, getSortList } from '../../api/sort'
+import { paddListenCount } from '../../utils/tool'
+import { ERR_OK } from '../../api/config'
+import Pagination from '@/components/pagination'
+import AvatarHover from '../../components/AvatarHover/AvatarHover'
+import { LoadingMixin, PaginationMixin } from '../../utils/mixin'
 
-  export default {
-    mixins: [LoadingMixin,PaginationMixin],
-    name: "sort",
-    data() {
-      return {
-        categories: [],
-        currentIndex: null,
-        currentSelect: '',
-        currentTagIndex: 1,
-        SortList: [],
-        categoryId: 10000000,
-        sortId: 5,
-        sin: 0,
-        pageConfig:null
-      }
-    },
-    filters: {
-      listen(count) {
-        return paddListenCount(count)
-      }
-    },
-    components: {
-      Pagination,
-      AvatarHover
-    },
-    async created() {
-      this.$Progress.start()
-      this.showLoading = this.CreateLoading('歌单加载中，请稍后...')
-      this._getSortTags()
-      await this._getSortList()
-      this.$Progress.finish()
-      this.showLoading.hide()
-    },
-    methods: {
-      ...mapActions([
-        'saveDiscInfo',
-        'saveSingID'
-      ]),
-      async _getSortTags() {
-        try {
-          const response = await getSortTags()
-          let ret = response.data.trim()
-          var result = ret.replace(/\n/g, "");
-          const Reg = /^\w+\(({.+})\)$/
-          const matches = result.match(Reg)
-          const objArr = JSON.parse(matches[1])
-          if (objArr.code === ERR_OK) {
-            this.categories = objArr.data.categories.slice(1)
-          }
-        } catch (e) {
-          this.CreateDialog({
-            message: '类型获取失败'
-          })
+export default {
+  mixins: [LoadingMixin, PaginationMixin],
+  name: 'sort',
+  data () {
+    return {
+      categories: [],
+      currentIndex: null,
+      currentSelect: '',
+      currentTagIndex: 1,
+      SortList: [],
+      categoryId: 10000000,
+      sortId: 5,
+      sin: 0,
+      pageConfig: null
+    }
+  },
+  filters: {
+    listen (count) {
+      return paddListenCount(count)
+    }
+  },
+  components: {
+    Pagination,
+    AvatarHover
+  },
+  async created () {
+    this.$Progress.start()
+    this.showLoading = this.CreateLoading('歌单加载中，请稍后...')
+    this._getSortTags()
+    await this._getSortList()
+    this.$Progress.finish()
+    this.showLoading.hide()
+  },
+  methods: {
+    ...mapActions([
+      'saveDiscInfo',
+      'saveSingID'
+    ]),
+    async _getSortTags () {
+      try {
+        const response = await getSortTags()
+        let ret = response.data.trim()
+        var result = ret.replace(/\n/g, '')
+        const Reg = /^\w+\(({.+})\)$/
+        const matches = result.match(Reg)
+        const objArr = JSON.parse(matches[1])
+        if (objArr.code === ERR_OK) {
+          this.categories = objArr.data.categories.slice(1)
         }
-
-      },
-      async _getSortList() {
-        try {
-          const response = await getSortList(this.categoryId, this.sortId, this.sin)
-          let ret = response.data
-          const Reg = /^\w+\(({.+})\)$/
-          const matches = ret.match(Reg)
-          const objArr = JSON.parse(matches[1])
-          if (objArr.code === ERR_OK) {
-            this.SortList = objArr.data.list
-            this.pageConfig = this._initPagination(objArr.data.sum)
-          }
-          this.showToast && this.showToast.hide()
-        }catch (e) {
-          this.$Progress.finish()
-          this.showLoading.hide()
-          this.showToast && this.showToast.hide()
-          this.copyrightIssue()
-        }
-      },
-
-      copyrightIssue(message) {
-        var vm = this
+      } catch (e) {
         this.CreateDialog({
-          message: message ? message : '抱歉，因版权限制,暂无法查看该专辑下歌曲！',
-          confirmBtnText: '返回分类歌单',
-          cancelBtn: false,
-          showClose:true,
-          confirmBtn() {
-            vm.$router.push('/music/sort')
-          }
+          message: '类型获取失败'
         })
-      },
-
-      handleSelectTags(items, index) {
-        this.currentIndex = items.categoryId
-        this.categoryId = items.categoryId
-        this.currentSelect = items.categoryName
-        this.$refs.pagination.setCurrentIndex(1)
-        this.showToast = this.CreateToast()
-        this._getSortList()
-      },
-      handleTab(id) {
-        this.currentTagIndex = id
-        this.sortId = id
-        this.showToast = this.CreateToast()
-        this._getSortList()
-      },
-      pagetions(count) {
-        this.sin = (count - 1) * 30
-        this.showToast = this.CreateToast()
-        this._getSortList()
-      },
-      handleSelectSort(items) {
-        this.$router.push({
-          path: `/music/sort/${items.dissid}`
-        })
-        // 保存专辑信息
-        this.saveDiscInfo(items)
-        this.saveSingID(items.dissid)
       }
+    },
+    async _getSortList () {
+      try {
+        const response = await getSortList(this.categoryId, this.sortId, this.sin)
+        let ret = response.data
+        const Reg = /^\w+\(({.+})\)$/
+        const matches = ret.match(Reg)
+        const objArr = JSON.parse(matches[1])
+        if (objArr.code === ERR_OK) {
+          this.SortList = objArr.data.list
+          this.pageConfig = this._initPagination(objArr.data.sum)
+        }
+        this.showToast && this.showToast.hide()
+      } catch (e) {
+        this.$Progress.finish()
+        this.showLoading.hide()
+        this.showToast && this.showToast.hide()
+        this.copyrightIssue()
+      }
+    },
+
+    copyrightIssue (message) {
+      var vm = this
+      this.CreateDialog({
+        message: message || '抱歉，因版权限制,暂无法查看该专辑下歌曲！',
+        confirmBtnText: '返回分类歌单',
+        cancelBtn: false,
+        showClose: true,
+        confirmBtn () {
+          vm.$router.push('/music/sort')
+        }
+      })
+    },
+
+    handleSelectTags (items, index) {
+      this.currentIndex = items.categoryId
+      this.categoryId = items.categoryId
+      this.currentSelect = items.categoryName
+      this.$refs.pagination.setCurrentIndex(1)
+      this.showToast = this.CreateToast()
+      this._getSortList()
+    },
+    handleTab (id) {
+      this.currentTagIndex = id
+      this.sortId = id
+      this.showToast = this.CreateToast()
+      this._getSortList()
+    },
+    pagetions (count) {
+      this.sin = (count - 1) * 30
+      this.showToast = this.CreateToast()
+      this._getSortList()
+    },
+    handleSelectSort (items) {
+      this.$router.push({
+        path: `/music/sort/${items.dissid}`
+      })
+      // 保存专辑信息
+      this.saveDiscInfo(items)
+      this.saveSingID(items.dissid)
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

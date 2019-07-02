@@ -1,10 +1,9 @@
-import {commonParams} from './config'
+import { commonParams, debug } from './config'
 import axios from 'axios'
 
-const debug = process.env.NODE_ENV !== 'production'
-
-export function getSortTags() {
-  const url = debug ? 'http://localhost:3000/getSortTags' : '/pc/getSortTags'
+export function getSortTags () {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSortTags`
   const data = Object.assign({}, commonParams, {
     g_tk: '455128728',
     loginUin: 0,
@@ -20,8 +19,9 @@ export function getSortTags() {
   })
 }
 
-export function getSortList(categoryId, sortId, sin) {
-  const url = debug ? 'http://localhost:3000/getSortList' : '/pc/getSortList'
+export function getSortList (categoryId, sortId, sin) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSortList`
   const data = Object.assign({}, commonParams, {
     picmid: 1,
     g_tk: 455128728,
@@ -33,7 +33,7 @@ export function getSortList(categoryId, sortId, sin) {
     categoryId,
     sortId,
     sin,
-    ein: 29 + sin,
+    ein: 29 + sin
   })
 
   return axios.get(url, {
@@ -43,9 +43,9 @@ export function getSortList(categoryId, sortId, sin) {
   })
 }
 
-
-export function getSortDesc(mid) {
-  const url = debug ? 'http://localhost:3000/getSortDesc' : '/pc/getSortDesc'
+export function getSortDesc (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSortDesc`
   const data = Object.assign({}, commonParams, {
     type: 1,
     json: 1,
@@ -73,8 +73,8 @@ export function getSortDesc(mid) {
   })
 }
 
-function getUid() {
-  var t = (new Date).getUTCMilliseconds()
+function getUid () {
+  var t = (new Date()).getUTCMilliseconds()
   var _uid = '' + Math.round(2147483647 * Math.random()) * t % 1e10
   return _uid
 }

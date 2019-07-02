@@ -29,7 +29,6 @@ export default {
   methods: {
     selectItem (items, index) {
       this.activeIndex = index
-      console.log(items)
       this.$emit('selectItemTag', items, index)
     }
   }

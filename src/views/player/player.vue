@@ -299,7 +299,6 @@
       getLyric() {
         this.currentSong.getLyric().then((lyric) => {
           this.currentLyric = new Lyric(lyric, this.handleLyric)
-          console.log(this.currentLyric)
           if (this.playing) {
             this.currentLyric.play()
           }

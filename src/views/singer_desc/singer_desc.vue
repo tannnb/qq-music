@@ -23,18 +23,19 @@
     </div>
 
     <div class="list-wrapper">
-      <baidu-foldable style="width: 100%" height="%30" async>
-        <List-view
-          class="singerContentList"
-          v-if="songs.length !== '' "
-          :song="songs"
-          @handlePlayer="handlePlayer"
-          @appendPlayer="appendPlayer"
-        />
-      </baidu-foldable>
+      <!--<baidu-foldable style="width: 100%" height="%30" async>
+
+      </baidu-foldable>-->
+      <List-view
+              class="singerContentList"
+              v-if="songs.length !== '' "
+              :song="songs"
+              @handlePlayer="handlePlayer"
+              @appendPlayer="appendPlayer"
+      />
     </div>
 
-    <div class="singer_ablum">
+   <!-- <div class="singer_ablum">
       <h4 class="header">专辑</h4>
       <ul class="content">
         <li v-for="(items,index) in singer_ablum.list"
@@ -47,11 +48,11 @@
           <p class="pubTime">{{items.pubTime}}</p>
         </li>
       </ul>
-    </div>
+    </div>-->
     <div class="singer_ablum">
       <h4 class="header">MV</h4>
       <ul class="content">
-        <li v-for="(items,index) in singer_mv.list"
+        <li v-for="items in singer_mv.list"
             :key="items.id"
             @click="handleSelectMV(items)"
             class="items">
@@ -77,250 +78,247 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions, mapMutations} from 'vuex'
-  import {getSingerDesc, getSingerAlbum, getSingerMv, gerSingerFan,getSingerMvUrl} from '../../api/singer'
-  import {ERR_OK} from "../../api/config";
-  import {paddListenCount} from "../../utils/tool";
-  import ListView from '../../components/list-view/list-view'
-  import reviewList from '../../components/review-list/review-list'
-  import {processSongsUrl, isValidMusic, createSong} from '../../api/songList'
-  import {LoadingMixin} from "../../utils/mixin"
-  import AvatarHover from '../../components/AvatarHover/AvatarHover'
-  import DPlayer from 'dplayer';
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { getSingerDesc, getSingerAlbum, getSingerMv, gerSingerFan, getSingerMvUrl } from '../../api/singer'
+import { ERR_OK } from '../../api/config'
+import { paddListenCount } from '../../utils/tool'
+import ListView from '../../components/list-view/list-view'
+import reviewList from '../../components/review-list/review-list'
+import { processSongsUrl, isValidMusic, createSong } from '../../api/songList'
+import { LoadingMixin } from '../../utils/mixin'
+import AvatarHover from '../../components/AvatarHover/AvatarHover'
+import DPlayer from 'dplayer'
 
-  export default {
-    mixins: [LoadingMixin],
-    data() {
-      return {
-        singerlist: null,
-        singerInfo: null,
-        songs: [],
-        singer_ablum: {},
-        singer_mv: {},
-        music_num: null,
-        freeflow_url:[],
-        showDplayer:false,
-        options:{}
+export default {
+  mixins: [LoadingMixin],
+  data () {
+    return {
+      singerlist: null,
+      singerInfo: null,
+      songs: [],
+      singer_ablum: {},
+      singer_mv: {},
+      music_num: null,
+      freeflow_url: [],
+      showDplayer: false,
+      options: {}
+    }
+  },
+  components: {
+    ListView,
+    reviewList,
+    AvatarHover
+  },
+  created () {
+    this._getSingerDesc()
+    this._getSingerAlbum()
+    this._getSingerMv()
+  },
+  computed: {
+    ...mapGetters(['mid', 'initDisc'])
+  },
+  filters: {
+    listen (count) {
+      return paddListenCount(count)
+    }
+  },
+  methods: {
+    ...mapActions([
+      'selectPlay',
+      'insertSong'
+    ]),
+    ...mapMutations({
+      setPlayState: 'SET_PLAYING_STATE'
+    }),
+    uri (uri, flag) {
+      let count = flag ? '1' : '2'
+      return `https://y.gtimg.cn/music/photo_new/T00${count}R300x300M000${uri}.jpg?max_age=2592000`
+    },
+    // 追加歌曲
+    appendPlayer (items) {
+      this.insertSong(items)
+    },
+
+    handlePlayer (items, index) {
+      this.selectPlay({
+        list: this.songs,
+        index: index
+      })
+    },
+
+    copyrightIssue (message) {
+      var vm = this
+      this.CreateDialog({
+        message: message || '抱歉，因版权限制,暂无法查看该歌手下歌曲！',
+        confirmBtnText: '返回专辑页面',
+        cancelBtn: false,
+        showClose: true,
+        confirmBtn () {
+          vm.$router.push('/music/singer')
+        },
+        close () {
+          vm.$router.push('/music/singer')
+        }
+      })
+    },
+
+    handlePlayAll () {
+      if (this.songs.length === 0) {
+        this.copyrightIssue()
+        return false
       }
+      this.selectPlay({
+        list: this.songs,
+        index: 0
+      })
     },
-    components: {
-      ListView,
-      reviewList,
-      AvatarHover
-    },
-    created() {
-      this._getSingerDesc()
-      this._getSingerAlbum()
-      this._getSingerMv()
-    },
-    computed: {
-      ...mapGetters(['mid', 'initDisc'])
-    },
-    filters: {
-      listen(count) {
-        return paddListenCount(count)
+
+    async _getSingerDesc () {
+      this.$Progress.start()
+      this.showToast = this.CreateToast()
+      if (!this.mid) {
+        this.$Progress.finish()
+        this.showToast.hide()
+        this.$router.push('/music/singer')
+        return
       }
-    },
-    methods: {
-      ...mapActions([
-        'selectPlay',
-        'insertSong'
-      ]),
-      ...mapMutations({
-        setPlayState: 'SET_PLAYING_STATE'
-      }),
-      uri(uri, flag) {
-        let count = flag ? '1' : '2'
-        return `https://y.gtimg.cn/music/photo_new/T00${count}R300x300M000${uri}.jpg?max_age=2592000`
-      },
-      // 追加歌曲
-      appendPlayer(items) {
-        this.insertSong(items)
-      },
 
-      handlePlayer(items, index) {
-        this.selectPlay({
-          list: this.songs,
-          index: index
-        })
-      },
+      try {
+        const response = await getSingerDesc(this.mid)
+        this.showToast.hide()
+        this.$Progress.finish()
+        if (response.data.code === ERR_OK) {
+          this.singerInfo = response.data.data
+          this.singerlist = response.data.data.list
 
-      copyrightIssue(message) {
-        var vm = this
+          // 获取播放地址
+          try {
+            const result = await processSongsUrl(this._normalizeSongs(response.data.data.list))
+            //  排除没有url的歌曲
+            this.songs = result.filter((currentSong) => {
+              return currentSong.url.length !== 0
+            })
+          } catch (e) {
+            this.copyrightIssue()
+          }
+        }
+      } catch (e) {
+        this.$Progress.finish()
+        this.showToast.hide()
+        this.copyrightIssue()
+      }
+
+      // 获取MV
+      try {
+        const response = await gerSingerFan(this.mid)
+        this.music_num = response.data.data.music_num
+      } catch (e) {
         this.CreateDialog({
-          message: message ? message : '抱歉，因版权限制,暂无法查看该歌手下歌曲！',
-          confirmBtnText: '返回专辑页面',
-          cancelBtn: false,
-          showClose: true,
-          confirmBtn() {
-            vm.$router.push('/music/singer')
-          },
-          close() {
-            vm.$router.push('/music/singer')
-          }
+          message: 'MV获取失败'
         })
-      },
+      }
+    },
 
-      handlePlayAll() {
-        if (this.songs.length === 0) {
-          this.copyrightIssue()
-          return false
+    async _getSingerAlbum () {
+      if (!this.mid) {
+        this.$router.push('/music/singer')
+        return
+      }
+      try {
+        const response = await getSingerAlbum(this.mid)
+        if (response.data.code === ERR_OK) {
+          this.singer_ablum = response.data.data
         }
-        this.selectPlay({
-          list: this.songs,
-          index: 0
+      } catch (e) {
+        this.CreateDialog({
+          message: '歌手详情获取失败'
         })
-      },
-
-      async _getSingerDesc() {
-        this.$Progress.start()
-        this.showLoading = this.CreateLoading('歌手信息加载中，请稍后...')
-        if (!this.mid) {
-          this.$Progress.finish()
-          this.showLoading.hide()
-          this.$router.push('/music/singer')
-          return
+      }
+    },
+    async _getSingerMv () {
+      if (!this.mid) {
+        this.$router.push('/music/singer')
+        return
+      }
+      try {
+        const response = await getSingerMv(this.mid)
+        let ret = response.data
+        const reg = /\((\{.+\})\)/
+        const matches = ret.match(reg)
+        if (matches) {
+          ret = JSON.parse(matches[1])
         }
-
-        try {
-          const response = await getSingerDesc(this.mid)
-          if (response.data.code === ERR_OK) {
-            this.singerInfo = response.data.data
-            this.singerlist = response.data.data.list
-
-            // 获取播放地址
-            try {
-              const result = await processSongsUrl(this._normalizeSongs(response.data.data.list))
-              //  排除没有url的歌曲
-              this.songs = result.filter((currentSong) => {
-                return currentSong.url.length !== 0
-              })
-              this.$Progress.finish()
-              this.showLoading.hide()
-            } catch (e) {
-              this.$Progress.finish()
-              this.showLoading.hide()
-              this.copyrightIssue()
-            }
-          }
-        } catch (e) {
-          this.$Progress.finish()
-          this.showLoading.hide()
-          this.copyrightIssue()
+        if (ret.code === ERR_OK) {
+          this.singer_mv = ret.data
         }
+      } catch (e) {
+        this.CreateDialog({
+          message: 'MV获取失败'
+        })
+      }
+    },
 
-        // 获取MV
-        try {
-          const response = await gerSingerFan(this.mid)
-          this.music_num = response.data.data.music_num
-        } catch (e) {
-          this.CreateDialog({
-            message: 'MV获取失败'
-          })
-        }
-      },
+    async handleSelectMV (items) {
+      const vid = items.vid
+      const response = await getSingerMvUrl(vid)
+      if (response.data.code === ERR_OK) {
+        const MvUrlData = response.data.getMvUrl
+        if (MvUrlData.code === ERR_OK) {
+          const mvUrl_mp4 = MvUrlData.data[vid].mp4
 
-      async _getSingerAlbum() {
-        if (!this.mid) {
-          this.$router.push('/music/singer')
-          return
-        }
-        try {
-          const response = await getSingerAlbum(this.mid)
-          if (response.data.code === ERR_OK) {
-            this.singer_ablum = response.data.data
-          }
-        } catch (e) {
-          this.CreateDialog({
-            message: '歌手详情获取失败'
-          })
-        }
-      },
-      async _getSingerMv() {
-        if (!this.mid) {
-          this.$router.push('/music/singer')
-          return
-        }
-        try {
-          const response = await getSingerMv(this.mid)
-          let ret = response.data
-          const reg = /\((\{.+\})\)/
-          const matches = ret.match(reg)
-          if (matches) {
-            ret = JSON.parse(matches[1])
-          }
-          if (ret.code === ERR_OK) {
-            this.singer_mv = ret.data
-          }
-        } catch (e) {
-          this.CreateDialog({
-            message: 'MV获取失败'
-          })
-        }
-      },
-
-      async handleSelectMV(items){
-        const vid = items.vid
-        const response = await getSingerMvUrl(vid)
-        if(response.data.code === ERR_OK){
-          const MvUrlData = response.data.getMvUrl
-          if(MvUrlData.code === ERR_OK){
-            const mvUrl_mp4 = MvUrlData.data[vid].mp4
-
-            const result = []
-            for(let i=0;i<mvUrl_mp4.length;i++){
-              if(mvUrl_mp4[i].freeflow_url.length !== 0){
-                for(let j=0;j<mvUrl_mp4[i].freeflow_url.length;j++){
-                  result.unshift(mvUrl_mp4[i].freeflow_url[j])
-                }
+          const result = []
+          for (let i = 0; i < mvUrl_mp4.length; i++) {
+            if (mvUrl_mp4[i].freeflow_url.length !== 0) {
+              for (let j = 0; j < mvUrl_mp4[i].freeflow_url.length; j++) {
+                result.unshift(mvUrl_mp4[i].freeflow_url[j])
               }
             }
+          }
 
-           if(result.length === 0){
-             this.CreateDialog({
-               message: message ? message : '该歌手MV因版权问题,暂时无法播放！',
-               confirmBtnText: '取消',
-               cancelBtn: false
-             })
-              return
-           }
-
-            this.showDplayer = true
-            this.setPlayState(false)
-            this.$nextTick(() => {
-              const dp = new DPlayer({
-                container:this.$refs.dplayer,
-                video: {
-                  url: result[0],
-                  pic: items.pic
-                },
-                autoplay: false
-              })
+          if (result.length === 0) {
+            this.CreateDialog({
+              message: message || '该歌手MV因版权问题,暂时无法播放！',
+              confirmBtnText: '取消',
+              cancelBtn: false
             })
+            return
           }
+
+          this.showDplayer = true
+          this.setPlayState(false)
+          this.$nextTick(() => {
+            const dp = new DPlayer({
+              container: this.$refs.dplayer,
+              video: {
+                url: result[0],
+                pic: items.pic
+              },
+              autoplay: false
+            })
+          })
         }
-      },
-
-      closeplayer(){
-        this.showDplayer = false
-        this.setPlayState(true)
-      },
-
-      _normalizeSongs(list) {
-        let ret = []
-        list.forEach((musicData) => {
-          if (isValidMusic(musicData.musicData)) {
-            ret.push(createSong(musicData.musicData))
-          }
-        })
-        return ret
       }
+    },
+
+    closeplayer () {
+      this.showDplayer = false
+      this.setPlayState(true)
+    },
+
+    _normalizeSongs (list) {
+      let ret = []
+      list.forEach((musicData) => {
+        if (isValidMusic(musicData.musicData)) {
+          ret.push(createSong(musicData.musicData))
+        }
+      })
+      return ret
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>
-
 
   .vue-foldable-container {
     transition: max-height 0.3s;
@@ -518,4 +516,3 @@
   }
 
 </style>
-

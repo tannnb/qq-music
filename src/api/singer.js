@@ -1,25 +1,24 @@
-import {commonParams} from './config'
-import axios from "axios/index";
+import { commonParams, debug } from './config'
+import axios from 'axios/index'
 
-const debug = process.env.NODE_ENV !== 'production'
-
-export function getSingerList(options) {
-  const url = debug ? 'http://localhost:3000/singer' : '/pc/singer'
+export function getSingerList (options) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSingerList`
   const params = Object.assign({}, {
-    "comm": {
-      "ct": 24,
-      "cv": 10000
+    'comm': {
+      'ct': 24,
+      'cv': 10000
     },
-    "singerList": {
-      "module": "Music.SingerListServer",
-      "method": "get_singer_list",
-      "param": {
-        "index": options ? options.index : -100,
-        "area": options ? options.area : -100,
-        "sex": options ? options.sex : -100,
-        "genre": options ? options.genre : -100,
-        "sin": options ? options.sin : 0,
-        "cur_page": options ? options.cur_page : 1
+    'singerList': {
+      'module': 'Music.SingerListServer',
+      'method': 'get_singer_list',
+      'param': {
+        'index': options ? options.index : -100,
+        'area': options ? options.area : -100,
+        'sex': options ? options.sex : -100,
+        'genre': options ? options.genre : -100,
+        'sin': options ? options.sin : 0,
+        'cur_page': options ? options.cur_page : 1
       }
     }
   })
@@ -40,8 +39,9 @@ export function getSingerList(options) {
   })
 }
 
-export function getSingerDesc(mid) {
-  const url = debug ? 'http://localhost:3000/singerdesc' : '/pc/singerdesc'
+export function getSingerDesc (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSingerDesc`
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     singermid: mid,
@@ -51,7 +51,7 @@ export function getSingerDesc(mid) {
     needNewCode: 0,
     begin: 0,
     num: 80,
-    songstatus: 1,
+    songstatus: 1
   })
 
   return axios.get(url, {
@@ -61,8 +61,9 @@ export function getSingerDesc(mid) {
   })
 }
 
-export function getSingerAlbum(mid) {
-  const url = debug ? 'http://localhost:3000/getSingerAlbum' : '/pc/getSingerAlbum'
+export function getSingerAlbum (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSingerAlbum`
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     singermid: mid,
@@ -72,7 +73,7 @@ export function getSingerAlbum(mid) {
     needNewCode: 0,
     begin: 0,
     num: 5,
-    songstatus: 1,
+    songstatus: 1
   })
 
   return axios.get(url, {
@@ -82,8 +83,9 @@ export function getSingerAlbum(mid) {
   })
 }
 
-export function getSingerMv(mid) {
-  const url = debug ? 'http://localhost:3000/getSingerMv' : '/pc/getSingerMv'
+export function getSingerMv (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSingerMv`
   const data = Object.assign({}, commonParams, {
     g_tk: 1194859437,
     cid: 205360581,
@@ -104,9 +106,9 @@ export function getSingerMv(mid) {
   })
 }
 
-
-export function gerSingerFan(mid) {
-  const url = debug ? 'http://localhost:3000/gerSingerFan' : '/pc/gerSingerFan'
+export function gerSingerFan (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/gerSingerFan`
   const data = Object.assign({}, commonParams, {
     reqtype: 1,
     singermid: mid,
@@ -126,9 +128,9 @@ export function gerSingerFan(mid) {
   })
 }
 
-
-export function getSingerMvUrl(vid) {
-  const url = debug ? 'http://localhost:3000/getSingerMvUrl' : '/pc/getSingerMvUrl'
+export function getSingerMvUrl (vid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getSingerMvUrl`
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,
@@ -136,11 +138,11 @@ export function getSingerMvUrl(vid) {
     format: 'jsonp',
     needNewCode: 0,
     data: {
-      "getMvUrl": {
-        "module": "gosrf.Stream.MvUrlProxy",
-        "method": "GetMvUrls",
-        "param": {
-          "vids": [vid], "request_typet": 10001
+      'getMvUrl': {
+        'module': 'gosrf.Stream.MvUrlProxy',
+        'method': 'GetMvUrls',
+        'param': {
+          'vids': [vid], 'request_typet': 10001
         }
       }
     }
@@ -153,23 +155,14 @@ export function getSingerMvUrl(vid) {
   })
 }
 
-
 class Dplayer {
-  constructor(){
+  constructor () {
 
   }
 }
 
-export function createDplayer(musicData) {
+export function createDplayer (musicData) {
   return new Dplayer({
 
   })
 }
-
-
-
-
-
-
-
-

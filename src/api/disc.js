@@ -1,10 +1,9 @@
-import {commonParams} from './config'
+import { commonParams, debug } from './config'
 import axios from 'axios'
 
-const debug = process.env.NODE_ENV !== 'production'
-
-export function getDiscList(id) {
-  const url = debug ? 'http://localhost:3000/getDiscList' : '/pc/getDiscList'
+export function getDiscList (id) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getDiscList`
   const data = Object.assign({}, commonParams, {
     type: 1,
     json: 1,
@@ -32,9 +31,9 @@ export function getDiscList(id) {
   })
 }
 
-
-export function review(mid, pagenum = 0) {
-  const url = debug ? 'http://localhost:3000/review' : '/pc/review'
+export function review (mid, pagenum = 0) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/review`
   const data = Object.assign({}, commonParams, {
     hostUin: 0,
     inCharset: 'utf8',
@@ -52,7 +51,7 @@ export function review(mid, pagenum = 0) {
     lasthotcommentid: '',
     domain: 'qq.com',
     ct: 24,
-    cv: 101010,
+    cv: 101010
   })
 
   return axios.get(url, {
@@ -62,8 +61,9 @@ export function review(mid, pagenum = 0) {
   })
 }
 
-export function getNewAlbumSong(mid) {
-  const url = debug ? 'http://localhost:3000/getNewAlbumSong' : '/pc/getNewAlbumSong'
+export function getNewAlbumSong (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getNewAlbumSong`
   const data = Object.assign({}, commonParams, {
     albummid: mid,
     g_tk: 125702638,
@@ -80,4 +80,3 @@ export function getNewAlbumSong(mid) {
     return Promise.resolve(res)
   })
 }
-

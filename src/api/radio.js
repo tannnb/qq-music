@@ -1,11 +1,10 @@
-import {commonParams, ERR_OK, options} from './config'
+import { commonParams, ERR_OK, options, debug } from './config'
 import axios from 'axios'
-import {Base64} from "js-base64";
+import { Base64 } from 'js-base64'
 
-const debug = process.env.NODE_ENV !== 'production'
-
-export function station() {
-  const url = debug ? 'http://localhost:3000/station' : '/pc/station'
+export function station () {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/station`
   const data = Object.assign({}, commonParams, {
     channel: 'radio',
     page: 'index',
@@ -25,9 +24,9 @@ export function station() {
   })
 }
 
-
-export function getRadioDesc(id) {
-  const url = debug ? 'http://localhost:3000/getRadioDesc' : '/pc/getRadioDesc'
+export function getRadioDesc (id) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/getRadioDesc`
   const data = Object.assign({}, commonParams, {
     g_tk: 5381,
     loginUin: 0,
@@ -35,17 +34,17 @@ export function getRadioDesc(id) {
     platform: 'yqq',
     needNewCode: 0,
     data: {
-      "songlist": {
-        "module": "pf.radiosvr",
-        "method": "GetRadiosonglist",
-        "param": {
-          "id": Number(id),
-          "firstplay": 1,
-          "num": 30
+      'songlist': {
+        'module': 'pf.radiosvr',
+        'method': 'GetRadiosonglist',
+        'param': {
+          'id': Number(id),
+          'firstplay': 1,
+          'num': 30
         }
       },
-      "comm": {
-        "ct": "24"
+      'comm': {
+        'ct': '24'
       }
     }
   })
@@ -57,8 +56,9 @@ export function getRadioDesc(id) {
   })
 }
 
-export function StateLyric(mid) {
-  const url = debug ? 'http://localhost:3000/back_lyric' : '/pc/back_lyric'
+export function StateLyric (mid) {
+  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
+  const url = `${prefix}/back_lyric`
   const data = Object.assign({}, commonParams, {
     songmid: mid,
     platform: 'yqq',
@@ -76,9 +76,8 @@ export function StateLyric(mid) {
   })
 }
 
-
 export default class Song {
-  constructor({id, mid, albumdesc, isonly, singer, name, album, duration, image, url}) {
+  constructor ({ id, mid, albumdesc, isonly, singer, name, album, duration, image, url }) {
     this.id = id
     this.albumdesc = albumdesc
     this.isonly = isonly
@@ -92,14 +91,14 @@ export default class Song {
     this.url = url
   }
 
-  getLyric() {
+  getLyric () {
     if (this.lyric) {
       return Promise.resolve(this.lyric)
     }
     return new Promise((resolve, reject) => {
       StateLyric(this.mid).then((res) => {
         let ret = res.trim()
-        let result = ret.replace(/\n/g, "");
+        let result = ret.replace(/\n/g, '')
         const matches = result.replace(/^\w+\(/, '')
         const str = matches.replace(/\)$/, '')
         const listOpt = JSON.parse(str)
@@ -114,7 +113,7 @@ export default class Song {
   }
 }
 
-export function createSong(musicData) {
+export function createSong (musicData) {
   return new Song({
     id: musicData.id,
     album: musicData.album.name,
@@ -129,7 +128,7 @@ export function createSong(musicData) {
   })
 }
 
-function filterSinger(singer) {
+function filterSinger (singer) {
   let ret = []
   if (!singer) {
     return ''

@@ -1,5 +1,5 @@
 export class Createrecommend {
-  constructor({content_id, mid, singerid, title, cover, listen_num}) {
+  constructor ({ content_id, mid, singerid, title, cover, listen_num }) {
     this.id = content_id
     this.mid = mid ? mid : ''
     this.singerid = singerid
@@ -11,9 +11,8 @@ export class Createrecommend {
   }
 }
 
-
 export class CreateSong {
-  constructor(musicData) {
+  constructor (musicData) {
     this.title = musicData.title
     this.name = musicData.singer[0].name
     this.id = musicData.id
@@ -25,14 +24,14 @@ export class CreateSong {
 }
 
 export class CreateBanner {
-  constructor({mid, url}) {
+  constructor ({ mid, url }) {
     this.mid = mid
     this.url = url
   }
 }
 
 export class CreateAblum {
-  constructor(musicData) {
+  constructor (musicData) {
     this.album_id = musicData.album_id
     this.album_mid = musicData.album_mid
     this.album_name = musicData.album_name
@@ -43,8 +42,7 @@ export class CreateAblum {
   }
 }
 
-
-function filterSinger(singer) {
+function filterSinger (singer) {
   let ret = []
   if (!singer) {
     return ''
@@ -55,12 +53,11 @@ function filterSinger(singer) {
   return ret.join('/')
 }
 
-
-function getRandomInt(min, max) {
+function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export function shuffle(arr) {
+export function shuffle (arr) {
   let _arr = arr.slice()
   for (let i = 0; i < _arr.length; i++) {
     let j = getRandomInt(0, i)

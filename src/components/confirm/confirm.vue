@@ -145,9 +145,14 @@ export default {
             border-top: 1px solid rgba(239, 238, 238, 0.67)
             color: #31c27c
             cursor pointer
+            &:hover
+              background #31c27c
+              color: white
             &.left
-              border-right: 1px solid rgba(204, 204, 204, 0.8)
+              border-right: 1px solid rgba(204, 204, 204, 0.3)
               color: #494949
+              &:hover
+                color: white
 
   @keyframes confirm-fadein
     0%
