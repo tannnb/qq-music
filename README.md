@@ -1,12 +1,12 @@
 # QQ音乐(vue版)
 
-使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容，移动端可访问[♫Music♫](http://tannnb.com/h5music),获得更好体验
+使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容，移动端可访问[♫Music♫](http://h5.tannnb.com),获得更好体验
 
 ## PC端可点击下方链接访问
-> [在线演示地址](http://tannnb.com/pcmusic)
+> [在线演示地址](http://pc.tannnb.com)
 
 ## 移动端可扫码访问
-![二维码](https://qr.api.cli.im/qr?data=http%253A%252F%252Ftannnb.com%252Fh5music&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=cee72587fe4c6b20b1b5c8cd72880398)
+![二维码](https:////qr.api.cli.im/qr?data=http%253A%252F%252Fh5.tannnb.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=260&kid=cliim&key=83da0b63e2fb4dd15ad7feddf5d198b4)
 
 ## 如何安装与使用
 
@@ -15,7 +15,7 @@
 npm install 或者 yarn install
 
 # 启动
-npm run dev 或者yarn run dev
+npm serve 或者yarn serve
 
 # 启动服务: 进入server目录
 npm run app 或者yarn run app
