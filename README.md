@@ -6,7 +6,7 @@
 > [在线演示地址](http://pc.tannnb.com)
 
 ## 移动端可扫码访问
-![二维码](https:////qr.api.cli.im/qr?data=http%253A%252F%252Fh5.tannnb.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=260&kid=cliim&key=83da0b63e2fb4dd15ad7feddf5d198b4)
+![二维码](https://qr.api.cli.im/qr?data=http%253A%252F%252Fh5.tannnb.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=260&kid=cliim&key=83da0b63e2fb4dd15ad7feddf5d198b4)
 
 ## 如何安装与使用
 
