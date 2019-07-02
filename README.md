@@ -1,12 +1,12 @@
 # QQ音乐(vue版)
 
-使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容，移动端可访问[♫Music♫](http://tannnb.com/h5music),获得更好体验
+使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容，移动端可访问[♫Music♫](http://h5.tannnb.com),获得更好体验
 
 ## PC端可点击下方链接访问
-> [在线演示地址](http://tannnb.com/pcmusic)
+> [在线演示地址](http://pc.tannnb.com)
 
 ## 移动端可扫码访问
-![二维码](https://qr.api.cli.im/qr?data=http%253A%252F%252Ftannnb.com%252Fh5music&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=cee72587fe4c6b20b1b5c8cd72880398)
+![二维码](https://qr.api.cli.im/qr?data=http%253A%252F%252Fh5.tannnb.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=260&kid=cliim&key=83da0b63e2fb4dd15ad7feddf5d198b4)
 
 ## 如何安装与使用
 
@@ -15,7 +15,7 @@
 npm install 或者 yarn install
 
 # 启动
-npm run dev 或者yarn run dev
+npm serve 或者yarn serve
 
 # 启动服务: 进入server目录
 npm run app 或者yarn run app
@@ -26,7 +26,7 @@ npm run build
 
 ## 技术栈
 
-- Vue-Cli
+- Vue-cli3
 - Vue + Vue-Router + Vuex
 - ES6/7
 - stylus
@@ -93,20 +93,3 @@ npm run build
 
 
 
-## 更新说明
-
-### 2018-09-11
-- 完善电台播放功能，增加点击收藏高亮显示
-- 修改电台歌词获取来源
-
-### 2018-09-14
-- 将声明式组件改写成调用式，mixin混用代码
-- 添加边界处理，封装图片组件
-- 排行榜优化，封装Toast,Loading等基础组件
-- 处理排行版以及专辑因版权无法播放跳转问题，删除亢余代码
-
-### 2018-09-18
-- 添加精彩推荐(banner),和歌手MV播放功能，添加歌曲列表fold
-- 增加歌手MV播放外链，若高清MV无法播放，则使用标准MV播放
-- 屏蔽Toast,Loading等基础组件调用时，滚动条事件
-- 增加排行榜歌曲上升，下降热度等显示
