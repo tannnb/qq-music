@@ -1,0 +1,17 @@
+2019-10-06 00:00:01,029 INFO 2326 [egg-logrotator] app logger reload: got log-reload message
+2019-10-06 09:29:19,301 INFO 2887 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/Desktop/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-10-06 09:29:19,372 INFO 2887 [egg-multipart] stream mode enable
+2019-10-06 09:29:19,521 INFO 2887 [egg-static] starting static serve /public/ -> /Users/tanbing/Desktop/music3.0/server/app/public
+2019-10-06 09:29:19,524 INFO 2887 [egg-security] use methodnoallow middleware
+2019-10-06 09:29:19,524 INFO 2887 [egg-security] use noopen middleware
+2019-10-06 09:29:19,526 INFO 2887 [egg-security] use nosniff middleware
+2019-10-06 09:29:19,526 INFO 2887 [egg-security] use xssProtection middleware
+2019-10-06 09:29:19,527 INFO 2887 [egg-security] use xframe middleware
+2019-10-06 09:29:19,528 INFO 2887 [egg-security] use dta middleware
+2019-10-06 09:29:19,528 INFO 2887 [egg-security] compose 6 middlewares into one security middleware
+2019-10-06 09:29:19,540 INFO 2887 [egg:core] dump config after load, 5ms
+2019-10-06 09:29:19,556 INFO 2887 [egg-watcher:application] watcher start success
+2019-10-06 09:29:19,567 INFO 2887 [egg:core] dump config after ready, 9ms
+2019-10-06 12:20:51,223 WARN 2887 [ClusterClient:Watcher] follower closed, and try to init it again
+2019-10-06 13:16:45,004 WARN 2887 [TCPBase] socket is closed by other side while there were still unhandled data in the socket buffer
+2019-10-06 13:16:45,005 WARN 2887 [ClusterClient:Watcher] follower closed, and try to init it again

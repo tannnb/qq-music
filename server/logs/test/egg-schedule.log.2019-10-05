@@ -1,0 +1,417 @@
+2019-07-02 00:46:39,639 INFO 39353 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 00:46:39,639 INFO 39353 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 00:46:39,639 INFO 39353 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 01:03:36,093 INFO 39470 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 12383909ms at 2019-07-02 04:30:00.002
+2019-07-02 01:03:36,094 INFO 39470 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 82583907ms at 2019-07-03 00:00:00.001
+2019-07-02 01:03:36,094 INFO 39470 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 82584906ms at 2019-07-03 00:00:01.000
+2019-07-02 01:03:36,019 INFO 39471 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 01:03:36,019 INFO 39471 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 01:03:36,019 INFO 39471 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:01:09,396 INFO 40162 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:01:09,396 INFO 40162 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:01:09,396 INFO 40162 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:01:09,519 INFO 40161 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 59330485ms at 2019-07-03 04:30:00.004
+2019-07-02 12:01:09,520 INFO 40161 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 43130480ms at 2019-07-03 00:00:00.000
+2019-07-02 12:01:09,520 INFO 40161 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 43131480ms at 2019-07-03 00:00:01.000
+2019-07-02 12:07:22,242 INFO 40178 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:07:22,242 INFO 40178 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:07:22,242 INFO 40178 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:07:33,555 INFO 40180 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:07:33,555 INFO 40180 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:07:33,555 INFO 40180 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:08:18,362 INFO 40181 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:08:18,362 INFO 40181 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:08:18,362 INFO 40181 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:10:15,485 INFO 40187 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:10:15,485 INFO 40187 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:10:15,485 INFO 40187 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:13:23,842 INFO 40200 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:13:23,842 INFO 40200 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:13:23,842 INFO 40200 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:13:48,313 INFO 40202 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:13:48,313 INFO 40202 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:13:48,313 INFO 40202 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:50:44,021 INFO 40271 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 56355982ms at 2019-07-03 04:30:00.003
+2019-07-02 12:50:44,021 INFO 40271 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 40155979ms at 2019-07-03 00:00:00.000
+2019-07-02 12:50:44,022 INFO 40271 [Timer] /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 40156979ms at 2019-07-03 00:00:01.001
+2019-07-02 12:50:43,942 INFO 40272 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:50:43,942 INFO 40272 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:50:43,942 INFO 40272 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:51:51,536 INFO 40275 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:51:51,536 INFO 40275 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:51:51,536 INFO 40275 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:53:25,703 INFO 40284 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:53:25,703 INFO 40284 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:53:25,703 INFO 40284 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:53:26,637 INFO 40285 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:53:26,637 INFO 40285 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:53:26,637 INFO 40285 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:57:55,266 INFO 40306 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:57:55,266 INFO 40306 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:57:55,266 INFO 40306 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:58:26,476 INFO 40308 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:58:26,476 INFO 40308 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:58:26,476 INFO 40308 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 12:59:12,002 INFO 40309 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 12:59:12,002 INFO 40309 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 12:59:12,002 INFO 40309 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:00:39,757 INFO 40311 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:00:39,757 INFO 40311 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:00:39,757 INFO 40311 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:06:17,818 INFO 40319 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:06:17,818 INFO 40319 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:06:17,818 INFO 40319 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:06:21,813 INFO 40320 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:06:21,813 INFO 40320 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:06:21,813 INFO 40320 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:06:57,733 INFO 40321 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:06:57,733 INFO 40321 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:06:57,733 INFO 40321 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:07:18,675 INFO 40323 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:07:18,676 INFO 40323 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:07:18,676 INFO 40323 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:09:42,807 INFO 40325 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:09:42,807 INFO 40325 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:09:42,807 INFO 40325 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:10:17,756 INFO 40330 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:10:17,756 INFO 40330 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:10:17,756 INFO 40330 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:10:20,912 INFO 40331 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:10:20,912 INFO 40331 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:10:20,912 INFO 40331 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:11:51,328 INFO 40333 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:11:51,328 INFO 40333 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:11:51,328 INFO 40333 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:13:33,220 INFO 40335 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:13:33,220 INFO 40335 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:13:33,220 INFO 40335 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:15:56,067 INFO 40337 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:15:56,067 INFO 40337 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:15:56,067 INFO 40337 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:16:00,241 INFO 40339 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:16:00,241 INFO 40339 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:16:00,241 INFO 40339 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:18:32,184 INFO 40341 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:18:32,184 INFO 40341 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:18:32,184 INFO 40341 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:20:58,789 INFO 40343 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:20:58,789 INFO 40343 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:20:58,789 INFO 40343 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:21:00,900 INFO 40345 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:21:00,900 INFO 40345 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:21:00,900 INFO 40345 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:23:24,076 INFO 40347 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:23:24,076 INFO 40347 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:23:24,076 INFO 40347 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:24:12,151 INFO 40348 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:24:12,151 INFO 40348 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:24:12,151 INFO 40348 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:24:17,207 INFO 40350 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:24:17,207 INFO 40350 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:24:17,207 INFO 40350 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:24:28,618 INFO 40352 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:24:28,618 INFO 40352 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:24:28,618 INFO 40352 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:27:54,733 INFO 40355 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:27:54,733 INFO 40355 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:27:54,733 INFO 40355 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:27:58,490 INFO 40357 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:27:58,490 INFO 40357 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:27:58,490 INFO 40357 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:34:18,249 INFO 40365 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:34:18,249 INFO 40365 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:34:18,249 INFO 40365 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:36:24,202 INFO 40368 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:36:24,202 INFO 40368 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:36:24,202 INFO 40368 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 13:36:25,245 INFO 40369 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 13:36:25,245 INFO 40369 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 13:36:25,245 INFO 40369 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:07:09,234 INFO 40476 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:07:09,234 INFO 40476 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:07:09,234 INFO 40476 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:14:08,317 INFO 40487 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:14:08,317 INFO 40487 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:14:08,317 INFO 40487 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:14:10,846 INFO 40488 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:14:10,846 INFO 40488 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:14:10,846 INFO 40488 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:15:01,566 INFO 40489 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:15:01,566 INFO 40489 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:15:01,566 INFO 40489 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:16:30,464 INFO 40491 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:16:30,464 INFO 40491 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:16:30,464 INFO 40491 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:17:22,658 INFO 40493 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:17:22,658 INFO 40493 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:17:22,658 INFO 40493 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:17:28,195 INFO 40495 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:17:28,195 INFO 40495 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:17:28,195 INFO 40495 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:17:33,060 INFO 40496 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:17:33,060 INFO 40496 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:17:33,060 INFO 40496 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:19:36,786 INFO 40497 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:19:36,786 INFO 40497 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:19:36,786 INFO 40497 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:20:24,599 INFO 40500 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:20:24,599 INFO 40500 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:20:24,599 INFO 40500 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:20:40,366 INFO 40502 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:20:40,366 INFO 40502 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:20:40,366 INFO 40502 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:21:10,300 INFO 40503 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:21:10,300 INFO 40503 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:21:10,300 INFO 40503 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:21:16,927 INFO 40505 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:21:16,927 INFO 40505 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:21:16,927 INFO 40505 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:21:53,055 INFO 40512 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:21:53,055 INFO 40512 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:21:53,055 INFO 40512 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:22:32,548 INFO 40517 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:22:32,548 INFO 40517 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:22:32,548 INFO 40517 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:23:19,865 INFO 40520 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:23:19,865 INFO 40520 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:23:19,865 INFO 40520 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:23:22,610 INFO 40522 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:23:22,610 INFO 40522 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:23:22,610 INFO 40522 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:23:36,411 INFO 40523 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:23:36,411 INFO 40523 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:23:36,411 INFO 40523 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:23:38,953 INFO 40524 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:23:38,953 INFO 40524 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:23:38,953 INFO 40524 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:32:52,525 INFO 40537 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:32:52,525 INFO 40537 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:32:52,525 INFO 40537 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:32:55,507 INFO 40539 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:32:55,507 INFO 40539 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:32:55,507 INFO 40539 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:35:22,340 INFO 40540 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:35:22,340 INFO 40540 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:35:22,340 INFO 40540 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:35:36,064 INFO 40542 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:35:36,064 INFO 40542 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:35:36,064 INFO 40542 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:36:13,400 INFO 40543 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:36:13,400 INFO 40543 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:36:13,400 INFO 40543 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:37:27,021 INFO 40545 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:37:27,021 INFO 40545 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:37:27,021 INFO 40545 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:39:48,119 INFO 40552 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:39:48,119 INFO 40552 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:39:48,119 INFO 40552 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:40:05,398 INFO 40554 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:40:05,398 INFO 40554 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:40:05,398 INFO 40554 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:40:58,250 INFO 40557 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:40:58,250 INFO 40557 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:40:58,250 INFO 40557 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:41:54,645 INFO 40561 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:41:54,645 INFO 40561 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:41:54,645 INFO 40561 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:42:10,826 INFO 40564 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:42:10,826 INFO 40564 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:42:10,826 INFO 40564 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:43:11,300 INFO 40566 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:43:11,300 INFO 40566 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:43:11,300 INFO 40566 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:43:51,883 INFO 40569 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:43:51,883 INFO 40569 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:43:51,883 INFO 40569 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:45:22,103 INFO 40571 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:45:22,103 INFO 40571 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:45:22,103 INFO 40571 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:45:37,496 INFO 40574 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:45:37,496 INFO 40574 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:45:37,496 INFO 40574 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:46:07,734 INFO 40575 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:46:07,734 INFO 40575 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:46:07,734 INFO 40575 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:46:17,726 INFO 40577 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:46:17,726 INFO 40577 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:46:17,726 INFO 40577 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:48:26,583 INFO 40578 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:48:26,583 INFO 40578 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:48:26,583 INFO 40578 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:49:19,799 INFO 40580 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:49:19,799 INFO 40580 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:49:19,799 INFO 40580 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:49:25,993 INFO 40582 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:49:25,993 INFO 40582 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:49:25,993 INFO 40582 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:49:26,878 INFO 40583 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:49:26,878 INFO 40583 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:49:26,878 INFO 40583 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:51:23,746 INFO 40584 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:51:23,746 INFO 40584 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:51:23,746 INFO 40584 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:51:33,100 INFO 40586 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:51:33,100 INFO 40586 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:51:33,100 INFO 40586 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:51:55,810 INFO 40587 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:51:55,811 INFO 40587 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:51:55,811 INFO 40587 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 14:56:37,096 INFO 40606 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 14:56:37,096 INFO 40606 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 14:56:37,096 INFO 40606 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:01:55,825 INFO 40613 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:01:55,825 INFO 40613 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:01:55,825 INFO 40613 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:02:19,786 INFO 40616 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:02:19,786 INFO 40616 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:02:19,786 INFO 40616 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:02:44,733 INFO 40620 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:02:44,733 INFO 40620 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:02:44,733 INFO 40620 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:03:47,286 INFO 40624 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:03:47,286 INFO 40624 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:03:47,286 INFO 40624 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:04:16,179 INFO 40626 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:04:16,179 INFO 40626 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:04:16,179 INFO 40626 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:04:23,638 INFO 40629 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:04:23,638 INFO 40629 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:04:23,638 INFO 40629 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:04:56,688 INFO 40631 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:04:56,688 INFO 40631 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:04:56,689 INFO 40631 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:05:02,660 INFO 40632 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:05:02,660 INFO 40632 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:05:02,660 INFO 40632 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:05:41,000 INFO 40635 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:05:41,000 INFO 40635 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:05:41,000 INFO 40635 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:06:09,184 INFO 40637 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:06:09,184 INFO 40637 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:06:09,184 INFO 40637 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:06:25,683 INFO 40640 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:06:25,683 INFO 40640 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:06:25,683 INFO 40640 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:06:55,174 INFO 40642 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:06:55,174 INFO 40642 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:06:55,174 INFO 40642 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:07:04,783 INFO 40644 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:07:04,783 INFO 40644 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:07:04,783 INFO 40644 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:08:41,584 INFO 40645 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:08:41,584 INFO 40645 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:08:41,584 INFO 40645 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:09:53,171 INFO 40647 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:09:53,171 INFO 40647 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:09:53,171 INFO 40647 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:10:15,893 INFO 40649 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:10:15,893 INFO 40649 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:10:15,893 INFO 40649 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:13:00,355 INFO 40654 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:13:00,355 INFO 40654 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:13:00,355 INFO 40654 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:14:18,783 INFO 40655 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:14:18,783 INFO 40655 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:14:18,783 INFO 40655 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-02 15:14:23,492 INFO 40657 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-02 15:14:23,492 INFO 40657 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-02 15:14:23,492 INFO 40657 [egg-schedule]: register schedule /Users/tanbing/Desktop/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-07-07 16:25:38,814 INFO 52050 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 43461191ms at 2019-07-08 04:30:00.005
+2019-07-07 16:25:38,814 INFO 52050 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 27261186ms at 2019-07-08 00:00:00.000
+2019-07-07 16:25:38,815 INFO 52050 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 27262186ms at 2019-07-08 00:00:01.001
+2019-07-07 16:25:38,683 INFO 52052 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-07-07 16:25:38,683 INFO 52052 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-07-07 16:25:38,683 INFO 52052 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:28:03,869 INFO 13960 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:28:03,869 INFO 13960 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:28:03,869 INFO 13960 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:28:03,871 INFO 13961 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:28:03,872 INFO 13961 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:28:03,872 INFO 13961 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:28:03,874 INFO 13962 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:28:03,874 INFO 13962 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:28:03,874 INFO 13962 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:28:03,888 INFO 13963 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:28:03,888 INFO 13963 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:28:03,888 INFO 13963 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:28:04,037 INFO 13959 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 28915967ms at 2019-08-27 04:30:00.004
+2019-08-26 20:28:04,037 INFO 13959 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 12715963ms at 2019-08-27 00:00:00.000
+2019-08-26 20:28:04,037 INFO 13959 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 12716963ms at 2019-08-27 00:00:01.000
+2019-08-26 20:34:02,060 INFO 14076 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 28557944ms at 2019-08-27 04:30:00.004
+2019-08-26 20:34:02,061 INFO 14076 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 12357939ms at 2019-08-27 00:00:00.000
+2019-08-26 20:34:02,061 INFO 14076 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 12358939ms at 2019-08-27 00:00:01.000
+2019-08-26 20:34:01,977 INFO 14077 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:34:01,977 INFO 14077 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:34:01,977 INFO 14077 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:37:55,840 INFO 14128 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 28324164ms at 2019-08-27 04:30:00.004
+2019-08-26 20:37:55,840 INFO 14128 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 12124160ms at 2019-08-27 00:00:00.000
+2019-08-26 20:37:55,840 INFO 14128 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 12125160ms at 2019-08-27 00:00:01.000
+2019-08-26 20:37:55,760 INFO 14129 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:37:55,760 INFO 14129 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:37:55,760 INFO 14129 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:38:36,500 INFO 14135 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:38:36,500 INFO 14135 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:38:36,500 INFO 14135 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:38:43,962 INFO 14137 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:38:43,962 INFO 14137 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:38:43,962 INFO 14137 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:39:24,638 INFO 14140 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:39:24,638 INFO 14140 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:39:24,638 INFO 14140 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:39:38,975 INFO 14150 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 28221028ms at 2019-08-27 04:30:00.003
+2019-08-26 20:39:38,975 INFO 14150 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 12021025ms at 2019-08-27 00:00:00.000
+2019-08-26 20:39:38,975 INFO 14150 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 12022025ms at 2019-08-27 00:00:01.000
+2019-08-26 20:39:38,898 INFO 14151 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:39:38,898 INFO 14151 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:39:38,898 INFO 14151 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:43:38,336 INFO 14171 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:43:38,336 INFO 14171 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:43:38,336 INFO 14171 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:43:47,161 INFO 14173 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:43:47,161 INFO 14173 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:43:47,161 INFO 14173 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:44:12,789 INFO 14185 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 27947214ms at 2019-08-27 04:30:00.003
+2019-08-26 20:44:12,790 INFO 14185 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 11747210ms at 2019-08-27 00:00:00.000
+2019-08-26 20:44:12,790 INFO 14185 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 11748210ms at 2019-08-27 00:00:01.000
+2019-08-26 20:44:12,710 INFO 14186 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:44:12,710 INFO 14186 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:44:12,710 INFO 14186 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:46:08,037 INFO 14224 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:46:08,037 INFO 14224 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:46:08,037 INFO 14224 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:49:34,701 INFO 14294 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:49:34,701 INFO 14294 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:49:34,701 INFO 14294 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 20:49:48,279 INFO 14296 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 20:49:48,279 INFO 14296 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 20:49:48,279 INFO 14296 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 21:11:12,835 INFO 14520 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-08-26 21:11:12,835 INFO 14520 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-08-26 21:11:12,835 INFO 14520 [egg-schedule]: register schedule /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-08-26 21:11:12,943 INFO 14518 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 26327060ms at 2019-08-27 04:30:00.003
+2019-08-26 21:11:12,943 INFO 14518 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 10127057ms at 2019-08-27 00:00:00.000
+2019-08-26 21:11:12,943 INFO 14518 [Timer] /Users/tanbing/project/Client/api/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 10128057ms at 2019-08-27 00:00:01.000
+2019-10-05 19:58:37,139 INFO 1454 [Timer] /Users/tanbing/project/Client/qq_music/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 30682866ms at 2019-10-06 04:30:00.005
+2019-10-05 19:58:37,139 INFO 1454 [Timer] /Users/tanbing/project/Client/qq_music/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 14482861ms at 2019-10-06 00:00:00.000
+2019-10-05 19:58:37,140 INFO 1454 [Timer] /Users/tanbing/project/Client/qq_music/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 14483860ms at 2019-10-06 00:00:01.000
+2019-10-05 19:58:37,026 INFO 1456 [egg-schedule]: register schedule /Users/tanbing/project/Client/qq_music/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-10-05 19:58:37,026 INFO 1456 [egg-schedule]: register schedule /Users/tanbing/project/Client/qq_music/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-10-05 19:58:37,026 INFO 1456 [egg-schedule]: register schedule /Users/tanbing/project/Client/qq_music/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-10-05 20:12:00,139 INFO 1627 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 29879864ms at 2019-10-06 04:30:00.003
+2019-10-05 20:12:00,139 INFO 1627 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 13679861ms at 2019-10-06 00:00:00.000
+2019-10-05 20:12:00,140 INFO 1627 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 13680861ms at 2019-10-06 00:00:01.001
+2019-10-05 20:12:00,023 INFO 1628 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-10-05 20:12:00,023 INFO 1628 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-10-05 20:12:00,023 INFO 1628 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-10-05 22:49:56,835 INFO 2325 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 20403170ms at 2019-10-06 04:30:00.005
+2019-10-05 22:49:56,835 INFO 2325 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 4203165ms at 2019-10-06 00:00:00.000
+2019-10-05 22:49:56,835 INFO 2325 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 4204165ms at 2019-10-06 00:00:01.000
+2019-10-05 22:49:56,677 INFO 2326 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-10-05 22:49:56,677 INFO 2326 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-10-05 22:49:56,677 INFO 2326 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-10-06 00:00:00,009 INFO 2326 [Job#157029120000313785705488650621] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js executing by app
+2019-10-06 00:00:00,030 INFO 2326 [Job#157029120000313785705488650621] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js execute succeed, used 20ms
+2019-10-06 00:00:00,007 INFO 2325 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 86399996ms at 2019-10-07 00:00:00.003
+2019-10-06 00:00:01,010 INFO 2325 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 86399995ms at 2019-10-07 00:00:01.005
+2019-10-06 00:00:01,006 INFO 2326 [Job#157029120100513785715505101991] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js executing by app
+2019-10-06 00:00:01,027 INFO 2326 [Job#157029120100513785715505101991] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js execute succeed, used 21ms

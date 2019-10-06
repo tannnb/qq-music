@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta http-equiv="Content-Language" content="zh-cn">
+  <meta name="force-rendering" content="webkit"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta name="applicable-device" content="pc">
+  <meta name="keywords" content="音乐,QQ音乐,在线听歌,音乐下载,音乐播放器,音乐网站,MV,巅峰榜,音乐排行榜,翻译歌曲,热门歌曲,经典老歌,无损音乐,无损曲库"/>
+  <meta name="description" content="仿QQ音乐官网"/>
+  <link rel="shortcut icon" href="./static/favicon.ico" >
+  <title>仿QQ音乐官网</title>
+  <style>
+    .fullwrapper {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 100;
+      background: white;
+      overflow: hidden;
+    }
+    .inner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      bottom: auto;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .inner .animate {
+      display: flex;
+      width: 60px;
+      height: 60px;
+      border: 3px solid transparent;
+      border-top-color: #31c27c;
+      border-bottom-color: #31c27c;
+      border-radius: 50%;
+      margin: 0 auto;
+      animation: spin 1.5s linear infinite;
+    }
+
+    .animate::before {
+      content: '';
+      display: block;
+      margin: auto;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #31c27c;
+      border-radius: 50%;
+      animation: pulse 1s alternate ease-in-out infinite;
+    }
+
+    .inner p {
+      padding-top :20px;
+      color: #31c27c;
+      font-size: 18px
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(0.5);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="fullwrapper" class="fullwrapper">
+  <div class="inner">
+    <div class="animate"></div>
+    <p>加载中,请稍后...</p>
+  </div>
+</div>
+<div id="app"></div>
+</body>
+</html>

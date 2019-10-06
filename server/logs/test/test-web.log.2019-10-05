@@ -1,0 +1,15 @@
+2019-07-02 14:21:31,994 ERROR 40505 [-/::1/-/14ms GET /api/pc/musicu?g_tk=5381&inCharset=utf-8&outCharset=utf-8&notice=0&format=jsonp&loginUin=0&hostUin=0&platform=yqq&needNewCode=0&data=%7B%22comm%22:%7B%22ct%22:24%7D,%22category%22:%7B%22method%22:%22get_hot_category%22,%22param%22:%7B%22qq%22:%22%22%7D,%22module%22:%22music.web_category_svr%22%7D,%22recomPlaylist%22:%7B%22method%22:%22get_hot_recommend%22,%22param%22:%7B%22async%22:1,%22cmd%22:2%7D,%22module%22:%22playlist.HotRecommendServer%22%7D,%22playlist%22:%7B%22method%22:%22get_playlist_by_category%22,%22param%22:%7B%22id%22:8,%22curPage%22:1,%22size%22:40,%22order%22:5,%22titleid%22:8%7D,%22module%22:%22playlist.PlayListPlazaServer%22%7D,%22new_song%22:%7B%22module%22:%22QQMusic.MusichallServer%22,%22method%22:%22GetNewSong%22,%22param%22:%7B%22type%22:0%7D%7D,%22new_album%22:%7B%22module%22:%22music.web_album_library%22,%22method%22:%22get_album_by_tags%22,%22param%22:%7B%22area%22:1,%22company%22:-1,%22genre%22:-1,%22type%22:-1,%22year%22:-1,%22sort%22:2,%22get_tags%22:1,%22sin%22:0,%22num%22:40,%22click_albumid%22:0%7D%7D,%22toplist%22:%7B%22module%22:%22music.web_toplist_svr%22,%22method%22:%22get_toplist_index%22,%22param%22:%7B%7D%7D,%22focus%22:%7B%22module%22:%22QQMusic.MusichallServer%22,%22method%22:%22GetFocus%22,%22param%22:%7B%7D%7D%7D] nodejs.TypeError: Assignment to constant variable.
+    at clientController.fetchServer (/Users/tanbing/Desktop/api/app/service/clientService.js:20:14)
+    at clientController.musicu (/Users/tanbing/Desktop/api/app/controller/client.js:12:52)
+    at Object.callFn (/Users/tanbing/Desktop/api/node_modules/egg-core/lib/utils/index.js:44:21)
+    at Object.classControllerMiddleware (/Users/tanbing/Desktop/api/node_modules/egg-core/lib/loader/mixin/controller.js:87:20)
+    at Object.callFn (/Users/tanbing/Desktop/api/node_modules/@eggjs/router/lib/utils.js:12:21)
+    at wrappedController (/Users/tanbing/Desktop/api/node_modules/@eggjs/router/lib/egg_router.js:322:18)
+    at dispatch (/Users/tanbing/Desktop/api/node_modules/@eggjs/router/node_modules/koa-compose/index.js:44:32)
+    at next (/Users/tanbing/Desktop/api/node_modules/@eggjs/router/node_modules/koa-compose/index.js:45:18)
+    at /Users/tanbing/Desktop/api/node_modules/@eggjs/router/lib/router.js:190:18
+    at dispatch (/Users/tanbing/Desktop/api/node_modules/@eggjs/router/node_modules/koa-compose/index.js:44:32)
+headers: {"Access-Control-Allow-Origin":"*","vary":"Origin"}
+pid: 40505
+hostname: tanbingdeMBP.lan
+

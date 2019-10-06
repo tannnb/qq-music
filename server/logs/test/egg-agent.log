@@ -1,0 +1,31 @@
+2019-10-06 00:00:01,029 INFO 2325 [egg-logrotator] agent logger reload: got log-reload message
+2019-10-06 09:29:17,715 INFO 2882 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/Desktop/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-06 09:29:17,733 INFO 2882 [egg:core] dump config after load, 7ms
+2019-10-06 09:29:17,805 INFO 2882 [egg-watcher] Start watching: ["/Users/tanbing/Desktop/music3.0/server/app","/Users/tanbing/Desktop/music3.0/server/config","/Users/tanbing/Desktop/music3.0/server/mocks","/Users/tanbing/Desktop/music3.0/server/mocks_proxy","/Users/tanbing/Desktop/music3.0/server/app.js"]
+2019-10-06 09:29:17,805 INFO 2882 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/app"
+2019-10-06 09:29:17,806 INFO 2882 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/config"
+2019-10-06 09:29:17,806 INFO 2882 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/mocks"
+2019-10-06 09:29:17,806 INFO 2882 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/mocks_proxy"
+2019-10-06 09:29:17,806 INFO 2882 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/app.js"
+2019-10-06 09:29:17,806 INFO 2882 [egg-watcher:agent] watcher start success
+2019-10-06 09:29:17,822 INFO 2882 [egg:core] dump config after ready, 4ms
+2019-10-06 12:20:51,230 ERROR 2882 nodejs.ClusterClientNoResponseError: client no response in 2160569ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/Desktop/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 2882
+hostname: tanbingdeMBP.lan
+
+2019-10-06 13:16:45,004 ERROR 2882 nodejs.ClusterClientNoResponseError: client no response in 3333756ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/Desktop/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 2882
+hostname: tanbingdeMBP.lan
+
