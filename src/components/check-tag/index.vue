@@ -38,41 +38,27 @@ export default {
 <style lang="stylus" scoped>
     .singer_index
         display flex
-
+        margin 10px 0
         .item
-            position: relative;
-            z-index: 1;
-            height 26px
-            line-height 27px
-            overflow hidden
-            padding 0 8px
-            margin 0 12px 14px 0
+            padding 4px 12px
             color #333
+            border-radius: 19px
             font-size 14px
             cursor pointer
-
-            &::before
-                content: '';
-                position: absolute;
-                z-index: -1;
-                top: 0;
-                bottom: 0;
-                left: -0.25em;
-                right: -0.25em;
-                transform-origin: bottom center;
-                transform: scaleY(0.1);
-                transition: all 0.2s ease-in-out;
+            margin-right 4px
+            border:1px solid transparent;
 
             &:hover
-                color white
-                &::before
-                    transform: scaleY(1);
-                    background-color: #31c27c;
-
+                box-sizing border-box
+                background: #fafbff;
+                border: 1px solid #eee;
+                box-shadow: 0 5px 6px 0 rgba(217,219,227,.22), 0 3px 1px 0 rgba(250,251,255,.1);;
+                color #3b426b
             &:first-child
-                font-size 15px
-
+                font-size 12px
             &.active
-                background #31c27c
+                border: 1px solid #2a62ff;
+                background: linear-gradient(0deg,#2a62ff,#4e7dff);
+                box-shadow: 0 5px 6px 0 rgba(73,105,230,.22);
                 color: #fff
 </style>

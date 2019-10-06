@@ -41,12 +41,13 @@ export default {
       color #333
       font-size 14px
       cursor pointer
+
       &:hover
-        background #31c27c
+        background: linear-gradient(0deg,#2a62ff,#4e7dff);
         color #fff
       &:first-child
         font-size 15px
       &.active
-        background #31c27c
+        background: linear-gradient(0deg,#2a62ff,#4e7dff);
         color: #fff
 </style>

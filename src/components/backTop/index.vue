@@ -1,5 +1,5 @@
 <template>
-    <a href="javascript:void(0)" ref="btn" @click="backTop" class="btn" title="回到顶部"></a>
+    <a-back-top />
 </template>
 
 <script>
@@ -12,10 +12,10 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('scroll', this.userScroll)
+   // window.addEventListener('scroll', this.userScroll)
   },
   destroyed () {
-    window.removeEventListener('scroll', this.userScroll)
+   // window.removeEventListener('scroll', this.userScroll)
   },
   methods: {
     userScroll () {
@@ -49,16 +49,17 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .btn {
-        width: 60px;
-        height: 60px;
-        position: fixed;
-        right: 65px;
-        bottom: 80px;
-        display: none;
-        background: url("./top_bg.png") no-repeat left top;
+    #components-back-top-demo-custom .ant-back-top {
+        bottom: 100px;
     }
-    .btn:hover {
-        background: url("./top_bg.png") no-repeat 0 -60px;
+    #components-back-top-demo-custom .ant-back-top-inner {
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        border-radius: 4px;
+        background-color: #1088e9;
+        color: #fff;
+        text-align: center;
+        font-size: 20px;
     }
 </style>

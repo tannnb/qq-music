@@ -253,6 +253,7 @@
 <style lang="stylus">
     .ant-affix {
         background white
+        box-shadow: 0 5px 6px 0 rgba(73,105,230,.1);
     }
 
     .components-input-demo-presuffix, .anticon-close-circle {

@@ -16,10 +16,10 @@ import VueProgressBar from 'vue-progressbar'
 import Loading from './components/loading/loading'
 import Toast from './components/Toast/Toast'
 import Dialog from './components/confirm/confirm'
-import { Tabs,Input,Icon,Affix,Carousel ,Modal,Button,Card,Spin} from 'ant-design-vue'
+import { Tabs,Input,Icon,Affix,Carousel ,Modal,Button,Card,Spin,Tooltip,Pagination,BackTop} from 'ant-design-vue'
 
 
-Vue.use(Tabs).use(Input).use(Icon).use(Affix).use(Carousel).use(Button).use(Card).use(Spin);
+Vue.use(Tabs).use(Input).use(Icon).use(Affix).use(Carousel).use(Button).use(Card).use(Spin).use(Tooltip).use(Pagination).use(BackTop);
 Vue.prototype.$confirm = Modal.confirm;
 
 
