@@ -58,11 +58,11 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { getSingerList } from '../../api/singer'
-import { ERR_OK } from '../../api/config'
+import { getSingerList } from '@/api/singer'
+import { ERR_OK } from '@/api/config'
 import CheckTag from '@/components/check-tag'
 import Pagination from '@/components/pagination'
-import { LoadingMixin, PaginationMixin } from '../../utils/mixin'
+import { LoadingMixin, PaginationMixin } from '@/utils/mixin'
 
 const COUNT = 80
 export default {
