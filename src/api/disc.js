@@ -2,8 +2,8 @@ import { commonParams, debug } from './config'
 import axios from 'axios'
 
 export function getDiscList (id) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getDiscList`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getDiscList`
   const data = Object.assign({}, commonParams, {
     type: 1,
     json: 1,
@@ -32,8 +32,8 @@ export function getDiscList (id) {
 }
 
 export function review (mid, pagenum = 0) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/review`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/review`
   const data = Object.assign({}, commonParams, {
     hostUin: 0,
     inCharset: 'utf8',
@@ -62,8 +62,8 @@ export function review (mid, pagenum = 0) {
 }
 
 export function getNewAlbumSong (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getNewAlbumSong`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getNewAlbumSong`
   const data = Object.assign({}, commonParams, {
     albummid: mid,
     g_tk: 125702638,

@@ -49,3 +49,63 @@ name: "ClusterClientNoResponseError"
 pid: 2882
 hostname: tanbingdeMBP.lan
 
+2019-10-17 22:08:15,861 INFO 17112 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/Desktop/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-10-17 22:08:15,870 INFO 17112 [egg:core] dump config after load, 3ms
+2019-10-17 22:08:15,922 INFO 17112 [egg-watcher] Start watching: ["/Users/tanbing/Desktop/music3.0/server/app","/Users/tanbing/Desktop/music3.0/server/config","/Users/tanbing/Desktop/music3.0/server/mocks","/Users/tanbing/Desktop/music3.0/server/mocks_proxy","/Users/tanbing/Desktop/music3.0/server/app.js"]
+2019-10-17 22:08:15,922 INFO 17112 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/app"
+2019-10-17 22:08:15,923 INFO 17112 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/config"
+2019-10-17 22:08:15,923 INFO 17112 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/mocks"
+2019-10-17 22:08:15,923 INFO 17112 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/mocks_proxy"
+2019-10-17 22:08:15,923 INFO 17112 [egg-watcher] Start watching: "/Users/tanbing/Desktop/music3.0/server/app.js"
+2019-10-17 22:08:15,923 INFO 17112 [egg-watcher:agent] watcher start success
+2019-10-17 22:08:15,935 INFO 17112 [egg:core] dump config after ready, 4ms
+2019-11-02 18:59:51,449 INFO 29570 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-11-02 18:59:51,459 INFO 29570 [egg:core] dump config after load, 4ms
+2019-11-02 18:59:51,531 INFO 29570 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2019-11-02 18:59:51,531 INFO 29570 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2019-11-02 18:59:51,532 INFO 29570 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2019-11-02 18:59:51,532 INFO 29570 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2019-11-02 18:59:51,532 INFO 29570 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2019-11-02 18:59:51,532 INFO 29570 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2019-11-02 18:59:51,532 INFO 29570 [egg-watcher:agent] watcher start success
+2019-11-02 18:59:51,564 INFO 29570 [egg:core] dump config after ready, 9ms
+2019-11-29 21:54:53,528 INFO 83377 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-11-29 21:54:53,538 INFO 83377 [egg:core] dump config after load, 3ms
+2019-11-29 21:54:53,590 INFO 83377 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2019-11-29 21:54:53,590 INFO 83377 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2019-11-29 21:54:53,590 INFO 83377 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2019-11-29 21:54:53,590 INFO 83377 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2019-11-29 21:54:53,591 INFO 83377 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2019-11-29 21:54:53,591 INFO 83377 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2019-11-29 21:54:53,591 INFO 83377 [egg-watcher:agent] watcher start success
+2019-11-29 21:54:53,604 INFO 83377 [egg:core] dump config after ready, 4ms
+2019-12-05 20:17:39,694 INFO 99336 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-12-05 20:17:39,721 INFO 99336 [egg:core] dump config after load, 9ms
+2019-12-05 20:17:39,821 INFO 99336 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2019-12-05 20:17:39,821 INFO 99336 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2019-12-05 20:17:39,822 INFO 99336 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2019-12-05 20:17:39,822 INFO 99336 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2019-12-05 20:17:39,822 INFO 99336 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2019-12-05 20:17:39,822 INFO 99336 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2019-12-05 20:17:39,822 INFO 99336 [egg-watcher:agent] watcher start success
+2019-12-05 20:17:39,843 INFO 99336 [egg:core] dump config after ready, 6ms
+2019-12-05 20:55:19,516 INFO 159 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-12-05 20:55:19,532 INFO 159 [egg:core] dump config after load, 6ms
+2019-12-05 20:55:19,589 INFO 159 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2019-12-05 20:55:19,589 INFO 159 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2019-12-05 20:55:19,590 INFO 159 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2019-12-05 20:55:19,590 INFO 159 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2019-12-05 20:55:19,590 INFO 159 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2019-12-05 20:55:19,590 INFO 159 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2019-12-05 20:55:19,590 INFO 159 [egg-watcher:agent] watcher start success
+2019-12-05 20:55:19,607 INFO 159 [egg:core] dump config after ready, 6ms
+2019-12-06 23:18:40,985 INFO 2202 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2019-12-06 23:18:41,047 INFO 2202 [egg:core] dump config after load, 11ms
+2019-12-06 23:18:41,157 INFO 2202 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2019-12-06 23:18:41,157 INFO 2202 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2019-12-06 23:18:41,157 INFO 2202 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2019-12-06 23:18:41,157 INFO 2202 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2019-12-06 23:18:41,157 INFO 2202 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2019-12-06 23:18:41,157 INFO 2202 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2019-12-06 23:18:41,158 INFO 2202 [egg-watcher:agent] watcher start success
+2019-12-06 23:18:41,197 INFO 2202 [egg:core] dump config after ready, 10ms

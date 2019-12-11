@@ -4,3 +4,39 @@
 2019-10-06 09:29:19,371 INFO 2887 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
 2019-10-06 09:29:19,371 INFO 2887 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
 2019-10-06 09:29:19,371 INFO 2887 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-10-17 22:08:16,819 INFO 17113 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-10-17 22:08:16,819 INFO 17113 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-10-17 22:08:16,820 INFO 17113 [egg-schedule]: register schedule /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-10-17 22:08:16,977 INFO 17112 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 22903026ms at 2019-10-18 04:30:00.003
+2019-10-17 22:08:16,977 INFO 17112 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 6703023ms at 2019-10-18 00:00:00.000
+2019-10-17 22:08:16,978 INFO 17112 [Timer] /Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 6704023ms at 2019-10-18 00:00:01.001
+2019-11-02 18:59:52,920 INFO 29570 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 34207083ms at 2019-11-03 04:30:00.003
+2019-11-02 18:59:52,920 INFO 29570 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 18007080ms at 2019-11-03 00:00:00.000
+2019-11-02 18:59:52,921 INFO 29570 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 18008080ms at 2019-11-03 00:00:01.001
+2019-11-02 18:59:52,797 INFO 29571 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-11-02 18:59:52,797 INFO 29571 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-11-02 18:59:52,797 INFO 29571 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-11-29 21:54:55,072 INFO 83377 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 23704936ms at 2019-11-30 04:30:00.008
+2019-11-29 21:54:55,073 INFO 83377 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 7504928ms at 2019-11-30 00:00:00.000
+2019-11-29 21:54:55,073 INFO 83377 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 7505927ms at 2019-11-30 00:00:01.000
+2019-11-29 21:54:54,855 INFO 83378 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-11-29 21:54:54,855 INFO 83378 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-11-29 21:54:54,855 INFO 83378 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-12-05 20:17:42,256 INFO 99336 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 29537748ms at 2019-12-06 04:30:00.004
+2019-12-05 20:17:42,256 INFO 99336 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 13337744ms at 2019-12-06 00:00:00.000
+2019-12-05 20:17:42,257 INFO 99336 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 13338744ms at 2019-12-06 00:00:01.001
+2019-12-05 20:17:42,063 INFO 99340 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-12-05 20:17:42,063 INFO 99340 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-12-05 20:17:42,063 INFO 99340 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-12-05 20:55:21,404 INFO 159 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 27278601ms at 2019-12-06 04:30:00.005
+2019-12-05 20:55:21,404 INFO 159 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 11078596ms at 2019-12-06 00:00:00.000
+2019-12-05 20:55:21,405 INFO 159 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 11079596ms at 2019-12-06 00:00:01.001
+2019-12-05 20:55:21,227 INFO 160 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-12-05 20:55:21,227 INFO 160 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-12-05 20:55:21,227 INFO 160 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js
+2019-12-06 23:18:44,643 INFO 2202 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js next time will execute after 18675363ms at 2019-12-07 04:30:00.006
+2019-12-06 23:18:44,643 INFO 2202 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js next time will execute after 2475357ms at 2019-12-07 00:00:00.000
+2019-12-06 23:18:44,643 INFO 2202 [Timer] /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js next time will execute after 2476357ms at 2019-12-07 00:00:01.000
+2019-12-06 23:18:44,402 INFO 2204 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/app/schedule/clean_tmpdir.js
+2019-12-06 23:18:44,402 INFO 2204 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/clean_log.js
+2019-12-06 23:18:44,403 INFO 2204 [egg-schedule]: register schedule /Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/app/schedule/rotate_by_file.js

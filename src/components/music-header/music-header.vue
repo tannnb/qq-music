@@ -85,6 +85,14 @@
     components: {
       IconSvg,
     },
+    watch:{
+        $route: {
+           handler(newValue) {
+               this.activeKey = newValue.fullPath
+           },
+            immediate:true
+        }
+    },
     data () {
       return {
         activeKey: '/music/index',

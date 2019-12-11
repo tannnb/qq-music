@@ -30,9 +30,9 @@
                @click="handlePlayAll">
             <i class="icon-play"></i><span>播放全部</span>
           </div>
-          <div class="funBtn-Btn">
+         <!-- <div class="funBtn-Btn">
             <i class="icon-pinglun"></i><span>全部评论({{songTable.comment_num}})</span>
-          </div>
+          </div>-->
         </div>
         <ul class="content-songList">
           <li v-for="(items,index) in songs"
@@ -65,23 +65,29 @@
                 <div class="content">{{RankingStatus(items).content}}</div>
               </div>
             </div>
-            <div class="avatar"><img v-lazy="items.image" alt="" :title="items.name"></div>
+            <div class="avatar"><img v-lazy="items.image" :key="items.image" alt="" :title="items.name"></div>
             <div class="name">
               <div class="nameInfo">
-                <span>{{items.name}}</span>
-                <span class="isonly" v-show="items.isonly === 1">独家</span>
+                <div class="albumdesc">
+                  <span class="item">{{items.name}} ⁃ {{items.singer}}  <a-tag v-show="items.isonly === 1" color="green">独家</a-tag></span>
+                  <span class="itemAlbumdesc">{{items.albumdesc}}</span>
+                </div>
               </div>
               <div class="player">
-                <span class="icon-play" @click="handleSelectSong(index)"></span>
+                <a-icon class="icon-play" type="play-circle" @click="handleSelectSong(index)" />
+                <a-icon class="icon-play"  type="plus-circle" />
               </div>
             </div>
-            <div class="singer">{{items.singer}}</div>
-            <div class="duration">{{items.duration | formatTimes}}</div>
+            <div class="duration">时长: {{items.duration | formatTimes}}</div>
           </li>
         </ul>
         <div class="no-songlist" v-if="songs.length === 0">暂无该排行信息 o(╥﹏╥)o</div>
         <div class="page-wrapper">
-          <Pagination v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="pagetions"></Pagination>
+          <a-pagination
+                  :current="cur_page"
+                  :hideOnSinglePage="false"
+                  :total="total"
+                  @change="pagetions" :itemRender="itemRender" />
         </div>
       </div>
     </div>
@@ -116,7 +122,9 @@
         songTable: null,
         songs: [],
         miniLoadingFlag: false,
-        pageConfig:null
+        pageConfig:null,
+        cur_page:1,
+        total:0
       }
     },
     filters: {
@@ -131,6 +139,26 @@
       this.getToplistCp()
     },
     methods: {
+      backTop () {
+        clearInterval(this.timer)
+        this.timer = setInterval(() => {
+          let oTop = document.documentElement.scrollTop || document.body.scrollTop
+          let ispeed = Math.floor(-oTop / 6)
+          document.documentElement.scrollTop = document.body.scrollTop = oTop + ispeed
+          this.istop = false
+          if (oTop === 0) {
+            clearInterval(this.timer)
+          }
+        }, 30)
+      },
+      itemRender(current, type, originalElement) {
+        if (type === 'prev') {
+          return <a>上一页</a>;
+        } else if (type === 'next') {
+          return <a>下一页</a>;
+        }
+        return originalElement;
+      },
       ...mapActions([
         'selectPlay'
       ]),
@@ -154,13 +182,12 @@
           this.topID = child.topID
           this.ListName = child.ListName
           this.showtime = child.showtime
-
           const listCp = await toplistCp(this.update_key, this.topID, this.songType, this.song_begin)
           if (listCp.data.code === ERR_OK) {
             this.songlist = listCp.data.songlist
             this.songTable = listCp.data
+            this.total = listCp.data.total_song_num
             this.song_begin = this.songTable.song_begin
-            this.allpage = listCp.data.total_song_num
             this.pageConfig = this._initPagination(listCp.data.total_song_num)
             this.getSong(this.songlist)
           }
@@ -281,6 +308,7 @@
 
       // 切换榜单
       async handleSelectSlider(item) {
+        this.cur_page = 1
         this.showToast = this.CreateToast()
         // 切换榜单，从第一页开始
         this.song_begin = 0
@@ -300,7 +328,7 @@
             this.songlist = response.data.songlist
             this.songTable = response.data
             this.getSong(this.songlist)
-            this.allpage = response.data.total_song_num
+            this.total = response.data.total_song_num
             setTimeout(() => {
               document.documentElement.scrollTop = document.body.scrollTop = 0;
             }, 200)
@@ -329,15 +357,15 @@
       // 播放全部
       handlePlayAll() {
         if (this.songs.length === 0) {
-          this.CreateDialog({
-            message: '暂时没有找到歌曲呢o(╥﹏╥)o'
+            this.$notification.open({
+              message: '提示',
+              duration:1.5,
+              description:'没有更多的歌曲了',
+              icon:<a-icon type="customer-service" style="color: #108ee9" />
           })
           return
         }
-        this.selectPlay({
-          list: this.songs,
-          index: 0
-        })
+        this.selectPlay({list: this.songs, index: 0})
       },
 
       handleSelectSong(index) {
@@ -349,20 +377,23 @@
 
       // 分页
       async pagetions(index) {
-        this.song_begin = (index - 1) * 30
+        this.cur_page = index
+        this.song_begin = (index - 1) * 20
         this.showToast = this.CreateToast()
         try {
           const response = await toplistCp(this.update_key, this.topID, this.songType, this.song_begin)
           if (response.data.code === ERR_OK) {
+            console.log('123',response.data)
             this.showToast.hide()
             this.songlist = response.data.songlist
             this.songTable = response.data
             this.song_begin = this.songTable.song_begin
-            this.allpage = response.data.total_song_num
+            // this.total = response.data.total_song_num
             this.getSong(this.songlist)
-            setTimeout(() => {
+            this.backTop()
+            /*setTimeout(() => {
               document.documentElement.scrollTop = document.body.scrollTop = 0;
-            }, 200)
+            }, 200)*/
           }
         } catch (e) {
           this.showToast.hide()
@@ -374,51 +405,52 @@
 
 <style lang="stylus" scoped>
 
+
   .rankWrapper {
     padding-top 35px
-    background: linear-gradient(#f3f3f3, #fff);
     .rank-main {
       display flex
       width 1200px
       margin 0 auto
       .slider-wrapper {
-        flex 0 0 150
-        width 150px
-      }
-      .slider {
-        border: 1px solid rgba(153, 153, 153, .2)
-        .slider-items {
-          .title {
-            display block
-            line-height: 60px;
-            font-size: 20px;
-            font-weight: 400;
-            font-size 15px
-            text-align center
-            border-bottom: 1px solid #ebebeb;
-            margin: 0 17px 10px;
-          }
-          .item {
-            display: block;
-            text-align center
-            line-height: 22px;
-            padding: 8px 17px;
-            font-size 14px
-            cursor pointer
-            &:hover {
-              color: #31c27c
+        flex 0 0 220
+        width 220px
+        .slider {
+          border: 1px solid #f5f8ff;
+          box-shadow: 0 5px 18px 0 rgba(238,242,255,0.72);
+          .slider-items {
+            .title {
+              display block
+              padding 20px 0
+              margin 0 10px
+              font-size 15px
+              font-weight: bold;
+              text-align center
+              border-bottom: 1px solid #ebebeb;
             }
-            &.active {
-              color: #fff
-              background: #31c27c
+            .item {
+              width 60%
+              margin 6px auto
+              display: block;
+              text-align center
+              line-height: 22px;
+              padding: 4px;
+              font-size 13px
+              cursor pointer
+              border-radius 30px
+              &:hover,&.active {
+                color: #fff
+                background: linear-gradient(left, #2a62ff, #4e7dff);
+              }
             }
           }
         }
       }
+
       .rankContent {
         position: relative
         flex 1
-        padding-left 30px
+        padding-left 60px
         .content-Header {
           margin-top: 20px;
           .tags {
@@ -437,31 +469,32 @@
             display flex
             justify-content center
             align-items center
-            border: 1px solid #c9c9c9
-            padding 10px 30px
-            margin 20px 10px 20px 0
-            font-size 15px
-            color: #333
-            border-radius 2px
+            border: 1px solid #4e7dff
+            padding 6px 16px
+            margin 16px 10px 16px 0
+            font-size 14px
+            border-radius 30px
             cursor pointer
+            color: #fff
             &.active {
-              background #31c27c
               color: #fff
-              border-color #31c27c
+              background linear-gradient(left, #2a62ff, #4e7dff)
               &:hover {
-                background #2CAF6F
+                background linear-gradient(left, #204bff, #204bff)
+                box-shadow: 0 5px 18px 0 rgba(78, 125, 255, 0.44);
               }
             }
             &.notSong {
-              border-color #cfcfcf
+              border-color #4e7dff
               user-select none
+              color #4e7dff
               cursor: not-allowed
             }
             &:hover {
               background #EDEDED
             }
             i {
-              font-size 18px
+              font-size 20px
               padding-right 6px
             }
           }
@@ -471,11 +504,14 @@
           .songList-Item {
             display flex
             align-items center
-            padding 10px 0
+            padding 8px 0
             border-bottom 1px solid #f2f2f2
+            &:hover {
+              box-shadow: 0 5px 18px 0 rgba(238,242,255,0.9);
+            }
             .ranking {
-              flex 0 0 80
-              width 80px
+              flex 0 0 60
+              width 60px
               text-align center
               color: #636363
               .icon {
@@ -539,14 +575,16 @@
               }
               .content {
                 text-align center
-                font-size 13px
+                font-size 12px
                 color: #999
               }
             }
             .avatar {
               width 60px
-              padding-right 10px
+              border-radius 4px
+              margin-right 20px
               cursor pointer
+              overflow hidden
               img {
                 width 100%
                 vertical-align top
@@ -560,34 +598,40 @@
               color: #373737
               cursor pointer
               &:hover {
-                color: #31c27c
+                .item {
+                  color: #4e7dff
+                }
               }
               .nameInfo {
                 flex 1
                 font-size 14px
-                color: #868484
+                color: #363434
                 &:hover {
-                  color: #31c27c
+                  color: #4e7dff
                 }
-                .isonly {
-                  color: #31c27c
-                  padding 2px 6px
-                  margin-left 6px
-                  font-size 13px
-                  border: 1px solid #31c27c
-                  border-radius 4px
+                .item {
+                  display block
+                }
+                .itemAlbumdesc {
+                  display block
+                  font-size 12px
+                  line-height 16px
+                  padding-top 6px
                 }
               }
               .player {
-                flex 0 0 100
-                width 100px
-                span {
+                flex 0 0 120
+                width 120px
+                text-align center
+                display flex
+                .icon-play {
                   display none
-                  font-size 44px
+                  font-size 30px
+                  margin-right 10px
                   cursor pointer
-                  color: #b1b1b1
+                  color: #c0b6c5
                   &:hover {
-                    color: #31c27c
+                    color: #4e7dff
                   }
                 }
               }
@@ -605,14 +649,17 @@
             .duration {
               flex 0 0 100
               width 100px
-              font-size 14px
-              color: #999
+              font-size 12px
+              color: #cbcbcb
             }
             &:hover {
               .name {
                 .icon-play {
                   display block
                 }
+              }
+              .duration {
+                color: #343434
               }
             }
           }

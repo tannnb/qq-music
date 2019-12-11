@@ -18,3 +18,81 @@
 2019-10-06 17:52:34,326 WARN 2887 [ClusterClient:Watcher] follower closed, and try to init it again
 2019-10-06 17:55:30,683 WARN 2887 [TCPBase] socket is closed by other side while there were still unhandled data in the socket buffer
 2019-10-06 17:55:30,684 WARN 2887 [ClusterClient:Watcher] follower closed, and try to init it again
+2019-10-17 22:08:16,794 INFO 17113 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/Desktop/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-10-17 22:08:16,820 INFO 17113 [egg-multipart] stream mode enable
+2019-10-17 22:08:16,931 INFO 17113 [egg-static] starting static serve /public/ -> /Users/tanbing/Desktop/music3.0/server/app/public
+2019-10-17 22:08:16,935 INFO 17113 [egg-security] use methodnoallow middleware
+2019-10-17 22:08:16,936 INFO 17113 [egg-security] use noopen middleware
+2019-10-17 22:08:16,937 INFO 17113 [egg-security] use nosniff middleware
+2019-10-17 22:08:16,938 INFO 17113 [egg-security] use xssProtection middleware
+2019-10-17 22:08:16,939 INFO 17113 [egg-security] use xframe middleware
+2019-10-17 22:08:16,940 INFO 17113 [egg-security] use dta middleware
+2019-10-17 22:08:16,940 INFO 17113 [egg-security] compose 6 middlewares into one security middleware
+2019-10-17 22:08:16,952 INFO 17113 [egg:core] dump config after load, 5ms
+2019-10-17 22:08:16,965 INFO 17113 [egg-watcher:application] watcher start success
+2019-10-17 22:08:16,970 INFO 17113 [egg:core] dump config after ready, 3ms
+2019-11-02 18:59:52,748 INFO 29571 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-11-02 18:59:52,797 INFO 29571 [egg-multipart] stream mode enable
+2019-11-02 18:59:52,880 INFO 29571 [egg-static] starting static serve /public/ -> /Users/tanbing/project/Client/music3.0/server/app/public
+2019-11-02 18:59:52,882 INFO 29571 [egg-security] use methodnoallow middleware
+2019-11-02 18:59:52,883 INFO 29571 [egg-security] use noopen middleware
+2019-11-02 18:59:52,884 INFO 29571 [egg-security] use nosniff middleware
+2019-11-02 18:59:52,884 INFO 29571 [egg-security] use xssProtection middleware
+2019-11-02 18:59:52,885 INFO 29571 [egg-security] use xframe middleware
+2019-11-02 18:59:52,885 INFO 29571 [egg-security] use dta middleware
+2019-11-02 18:59:52,885 INFO 29571 [egg-security] compose 6 middlewares into one security middleware
+2019-11-02 18:59:52,895 INFO 29571 [egg:core] dump config after load, 5ms
+2019-11-02 18:59:52,909 INFO 29571 [egg-watcher:application] watcher start success
+2019-11-02 18:59:52,914 INFO 29571 [egg:core] dump config after ready, 4ms
+2019-11-29 21:54:54,820 INFO 83378 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-11-29 21:54:54,856 INFO 83378 [egg-multipart] stream mode enable
+2019-11-29 21:54:55,005 INFO 83378 [egg-static] starting static serve /public/ -> /Users/tanbing/project/Client/music3.0/server/app/public
+2019-11-29 21:54:55,008 INFO 83378 [egg-security] use methodnoallow middleware
+2019-11-29 21:54:55,009 INFO 83378 [egg-security] use noopen middleware
+2019-11-29 21:54:55,010 INFO 83378 [egg-security] use nosniff middleware
+2019-11-29 21:54:55,011 INFO 83378 [egg-security] use xssProtection middleware
+2019-11-29 21:54:55,013 INFO 83378 [egg-security] use xframe middleware
+2019-11-29 21:54:55,014 INFO 83378 [egg-security] use dta middleware
+2019-11-29 21:54:55,014 INFO 83378 [egg-security] compose 6 middlewares into one security middleware
+2019-11-29 21:54:55,027 INFO 83378 [egg:core] dump config after load, 6ms
+2019-11-29 21:54:55,053 INFO 83378 [egg-watcher:application] watcher start success
+2019-11-29 21:54:55,060 INFO 83378 [egg:core] dump config after ready, 4ms
+2019-12-05 20:17:41,972 INFO 99340 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-12-05 20:17:42,064 INFO 99340 [egg-multipart] stream mode enable
+2019-12-05 20:17:42,177 INFO 99340 [egg-static] starting static serve /public/ -> /Users/tanbing/project/Client/music3.0/server/app/public
+2019-12-05 20:17:42,180 INFO 99340 [egg-security] use methodnoallow middleware
+2019-12-05 20:17:42,181 INFO 99340 [egg-security] use noopen middleware
+2019-12-05 20:17:42,182 INFO 99340 [egg-security] use nosniff middleware
+2019-12-05 20:17:42,182 INFO 99340 [egg-security] use xssProtection middleware
+2019-12-05 20:17:42,183 INFO 99340 [egg-security] use xframe middleware
+2019-12-05 20:17:42,183 INFO 99340 [egg-security] use dta middleware
+2019-12-05 20:17:42,183 INFO 99340 [egg-security] compose 6 middlewares into one security middleware
+2019-12-05 20:17:42,205 INFO 99340 [egg:core] dump config after load, 15ms
+2019-12-05 20:17:42,240 INFO 99340 [egg-watcher:application] watcher start success
+2019-12-05 20:17:42,248 INFO 99340 [egg:core] dump config after ready, 5ms
+2019-12-05 20:55:21,188 INFO 160 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-12-05 20:55:21,228 INFO 160 [egg-multipart] stream mode enable
+2019-12-05 20:55:21,330 INFO 160 [egg-static] starting static serve /public/ -> /Users/tanbing/project/Client/music3.0/server/app/public
+2019-12-05 20:55:21,333 INFO 160 [egg-security] use methodnoallow middleware
+2019-12-05 20:55:21,334 INFO 160 [egg-security] use noopen middleware
+2019-12-05 20:55:21,335 INFO 160 [egg-security] use nosniff middleware
+2019-12-05 20:55:21,337 INFO 160 [egg-security] use xssProtection middleware
+2019-12-05 20:55:21,337 INFO 160 [egg-security] use xframe middleware
+2019-12-05 20:55:21,338 INFO 160 [egg-security] use dta middleware
+2019-12-05 20:55:21,338 INFO 160 [egg-security] compose 6 middlewares into one security middleware
+2019-12-05 20:55:21,356 INFO 160 [egg:core] dump config after load, 9ms
+2019-12-05 20:55:21,383 INFO 160 [egg-watcher:application] watcher start success
+2019-12-05 20:55:21,395 INFO 160 [egg:core] dump config after ready, 8ms
+2019-12-06 23:18:44,280 INFO 2204 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2019-12-06 23:18:44,403 INFO 2204 [egg-multipart] stream mode enable
+2019-12-06 23:18:44,527 INFO 2204 [egg-static] starting static serve /public/ -> /Users/tanbing/project/Client/music3.0/server/app/public
+2019-12-06 23:18:44,530 INFO 2204 [egg-security] use methodnoallow middleware
+2019-12-06 23:18:44,531 INFO 2204 [egg-security] use noopen middleware
+2019-12-06 23:18:44,532 INFO 2204 [egg-security] use nosniff middleware
+2019-12-06 23:18:44,533 INFO 2204 [egg-security] use xssProtection middleware
+2019-12-06 23:18:44,533 INFO 2204 [egg-security] use xframe middleware
+2019-12-06 23:18:44,534 INFO 2204 [egg-security] use dta middleware
+2019-12-06 23:18:44,534 INFO 2204 [egg-security] compose 6 middlewares into one security middleware
+2019-12-06 23:18:44,552 INFO 2204 [egg:core] dump config after load, 9ms
+2019-12-06 23:18:44,596 INFO 2204 [egg-watcher:application] watcher start success
+2019-12-06 23:18:44,604 INFO 2204 [egg:core] dump config after ready, 5ms

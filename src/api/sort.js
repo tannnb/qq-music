@@ -2,8 +2,8 @@ import { commonParams, debug } from './config'
 import axios from 'axios'
 
 export function getSortTags () {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSortTags`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSortTags`
   const data = Object.assign({}, commonParams, {
     g_tk: '455128728',
     loginUin: 0,
@@ -20,8 +20,8 @@ export function getSortTags () {
 }
 
 export function getSortList (categoryId, sortId, sin) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSortList`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSortList`
   const data = Object.assign({}, commonParams, {
     picmid: 1,
     g_tk: 455128728,
@@ -44,8 +44,8 @@ export function getSortList (categoryId, sortId, sin) {
 }
 
 export function getSortDesc (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSortDesc`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSortDesc`
   const data = Object.assign({}, commonParams, {
     type: 1,
     json: 1,

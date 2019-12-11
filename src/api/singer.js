@@ -2,8 +2,8 @@ import { commonParams, debug } from './config'
 import axios from 'axios/index'
 
 export function getSingerList (options) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSingerList`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSingerList`
   const params = Object.assign({}, {
     'comm': {
       'ct': 24,
@@ -40,8 +40,8 @@ export function getSingerList (options) {
 }
 
 export function getSingerDesc (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSingerDesc`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSingerDesc`
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     singermid: mid,
@@ -62,8 +62,8 @@ export function getSingerDesc (mid) {
 }
 
 export function getSingerAlbum (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSingerAlbum`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSingerAlbum`
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     singermid: mid,
@@ -84,8 +84,8 @@ export function getSingerAlbum (mid) {
 }
 
 export function getSingerMv (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSingerMv`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSingerMv`
   const data = Object.assign({}, commonParams, {
     g_tk: 1194859437,
     cid: 205360581,
@@ -107,8 +107,8 @@ export function getSingerMv (mid) {
 }
 
 export function gerSingerFan (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/gerSingerFan`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/gerSingerFan`
   const data = Object.assign({}, commonParams, {
     reqtype: 1,
     singermid: mid,
@@ -129,8 +129,8 @@ export function gerSingerFan (mid) {
 }
 
 export function getSingerMvUrl (vid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getSingerMvUrl`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getSingerMvUrl`
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,

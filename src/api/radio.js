@@ -3,8 +3,8 @@ import axios from 'axios'
 import { Base64 } from 'js-base64'
 
 export function station () {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/station`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/station`
   const data = Object.assign({}, commonParams, {
     channel: 'radio',
     page: 'index',
@@ -25,8 +25,8 @@ export function station () {
 }
 
 export function getRadioDesc (id) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getRadioDesc`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getRadioDesc`
   const data = Object.assign({}, commonParams, {
     g_tk: 5381,
     loginUin: 0,
@@ -57,8 +57,8 @@ export function getRadioDesc (id) {
 }
 
 export function StateLyric (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/back_lyric`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/back_lyric`
   const data = Object.assign({}, commonParams, {
     songmid: mid,
     platform: 'yqq',

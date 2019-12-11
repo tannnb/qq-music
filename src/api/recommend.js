@@ -13,8 +13,8 @@ export function gethotkey () {
 }
 
 export function musicu () {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/musicu`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/musicu`
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,
@@ -96,8 +96,8 @@ export function musicu () {
 }
 
 export function recommend (id) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/recommend`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/recommend`
   const recomPlaylist = {
     'comm': { 'ct': 24 },
     'recomPlaylist': {
@@ -138,8 +138,8 @@ export function recommend (id) {
 }
 
 export function newSongType (id) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/newSongType`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/newSongType`
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,
@@ -163,8 +163,8 @@ export function newSongType (id) {
 }
 
 export function newAlbumArea (id) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/newAlbumArea`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/newAlbumArea`
   const data = Object.assign({}, commonParams, {
     loginUin: 0,
     hostUin: 0,

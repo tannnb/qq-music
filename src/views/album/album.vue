@@ -1,5 +1,5 @@
 <template>
-    <div class="albumWrapper">
+    <div class="albumWrapper" :spinning="spinning" tip="加载中...">
         <div class="album-tags-wrapper">
             <div class="tagItem">
 
@@ -75,11 +75,7 @@
                 </li>
             </ul>
             <div class="page-wrapper">
-               <!-- <a-pagination :current="cur_page"
-                              :hideOnSinglePage="true"
-                              :total="total" @change="changeCurrentPage" :itemRender="itemRender" />-->
-
-                <Pagination v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="pagetions"></Pagination>
+                <a-pagination :current="cur_page" :hideOnSinglePage="true" :total="total" @change="changeCurrentPage" :itemRender="itemRender" />
             </div>
         </div>
 
@@ -91,21 +87,22 @@
   import { mapActions } from 'vuex'
   import { filterSinger } from '../../utils/tool'
   import { getAlbum } from '../../api/album'
-  import Pagination from '@/components/pagination'
   import { ERR_OK } from '../../api/config'
   import CheckTag from '@/components/check-tag'
   import SingerTag from '../singer/singertag'
   import { LoadingMixin, PaginationMixin } from '../../utils/mixin'
-  import AvatarHover from '../../components/AvatarHover/AvatarHover'
+  import AvatarHover from '@/components/AvatarHover/AvatarHover'
 
+
+    const COUNT = 20
   export default {
     mixins: [LoadingMixin, PaginationMixin],
     data () {
       return {
+          spinning:false,
         albumList: [],
         albumTags: {},
         albumTagsArea: [],
-        allpage: 0,
 
         currentAreaIndex: 0,
         currentGenreIndex: 0,
@@ -118,19 +115,19 @@
         defaultCompany: '唱片公司',
         defaultTitle: '',
 
-        pageConfig: null,
         area: 7, // 地区
         company: -1, // 唱片公司
         genre: -1, // 流派
         type: -1, // 类型
         year: -1, // 年代
         sin: 0, // 分页页数
+          cur_page:1,
+          total:0,
       }
     },
     components: {
       SingerTag,
       CheckTag,
-      Pagination,
       AvatarHover,
     },
     created () {
@@ -152,6 +149,23 @@
         'saveDiscInfo',
         'saveSingID',
       ]),
+        changeCurrentPage (index) {
+            this.cur_page = index
+            this.sin = (index - 1) * COUNT
+            this._getAlbum()
+            let scrollTop = 90
+            setTimeout(() => {
+                document.body.scrollTop = document.documentElement.scrollTop = scrollTop;
+            },30)
+        },
+        itemRender(current, type, originalElement) {
+            if (type === 'prev') {
+                return <a>上一页</a>;
+            } else if (type === 'next') {
+                return <a>下一页</a>;
+            }
+            return originalElement;
+        },
       hide () {
         this.selectItemvisible = false
         this.selectItemVisibleCompany = false
@@ -175,8 +189,7 @@
             this.albumList = data.list // list
             this.albumTags = data.tags // tag
             this.albumTagsArea = this._initnormalize(data.tags) // initAreaTag
-            this.allpage = this.albumList.length
-            this.pageConfig = this._initPagination(data.total)
+            this.total = data.total
             this.$Progress.finish()
             this.showToast.hide()
           }
@@ -210,11 +223,13 @@
         this._getAlbum()
       },
       selectItemGenreIndex (items, index) {
+          this.cur_page = 1
         this.currentGenreIndex = index
         this.genre = items.id
         this._getAlbum()
       },
       selectItemTypeIndex (items, index) {
+          this.cur_page = 1
         this.currentTypeIndex = index
         this.type = items.id
         this._getAlbum()
@@ -224,9 +239,11 @@
         this.selectItemIndex = 1
       },
       selectCompany () {
+          this.cur_page = 1
         this.selectItemIndex = 2
       },
       selectItemYear (items, index) {
+          this.cur_page = 1
         this.defaultYear = items.name
         this.year = items.id
         this._getAlbum()
@@ -362,19 +379,30 @@
             .content-items {
                 display flex
                 flex-flow wrap
+                justify-content center
 
                 .items {
                     width 20%
-                    padding-bottom 44px
-
+                    padding 5px 0
+                    margin-bottom 20px
+                    border:1px solid #f5f8ff
+                    box-shadow 0 5px 18px 0 rgba(238,242,255,.72)
+                    cursor pointer
+                    &:hover {
+                        .name {
+                            color: #3f66ff
+                        }
+                        border:1px solid rgba(63, 102, 255, 0.2)
+                    }
                     .avatar {
                         width 224px
+                        margin  0 auto
                     }
 
                     .name {
-                        font-size 15px
+                        font-size 14px
                         color: #333
-                        padding 10px 0 12px 0
+                        padding 10px 0 12px 14px
                         max-width: 100%;
                         font-weight: 400;
                         overflow: hidden;
@@ -382,15 +410,12 @@
                         line-height: 22px;
                         max-height: 44px;
                         cursor pointer
-
-                        &:hover {
-                            color: #31c27c
-                        }
                     }
 
                     .singer, .time {
-                        font-size 13px
+                        font-size 12px
                         padding-bottom 6px
+                        padding-left 14px
                         color: #999;
                         white-space: nowrap;
                         overflow: hidden;
@@ -399,13 +424,6 @@
 
                     .singer {
                         cursor pointer
-
-                        &:hover {
-                            color: #31c27c
-                        }
-                    }
-
-                    .time {
                     }
                 }
             }

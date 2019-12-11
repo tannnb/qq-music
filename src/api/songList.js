@@ -60,8 +60,8 @@ export function createSong (musicData, list) {
 
 // 获取歌词
 function getLyric (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getLyric`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getLyric`
   const data = Object.assign({}, commonParams, {
     songmid: mid,
     platform: 'yqq',
@@ -98,8 +98,8 @@ export function processSongsUrl (songs) {
 }
 
 export function getSongsUrl (songs) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getPurlUrl`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getPurlUrl`
   let mids = []
   let types = []
 

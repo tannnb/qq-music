@@ -3,8 +3,8 @@ import { getUid } from '../utils/tool'
 import axios from 'axios/index'
 
 export function getMvlist (options) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getMvlist`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getMvlist`
   const data = Object.assign({}, options, {
     loginUin: 0,
     hostUin: 0,

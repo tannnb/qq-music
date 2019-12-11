@@ -1,9 +1,9 @@
-import { commonParams,debug } from './config'
+import { commonParams, debug } from './config'
 import axios from 'axios'
 
 export function getAlbum (options) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getAlbum`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getAlbum`
 
   const data = Object.assign({}, commonParams, {
     g_tk: 1194859437,
@@ -39,8 +39,8 @@ export function getAlbum (options) {
 }
 
 export function getAlbumDesc (mid) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/getAlbumDesc`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/getAlbumDesc`
   const data = Object.assign({}, commonParams, {
     albummid: mid,
     g_tk: '1194859437',

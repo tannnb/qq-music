@@ -1,294 +1,294 @@
 {
-  "keys": "/Users/tanbing/Desktop/music3.0/server/config/config.default.js",
-  "middleware": "/Users/tanbing/Desktop/music3.0/server/config/config.default.js",
+  "keys": "/Users/tanbing/project/Client/music3.0/server/config/config.default.js",
+  "middleware": "/Users/tanbing/project/Client/music3.0/server/config/config.default.js",
   "security": {
     "csrf": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/config/config.default.js",
-      "useSession": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "ignoreJSON": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "cookieName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "sessionName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "headerName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "bodyName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "queryName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/config/config.default.js",
+      "useSession": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "ignoreJSON": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "cookieName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "sessionName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "headerName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "bodyName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "queryName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
-    "domainWhiteList": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-    "protocolWhiteList": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-    "defaultMiddleware": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
+    "domainWhiteList": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+    "protocolWhiteList": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+    "defaultMiddleware": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
     "xframe": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "value": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "value": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "hsts": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.local.js",
-      "maxAge": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "includeSubdomains": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.local.js",
+      "maxAge": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "includeSubdomains": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "dta": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "methodnoallow": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "noopen": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "nosniff": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "referrerPolicy": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "value": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "value": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "xssProtection": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "value": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "value": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "csp": {
-      "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "policy": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "policy": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     },
     "ssrf": {
-      "ipBlackList": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js",
-      "checkAddress": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+      "ipBlackList": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js",
+      "checkAddress": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
     }
   },
   "cors": {
-    "origin": "/Users/tanbing/Desktop/music3.0/server/config/config.default.js",
-    "allowMethods": "/Users/tanbing/Desktop/music3.0/server/config/config.default.js"
+    "origin": "/Users/tanbing/project/Client/music3.0/server/config/config.default.js",
+    "allowMethods": "/Users/tanbing/project/Client/music3.0/server/config/config.default.js"
   },
   "session": {
-    "maxAge": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-session/config/config.default.js",
-    "key": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-session/config/config.default.js",
-    "httpOnly": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-session/config/config.default.js",
-    "encrypt": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-session/config/config.default.js"
+    "maxAge": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-session/config/config.default.js",
+    "key": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-session/config/config.default.js",
+    "httpOnly": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-session/config/config.default.js",
+    "encrypt": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-session/config/config.default.js"
   },
   "helper": {
-    "shtml": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-security/config/config.default.js"
+    "shtml": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-security/config/config.default.js"
   },
   "jsonp": {
-    "limit": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-jsonp/config/config.default.js",
-    "callback": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-jsonp/config/config.default.js",
-    "csrf": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-jsonp/config/config.default.js"
+    "limit": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-jsonp/config/config.default.js",
+    "callback": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-jsonp/config/config.default.js",
+    "csrf": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-jsonp/config/config.default.js"
   },
   "onerror": {
-    "errorPageUrl": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-onerror/config/config.default.js",
-    "appErrorFilter": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-onerror/config/config.default.js",
-    "templatePath": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-onerror/config/config.default.js"
+    "errorPageUrl": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-onerror/config/config.default.js",
+    "appErrorFilter": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-onerror/config/config.default.js",
+    "templatePath": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-onerror/config/config.default.js"
   },
   "i18n": {
-    "defaultLocale": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-i18n/config/config.default.js",
-    "dirs": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-i18n/config/config.default.js",
-    "queryField": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-i18n/config/config.default.js",
-    "cookieField": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-i18n/config/config.default.js",
-    "cookieDomain": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-i18n/config/config.default.js",
-    "cookieMaxAge": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-i18n/config/config.default.js"
+    "defaultLocale": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-i18n/config/config.default.js",
+    "dirs": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-i18n/config/config.default.js",
+    "queryField": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-i18n/config/config.default.js",
+    "cookieField": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-i18n/config/config.default.js",
+    "cookieDomain": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-i18n/config/config.default.js",
+    "cookieMaxAge": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-i18n/config/config.default.js"
   },
   "watcher": {
-    "type": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-watcher/config/config.local.js",
+    "type": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-watcher/config/config.local.js",
     "eventSources": {
-      "default": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-watcher/config/config.default.js",
-      "development": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-watcher/config/config.default.js"
+      "default": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-watcher/config/config.default.js",
+      "development": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-watcher/config/config.default.js"
     }
   },
   "customLogger": {
     "scheduleLogger": {
-      "consoleLevel": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-schedule/config/config.default.js",
-      "file": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-schedule/config/config.default.js"
+      "consoleLevel": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-schedule/config/config.default.js",
+      "file": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-schedule/config/config.default.js"
     }
   },
   "schedule": {
-    "directory": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-schedule/config/config.default.js"
+    "directory": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-schedule/config/config.default.js"
   },
   "multipart": {
-    "mode": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "autoFields": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "defaultCharset": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "fieldNameSize": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "fieldSize": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "fields": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "fileSize": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "files": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "fileExtensions": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "whitelist": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
-    "tmpdir": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "mode": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "autoFields": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "defaultCharset": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "fieldNameSize": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "fieldSize": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "fields": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "fileSize": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "files": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "fileExtensions": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "whitelist": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
+    "tmpdir": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js",
     "cleanSchedule": {
-      "cron": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-multipart/config/config.default.js"
+      "cron": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-multipart/config/config.default.js"
     }
   },
   "development": {
-    "watchDirs": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-development/config/config.default.js",
-    "ignoreDirs": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-development/config/config.default.js",
-    "fastReady": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-development/config/config.default.js",
-    "reloadOnDebug": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-development/config/config.default.js",
-    "overrideDefault": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-development/config/config.default.js"
+    "watchDirs": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-development/config/config.default.js",
+    "ignoreDirs": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-development/config/config.default.js",
+    "fastReady": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-development/config/config.default.js",
+    "reloadOnDebug": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-development/config/config.default.js",
+    "overrideDefault": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-development/config/config.default.js"
   },
   "logrotator": {
-    "filesRotateByHour": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
-    "hourDelimiter": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
-    "filesRotateBySize": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
-    "maxFileSize": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
-    "maxFiles": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
-    "rotateDuration": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
-    "maxDays": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-logrotator/config/config.default.js"
+    "filesRotateByHour": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
+    "hourDelimiter": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
+    "filesRotateBySize": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
+    "maxFileSize": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
+    "maxFiles": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
+    "rotateDuration": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/config/config.default.js",
+    "maxDays": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-logrotator/config/config.default.js"
   },
   "static": {
-    "prefix": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-static/config/config.default.js",
-    "dir": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-static/config/config.default.js",
-    "dynamic": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-static/config/config.default.js",
-    "preload": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-static/config/config.default.js",
-    "buffer": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-static/config/config.default.js",
-    "maxFiles": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-static/config/config.default.js"
+    "prefix": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-static/config/config.default.js",
+    "dir": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-static/config/config.default.js",
+    "dynamic": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-static/config/config.default.js",
+    "preload": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-static/config/config.default.js",
+    "buffer": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-static/config/config.default.js",
+    "maxFiles": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-static/config/config.default.js"
   },
   "view": {
-    "root": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-view/config/config.default.js",
-    "cache": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-view/config/config.local.js",
-    "defaultExtension": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-view/config/config.default.js",
-    "defaultViewEngine": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-view/config/config.default.js",
-    "mapping": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg-view/config/config.default.js"
+    "root": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-view/config/config.default.js",
+    "cache": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-view/config/config.local.js",
+    "defaultExtension": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-view/config/config.default.js",
+    "defaultViewEngine": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-view/config/config.default.js",
+    "mapping": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg-view/config/config.default.js"
   },
-  "env": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "name": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "proxy": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "maxProxyCount": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "protocolHeaders": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "ipHeaders": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "hostHeaders": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
+  "env": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "name": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "proxy": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "maxProxyCount": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "protocolHeaders": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "ipHeaders": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "hostHeaders": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
   "pkg": {
-    "name": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "version": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "description": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "private": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
+    "name": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "version": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "description": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "private": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
     "egg": {
-      "declarations": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "declarations": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "dependencies": {
-      "axios": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "egg": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "egg-cors": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "egg-router-plus": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "egg-scripts": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "axios": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "egg": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "egg-cors": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "egg-router-plus": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "egg-scripts": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "devDependencies": {
-      "autod": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "autod-egg": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "egg-bin": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "egg-ci": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "egg-mock": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "eslint": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "eslint-config-egg": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "autod": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "autod-egg": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "egg-bin": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "egg-ci": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "egg-mock": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "eslint": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "eslint-config-egg": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "engines": {
-      "node": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "node": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "scripts": {
-      "start": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "stop": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "dev": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "debug": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "test": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "test-local": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "cov": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "lint": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "ci": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "autod": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "start": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "stop": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "dev": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "debug": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "test": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "test-local": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "cov": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "lint": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "ci": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "autod": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "ci": {
-      "version": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "version": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "repository": {
-      "type": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "url": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "type": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "url": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
-    "author": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "license": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "author": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "license": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
-  "baseDir": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "HOME": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "rundir": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
+  "baseDir": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "HOME": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "rundir": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
   "dump": {
-    "ignore": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "ignore": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
   "confusedConfigurations": {
-    "bodyparser": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "notFound": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "sitefile": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "middlewares": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "httpClient": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "bodyparser": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "notFound": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "sitefile": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "middlewares": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "httpClient": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
   "notfound": {
-    "pageUrl": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "pageUrl": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
   "siteFile": {
-    "/favicon.ico": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "/favicon.ico": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
   "bodyParser": {
-    "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "encoding": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "formLimit": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "jsonLimit": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "strict": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
+    "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "encoding": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "formLimit": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "jsonLimit": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "strict": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
     "queryString": {
-      "arrayLimit": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "depth": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "parameterLimit": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "arrayLimit": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "depth": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "parameterLimit": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     }
   },
   "logger": {
-    "dir": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "encoding": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "env": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "level": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "consoleLevel": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "disableConsoleAfterReady": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "outputJSON": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "buffer": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "appLogName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "coreLogName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "agentLogName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "errorLogName": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
+    "dir": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "encoding": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "env": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "level": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "consoleLevel": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "disableConsoleAfterReady": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "outputJSON": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "buffer": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "appLogName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "coreLogName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "agentLogName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "errorLogName": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
     "coreLogger": {
-      "consoleLevel": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.local.js"
+      "consoleLevel": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.local.js"
     },
-    "allowDebugAtProd": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "allowDebugAtProd": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
   "httpclient": {
-    "enableDNSCache": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "dnsCacheLookupInterval": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "dnsCacheMaxLength": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
+    "enableDNSCache": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "dnsCacheLookupInterval": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "dnsCacheMaxLength": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
     "request": {
-      "timeout": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "timeout": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "httpAgent": {
-      "keepAlive": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "freeSocketTimeout": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "maxSockets": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "maxFreeSockets": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "keepAlive": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "freeSocketTimeout": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "maxSockets": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "maxFreeSockets": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     },
     "httpsAgent": {
-      "keepAlive": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "freeSocketTimeout": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "maxSockets": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "maxFreeSockets": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "keepAlive": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "freeSocketTimeout": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "maxSockets": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "maxFreeSockets": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     }
   },
   "meta": {
-    "enable": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "logging": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "enable": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "logging": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
-  "coreMiddleware": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "workerStartTimeout": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-  "serverTimeout": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
+  "coreMiddleware": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "workerStartTimeout": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+  "serverTimeout": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
   "cluster": {
     "listen": {
-      "path": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "port": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-      "hostname": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+      "path": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "port": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+      "hostname": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
     }
   },
   "clusterClient": {
-    "maxWaitTime": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js",
-    "responseTimeout": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+    "maxWaitTime": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js",
+    "responseTimeout": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
   },
-  "onClientError": "/Users/tanbing/Desktop/music3.0/server/node_modules/egg/config/config.default.js"
+  "onClientError": "/Users/tanbing/project/Client/music3.0/server/node_modules/egg/config/config.default.js"
 }

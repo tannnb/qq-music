@@ -2,8 +2,8 @@ import { commonParams, debug } from './config'
 import axios from 'axios/index'
 
 export function toplistOpt () {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/toplistOpt`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/toplistOpt`
   const data = Object.assign({}, commonParams, {
     page: 'index',
     format: 'html',
@@ -20,8 +20,8 @@ export function toplistOpt () {
 }
 
 export function toplistCp (date, topid, type, song_begin = 0) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/toplistCp`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/toplistCp`
   const data = Object.assign({}, {
     tpl: 3,
     page: 'detail',
@@ -29,7 +29,7 @@ export function toplistCp (date, topid, type, song_begin = 0) {
     topid,
     type: type == 1 ? 'top' : 'global',
     song_begin,
-    song_num: 30,
+    song_num: 20,
     loginUin: 0,
     hostUin: 0,
     platform: 'yqq',

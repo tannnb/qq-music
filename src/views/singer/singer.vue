@@ -97,9 +97,6 @@ export default {
       'saveDiscInfo',
       'saveSingID'
     ]),
-    getPopupContainer(trigger) {
-      return trigger.parentElement
-    },
     itemRender(current, type, originalElement) {
       if (type === 'prev') {
         return <a>上一页</a>;
@@ -157,9 +154,8 @@ export default {
         'sin': this.sin,
         'cur_page': this.cur_page
       }
-      this.spinning = true
+      this.showToast = this.CreateToast()
       getSingerList(data).then(res => {
-        this.spinning = false
         const { code, singerList } = res.data
         if (code === ERR_OK) {
           let ret = singerList.data
@@ -169,9 +165,10 @@ export default {
           this.total = ret.total
         }
         this.$Progress.finish()
+        this.showToast.hide()
       }).catch(() => {
-        this.spinning = false
         this.$Progress.finish()
+        this.showToast.hide()
       })
     },
 

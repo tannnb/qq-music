@@ -2,8 +2,8 @@ import { commonParams, options, debug } from './config'
 import axios from 'axios'
 
 export function clientSearch (query, page, zhida, perpage) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/clientSearch`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/clientSearch`
   const data = Object.assign({}, commonParams, {
     w: query,
     p: page,
@@ -31,8 +31,8 @@ export function clientSearch (query, page, zhida, perpage) {
 }
 
 export function clientSmartBox (key) {
-  const prefix = debug ? 'http://localhost:7001/api/pc' : 'http://api.tannnb.com/api/pc'
-  const url = `${prefix}/clientSmartBox`
+  const prefix = debug ? 'http://localhost:7001' : 'http://api.tannnb.com'
+  const url = `${prefix}/api/pc/clientSmartBox`
   const data = Object.assign({}, commonParams, options, {
     is_xml: 0,
     key,
