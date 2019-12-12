@@ -1,7 +1,7 @@
 <template>
     <a-affix :offsetTop="offsetTop">
         <div class="music-header">
-            <div class="music-logo"></div>
+            <div class="music-logo">随心听</div>
             <a-tabs :defaultActiveKey="activeKey" @change="handleHeaderNav">
                 <a-tab-pane v-for="item in headerData" :key="item.url" :tab="item.label"/>
             </a-tabs>
@@ -270,7 +270,9 @@
         transition: color 0.3s;
         font-size: 12px;
     }
-
+    .ant-tabs-bar {
+        margin-bottom 5px
+    }
     .components-input-demo-presuffix, .anticon-close-circle:hover {
         color: #999;
     }
@@ -281,30 +283,29 @@
 </style>
 
 <style lang="stylus" scoped>
-
-
     .down-enter-active, .down-leave-active {
         transition: all 0.2s
     }
-
     .down-enter, .down-leave-to {
         opacity 0.5
     }
-
 
     .music-header {
         position: relative
         display flex
         align-items center
         max-width 1200px
-        margin 10px auto
+        margin 10px auto 0 auto
         box-sizing border-box
 
         .music-logo {
             width 110px
             height 40px
+            line-height 40px
+            text-align center
+            font-size 24px
             margin-right 30px
-            background #eee
+            color #3f66ff
         }
 
         .music-nav {
@@ -339,7 +340,7 @@
             .searchInput {
                 position: absolute
                 width: 240px
-                top: 10px
+                top: 2px
                 right: 0;
 
                 input {

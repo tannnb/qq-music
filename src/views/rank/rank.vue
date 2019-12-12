@@ -429,7 +429,7 @@
               border-bottom: 1px solid #ebebeb;
             }
             .item {
-              width 60%
+              width 80%
               margin 6px auto
               display: block;
               text-align center
@@ -438,6 +438,7 @@
               font-size 13px
               cursor pointer
               border-radius 30px
+              white-space nowrap
               &:hover,&.active {
                 color: #fff
                 background: linear-gradient(left, #2a62ff, #4e7dff);
@@ -608,6 +609,9 @@
                 color: #363434
                 &:hover {
                   color: #4e7dff
+                  .item {
+                    font-weight bold
+                  }
                 }
                 .item {
                   display block

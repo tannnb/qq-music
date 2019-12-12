@@ -1,5 +1,5 @@
 <template>
-    <a-back-top />
+    <a-back-top :visibilityHeight="visibilityHeight" />
 </template>
 
 <script>
@@ -8,7 +8,8 @@ export default {
   data () {
     return {
       timer: null,
-      istop: true
+      istop: true,
+      visibilityHeight:300
     }
   },
   mounted () {
@@ -47,7 +48,12 @@ export default {
   }
 }
 </script>
-
+<style>
+    .ant-back-top {
+        bottom: 80px;
+        right: 60px;
+    }
+</style>
 <style lang="stylus" scoped>
     #components-back-top-demo-custom .ant-back-top {
         bottom: 100px;

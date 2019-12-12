@@ -1,16 +1,13 @@
 <template>
   <div class="stationWrapper">
     <div class="station-main">
-      <div class="slider">
-        <div class="taglist" ref='tagsWrapper' v-if="tags.length !== 0">
-          <span class="taglistItem"
-                @click="selectMenu(index,$event)"
-                :class=" currentIndex === index? 'active':'' "
-                v-for="(items,index) in tags">{{items}}</span>
-        </div>
-      </div>
+      <a-anchor class="slider" :offsetTop="offsetTop"
+                :bounds="30"
+                :showInkInFixed="false">
+        <a-anchor-link v-for="(items,index) in tags" :key="index" :href="`${hrefPrex}/#${items}`" :title="items" />
+      </a-anchor>
       <div class="stationContent" ref="stationContent">
-        <div class="item" ref="itemlist"
+        <div :id="`${items.name}`" class="item" ref="itemlist"
              v-if="stationList.length !== 0"
              v-for="(items,index) in stationList.groupList">
           <h4 class="title">{{items.name}}</h4>
@@ -23,7 +20,7 @@
                 <Avatar-hover :avatar-uri="item.radioImg"></Avatar-hover>
               </div>
               <p class="radioName">{{item.radioName}}</p>
-              <p class="listenNum">播放量: {{item.listenNum | listen}}</p>
+              <p class="listenNum"><a-icon type="sound" /> 播放量: {{item.listenNum | listen}}</p>
             </li>
           </ul>
         </div>
@@ -46,6 +43,7 @@
     name: "station",
     data() {
       return {
+        offsetTop:100,
         stationList: [],
         tags: [],
         listHeight: [],
@@ -65,7 +63,8 @@
       this._station()
     },
     mounted() {
-      setTimeout(() => {
+      this.hrefPrex = window.location.href
+     /* setTimeout(() => {
         this.$nextTick(() => {
           this._calculateHeight();
         })
@@ -73,7 +72,7 @@
         this.$refs.tagsWrapper.style.left = this.stationContent - 240 + 'px'
         this.$refs.tagsWrapper.style.opacity = 1
       }, 500)
-      window.addEventListener('scroll', this.radioScroll);
+      window.addEventListener('scroll', this.radioScroll);*/
     },
     computed: {
       currentIndex() {
@@ -188,130 +187,125 @@
   }
 </script>
 
+<style lang="stylus">
+  .stationWrapper {
+    .ant-affix {
+       box-shadow none
+    }
+    .ant-anchor-link {
+      font-size 15px
+      padding 15px 0 15px 15px
+      &.ant-anchor-link-active {
+        .ant-anchor-link-title {
+          color #2a62ff !important
+        }
+      }
+    }
+    .ant-anchor-ink {
+      &::before {
+        background transparent !important
+      }
+      .ant-anchor-ink-ball {
+        border-color #2a62ff !important
+      }
+    }
+  }
+</style>
 <style lang="stylus" scoped>
   .stationWrapper {
     padding-top 35px
-    background: linear-gradient(#f3f3f3, #fff);
     .station-main {
       display flex
       width 1200px
       margin 0 auto
       .slider {
-        flex 0 0 240
-        width 240px
+        flex 0 0 120
+        width 120px
       }
       .stationContent {
         flex 1
+        margin-left 40px
       }
     }
   }
   .slider {
-    .taglist {
-      position: fixed
-      left: 40px
-      top: 142px
-      transition all .3s
-      opacity 0
-      background url("./radio_sidebar.png") 0 0 no-repeat;
-      .taglistItem {
-        position: relative
-        display: block;
-        padding-left: 63px;
-        line-height: 59px;
-        font-size: 15px;
-        cursor pointer
-        &:hover {
-          color: #31c27c
-        }
-        &.active {
-          color: #31c27c
-          &:after {
-            content: "";
-            position: absolute;
-            height: 1px;
-            width: 37px;
-            overflow: hidden;
-            left: 0;
-            top: 50%;
-            background-color: #31c27c;
-          }
-        }
-        &:after {
-          content: "";
-          position: absolute;
-          height: 1px;
-          width: 37px;
-          overflow: hidden;
-          left: 0;
-          top: 50%;
-          background-color: #dadada;
-        }
-      }
+    .taglistItem {
+      position: relative
+      display: block;
+      line-height: 50px;
+      text-align center
+      font-size: 15px;
+      cursor pointer
     }
   }
   .stationContent {
-    .item {
-      .title {
-        position: relative
-        font-weight: 400;
-        height: 20px;
-        line-height: 20px;
-        color: #828282;
-        margin-bottom: 38px;
-        font-size: 16px;
-        &:after {
-          content: "";
-          position: absolute;
-          height: 1px;
-          overflow: hidden;
-          left: 43px;
-          right: 0;
-          top: 10px;
-          background-color: #ececec;
-        }
+    .title {
+      position: relative
+      font-weight: 400;
+      height: 20px;
+      line-height: 20px;
+      color: #2f2f2f;
+      margin-bottom: 38px;
+      font-size: 18px;
+      &:after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        overflow: hidden;
+        left: 43px;
+        right: 0;
+        top: 10px;
+        background-color: #ececec;
       }
-      .radioItem {
-        display flex
-        flex-wrap wrap
-        .radioItem_li {
-          width 25%
-          padding-bottom: 44px;
-          .avatar {
-            width 222px
-            overflow hidden
-            cursor pointer
-            img {
-              vertical-align top
-              width 100%
-              transition all .2s
-              &:hover {
-                transform scale(1.1)
-              }
+    }
+    .radioItem {
+      display flex
+      flex-wrap wrap
+      .radioItem_li {
+        width 20%
+        padding 10px
+        margin-bottom: 20px;
+        border 1px solid rgba(195, 195, 195, 0.1)
+        transition all .5s
+        cursor pointer
+        .avatar {
+          width 100%
+          overflow hidden
+          cursor pointer
+          img {
+            vertical-align top
+            width 100% !important
+            transition all .2s
+            &:hover {
+              transform scale(1.1)
             }
           }
-          .radioName {
-            padding 12px 0 6px 0
-            max-width: 100%;
-            font-weight: 400;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 22px;
-            color: #333
-            font-size 15px
-            cursor pointer
-            &:hover{
-              color: #31c27c
-            }
-          }
-          .listenNum {
-            color: #999;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            height: 22px;
-            font-size 14px
-          }
+        }
+        .radioName {
+          padding 12px 0 6px 10px
+          max-width: 100%;
+          font-weight: 400;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 22px;
+          color: #333
+          font-size 15px
+          cursor pointer
+        }
+        .listenNum {
+          padding-left 10px
+          color: #999;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 22px;
+          font-size 13px
+        }
+        &:hover {
+          z-index 2
+          box-shadow: 0 5px 18px 0 rgba(78, 125, 255, 0.3);
+          border:1px solid rgba(63, 102, 255, 0.2)
         }
       }
     }

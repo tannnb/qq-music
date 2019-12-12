@@ -14,9 +14,9 @@ export default {
       default: require('./playlist_300.png')
     }
   },
-  data () {
-    return {
-      Url: this.avatarUri
+  computed: {
+    Url() {
+      return this.avatarUri
     }
   }
 }
@@ -30,8 +30,8 @@ export default {
     overflow hidden
     cursor pointer
     .img-cover
-      width 224px
-      height: 224px
+      width 100%
+      height 100%
       background #ececec
       img
         width 100%
