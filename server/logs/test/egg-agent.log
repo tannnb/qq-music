@@ -9,3 +9,85 @@
 2019-12-12 19:57:15,900 INFO 18367 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
 2019-12-12 19:57:15,900 INFO 18367 [egg-watcher:agent] watcher start success
 2019-12-12 19:57:15,942 INFO 18367 [egg:core] dump config after ready, 9ms
+2020-02-06 22:05:14,087 INFO 46488 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-06 22:05:14,111 INFO 46488 [egg:core] dump config after load, 6ms
+2020-02-06 22:05:14,174 INFO 46488 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2020-02-06 22:05:14,174 INFO 46488 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2020-02-06 22:05:14,175 INFO 46488 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2020-02-06 22:05:14,175 INFO 46488 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2020-02-06 22:05:14,175 INFO 46488 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2020-02-06 22:05:14,175 INFO 46488 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2020-02-06 22:05:14,175 INFO 46488 [egg-watcher:agent] watcher start success
+2020-02-06 22:05:14,207 INFO 46488 [egg:core] dump config after ready, 5ms
+2020-02-10 11:53:19,444 INFO 69271 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-10 11:53:19,458 INFO 69271 [egg:core] dump config after load, 5ms
+2020-02-10 11:53:19,535 INFO 69271 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2020-02-10 11:53:19,535 INFO 69271 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2020-02-10 11:53:19,535 INFO 69271 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2020-02-10 11:53:19,535 INFO 69271 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2020-02-10 11:53:19,536 INFO 69271 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2020-02-10 11:53:19,536 INFO 69271 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2020-02-10 11:53:19,536 INFO 69271 [egg-watcher:agent] watcher start success
+2020-02-10 11:53:19,551 INFO 69271 [egg:core] dump config after ready, 5ms
+2020-02-11 15:19:26,473 INFO 77000 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-11 15:19:26,494 INFO 77000 [egg:core] dump config after load, 9ms
+2020-02-11 15:19:26,569 INFO 77000 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2020-02-11 15:19:26,570 INFO 77000 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2020-02-11 15:19:26,570 INFO 77000 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2020-02-11 15:19:26,571 INFO 77000 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2020-02-11 15:19:26,571 INFO 77000 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2020-02-11 15:19:26,571 INFO 77000 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2020-02-11 15:19:26,572 INFO 77000 [egg-watcher:agent] watcher start success
+2020-02-11 15:19:26,589 INFO 77000 [egg:core] dump config after ready, 4ms
+2020-02-11 18:19:45,914 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 1630247ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+
+2020-02-11 18:52:23,064 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 576894ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+
+2020-02-11 18:54:33,448 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 90362ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+
+2020-02-11 19:08:05,961 WARN 77000 [agent:development] reload worker because /Users/tanbing/project/Client/music3.0/server/app/controller/client.js change
+2020-02-11 19:08:05,757 INFO 77000 [egg-watcher] Recieved a change event from eventSource: {"event":"change","path":"/Users/tanbing/project/Client/music3.0/server/app/controller/client.js","stat":{"dev":16777220,"mode":33188,"nlink":1,"uid":501,"gid":20,"rdev":0,"blksize":4096,"ino":14037084,"size":2868,"blocks":8,"atimeMs":1581419253591.8584,"mtimeMs":1581419285694.7979,"ctimeMs":1581419285694.7979,"birthtimeMs":1562051662371.2559,"atime":"2020-02-11T11:07:33.592Z","mtime":"2020-02-11T11:08:05.695Z","ctime":"2020-02-11T11:08:05.695Z","birthtime":"2019-07-02T07:14:22.371Z"},"remove":false,"isDirectory":false,"isFile":true}
+2020-02-11 19:42:22,467 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 213314ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+
+2020-02-22 14:04:51,429 INFO 25063 [egg:logger] init all loggers with options: {"dir":"/Users/tanbing/project/Client/music3.0/server/logs/test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"agent"}
+2020-02-22 14:04:51,464 INFO 25063 [egg:core] dump config after load, 14ms
+2020-02-22 14:04:51,548 INFO 25063 [egg-watcher] Start watching: ["/Users/tanbing/project/Client/music3.0/server/app","/Users/tanbing/project/Client/music3.0/server/config","/Users/tanbing/project/Client/music3.0/server/mocks","/Users/tanbing/project/Client/music3.0/server/mocks_proxy","/Users/tanbing/project/Client/music3.0/server/app.js"]
+2020-02-22 14:04:51,548 INFO 25063 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app"
+2020-02-22 14:04:51,548 INFO 25063 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/config"
+2020-02-22 14:04:51,548 INFO 25063 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks"
+2020-02-22 14:04:51,548 INFO 25063 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/mocks_proxy"
+2020-02-22 14:04:51,549 INFO 25063 [egg-watcher] Start watching: "/Users/tanbing/project/Client/music3.0/server/app.js"
+2020-02-22 14:04:51,549 INFO 25063 [egg-watcher:agent] watcher start success
+2020-02-22 14:04:51,565 INFO 25063 [egg:core] dump config after ready, 4ms

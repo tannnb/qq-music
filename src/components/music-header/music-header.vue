@@ -64,204 +64,204 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  import IconSvg from '@/components/svg-icon/svg-nav'
-  import { gethotkey } from '@/api/recommend'
-  import { ERR_OK } from '@/api/config'
-  import { paddListenCount } from '@/utils/tool'
-  import { LoadingMixin } from '@/utils/mixin'
-  import { clientSmartBox } from '@/api/search'
-  import { debounce } from '@/utils/tool'
+    import {mapActions, mapGetters} from 'vuex'
+    import IconSvg from '@/components/svg-icon/svg-nav'
+    import {gethotkey} from '@/api/recommend'
+    import {ERR_OK} from '@/api/config'
+    import {paddListenCount} from '@/utils/tool'
+    import {LoadingMixin} from '@/utils/mixin'
+    import {clientSmartBox} from '@/api/search'
+    import {debounce} from '@/utils/tool'
 
-  export default {
-    mixins: [LoadingMixin],
-    name: 'music-header',
-    props: {
-      currentIndex: {
-        type: Number,
-        default: 0,
-      },
-    },
-    components: {
-      IconSvg,
-    },
-    watch:{
-        $route: {
-           handler(newValue) {
-               this.activeKey = newValue.fullPath
-           },
-            immediate:true
-        }
-    },
-    data () {
-      return {
-        activeKey: '/music/index',
-        offsetTop: 0,
-        headerData: [
-          {
-            label: '首页',
-            url: '/music/index',
-          },
-          {
-            label: '歌手',
-            url: '/music/singer',
-          },
-          {
-            label: '专辑',
-            url: '/music/album',
-          },
-          {
-            label: '排行榜',
-            url: '/music/rank',
-          },
-          {
-            label: '分类歌单',
-            url: '/music/sort',
-          },
-          {
-            label: '电台',
-            url: '/music/station',
-          },
-          {
-            label: 'MV',
-            url: '/music/mv',
-          },
-          {
-            label: '搜索',
-            url: '/music/search',
-          },
-        ],
-        search_Area: false,
-        queryFlag: false,
-        hotKey: '',
-        hotKeyQuery: '',
-        searchQueryData: [],
-      }
-    },
-    created () {
-      this._gethotkey()
-    },
-    filters: {
-      paddListenCounts (count) {
-        return paddListenCount(count)
-      },
-    },
-    computed: {
-      ...mapGetters(['searchHistory']),
-    },
-    mounted () {
-      this.$watch('hotKeyQuery', debounce((newQuery) => this.searchQuery()))
-    },
-    methods: {
-      ...mapActions([
-        'saveSearcHistory',
-        'clearSearchHistory',
-        'deleteSearchHistory',
-      ]),
-      paddListenCount,
-      handleHeaderNav (item) {
-        this.$router.push({path: item})
-      },
-      emitEmpty () {
-        this.hotKeyQuery = ''
-      },
+    export default {
+        mixins: [LoadingMixin],
+        name: 'music-header',
+        props: {
+            currentIndex: {
+                type: Number,
+                default: 0,
+            },
+        },
+        components: {
+            IconSvg,
+        },
+        watch: {
+            $route: {
+                handler(newValue) {
+                    this.activeKey = newValue.fullPath
+                },
+                immediate: true
+            }
+        },
+        data() {
+            return {
+                activeKey: '/music/index',
+                offsetTop: 0,
+                headerData: [
+                    {
+                        label: '首页',
+                        url: '/music/index',
+                    },
+                    {
+                        label: '歌手',
+                        url: '/music/singer',
+                    },
+                    {
+                        label: '专辑',
+                        url: '/music/album',
+                    },
+                    {
+                        label: '排行榜',
+                        url: '/music/rank',
+                    },
+                    {
+                        label: '分类歌单',
+                        url: '/music/sort',
+                    },
+                    {
+                        label: '电台',
+                        url: '/music/station',
+                    },
+                    {
+                        label: 'MV',
+                        url: '/music/mv',
+                    },
+                    {
+                        label: '搜索',
+                        url: '/music/search',
+                    },
+                ],
+                search_Area: false,
+                queryFlag: false,
+                hotKey: '',
+                hotKeyQuery: '',
+                searchQueryData: [],
+            }
+        },
+        created() {
+            this._gethotkey()
+        },
+        filters: {
+            paddListenCounts(count) {
+                return paddListenCount(count)
+            },
+        },
+        computed: {
+            ...mapGetters(['searchHistory']),
+        },
+        mounted() {
+            this.$watch('hotKeyQuery', debounce((newQuery) => this.searchQuery()))
+        },
+        methods: {
+            ...mapActions([
+                'saveSearcHistory',
+                'clearSearchHistory',
+                'deleteSearchHistory',
+            ]),
+            paddListenCount,
+            handleHeaderNav(item) {
+                this.$router.push({path: item})
+            },
+            emitEmpty() {
+                this.hotKeyQuery = ''
+            },
 
-      handleSelect (items) {
-        this.$emit('handleSelect', items)
-      },
-      handleFocus () {
-        this.search_Area = true
-      },
-      handleBlur () {
-        this.search_Area = false
-        this.queryFlag = false
-      },
-      handleSelectHotKey (items, flag) {
-        if (flag) {
-          this.hotKeyQuery = items
-        } else {
-          this.hotKeyQuery = items.k
-        }
-        this.saveSearcHistory(this.hotKeyQuery)
-        this.$router.push({path: '/music/search', query: {key: this.hotKeyQuery}})
-      },
+            handleSelect(items) {
+                this.$emit('handleSelect', items)
+            },
+            handleFocus() {
+                this.search_Area = true
+            },
+            handleBlur() {
+                this.search_Area = false
+                this.queryFlag = false
+            },
+            handleSelectHotKey(items, flag) {
+                if (flag) {
+                    this.hotKeyQuery = items
+                } else {
+                    this.hotKeyQuery = items.k
+                }
+                this.saveSearcHistory(this.hotKeyQuery)
+                this.$router.push({path: '/music/search', query: {key: this.hotKeyQuery}})
+            },
 
-      handleQueryClick (item) {
-        this.saveSearcHistory(item.name)
-        this.queryFlag = false
-        this.hotKeyQuery = ''
-        this.$router.push({path: '/music/search', query: {key: item.name}})
-      },
-      searchQuery () {
-        if (!this.hotKeyQuery) {
-          this.queryFlag = false
-          return
-        }
-        this.queryFlag = true
-        clientSmartBox(this.hotKeyQuery).then(res => {
-          const {data, code} = res.data
-          if (code === ERR_OK && data.song) {
-            this.search_Area = false
-            this.searchQueryData = data.song.itemlist
-            console.log(data.song.itemlist)
-          }
-        })
-      },
+            handleQueryClick(item) {
+                this.saveSearcHistory(item.name)
+                this.queryFlag = false
+                this.hotKeyQuery = ''
+                this.$router.push({path: '/music/search', query: {key: item.name}})
+            },
+            searchQuery() {
+                if (!this.hotKeyQuery) {
+                    this.queryFlag = false
+                    return
+                }
+                this.queryFlag = true
+                clientSmartBox(this.hotKeyQuery).then(res => {
+                    const {data, code} = res.data
+                    if (code === ERR_OK && data.song) {
+                        this.search_Area = false
+                        this.searchQueryData = data.song.itemlist
+                        console.log(data.song.itemlist)
+                    }
+                })
+            },
 
-      handleDeleteAll () {
-        const _this = this
-        this.$confirm({
-          type: 'info',
-          title: '提示',
-          centered: true,
-          content: '是否清除当前搜索历史记录?',
-          iconType: 'exclamation-circle',
-          okText: '确认',
-          cancelText: '取消',
-          onOk () {
-            _this.clearSearchHistory()
-          },
-        })
-      },
-      handleDetele (items) {
-        this.deleteSearchHistory(items)
-      },
-      _gethotkey () {
-        gethotkey().then(res => {
-          if (res.code === ERR_OK) {
-            this.hotKey = this._normal(res.data.hotkey)
-          }
-        })
-      },
+            handleDeleteAll() {
+                const _this = this
+                this.$confirm({
+                    type: 'info',
+                    title: '提示',
+                    centered: true,
+                    content: '是否清除当前搜索历史记录?',
+                    iconType: 'exclamation-circle',
+                    okText: '确认',
+                    cancelText: '取消',
+                    onOk() {
+                        _this.clearSearchHistory()
+                    },
+                })
+            },
+            handleDetele(items) {
+                this.deleteSearchHistory(items)
+            },
+            _gethotkey() {
+                gethotkey().then(res => {
+                    if (res.code === ERR_OK) {
+                        this.hotKey = this._normal(res.data.hotkey)
+                    }
+                })
+            },
 
-      _normal (item) {
-        return item.slice(0, 8)
-      },
+            _normal(item) {
+                return item.slice(0, 8)
+            },
 
-      handleSearchPage () {
-        if (this.hotKeyQuery.length === 0) {
-          this.$confirm({
-            type: 'warning',
-            title: '提示',
-            centered: true,
-            content: '请输入要搜索的音乐或歌单',
-            iconType: 'exclamation-circle',
-            okText: '确认',
-            cancelText: '取消',
-          })
-          return
-        }
-        this.saveSearcHistory(this.hotKeyQuery)
-        this.$router.push('/music/search')
-      },
+            handleSearchPage() {
+                if (this.hotKeyQuery.length === 0) {
+                    this.$confirm({
+                        type: 'warning',
+                        title: '提示',
+                        centered: true,
+                        content: '请输入要搜索的音乐或歌单',
+                        iconType: 'exclamation-circle',
+                        okText: '确认',
+                        cancelText: '取消',
+                    })
+                    return
+                }
+                this.saveSearcHistory(this.hotKeyQuery)
+                this.$router.push('/music/search')
+            },
 
-    },
-  }
+        },
+    }
 </script>
 <style lang="stylus">
     .ant-affix {
         background white
-        box-shadow: 0 5px 6px 0 rgba(73,105,230,.1);
+        box-shadow: 0 5px 6px 0 rgba(73, 105, 230, .1);
     }
 
     .components-input-demo-presuffix, .anticon-close-circle {
@@ -270,9 +270,19 @@
         transition: color 0.3s;
         font-size: 12px;
     }
+
     .ant-tabs-bar {
-        margin-bottom 5px
+        margin-bottom 1px
     }
+
+    .ant-tabs-ink-bar {
+        background  #3f66ff
+    }
+
+    .ant-tabs-nav .ant-tabs-tab-active {
+        color #3f66ff
+    }
+
     .components-input-demo-presuffix, .anticon-close-circle:hover {
         color: #999;
     }
@@ -286,6 +296,7 @@
     .down-enter-active, .down-leave-active {
         transition: all 0.2s
     }
+
     .down-enter, .down-leave-to {
         opacity 0.5
     }
@@ -351,7 +362,7 @@
             .search-history {
                 position absolute
                 z-index 10
-                top 41px
+                top 34px
                 right 0
                 min-width 239px
                 border 1px solid #ddd
@@ -437,7 +448,7 @@
             .queryText {
                 position absolute
                 z-index 20
-                top 41px
+                top 34px
                 right 0
                 min-width 239px
                 border 1px solid #ddd

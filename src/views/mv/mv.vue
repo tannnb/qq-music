@@ -2,18 +2,13 @@
   <div class="mv-wrapper">
     <div class="mv-main">
       <div>
-        <Tags v-if="taglist" titleName="地区" :tag="taglist.area" :currentId="currentAreaId"
-              @selectItemTag="selectAreaIndex"/>
-        <Tags v-if="taglist" titleName="类型" :tag="taglist.tag" :currentId="currentTagId"
-              @selectItemTag="selectTagIndex"/>
-        <Tags v-if="taglist" titleName="年份" :tag="taglist.year" :currentId="currentYearId"
-              @selectItemTag="selectYearIndex"/>
+        <CheckTag v-if="tagArea" :tagSource="tagArea" @selectItemTag="selectItemIndex" />
+        <CheckTag v-if="tagVersion" :tagSource="tagVersion" @selectItemTag="selectVersionIndex" />
       </div>
       <div>
         <div class="mvTitle">
-          <h2 class="title">全部MV</h2>
           <div class="tagTab">
-            <div :class="currentType === 1? 'active':'' " @click="handleTab(1)">推荐</div>
+            <div :class="currentType === 1? 'active':'' " @click="handleTab(1)"><a-icon type="fire" />推荐</div>
             <div :class="currentType === 2? 'active':'' " @click="handleTab(2)">最新</div>
           </div>
         </div>
@@ -22,16 +17,16 @@
               v-for="(items,index) in mvlist"
               @click="handleSelectMvItem(items)"
               :key="items.mv_id">
-            <Avatar-hover :avatarUri="items.picurl"></Avatar-hover>
-            <h4 class="mvtitle">{{items.mvtitle}}</h4>
+            <Avatar-hover class="avatar" :avatarUri="items.picurl"></Avatar-hover>
+            <h4 class="mvtitle">{{items.title}}</h4>
             <div class="singername">{{filterSinger(items.singers)}}</div>
-            <div class="listennum"><i class="icon"></i>{{items.listennum | listenCount}}<span class="time">{{items.publictime}}</span>
+            <div class="listennum"><i class="icon"></i>{{items.playcnt | listenCount}}<span class="time">{{items.pubdate}}</span>
             </div>
           </li>
         </ul>
       </div>
       <div class="page-wrapper">
-        <Pagination v-if="pageConfig" :page-config="pageConfig" @changeCurrentPage="pagetions"></Pagination>
+        <a-button type="primary" icon="plus-circle" shape="round" :loading="loading" @click="loadMore">加载更多</a-button>
       </div>
     </div>
 
@@ -49,6 +44,7 @@
   import {getMvlist} from "../../api/mv";
   import {getSingerMvUrl} from "../../api/singer"
   import Tags from '../../components/Tags/Tags'
+  import CheckTag from '@/components/check-tag'
   import AvatarHover from '../../components/AvatarHover/AvatarHover'
   import Pagination from '@/components/pagination'
 
@@ -62,6 +58,9 @@
     name: "mv",
     data() {
       return {
+        tagArea:[],
+        tagVersion:[],
+        loading:false,
         MvData: {},
         mvlist: [],
         taglist: null,
@@ -70,7 +69,6 @@
         currentTagId: 0,
         currentYearId: 0,
         pageno:0,
-        allpage:null,
         showDplayer:false,
         pageConfig:null
       }
@@ -80,47 +78,44 @@
     },
     components: {
       Tags,
+      CheckTag,
       AvatarHover,
-      Pagination
+      Pagination,
     },
     methods: {
       ...mapMutations({
         setPlayState: 'SET_PLAYING_STATE'
       }),
 
-      async _getMvlist() {
+      loadMore() {
+
+      },
+
+      selectItemIndex(item,index) {
+      console.log(item,index)
+      },
+      selectVersionIndex(item,index) {
+        console.log(item,index)
+      },
+
+      _getMvlist() {
         this.$Progress.start()
-        this.showLoading = this.CreateLoading('MV信息加载中，请稍后...')
-        try {
-          const response = await getMvlist({
-            type: this.currentType,
-            year: this.currentYearId,
-            area: this.currentAreaId,
-            tag: this.currentTagId,
-            pageno:this.pageno
-          })
+        getMvlist().then(res => {
+          let result = res.data
           this.$Progress.finish()
-          this.showLoading.hide()
-          let ret = response.data
-          var reg = /^\w+\(({.+})/
-          var matches = ret.match(reg)
-          if (matches) {
-            ret = JSON.parse(matches[1] + '}')
+          if (result.code === ERR_OK) {
+            this.mvlist = result.mv_list.data.list
+            console.log(this.mvlist)
+            let tagResult = result.mv_tag.data
+            this.tagArea = tagResult.area
+            this.tagVersion = tagResult.version
           }
-          if (ret.code === ERR_OK) {
-            this.MvData = ret.data
-            this.mvlist = this.MvData.mvlist
-            this.allpage = this.MvData.sum
-            this.taglist = this.MvData.taglist
-            this.pageConfig = this._initPagination(ret.data.sum)
-          }
-        } catch (e) {
+        }).catch(e => {
           this.$Progress.finish()
-          this.showLoading.hide()
           this.CreateDialog({
             message: '暂时无法获取到MV信息'
           })
-        }
+        })
       },
 
       selectAreaIndex(item) {
@@ -221,7 +216,6 @@
 
   .mv-wrapper {
     padding-top 35px
-    background: linear-gradient(#f3f3f3, #fff);
     .mv-main {
       width 1200px
       margin 0 auto
@@ -229,16 +223,13 @@
         display flex
         justify-content space-between
         padding 30px 0 10px 0
-        .title {
-          font-weight bold
-          font-size 18px
-        }
         .tagTab {
           display flex
           .active {
-            background #31c27c
             color: #fff
-            border-color #31c27c
+            border: 1px solid #2a62ff;
+            background: linear-gradient(0deg, #2a62ff, #4e7dff);
+            box-shadow: 0 5px 6px 0 rgba(73, 105, 230, .22);
             margin-right -1px
             z-index 2
             &:hover {
@@ -251,7 +242,16 @@
             border 1px solid #c3c3c3
             cursor pointer
             &:hover {
-              color: #31c27c
+              border: 1px solid #2a62ff;
+              background: linear-gradient(0deg, #2a62ff, #4e7dff);
+              box-shadow: 0 5px 6px 0 rgba(73, 105, 230, .22);
+              color: #fff
+            }
+            &:first-child {
+              border-radius 30px 0 0 30px
+            }
+            &:last-child{
+              border-radius 0 30px 30px 0
             }
             &:nth-child(odd) {
               margin-right -1px
@@ -260,15 +260,38 @@
         }
       }
       .mvlist-content {
-        display: flex
-        justify-content space-between
-        flex-wrap wrap
+        display flex
+        flex-flow wrap
+        width 1200px
+        margin 0 auto
+        padding-top 20px
+
         .item {
-          width 24%
-          padding-bottom: 44px
-          height 100%
-          color: #999
+          width 20%
+          padding 10px 0 20px 0
+          text-align center
+          margin-bottom 10px
+          border:1px solid #f5f8ff
+          cursor pointer
+          transition all .5s
+          border-radius 4px
+          &:hover {
+            z-index 2
+            box-shadow: 0 5px 18px 0 rgba(78, 125, 255, 0.3);
+            border:1px solid rgba(63, 102, 255, 0.2)
+          }
+          .avatar {
+            width 224px
+            height: 150px
+            margin 0 auto
+            cursor pointer
+            img {
+              width 100%
+              vertical-align top
+            }
+          }
           .mvtitle {
+            padding 0 10px
             margin-top 15px
             font-size 14px
             color: #000
@@ -277,19 +300,18 @@
             white-space nowrap
             cursor pointer
             &:hover {
-              color: #31c27c
+              color: #2a62ff
             }
           }
           .singername {
             font-size 13px
-            padding 6px 0
+            padding 10px 0
             cursor pointer
-            &:hover {
-              color: #31c27c
-            }
+            color #868686
           }
           .listennum {
             font-size 13px
+            color #868686
             .icon {
               display: inline-block;
               width: 19px;

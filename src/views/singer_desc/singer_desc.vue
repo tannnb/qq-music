@@ -13,19 +13,16 @@
           <div class="funBtn-Btn"
                :class="songs && songs.length === 0? 'notSong':'active'"
                @click="handlePlayAll">
-            <i class="icon-play"></i><span>播放歌手热门歌曲</span>
+            <i class="icon-play"></i><span>播放全部</span>
           </div>
           <div class="funBtn-Btn">
-            <i class="icon-add"></i><span>关注{{music_num | listen}}</span>
+            <span>关注数:{{music_num | listen}}</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="list-wrapper">
-      <!--<baidu-foldable style="width: 100%" height="%30" async>
-
-      </baidu-foldable>-->
       <List-view
               class="singerContentList"
               v-if="songs.length !== '' "
@@ -35,7 +32,7 @@
       />
     </div>
 
-   <!-- <div class="singer_ablum">
+  <!--  <div class="singer_ablum">
       <h4 class="header">专辑</h4>
       <ul class="content">
         <li v-for="(items,index) in singer_ablum.list"
@@ -329,15 +326,14 @@ export default {
   }
 
   .singer-desc {
-    background: linear-gradient(#f3f3f3, #fff);
     .singerWrapper {
       width 1200px
-      margin 0 auto
+      margin 40px auto
       display flex
-      padding 40px 0 35px 0
       .logo {
-        width 250px
-        height 250px
+        width 150px
+        height 150px
+        border-radius 80px
         overflow hidden
         img {
           width 100%
@@ -345,32 +341,27 @@ export default {
         }
       }
       .singerItem {
-        padding-left 60px
+        padding-left 30px
         .dissname {
-          padding-top 40px
-          padding-bottom 10px
-          font-size 32px
+          padding-top 10px
+          font-size 28px
         }
         .tags {
-          font-size 15px
+          font-size 14px
           padding 6px 0
           color: #888787
         }
         .singerTotal {
           display flex
-          padding-top 30px
+          padding-top 16px
           font-size 15px
           color: #797676
-          cursor pointer
           div {
             margin-right 20px
-            &:hover {
-              color: #31c27c
-            }
           }
           .weight {
             padding-left 6px
-            font-size 26px
+            font-size 24px
             color #494949
             font-family 'arial'
           }
@@ -381,28 +372,23 @@ export default {
             display flex
             justify-content center
             align-items center
-            border: 1px solid #c9c9c9
-            padding 10px 30px
+            padding 10px 20px
             margin 20px 10px 20px 0
             font-size 15px
-            color: #333
-            border-radius 2px
-            cursor pointer
-            &.active {
-              background #31c27c
-              color: #fff
-              border-color #31c27c
-              &:hover {
-                background #2CAF6F
-              }
-            }
+            color: #4e7dff
+            border-radius 60px
+            border: 1px solid #4e7dff
             &.notSong {
-              border-color #cfcfcf
               user-select none
               cursor: not-allowed
             }
+            &.active {
+              cursor pointer
+            }
             &:hover {
-              background #EDEDED
+              color: #fff
+              background linear-gradient(left, #204bff, #204bff)
+              box-shadow: 0 5px 18px 0 rgba(78, 125, 255, 0.44);
             }
             i {
               font-size 18px

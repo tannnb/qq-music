@@ -29,7 +29,7 @@ class clientController extends Controller {
 
 
   async getMvlist() {
-    const url = 'https://c.y.qq.com/mv/fcgi-bin/getmv_by_tag';
+    const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg';
     await this.mixinsServer(url);
   }
 

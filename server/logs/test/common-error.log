@@ -1,0 +1,40 @@
+2020-02-11 18:19:45,913 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 1630247ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+
+2020-02-11 18:52:23,063 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 576894ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+
+2020-02-11 18:54:33,447 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 90362ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+
+2020-02-11 19:42:22,467 ERROR 77000 nodejs.ClusterClientNoResponseError: client no response in 213314ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout.Leader._heartbeatTimer.setInterval [as _onTimeout] (/Users/tanbing/project/Client/music3.0/server/node_modules/cluster-client/lib/leader.js:77:23)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)
+name: "ClusterClientNoResponseError"
+pid: 77000
+hostname: tanbingdeMacBook-Pro.local
+

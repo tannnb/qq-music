@@ -28,14 +28,12 @@
     </div>
     <div class="ablum_desc_singerlist">
       <div class="list-wrapper">
-        <baidu-foldable style="width: 100%" height="%30" async>
-          <List-view
-            v-if="songs.length !== '' "
-            :song="songs"
-            @handlePlayer="handlePlayer"
-            @appendPlayer="appendPlayer"
-          />
-        </baidu-foldable>
+        <List-view
+                v-if="songs.length !== '' "
+                :song="songs"
+                @handlePlayer="handlePlayer"
+                @appendPlayer="appendPlayer"
+        />
       </div>
     </div>
     <div class="list-wrapper" style="width: 860px">

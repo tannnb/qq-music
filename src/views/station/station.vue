@@ -138,9 +138,15 @@
       },
       async handelClickRadio(item) {
         if (Number(item.radioId) === 99) {
-          this.CreateDialog({
-            message:'个性电台需要登录,暂时无法收听！'
-          })
+          const h = this.$createElement;
+          this.$info({
+            title: '提示',
+            centered:true,
+            content: h('div', {}, [
+              h('p', '个性电台需要登录,暂时无法收听！'),
+            ]),
+            okText: '确认',
+          });
           return
         }
         try {
@@ -160,15 +166,21 @@
                 index: 0
               })
             } catch (e) {
-              this.CreateDialog({
-                message:'歌曲地址获取失败！'
-              })
+              this.$warning({
+                centered:true,
+                title: '提示',
+                content: '歌曲地址获取失败',
+                okText: '确认',
+              });
             }
           }
         } catch (e) {
-          this.CreateDialog({
-            message:'电台获取失败！'
-          })
+          this.$error({
+            centered:true,
+            title: '提示',
+            content: '电台获取失败',
+            okText: '确认',
+          });
         }
       },
       _normalizeSongs(list) {

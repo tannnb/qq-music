@@ -23,6 +23,10 @@ import { Tabs,Input,Icon,Affix,Carousel ,Modal,Button,Card,Spin,Tooltip,Paginati
 Vue.use(Tabs).use(Input).use(Icon).use(Affix).use(Carousel).use(Button).use(Card).use(Spin).use(Tooltip).use(Pagination).use(BackTop).use(Popover)
     .use(Breadcrumb).use(Tag).use(Anchor)
 Vue.prototype.$confirm = Modal.confirm;
+Vue.prototype.$info = Modal.info;
+Vue.prototype.$success = Modal.success;
+Vue.prototype.$error = Modal.error;
+Vue.prototype.$warning = Modal.warning;
 Vue.prototype.$notification = notification;
 
 const options = {

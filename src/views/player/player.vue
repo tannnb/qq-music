@@ -9,7 +9,7 @@
         </div>
 
         <div class="playerSet">
-          <span class="mins" @click.stop="back"> <i class="icon-minWin"></i> 最小化</span>
+          <span class="mins" @click.stop="back"> <a-icon type="shrink" /></span>
         </div>
 
         <div class="playerContainer">
@@ -323,7 +323,6 @@
         })
       },
       handleLyric({lineNum, txt}) {
-        console.log(lineNum,txt)
         this.playingLyric = txt
         this.currentLineNum = lineNum
         if (lineNum > 3) {
@@ -437,19 +436,15 @@
       .playerSet {
         position: absolute
         top: 10px
-        left: 50%
-        transform translateX(-50%)
+        right: 10px
         display flex
         justify-content flex-end
         width 90%
-        padding 10px 0
         color: #898989
         .mins {
-          padding-left 10px
-          font-size 14px
           cursor pointer
           i {
-            font-size 18px
+            font-size 30px
           }
           &:hover {
             color: #fff
@@ -545,11 +540,11 @@
                 text-align: center
                 .text {
                   line-height: 28px
-                  color: rgba(237, 237, 237, 0.59)
+                  color: rgba(237, 237, 237, 0.3)
                   font-size: 13px
                   white-space nowrap
                   &.current {
-                    color: #3be22e
+                    color: #fff
                   }
                 }
                 .pure-music {
@@ -621,7 +616,7 @@
             }
             .icon-collect {
               &.icon-favorite {
-                color: #3be22e
+                color: #fff
               }
               &.icon-not-favorite {
                 color: #9e9e9e
@@ -682,9 +677,12 @@
           .musicName {
           }
           .playingLyric {
-            font-size 15px
+            font-size 13px
             font-weight 400
-            color #31c27c
+            color #2a62ff
+           /* order: 1px solid #2a62ff;
+            background: -webkit-gradient(linear, left bottom, left top, from(#2a62ff), to(#4e7dff));
+            background: linear-gradient(0deg, #2a62ff, #4e7dff);*/
           }
           .musictime {
           }
@@ -702,7 +700,7 @@
           font-size 30px
           cursor pointer
           &:hover {
-            color: #31c27c
+            color: #2a62ff
           }
           &:nth-child(2) {
             margin 0 20px

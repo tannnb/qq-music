@@ -3,7 +3,7 @@
 
 
         <!-- 轮播图 -->
-        <Slider v-if="focus" @handleSelectSliderAd="handleSelectSliderAd" :focus="focus"/>
+        <Slider class="sliderHook" v-if="focus" @handleSelectSliderAd="handleSelectSliderAd" :focus="focus"/>
 
 
         <!-- 歌单推荐 -->
@@ -144,4 +144,8 @@
     },
   }
 </script>
-
+<style scoped lang="stylus">
+    .sliderHook {
+        margin-top 40px
+    }
+</style>

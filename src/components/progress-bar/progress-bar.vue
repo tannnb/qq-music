@@ -125,7 +125,7 @@
       .progress {
         position: absolute;
         height: 100%;
-        background: #31c27c;
+        background: linear-gradient(0deg, #2a62ff, #4e7dff);
       }
       .progress-btn-wrapper {
         position: absolute;
@@ -142,7 +142,7 @@
           height: 16px;
           border: 3px solid #fff;
           border-radius: 50%;
-          background: #31c27c;
+          background: #2a62ff;
           cursor pointer
         }
       }
