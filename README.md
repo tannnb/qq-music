@@ -3,10 +3,13 @@
 使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容，移动端可访问[♫Music♫](http://h5.tannnb.com),获得更好体验
 
 ## PC端可点击下方链接访问
-> [在线演示地址](http://music.tannnb.com)
+> [在线演示地址](http://www.tannnb.com/pc/)
 
 ## 移动端可扫码访问
-![二维码](https://qr.api.cli.im/qr?data=http%253A%252F%252Fh5.tannnb.com&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=260&kid=cliim&key=83da0b63e2fb4dd15ad7feddf5d198b4)
+![二维码](//qr.api.cli.im/newqr/create?data=http%253A%252F%252Fwww.tannnb.com%252Fh5%252F&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&logoshape=no&size=260&kid=cliim&key=9908a2f1c29346859146f6aac97e30bd)
+
+## Vue3.0
+![二维码](//qr.api.cli.im/newqr/create?data=http%253A%252F%252Fwww.tannnb.com%252Fmusic-next&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&logoshape=no&size=260&kid=cliim&key=a81db08f101bf42ec056d10a67d6dc10)
 
 ## 如何安装与使用
 
