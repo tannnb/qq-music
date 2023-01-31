@@ -1,5 +1,5 @@
 # QQ音乐(vue版)
-课程来源自黄老师课程：https://coding.imooc.com/class/503.html
+
 
 使用vue模仿QQ音乐官网,主要以PC端为主，没有考虑移动端适配，目前只做了主流浏览器兼容
 
